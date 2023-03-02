@@ -18,7 +18,7 @@
     }
   },
   "function": {
-    "derafleventstream": {
+    "deraflcontracteventwebhook": {
       "build": true,
       "dependsOn": [
         {
@@ -36,43 +36,43 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_derafleventstream_alchemyKey": {
+    "AMPLIFY_function_deraflcontracteventwebhook_alchemyKey": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "derafleventstream"
+          "resourceName": "deraflcontracteventwebhook"
         }
       ]
     },
-    "AMPLIFY_function_derafleventstream_discordRaffleClosedWebhookUrl": {
+    "AMPLIFY_function_deraflcontracteventwebhook_discordRaffleClosedWebhookUrl": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "derafleventstream"
+          "resourceName": "deraflcontracteventwebhook"
         }
       ]
     },
-    "AMPLIFY_function_derafleventstream_discordRaffleCreateWebhookUrl": {
+    "AMPLIFY_function_deraflcontracteventwebhook_discordRaffleCreateWebhookUrl": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "derafleventstream"
+          "resourceName": "deraflcontracteventwebhook"
         }
       ]
     },
-    "AMPLIFY_function_derafleventstream_moralisApiKey": {
+    "AMPLIFY_function_deraflcontracteventwebhook_moralisApiKey": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "derafleventstream"
+          "resourceName": "deraflcontracteventwebhook"
         }
       ]
     },
-    "AMPLIFY_function_derafleventstream_traitSniperKey": {
+    "AMPLIFY_function_deraflcontracteventwebhook_traitSniperKey": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "derafleventstream"
+          "resourceName": "deraflcontracteventwebhook"
         }
       ]
     }

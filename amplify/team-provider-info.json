@@ -16,7 +16,7 @@
         "derafl": {}
       },
       "function": {
-        "derafleventstream": {
+        "deraflcontracteventwebhook": {
           "moralisApiKey": "aNnsQjMwzZZYLDzbXKaTRPpb1l88ipYyTF3xjNV6BbhDk5vp4Fsbd6WRHoTvguWo",
           "alchemyKey": "Nyx7UtugHODwhjfxI0EkO-xQV9Seym5M",
           "traitSniperKey": "feb08daf-f3d0-40b5-bbaa-cc5f41c0153f",
