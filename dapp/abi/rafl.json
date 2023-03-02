@@ -1,0 +1,718 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "_subscriptionId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "address",
+        "name": "_vrfCoordinator",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "royaltyFeeRegistryAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "feeCollector",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "CreateNotEnabled",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EthInputInvalid",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EthInputTooSmall",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidExpiryTimestamp",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidRaffleState",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "MsgValueInvalid",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "have",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "want",
+        "type": "address"
+      }
+    ],
+    "name": "OnlyCoordinatorCanFulfill",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RaffleBatchNotWinner",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RaffleOwnerCannotPurchaseTickets",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SendEthFailed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TicketAmountInvalid",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TicketsAlreadyRefunded",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TimeSinceExpiryInsufficientForRefund",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "CreateEnabled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      }
+    ],
+    "name": "RaffleClosed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint96",
+        "name": "winningTicket",
+        "type": "uint96"
+      }
+    ],
+    "name": "RaffleDrawn",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "nftAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint96",
+        "name": "tickets",
+        "type": "uint96"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "expires",
+        "type": "uint64"
+      }
+    ],
+    "name": "RaffleOpened",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      }
+    ],
+    "name": "RaffleRefunded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "winner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "royaltiesPaid",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "ethPaid",
+        "type": "uint256"
+      }
+    ],
+    "name": "RaffleReleased",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint96",
+        "name": "batchId",
+        "type": "uint96"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "purchaser",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint96",
+        "name": "ticketFrom",
+        "type": "uint96"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint96",
+        "name": "ticketAmount",
+        "type": "uint96"
+      }
+    ],
+    "name": "TicketPurchased",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "refundee",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "ethAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "TicketRefunded",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "INTERFACE_ID_ERC2981",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "INTERFACE_ID_ERC721",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint96",
+        "name": "ticketAmount",
+        "type": "uint96"
+      }
+    ],
+    "name": "buyTickets",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      }
+    ],
+    "name": "claimRefundedNft",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "nftAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint64",
+        "name": "expiryTimestamp",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint96",
+        "name": "ethInput",
+        "type": "uint96"
+      },
+      {
+        "internalType": "enum DeRafl.TokenType",
+        "name": "tokenType",
+        "type": "uint8"
+      }
+    ],
+    "name": "createRaffle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      }
+    ],
+    "name": "drawRaffle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint96",
+        "name": "batchId",
+        "type": "uint96"
+      }
+    ],
+    "name": "getBatchInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "uint96",
+            "name": "startTicket",
+            "type": "uint96"
+          },
+          {
+            "internalType": "uint96",
+            "name": "endTicket",
+            "type": "uint96"
+          }
+        ],
+        "internalType": "struct DeRafl.TicketBatch",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      }
+    ],
+    "name": "getRaffle",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "royaltyRecipient",
+            "type": "address"
+          },
+          {
+            "internalType": "uint96",
+            "name": "winningTicket",
+            "type": "uint96"
+          },
+          {
+            "internalType": "address",
+            "name": "nftAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint96",
+            "name": "ticketsAvailable",
+            "type": "uint96"
+          },
+          {
+            "internalType": "address payable",
+            "name": "raffleOwner",
+            "type": "address"
+          },
+          {
+            "internalType": "uint96",
+            "name": "ticketsSold",
+            "type": "uint96"
+          },
+          {
+            "internalType": "address",
+            "name": "winner",
+            "type": "address"
+          },
+          {
+            "internalType": "uint96",
+            "name": "batchIndex",
+            "type": "uint96"
+          },
+          {
+            "internalType": "uint256",
+            "name": "chainlinkRequestId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint64",
+            "name": "royaltyPercentage",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "raffleId",
+            "type": "uint64"
+          },
+          {
+            "internalType": "enum DeRafl.RaffleState",
+            "name": "raffleState",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint64",
+            "name": "expiryTimestamp",
+            "type": "uint64"
+          },
+          {
+            "internalType": "enum DeRafl.TokenType",
+            "name": "tokenType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct DeRafl.Raffle",
+        "name": "raffle",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "nftAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRoyaltyInfo",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "feeReceiver",
+        "type": "address"
+      },
+      {
+        "internalType": "uint64",
+        "name": "royaltyFee",
+        "type": "uint64"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "address",
+        "name": "ticketOwner",
+        "type": "address"
+      }
+    ],
+    "name": "getUserInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint128",
+            "name": "ticketsOwned",
+            "type": "uint128"
+          },
+          {
+            "internalType": "bool",
+            "name": "isRefunded",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct DeRafl.TicketOwner",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "requestId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "randomWords",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "rawFulfillRandomWords",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      }
+    ],
+    "name": "refundRaffle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      }
+    ],
+    "name": "refundTickets",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "raffleId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint96",
+        "name": "batchId",
+        "type": "uint96"
+      }
+    ],
+    "name": "release",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "toggleCreateEnabled",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

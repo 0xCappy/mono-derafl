@@ -1,0 +1,1 @@
+export const deraflAddress = '0x40189e061e4e4596a42885997f96ce743201a48c'

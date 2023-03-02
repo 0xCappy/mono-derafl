@@ -1,0 +1,111 @@
+type TicketRefund @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  ethAmount: Float
+  refundee: String
+  Raffle: Raffle @hasOne
+  tx: Transaction @hasOne
+}
+
+type Stat @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  ethPaid: Float
+  ticketsBought: Int
+  royaltiesPaid: Float
+  chainId: String!
+  rafflesCreated: Int
+}
+
+type TicketBatch @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  lastTicket: Int!
+  Transaction: Transaction! @hasOne
+  purchaser: String!
+  ticketsBought: Int!
+  batchId: Int!
+  firstTicket: Int!
+  raffleID: ID! @index(name: "byRaffle")
+}
+
+type Transaction @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  date: AWSDateTime!
+  eventType: Int!
+  hash: String!
+  chainId: String!
+}
+
+type Raffle @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  ticketsAvailable: Int!
+  raffleId: Int!
+  TicketBatches: [TicketBatch] @hasMany(indexName: "byRaffle", fields: ["id"])
+  WinningBatch: TicketBatch @hasOne
+  ReleaseTx: Transaction @hasOne
+  progress: Float!
+  OpenTx: Transaction @hasOne
+  DrawnTx: Transaction @hasOne
+  state: Int!
+  tokenId: String!
+  expires: AWSDateTime!
+  nftAddress: String!
+  ticketsSold: Int!
+  ticketBatches: Int
+  winningTicket: Int
+  CloseTx: Transaction @hasOne
+  chainId: String!
+  winningAccount: String
+  owner: String!
+  contract: String!
+  NFT: NFT @hasOne
+  RefundTx: Transaction @hasOne
+}
+
+type NFT @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  contractAddress: String!
+  metadata: AWSJSON!
+  tokenUri: String
+  tokenId: String!
+  symbol: String
+  imageUri: String
+  tokenName: String!
+  collectionName: String!
+  lastSales: AWSJSON
+  chainId: String!
+  rarityData: AWSJSON
+  Collection: Collection @hasOne
+}
+
+type Collection @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  contractAddress: String!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  symbol: String
+  rafflesCreated: Int
+  contractDeployer: String
+  deployedBlockNumber: Int
+  tokenType: String!
+  totalSupply: String
+  chainId: String!
+}
+
+type Account @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  address: String!
+  rafflesCreated: Int
+  rafflesWon: Int
+  rafflesEntered: Int
+  ticketsBought: Int
+}
+ 

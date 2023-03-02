@@ -1,0 +1,206 @@
+import { NFT, Raffle, RaffleInfo, RaffleState, TicketBatch, Transaction } from 'types';
+import { countdownRenderer } from 'common/utils';
+import useRaffleInfo from '../../hooks/useRaffleInfo';
+import Link from 'next/link';
+import { Line } from 'rc-progress';
+import React, { useEffect, useMemo, useState } from 'react';
+import Countdown from 'react-countdown';
+import { ButTicketsCard, LoadingSkeleton, MetadataCard, PendingDrawCard, PositionCard, PurchasesCard, RaffleClosedCard, RaffleCompleteCard, RaffleDrawnCard, RaffleInfoCard, RaffleStats, TokenInfoCard, TransactionsCard } from './components';
+import { Container, Image, Stack, Title, Divider, Flex, Box, Avatar, Group, MediaQuery, Grid } from '@mantine/core';
+import { RaffleCarousel } from '..';
+import { useWallet } from '@/context/WalletContext';
+import useTicketsOwned from '@/hooks/useTicketsOwned';
+
+interface RaffleDetailProps {
+    raffle: Raffle
+    ticketBatches: TicketBatch[]
+    trending: Raffle[]
+}
+
+const RaffleDetail = ({ raffle, ticketBatches, trending }: RaffleDetailProps) => {
+    const { address } = useWallet()
+    const [viewedBatch, setViewedBatch] = useState(0)
+    const [hasSetViewed, setHasSetViewed] = useState(false)
+    const _raffleInfo = useRaffleInfo(raffle.raffleId.toString(), parseInt(raffle.chainId), raffle.contract)
+    const ticketsOwned = useTicketsOwned(raffle.raffleId.toString(), address, parseInt(raffle.chainId), raffle.contract)
+    const [raffleInfo, setRaffleInfo] = useState<RaffleInfo | undefined>()
+    const [winningBatch, setWinningBatch] = useState<TicketBatch>()
+    const [purchases, setPurchases] = useState<TicketBatch[]>([])
+    const [updatedRaffle, setUpdatedRaffle] = useState<Raffle>(raffle)
+
+    useEffect(() => {
+        setPurchases(ticketBatches)
+    }, [])
+
+    useEffect(() => {
+        setRaffleInfo(_raffleInfo)
+    }, [_raffleInfo])
+
+    useEffect(() => {
+        if (raffleInfo && !hasSetViewed) {
+            setHasSetViewed(true)
+            setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))
+        }
+    }, [raffleInfo?.batchIndex])
+
+    useEffect(() => {
+        if (updatedRaffle.winningBatch) {
+            setWinningBatch(updatedRaffle.winningBatch)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (parseInt(raffleInfo?.winningTicket?.toString() || '0') > 0 && !winningBatch) {
+            getWinningBatch()
+        }
+    }, [raffleInfo?.winningTicket])
+
+    useEffect(() => {
+        const newState = parseInt(raffleInfo?.raffleState.toString() || '0')
+        if (newState > 0 && newState !== updatedRaffle.state) {
+            refreshRaffle()
+        }
+    }, [raffleInfo?.raffleState])
+
+    const getWinningBatch = async () => {
+        if (raffleInfo) {
+            const data = await fetch("/api/raffles/winningBatch", {
+                method: "POST",
+                body: JSON.stringify({
+                    winningTicket: parseInt(raffleInfo.winningTicket.toString()),
+                    raffleId: updatedRaffle.id
+                }),
+            });
+            const response = await data.json()
+            setWinningBatch(response as TicketBatch)
+        }
+    }
+
+    const refreshRaffle = async () => {
+        const data = await fetch("/api/raffles/detail", {
+            method: "POST",
+            body: JSON.stringify({
+                raffleId: updatedRaffle.raffleId
+            }),
+        });
+        const response = await data.json()
+        setUpdatedRaffle(response.raffle)
+    }
+
+    const raffleState: RaffleState | undefined = useMemo(() => {
+        if (raffleInfo) {
+            if (raffleInfo.raffleState.toString() === '1' && new Date > new Date(parseInt(raffleInfo.expiryTimestamp.toString()) * 1000)) {
+                return RaffleState.CLOSED
+            }
+            return parseInt(raffleInfo.raffleState.toString())
+        }
+    }, [raffleInfo])
+
+    const progress: number = useMemo(() => {
+        if (raffleInfo) {
+            const sold = raffleInfo.ticketsSold.toNumber()
+            const available = raffleInfo.ticketsAvailable.toNumber()
+
+            return (sold * 100) / available
+        }
+        return 0
+    }, [raffleInfo])
+
+    const renderRaffleAction = () => (
+        <>
+            {raffleInfo &&
+                <Box >
+                    <Grid columns={12}>
+                        <Grid.Col span={12} sm={4}>
+                            <PositionCard raffle={raffleInfo} chainId={raffle.chainId} contract={raffle.contract} />
+                        </Grid.Col>
+                        <Grid.Col span={12} sm={8}>
+                            {raffleState === RaffleState.ACTIVE &&
+                                <ButTicketsCard raffle={updatedRaffle} />
+                            }
+                            {raffleState === RaffleState.CLOSED && <RaffleClosedCard address={address} raffle={updatedRaffle} />}
+                            {raffleState === RaffleState.PENDING_DRAW && <PendingDrawCard />}
+                            {winningBatch && raffleState === RaffleState.DRAWN && <RaffleDrawnCard chainId={raffle.chainId} contract={raffle.contract} address={address} raffleInfo={raffleInfo} winningBatch={winningBatch} />}
+                            {winningBatch && raffleState === RaffleState.RELEASED && <RaffleCompleteCard raffleInfo={raffleInfo} winningBatch={winningBatch} />}
+                        </Grid.Col>
+                    </Grid>
+
+                </Box>
+            }
+        </>
+    )
+
+    return (
+        <Container size="xl">
+            <Stack spacing="xl">
+
+                {/* Md+ layout */}
+                <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
+                    <Flex direction={{ base: 'column', sm: 'row' }} gap="xl">
+                        <Stack style={{ flex: 2 }} spacing="xl">
+                            <Image style={{ width: '100%', aspectRatio: '1/1' }} src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
+                            {updatedRaffle.nft.metadata?.attributes && <MetadataCard totalSupply={raffle.nft.collection.totalSupply} metadata={updatedRaffle.nft.metadata} />}
+                            <TokenInfoCard nft={updatedRaffle.nft} />
+                            {/* <CollectionInfoCard collection={raffle.nft.collection} /> */}
+                        </Stack>
+
+                        <Stack style={{ flex: 3 }} spacing="xl">
+                            <RaffleInfoCard raffle={updatedRaffle} progress={progress} raffleState={parseInt(_raffleInfo?.raffleState.toString() || '0')} />
+                            {raffleInfo ?
+                                <>
+                                    <RaffleStats ticketsHeld={parseInt(ticketsOwned?.toString() || '0')} raffleInfo={raffleInfo} progress={progress} />
+                                    {renderRaffleAction()}
+                                </>
+                                :
+                                <LoadingSkeleton />
+                            }
+                        </Stack>
+                    </Flex>
+                </MediaQuery>
+
+                {/* Mobile Layout */}
+                <MediaQuery largerThan="md" styles={{ display: 'none' }}>
+                    <Stack spacing="xl">
+                        <Image style={{ width: '100%', aspectRatio: '1/1' }} src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
+                        <RaffleInfoCard progress={progress} raffle={updatedRaffle} raffleState={parseInt(_raffleInfo?.raffleState.toString() || '0')} />
+                        {raffleInfo &&
+                            <>
+                                <RaffleStats ticketsHeld={parseInt(ticketsOwned?.toString() || '0')} raffleInfo={raffleInfo} progress={progress} />
+                                {renderRaffleAction()}
+                            </>
+                        }
+                        {updatedRaffle.nft.metadata?.attributes && <MetadataCard totalSupply={raffle.nft.collection.totalSupply} metadata={updatedRaffle.nft.metadata} />}
+                        <TokenInfoCard nft={updatedRaffle.nft} />
+                        {/* <CollectionInfoCard collection={raffle.nft.collection} /> */}
+                    </Stack>
+                </MediaQuery>
+
+                <Box>
+                    <PurchasesCard onPurchasesRefreshed={() => setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))} raffleId={raffle.id} unviewedPurchaseCount={parseInt(raffleInfo?.batchIndex.toString() || '0') - viewedBatch} purchases={purchases} />
+                </Box>
+
+                <Box>
+                    <TransactionsCard raffle={updatedRaffle} />
+                </Box>
+
+                {/* <SimpleGrid spacing={32} breakpoints={[
+                    { minWidth: 'sm', cols: 1 },
+                    { minWidth: 'md', cols: 2 },
+                ]}>
+                    <Stack>
+                        <Image style={{ maxWidth: '100%', aspectRatio: '1/1' }} src={raffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
+                        {raffle.nft.metadata && <MetadataCard metadata={raffle.nft.metadata} />}
+                    </Stack>
+
+
+                </SimpleGrid> */}
+
+                <Box mt="4rem">
+                    <RaffleCarousel raffles={trending} />
+                </Box>
+            </Stack>
+        </Container>
+    );
+};
+
+export default RaffleDetail;

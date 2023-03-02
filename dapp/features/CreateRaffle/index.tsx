@@ -1,0 +1,276 @@
+import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { NFT } from 'types';
+import { ConfirmDetailsModal, NFTChip, NFTSelector, Overview } from './components';
+import raflAbi from '../../abi/rafl.json'
+import Steps from 'rc-steps';
+import { useRouter } from 'next/router';
+import { Button, Card, Center, Select, SimpleGrid, Stack, TextInput, Text, Box, Grid } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { parseEther } from 'ethers/lib/utils';
+import { useContractEvent } from 'wagmi'
+import useNftApprovedForAll from '@/hooks/useNftApprovedForAll';
+import { BigNumber } from 'ethers';
+import useRoyalties from '@/hooks/useRoyalties';
+import { useWallet } from '@/context/WalletContext';
+import { useIntersection } from '@mantine/hooks';
+import OwnedNft from '@/types/OwnedNft';
+import OwnedNftsResponse from '@/types/OwnedNftsResponse';
+import ContractActionButton from '../ContractActionButton';
+import Abi from '@/types/Abi';
+import dayjs from 'dayjs';
+import { DatePicker, TimeInput } from '@mantine/dates';
+
+const PAGE_SIZE = 40
+const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID!
+const DERAFL_ADDRESS = process.env.NEXT_PUBLIC_DERAFL_ADDRESS!
+
+export interface CreateForm {
+    ethAmount: string
+    expiryDate: Date | undefined
+    expiryTime: Date
+}
+
+const validateEthAmount = (value: string) => {
+    if (!value) {
+        return 'required'
+    }
+    if (value === '.') {
+        return 'required'
+    }
+    if (parseEther(value).mod(parseEther('0.001')).toString() !== '0') {
+        return 'Must be divisible by .001'
+    }
+    if (parseEther(value).lt(parseEther('0.01'))) {
+        return 'Minimum 0.01 Ether'
+    }
+    return
+}
+
+const validateExpiryDate = (value?: Date) => {
+    if (!value) {
+        return 'Required'
+    }
+    const dayjsValue = dayjs(value)
+    if (dayjsValue.isBefore(dayjs(new Date()))) {
+        return 'Cannot be in the past'
+    } else if (dayjsValue.isAfter(dayjs(new Date()).add(30, 'days'))) {
+        return 'Max 30 days'
+    }
+    return
+}
+
+const ContactFormSection = () => {
+    const [confirmModalOpen, setConfirmModalOpen] = useState(false)
+    const scrolledRef = useRef();
+    const [nfts, setNfts] = useState<OwnedNft[]>([])
+    const [page, setPage] = useState(0)
+    const [hasMore, setHasMore] = useState(true)
+    const [nftsLoading, setNftsLoading] = useState(false)
+    const [selectedNFT, setSelectedNFT] = useState<OwnedNft>()
+    const [pageKey, setPageKey] = useState<string | undefined>('')
+    const { toggleWalletOpen, address } = useWallet()
+
+    const approved = useNftApprovedForAll(selectedNFT?.contractAddress, address, DERAFL_ADDRESS)
+    // const approved = useNftApproved(selectedNFT?.contractAddress, selectedNFT?.tokenId, DERAFL_ADDRESS, parseInt(CHAIN_ID))
+    const [hasConfirmed, setHasConfirmed] = useState(false)
+    const router = useRouter()
+    const royalties = useRoyalties(selectedNFT?.contractAddress, selectedNFT?.tokenId, parseInt(CHAIN_ID), DERAFL_ADDRESS)
+
+    const form = useForm<CreateForm>({
+        initialValues: {
+            ethAmount: '',
+            expiryDate: undefined,
+            expiryTime: new Date()
+        },
+        validate: {
+            ethAmount: (value) => validateEthAmount(value),
+            expiryDate: (value) => validateExpiryDate(value)
+        },
+        validateInputOnBlur: true
+    });
+
+    const expiryTimestamp = useMemo(() => {
+        if (form.values.expiryDate && form.values.expiryTime) {
+            return new Date(
+                form.values.expiryDate.getFullYear(),
+                form.values.expiryDate.getMonth(),
+                form.values.expiryDate.getDate(),
+                form.values.expiryTime.getHours(),
+                form.values.expiryTime.getMinutes()
+            )
+        }
+        return new Date()
+    }, [form.values])
+
+    useEffect(() => {
+        console.log("FORM VAL: ", form.values)
+    }, [form.values])
+
+    useEffect(() => {
+        if (address) {
+            setHasMore(true)
+            setPage(0)
+            setNfts([])
+            fetchNFTS()
+        } else {
+            onCancel()
+        }
+    }, [address])
+
+    const stepValue: number = useMemo(() => {
+        if (!selectedNFT) {
+            return 0
+        } else if (selectedNFT && !hasConfirmed) {
+            return 1
+        }
+        return 2
+    }, [selectedNFT, form, hasConfirmed])
+
+    const fetchNFTS = async () => {
+        if (!nftsLoading && hasMore) {
+            setNftsLoading(true)
+            try {
+                const data = await fetch("/api/nft/byAccount", {
+                    method: "POST",
+                    body: JSON.stringify({ chainId: '0x5', address, pageKey, pageSize: PAGE_SIZE, offset: (PAGE_SIZE * page).toString() }),
+                });
+                const response = await data.json() as OwnedNftsResponse
+                const received = response.nfts
+                setNfts([...nfts, ...received])
+                setPageKey(response.pageKey)
+                setPage(page + 1)
+                setHasMore(received.length === PAGE_SIZE)
+                setNftsLoading(false)
+            } catch (err) {
+                setNftsLoading(false)
+            }
+        }
+    }
+
+    const { ref, entry } = useIntersection({
+        root: scrolledRef.current,
+        threshold: 1,
+    });
+
+    useEffect(() => {
+        if (entry && entry.isIntersecting) {
+            fetchNFTS()
+        }
+    }, [ref, entry])
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [selectedNFT])
+
+    const onCancel = () => {
+        form.setValues({ ethAmount: '', expiryDate: undefined, expiryTime: new Date() })
+        setSelectedNFT(undefined)
+        setHasConfirmed(false)
+    }
+
+    return (
+        // <Card mb="8rem">
+        <>
+            <Stack m={{ sm: 0, md: '2rem' }}>
+                <Steps current={stepValue} labelPlacement="vertical">
+                    <Steps.Step title={<p>Select an NFT</p>} />
+                    <Steps.Step title={<p>Approve & Create</p>} />
+                </Steps>
+
+                {!address &&
+                    <>
+                        <Center>
+                            <Stack>
+                                <Text>Connect your wallet to get started</Text>
+                                <Button onClick={toggleWalletOpen}>Connect Wallet</Button>
+                            </Stack>
+                        </Center>
+                    </>
+                }
+
+                {stepValue === 0 && address &&
+                    <>
+                        <NFTSelector hasMore={hasMore} account={address!} loading={nftsLoading} nfts={nfts} onSelectNFT={(nft) => { setSelectedNFT(nft) }} />
+                        <Box ref={ref}></Box>
+                    </>
+                }
+
+                {stepValue === 1 && address &&
+                    <SimpleGrid cols={1} breakpoints={[
+                        { minWidth: 'sm', cols: 2 },
+                    ]}>
+                        <Stack>
+                            {selectedNFT && address &&
+                                <NFTChip chainId={CHAIN_ID} nft={selectedNFT} onRemove={onCancel} />
+                            }
+                            <TextInput
+                                label="How much Eth would you like to raise?"
+                                placeholder="Eth amount"
+                                withAsterisk
+                                {...form.getInputProps('ethAmount')}
+                            />
+
+                            <Grid>
+                                <Grid.Col span={8}>
+                                    <DatePicker
+                                        placeholder="Pick a date"
+                                        label="Expiry Date (Max 30 days)"
+                                        withAsterisk
+                                        {...form.getInputProps('expiryDate')}
+                                        minDate={new Date()}
+                                        maxDate={dayjs(new Date()).add(30, 'days').toDate()}
+                                    />
+                                </Grid.Col>
+                                <Grid.Col span={4}>
+                                    <TimeInput
+                                        placeholder="Expiry Time"
+                                        label="Expiry Time"
+                                        withAsterisk
+                                        error={false}
+                                        {...form.getInputProps('expiryTime')}
+                                    />
+                                </Grid.Col>
+                            </Grid>
+                        </Stack>
+
+                        <Stack justify="space-between">
+                            <Overview royalties={royalties} ethAmount={form.values.ethAmount} expiryTimestamp={expiryTimestamp} />
+
+                            {!approved && selectedNFT && !Object.keys(form.errors).length ?
+                                (<ContractActionButton
+                                    chainId={CHAIN_ID}
+                                    contractAddress={selectedNFT!.contractAddress}
+                                    buttonTitle="Approve DeRafl"
+                                    abi={Abi.ERC721}
+                                    functionName="setApprovalForAll"
+                                    args={[DERAFL_ADDRESS, true]}
+                                    disabled={false}
+                                />)
+                                :
+                                <>
+                                    {form.isValid() &&
+                                        <Button onClick={() => setConfirmModalOpen(true)}>Create Raffle</Button>
+                                    }
+                                </>
+                            }
+                        </Stack>
+                    </SimpleGrid>
+                }
+            </Stack>
+
+            {confirmModalOpen &&
+                <ConfirmDetailsModal
+                    isOpen={confirmModalOpen}
+                    onClose={() => setConfirmModalOpen(false)}
+                    nftToken={selectedNFT!}
+                    ethAmount={form.values.ethAmount}
+                    expiryTimestamp={expiryTimestamp}
+                    royalties={royalties}
+                />
+            }
+        </>
+        // </Card>
+    );
+};
+
+export default ContactFormSection;
