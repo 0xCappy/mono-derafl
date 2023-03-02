@@ -10,6 +10,7 @@ export const getTicketRefund = /* GraphQL */ `
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -20,6 +21,7 @@ export const getTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -171,6 +173,7 @@ export const listTicketRefunds = /* GraphQL */ `
         refundee
         raffle {
           id
+          type
           createdAt
           updatedAt
           ticketsAvailable
@@ -242,6 +245,7 @@ export const syncTicketRefunds = /* GraphQL */ `
         refundee
         raffle {
           id
+          type
           createdAt
           updatedAt
           ticketsAvailable
@@ -371,6 +375,7 @@ export const getTicketBatch = /* GraphQL */ `
   query GetTicketBatch($id: ID!) {
     getTicketBatch(id: $id) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
@@ -407,6 +412,7 @@ export const listTicketBatches = /* GraphQL */ `
     listTicketBatches(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -452,6 +458,57 @@ export const syncTicketBatches = /* GraphQL */ `
     ) {
       items {
         id
+        type
+        createdAt
+        updatedAt
+        lastTicket
+        transaction {
+          id
+          createdAt
+          updatedAt
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        purchaser
+        ticketsBought
+        batchId
+        firstTicket
+        raffleID
+        _version
+        _deleted
+        _lastChangedAt
+        ticketBatchTransactionId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const ticketBatchesWithSort = /* GraphQL */ `
+  query TicketBatchesWithSort(
+    $type: String!
+    $createdAtUpdatedAtTicketsBought: ModelTicketBatchTicketBatchesWithSortCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelTicketBatchFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ticketBatchesWithSort(
+      type: $type
+      createdAtUpdatedAtTicketsBought: $createdAtUpdatedAtTicketsBought
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -499,6 +556,7 @@ export const ticketBatchesByRaffleID = /* GraphQL */ `
     ) {
       items {
         id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -603,6 +661,7 @@ export const getRaffle = /* GraphQL */ `
   query GetRaffle($id: ID!) {
     getRaffle(id: $id) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -610,6 +669,7 @@ export const getRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -628,6 +688,7 @@ export const getRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -783,6 +844,7 @@ export const listRaffles = /* GraphQL */ `
     listRaffles(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -793,6 +855,7 @@ export const listRaffles = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -929,6 +992,7 @@ export const syncRaffles = /* GraphQL */ `
     ) {
       items {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -939,6 +1003,159 @@ export const syncRaffles = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
+          createdAt
+          updatedAt
+          lastTicket
+          purchaser
+          ticketsBought
+          batchId
+          firstTicket
+          raffleID
+          _version
+          _deleted
+          _lastChangedAt
+          ticketBatchTransactionId
+        }
+        releaseTx {
+          id
+          createdAt
+          updatedAt
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        progress
+        openTx {
+          id
+          createdAt
+          updatedAt
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        drawnTx {
+          id
+          createdAt
+          updatedAt
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        state
+        tokenId
+        expires
+        nftAddress
+        ticketsSold
+        ticketBatches
+        winningTicket
+        closeTx {
+          id
+          createdAt
+          updatedAt
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        chainId
+        winningAccount
+        owner
+        contract
+        nft {
+          id
+          createdAt
+          updatedAt
+          contractAddress
+          metadata
+          tokenUri
+          tokenId
+          symbol
+          imageUri
+          tokenName
+          collectionName
+          lastSales
+          chainId
+          rarityData
+          _version
+          _deleted
+          _lastChangedAt
+          nFTCollectionId
+        }
+        refundTx {
+          id
+          createdAt
+          updatedAt
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        raffleWinningBatchId
+        raffleReleaseTxId
+        raffleOpenTxId
+        raffleDrawnTxId
+        raffleCloseTxId
+        raffleNftId
+        raffleRefundTxId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const rafflesWithSort = /* GraphQL */ `
+  query RafflesWithSort(
+    $type: String!
+    $createdAtUpdatedAtTicketsAvailableProgressExpiresTicketsSold: ModelRaffleRafflesWithSortCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelRaffleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    rafflesWithSort(
+      type: $type
+      createdAtUpdatedAtTicketsAvailableProgressExpiresTicketsSold: $createdAtUpdatedAtTicketsAvailableProgressExpiresTicketsSold
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        createdAt
+        updatedAt
+        ticketsAvailable
+        raffleId
+        TicketBatches {
+          nextToken
+          startedAt
+        }
+        winningBatch {
+          id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -1288,6 +1505,7 @@ export const getAccount = /* GraphQL */ `
   query GetAccount($id: ID!) {
     getAccount(id: $id) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1310,6 +1528,7 @@ export const listAccounts = /* GraphQL */ `
     listAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        type
         createdAt
         updatedAt
         address
@@ -1341,6 +1560,43 @@ export const syncAccounts = /* GraphQL */ `
     ) {
       items {
         id
+        type
+        createdAt
+        updatedAt
+        address
+        rafflesCreated
+        rafflesWon
+        rafflesEntered
+        ticketsBought
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const accountsWithSort = /* GraphQL */ `
+  query AccountsWithSort(
+    $type: String!
+    $createdAtUpdatedAtRafflesCreatedRafflesWonRafflesEnteredTicketsBought: ModelAccountAccountsWithSortCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelAccountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    accountsWithSort(
+      type: $type
+      createdAtUpdatedAtRafflesCreatedRafflesWonRafflesEnteredTicketsBought: $createdAtUpdatedAtRafflesCreatedRafflesWonRafflesEnteredTicketsBought
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
         createdAt
         updatedAt
         address

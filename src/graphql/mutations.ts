@@ -13,6 +13,7 @@ export const createTicketRefund = /* GraphQL */ `
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -23,6 +24,7 @@ export const createTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -172,6 +174,7 @@ export const updateTicketRefund = /* GraphQL */ `
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -182,6 +185,7 @@ export const updateTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -331,6 +335,7 @@ export const deleteTicketRefund = /* GraphQL */ `
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -341,6 +346,7 @@ export const deleteTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -546,6 +552,7 @@ export const createTicketBatch = /* GraphQL */ `
   ) {
     createTicketBatch(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
@@ -580,6 +587,7 @@ export const updateTicketBatch = /* GraphQL */ `
   ) {
     updateTicketBatch(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
@@ -614,6 +622,7 @@ export const deleteTicketBatch = /* GraphQL */ `
   ) {
     deleteTicketBatch(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
@@ -705,6 +714,7 @@ export const createRaffle = /* GraphQL */ `
   ) {
     createRaffle(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -712,6 +722,7 @@ export const createRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -730,6 +741,7 @@ export const createRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -883,6 +895,7 @@ export const updateRaffle = /* GraphQL */ `
   ) {
     updateRaffle(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -890,6 +903,7 @@ export const updateRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -908,6 +922,7 @@ export const updateRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -1061,6 +1076,7 @@ export const deleteRaffle = /* GraphQL */ `
   ) {
     deleteRaffle(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -1068,6 +1084,7 @@ export const deleteRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -1086,6 +1103,7 @@ export const deleteRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -1437,6 +1455,7 @@ export const createAccount = /* GraphQL */ `
   ) {
     createAccount(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1457,6 +1476,7 @@ export const updateAccount = /* GraphQL */ `
   ) {
     updateAccount(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1477,6 +1497,7 @@ export const deleteAccount = /* GraphQL */ `
   ) {
     deleteAccount(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       address

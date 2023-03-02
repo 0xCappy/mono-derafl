@@ -229,7 +229,8 @@ export const createRaffle = async (
       owner,
       contract,
       raffleNftId: nftID,
-      raffleOpenTxId: openTxId
+      raffleOpenTxId: openTxId,
+      type: 'Raffle'
     }
   }
 

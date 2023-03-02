@@ -86,7 +86,8 @@ const createEmptyAccount = async (address: string) => {
             rafflesCreated: 0,
             rafflesWon: 0,
             rafflesEntered: 0,
-            ticketsBought: 0
+            ticketsBought: 0,
+            type: 'Account'
         }
     }
     const options = {

@@ -122,7 +122,8 @@ export const createTicketBatch = async (
             lastTicket,
             batchId,
             purchaser,
-            ticketBatchTransactionId
+            ticketBatchTransactionId,
+            type: 'TicketBatch'
         }
     }
     const options = {

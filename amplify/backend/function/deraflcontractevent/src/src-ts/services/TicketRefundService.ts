@@ -18,5 +18,4 @@ export const createTicketRefund = async (raffleId: string, transactionId: string
     console.log("CREATE REFUND: ", JSON.stringify(response.data))
 
     return response?.data?.data?.createTicketRefund
-
 }

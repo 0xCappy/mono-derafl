@@ -85,8 +85,9 @@ type EagerTicketBatch = {
     identifier: ManagedIdentifier<TicketBatch, 'id'>;
   };
   readonly id: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly lastTicket: number;
   readonly transaction: Transaction;
   readonly purchaser: string;
@@ -102,8 +103,9 @@ type LazyTicketBatch = {
     identifier: ManagedIdentifier<TicketBatch, 'id'>;
   };
   readonly id: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly lastTicket: number;
   readonly transaction: AsyncItem<Transaction>;
   readonly purchaser: string;
@@ -157,8 +159,9 @@ type EagerRaffle = {
     identifier: ManagedIdentifier<Raffle, 'id'>;
   };
   readonly id: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly ticketsAvailable: number;
   readonly raffleId: number;
   readonly TicketBatches?: (TicketBatch | null)[] | null;
@@ -195,8 +198,9 @@ type LazyRaffle = {
     identifier: ManagedIdentifier<Raffle, 'id'>;
   };
   readonly id: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly ticketsAvailable: number;
   readonly raffleId: number;
   readonly TicketBatches: AsyncCollection<TicketBatch>;
@@ -329,13 +333,14 @@ type EagerAccount = {
     identifier: ManagedIdentifier<Account, 'id'>;
   };
   readonly id: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly address: string;
-  readonly rafflesCreated?: number | null;
-  readonly rafflesWon?: number | null;
-  readonly rafflesEntered?: number | null;
-  readonly ticketsBought?: number | null;
+  readonly rafflesCreated: number;
+  readonly rafflesWon: number;
+  readonly rafflesEntered: number;
+  readonly ticketsBought: number;
 }
 
 type LazyAccount = {
@@ -343,13 +348,14 @@ type LazyAccount = {
     identifier: ManagedIdentifier<Account, 'id'>;
   };
   readonly id: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly address: string;
-  readonly rafflesCreated?: number | null;
-  readonly rafflesWon?: number | null;
-  readonly rafflesEntered?: number | null;
-  readonly ticketsBought?: number | null;
+  readonly rafflesCreated: number;
+  readonly rafflesWon: number;
+  readonly rafflesEntered: number;
+  readonly ticketsBought: number;
 }
 
 export declare type Account = LazyLoading extends LazyLoadingDisabled ? EagerAccount : LazyAccount

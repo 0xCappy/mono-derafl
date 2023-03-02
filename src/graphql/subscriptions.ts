@@ -12,6 +12,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -22,6 +23,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -170,6 +172,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -180,6 +183,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -328,6 +332,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -338,6 +343,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -533,6 +539,7 @@ export const onCreateTicketBatch = /* GraphQL */ `
   ) {
     onCreateTicketBatch(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
@@ -566,6 +573,7 @@ export const onUpdateTicketBatch = /* GraphQL */ `
   ) {
     onUpdateTicketBatch(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
@@ -599,6 +607,7 @@ export const onDeleteTicketBatch = /* GraphQL */ `
   ) {
     onDeleteTicketBatch(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
@@ -684,6 +693,7 @@ export const onCreateRaffle = /* GraphQL */ `
   subscription OnCreateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
     onCreateRaffle(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -691,6 +701,7 @@ export const onCreateRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -709,6 +720,7 @@ export const onCreateRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -859,6 +871,7 @@ export const onUpdateRaffle = /* GraphQL */ `
   subscription OnUpdateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
     onUpdateRaffle(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -866,6 +879,7 @@ export const onUpdateRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -884,6 +898,7 @@ export const onUpdateRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -1034,6 +1049,7 @@ export const onDeleteRaffle = /* GraphQL */ `
   subscription OnDeleteRaffle($filter: ModelSubscriptionRaffleFilterInput) {
     onDeleteRaffle(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -1041,6 +1057,7 @@ export const onDeleteRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -1059,6 +1076,7 @@ export const onDeleteRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
@@ -1395,6 +1413,7 @@ export const onCreateAccount = /* GraphQL */ `
   subscription OnCreateAccount($filter: ModelSubscriptionAccountFilterInput) {
     onCreateAccount(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1412,6 +1431,7 @@ export const onUpdateAccount = /* GraphQL */ `
   subscription OnUpdateAccount($filter: ModelSubscriptionAccountFilterInput) {
     onUpdateAccount(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1429,6 +1449,7 @@ export const onDeleteAccount = /* GraphQL */ `
   subscription OnDeleteAccount($filter: ModelSubscriptionAccountFilterInput) {
     onDeleteAccount(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       address
