@@ -16,5 +16,65 @@
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
     }
+  },
+  "function": {
+    "derafleventstream": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "derafl"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_derafleventstream_alchemyKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "derafleventstream"
+        }
+      ]
+    },
+    "AMPLIFY_function_derafleventstream_discordRaffleClosedWebhookUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "derafleventstream"
+        }
+      ]
+    },
+    "AMPLIFY_function_derafleventstream_discordRaffleCreateWebhookUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "derafleventstream"
+        }
+      ]
+    },
+    "AMPLIFY_function_derafleventstream_moralisApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "derafleventstream"
+        }
+      ]
+    },
+    "AMPLIFY_function_derafleventstream_traitSniperKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "derafleventstream"
+        }
+      ]
+    }
   }
 }
