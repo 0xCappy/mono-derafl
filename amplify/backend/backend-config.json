@@ -4,10 +4,15 @@
       "dependsOn": [],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
             },
             "authenticationType": "API_KEY"
           }
@@ -18,7 +23,7 @@
     }
   },
   "function": {
-    "deraflcontracteventwebhook": {
+    "deraflcontractevent": {
       "build": true,
       "dependsOn": [
         {
@@ -36,43 +41,99 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_deraflcontracteventwebhook_alchemyKey": {
+    "AMPLIFY_function_deraflcontractevent_alchemyKey": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "deraflcontracteventwebhook"
+          "resourceName": "deraflcontractevent"
         }
       ]
     },
-    "AMPLIFY_function_deraflcontracteventwebhook_discordRaffleClosedWebhookUrl": {
+    "AMPLIFY_function_deraflcontractevent_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "deraflcontracteventwebhook"
+          "resourceName": "deraflcontractevent"
         }
       ]
     },
-    "AMPLIFY_function_deraflcontracteventwebhook_discordRaffleCreateWebhookUrl": {
+    "AMPLIFY_function_deraflcontractevent_discordRaffleClosedWebhookUrl": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "deraflcontracteventwebhook"
+          "resourceName": "deraflcontractevent"
         }
       ]
     },
-    "AMPLIFY_function_deraflcontracteventwebhook_moralisApiKey": {
+    "AMPLIFY_function_deraflcontractevent_discordRaffleCreateWebhookUrl": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "deraflcontracteventwebhook"
+          "resourceName": "deraflcontractevent"
         }
       ]
     },
-    "AMPLIFY_function_deraflcontracteventwebhook_traitSniperKey": {
+    "AMPLIFY_function_deraflcontractevent_moralisApiKey": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "deraflcontracteventwebhook"
+          "resourceName": "deraflcontractevent"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflcontractevent_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflcontractevent"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflcontractevent_traitSniperKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflcontractevent"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflstreamevent_alchemyKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflstreamevent"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflstreamevent_discordRaffleClosedWebhookUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflstreamevent"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflstreamevent_discordRaffleCreateWebhookUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflstreamevent"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflstreamevent_moralisApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflstreamevent"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflstreamevent_traitSniperKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflstreamevent"
         }
       ]
     }
