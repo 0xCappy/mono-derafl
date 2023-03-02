@@ -6,6 +6,7 @@ export type CreateTicketRefundInput = {
   id?: string | null,
   ethAmount?: number | null,
   refundee?: string | null,
+  _version?: number | null,
   ticketRefundRaffleId?: string | null,
   ticketRefundTxId?: string | null,
 };
@@ -93,10 +94,13 @@ export type TicketRefund = {
   id: string,
   ethAmount?: number | null,
   refundee?: string | null,
-  Raffle?: Raffle | null,
+  raffle?: Raffle | null,
   tx?: Transaction | null,
   createdAt: string,
   updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   ticketRefundRaffleId?: string | null,
   ticketRefundTxId?: string | null,
 };
@@ -109,11 +113,11 @@ export type Raffle = {
   ticketsAvailable: number,
   raffleId: number,
   TicketBatches?: ModelTicketBatchConnection | null,
-  WinningBatch?: TicketBatch | null,
-  ReleaseTx?: Transaction | null,
+  winningBatch?: TicketBatch | null,
+  releaseTx?: Transaction | null,
   progress: number,
-  OpenTx?: Transaction | null,
-  DrawnTx?: Transaction | null,
+  openTx?: Transaction | null,
+  drawnTx?: Transaction | null,
   state: number,
   tokenId: string,
   expires: string,
@@ -121,19 +125,22 @@ export type Raffle = {
   ticketsSold: number,
   ticketBatches?: number | null,
   winningTicket?: number | null,
-  CloseTx?: Transaction | null,
+  closeTx?: Transaction | null,
   chainId: string,
   winningAccount?: string | null,
   owner: string,
   contract: string,
-  NFT?: NFT | null,
-  RefundTx?: Transaction | null,
+  nft?: NFT | null,
+  refundTx?: Transaction | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   raffleWinningBatchId?: string | null,
   raffleReleaseTxId?: string | null,
   raffleOpenTxId?: string | null,
   raffleDrawnTxId?: string | null,
   raffleCloseTxId?: string | null,
-  raffleNFTId?: string | null,
+  raffleNftId?: string | null,
   raffleRefundTxId?: string | null,
 };
 
@@ -141,6 +148,7 @@ export type ModelTicketBatchConnection = {
   __typename: "ModelTicketBatchConnection",
   items:  Array<TicketBatch | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type TicketBatch = {
@@ -149,12 +157,15 @@ export type TicketBatch = {
   createdAt?: string | null,
   updatedAt?: string | null,
   lastTicket: number,
-  Transaction: Transaction,
+  transaction: Transaction,
   purchaser: string,
   ticketsBought: number,
   batchId: number,
   firstTicket: number,
   raffleID: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   ticketBatchTransactionId: string,
 };
 
@@ -167,6 +178,9 @@ export type Transaction = {
   eventType: number,
   hash: string,
   chainId: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type NFT = {
@@ -185,7 +199,10 @@ export type NFT = {
   lastSales?: string | null,
   chainId: string,
   rarityData?: string | null,
-  Collection?: Collection | null,
+  collection?: Collection | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   nFTCollectionId?: string | null,
 };
 
@@ -202,18 +219,23 @@ export type Collection = {
   tokenType: string,
   totalSupply?: string | null,
   chainId: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type UpdateTicketRefundInput = {
   id: string,
   ethAmount?: number | null,
   refundee?: string | null,
+  _version?: number | null,
   ticketRefundRaffleId?: string | null,
   ticketRefundTxId?: string | null,
 };
 
 export type DeleteTicketRefundInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateStatInput = {
@@ -223,6 +245,7 @@ export type CreateStatInput = {
   royaltiesPaid?: number | null,
   chainId: string,
   rafflesCreated?: number | null,
+  _version?: number | null,
 };
 
 export type ModelStatConditionInput = {
@@ -258,6 +281,9 @@ export type Stat = {
   rafflesCreated?: number | null,
   createdAt: string,
   updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type UpdateStatInput = {
@@ -267,10 +293,12 @@ export type UpdateStatInput = {
   royaltiesPaid?: number | null,
   chainId?: string | null,
   rafflesCreated?: number | null,
+  _version?: number | null,
 };
 
 export type DeleteStatInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateTicketBatchInput = {
@@ -283,6 +311,7 @@ export type CreateTicketBatchInput = {
   batchId: number,
   firstTicket: number,
   raffleID: string,
+  _version?: number | null,
   ticketBatchTransactionId: string,
 };
 
@@ -311,11 +340,13 @@ export type UpdateTicketBatchInput = {
   batchId?: number | null,
   firstTicket?: number | null,
   raffleID?: string | null,
+  _version?: number | null,
   ticketBatchTransactionId?: string | null,
 };
 
 export type DeleteTicketBatchInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateTransactionInput = {
@@ -326,6 +357,7 @@ export type CreateTransactionInput = {
   eventType: number,
   hash: string,
   chainId: string,
+  _version?: number | null,
 };
 
 export type ModelTransactionConditionInput = {
@@ -348,10 +380,12 @@ export type UpdateTransactionInput = {
   eventType?: number | null,
   hash?: string | null,
   chainId?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteTransactionInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateRaffleInput = {
@@ -372,12 +406,13 @@ export type CreateRaffleInput = {
   winningAccount?: string | null,
   owner: string,
   contract: string,
+  _version?: number | null,
   raffleWinningBatchId?: string | null,
   raffleReleaseTxId?: string | null,
   raffleOpenTxId?: string | null,
   raffleDrawnTxId?: string | null,
   raffleCloseTxId?: string | null,
-  raffleNFTId?: string | null,
+  raffleNftId?: string | null,
   raffleRefundTxId?: string | null,
 };
 
@@ -406,7 +441,7 @@ export type ModelRaffleConditionInput = {
   raffleOpenTxId?: ModelIDInput | null,
   raffleDrawnTxId?: ModelIDInput | null,
   raffleCloseTxId?: ModelIDInput | null,
-  raffleNFTId?: ModelIDInput | null,
+  raffleNftId?: ModelIDInput | null,
   raffleRefundTxId?: ModelIDInput | null,
 };
 
@@ -428,17 +463,19 @@ export type UpdateRaffleInput = {
   winningAccount?: string | null,
   owner?: string | null,
   contract?: string | null,
+  _version?: number | null,
   raffleWinningBatchId?: string | null,
   raffleReleaseTxId?: string | null,
   raffleOpenTxId?: string | null,
   raffleDrawnTxId?: string | null,
   raffleCloseTxId?: string | null,
-  raffleNFTId?: string | null,
+  raffleNftId?: string | null,
   raffleRefundTxId?: string | null,
 };
 
 export type DeleteRaffleInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateNFTInput = {
@@ -456,6 +493,7 @@ export type CreateNFTInput = {
   lastSales?: string | null,
   chainId: string,
   rarityData?: string | null,
+  _version?: number | null,
   nFTCollectionId?: string | null,
 };
 
@@ -494,11 +532,13 @@ export type UpdateNFTInput = {
   lastSales?: string | null,
   chainId?: string | null,
   rarityData?: string | null,
+  _version?: number | null,
   nFTCollectionId?: string | null,
 };
 
 export type DeleteNFTInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateCollectionInput = {
@@ -513,6 +553,7 @@ export type CreateCollectionInput = {
   tokenType: string,
   totalSupply?: string | null,
   chainId: string,
+  _version?: number | null,
 };
 
 export type ModelCollectionConditionInput = {
@@ -543,10 +584,12 @@ export type UpdateCollectionInput = {
   tokenType?: string | null,
   totalSupply?: string | null,
   chainId?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteCollectionInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateAccountInput = {
@@ -558,6 +601,7 @@ export type CreateAccountInput = {
   rafflesWon?: number | null,
   rafflesEntered?: number | null,
   ticketsBought?: number | null,
+  _version?: number | null,
 };
 
 export type ModelAccountConditionInput = {
@@ -583,6 +627,9 @@ export type Account = {
   rafflesWon?: number | null,
   rafflesEntered?: number | null,
   ticketsBought?: number | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
 export type UpdateAccountInput = {
@@ -594,10 +641,12 @@ export type UpdateAccountInput = {
   rafflesWon?: number | null,
   rafflesEntered?: number | null,
   ticketsBought?: number | null,
+  _version?: number | null,
 };
 
 export type DeleteAccountInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type ModelTicketRefundFilterInput = {
@@ -615,6 +664,7 @@ export type ModelTicketRefundConnection = {
   __typename: "ModelTicketRefundConnection",
   items:  Array<TicketRefund | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelStatFilterInput = {
@@ -633,6 +683,7 @@ export type ModelStatConnection = {
   __typename: "ModelStatConnection",
   items:  Array<Stat | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelTicketBatchFilterInput = {
@@ -651,6 +702,12 @@ export type ModelTicketBatchFilterInput = {
   ticketBatchTransactionId?: ModelIDInput | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelTransactionFilterInput = {
   id?: ModelIDInput | null,
   createdAt?: ModelStringInput | null,
@@ -668,6 +725,7 @@ export type ModelTransactionConnection = {
   __typename: "ModelTransactionConnection",
   items:  Array<Transaction | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelRaffleFilterInput = {
@@ -696,7 +754,7 @@ export type ModelRaffleFilterInput = {
   raffleOpenTxId?: ModelIDInput | null,
   raffleDrawnTxId?: ModelIDInput | null,
   raffleCloseTxId?: ModelIDInput | null,
-  raffleNFTId?: ModelIDInput | null,
+  raffleNftId?: ModelIDInput | null,
   raffleRefundTxId?: ModelIDInput | null,
 };
 
@@ -704,6 +762,7 @@ export type ModelRaffleConnection = {
   __typename: "ModelRaffleConnection",
   items:  Array<Raffle | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelNFTFilterInput = {
@@ -731,6 +790,7 @@ export type ModelNFTConnection = {
   __typename: "ModelNFTConnection",
   items:  Array<NFT | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelCollectionFilterInput = {
@@ -754,6 +814,7 @@ export type ModelCollectionConnection = {
   __typename: "ModelCollectionConnection",
   items:  Array<Collection | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelAccountFilterInput = {
@@ -774,13 +835,8 @@ export type ModelAccountConnection = {
   __typename: "ModelAccountConnection",
   items:  Array<Account | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
 
 export type ModelSubscriptionTicketRefundFilterInput = {
   id?: ModelSubscriptionIDInput | null,
@@ -962,7 +1018,7 @@ export type CreateTicketRefundMutation = {
     id: string,
     ethAmount?: number | null,
     refundee?: string | null,
-    Raffle?:  {
+    raffle?:  {
       __typename: "Raffle",
       id: string,
       createdAt?: string | null,
@@ -972,8 +1028,9 @@ export type CreateTicketRefundMutation = {
       TicketBatches?:  {
         __typename: "ModelTicketBatchConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      WinningBatch?:  {
+      winningBatch?:  {
         __typename: "TicketBatch",
         id: string,
         createdAt?: string | null,
@@ -984,9 +1041,12 @@ export type CreateTicketRefundMutation = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null,
-      ReleaseTx?:  {
+      releaseTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -995,9 +1055,12 @@ export type CreateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       progress: number,
-      OpenTx?:  {
+      openTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1006,8 +1069,11 @@ export type CreateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
-      DrawnTx?:  {
+      drawnTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1016,6 +1082,9 @@ export type CreateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       state: number,
       tokenId: string,
@@ -1024,7 +1093,7 @@ export type CreateTicketRefundMutation = {
       ticketsSold: number,
       ticketBatches?: number | null,
       winningTicket?: number | null,
-      CloseTx?:  {
+      closeTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1033,12 +1102,15 @@ export type CreateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       chainId: string,
       winningAccount?: string | null,
       owner: string,
       contract: string,
-      NFT?:  {
+      nft?:  {
         __typename: "NFT",
         id: string,
         createdAt?: string | null,
@@ -1054,9 +1126,12 @@ export type CreateTicketRefundMutation = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         nFTCollectionId?: string | null,
       } | null,
-      RefundTx?:  {
+      refundTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1065,13 +1140,19 @@ export type CreateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       raffleWinningBatchId?: string | null,
       raffleReleaseTxId?: string | null,
       raffleOpenTxId?: string | null,
       raffleDrawnTxId?: string | null,
       raffleCloseTxId?: string | null,
-      raffleNFTId?: string | null,
+      raffleNftId?: string | null,
       raffleRefundTxId?: string | null,
     } | null,
     tx?:  {
@@ -1083,9 +1164,15 @@ export type CreateTicketRefundMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketRefundRaffleId?: string | null,
     ticketRefundTxId?: string | null,
   } | null,
@@ -1102,7 +1189,7 @@ export type UpdateTicketRefundMutation = {
     id: string,
     ethAmount?: number | null,
     refundee?: string | null,
-    Raffle?:  {
+    raffle?:  {
       __typename: "Raffle",
       id: string,
       createdAt?: string | null,
@@ -1112,8 +1199,9 @@ export type UpdateTicketRefundMutation = {
       TicketBatches?:  {
         __typename: "ModelTicketBatchConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      WinningBatch?:  {
+      winningBatch?:  {
         __typename: "TicketBatch",
         id: string,
         createdAt?: string | null,
@@ -1124,9 +1212,12 @@ export type UpdateTicketRefundMutation = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null,
-      ReleaseTx?:  {
+      releaseTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1135,9 +1226,12 @@ export type UpdateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       progress: number,
-      OpenTx?:  {
+      openTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1146,8 +1240,11 @@ export type UpdateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
-      DrawnTx?:  {
+      drawnTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1156,6 +1253,9 @@ export type UpdateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       state: number,
       tokenId: string,
@@ -1164,7 +1264,7 @@ export type UpdateTicketRefundMutation = {
       ticketsSold: number,
       ticketBatches?: number | null,
       winningTicket?: number | null,
-      CloseTx?:  {
+      closeTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1173,12 +1273,15 @@ export type UpdateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       chainId: string,
       winningAccount?: string | null,
       owner: string,
       contract: string,
-      NFT?:  {
+      nft?:  {
         __typename: "NFT",
         id: string,
         createdAt?: string | null,
@@ -1194,9 +1297,12 @@ export type UpdateTicketRefundMutation = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         nFTCollectionId?: string | null,
       } | null,
-      RefundTx?:  {
+      refundTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1205,13 +1311,19 @@ export type UpdateTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       raffleWinningBatchId?: string | null,
       raffleReleaseTxId?: string | null,
       raffleOpenTxId?: string | null,
       raffleDrawnTxId?: string | null,
       raffleCloseTxId?: string | null,
-      raffleNFTId?: string | null,
+      raffleNftId?: string | null,
       raffleRefundTxId?: string | null,
     } | null,
     tx?:  {
@@ -1223,9 +1335,15 @@ export type UpdateTicketRefundMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketRefundRaffleId?: string | null,
     ticketRefundTxId?: string | null,
   } | null,
@@ -1242,7 +1360,7 @@ export type DeleteTicketRefundMutation = {
     id: string,
     ethAmount?: number | null,
     refundee?: string | null,
-    Raffle?:  {
+    raffle?:  {
       __typename: "Raffle",
       id: string,
       createdAt?: string | null,
@@ -1252,8 +1370,9 @@ export type DeleteTicketRefundMutation = {
       TicketBatches?:  {
         __typename: "ModelTicketBatchConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      WinningBatch?:  {
+      winningBatch?:  {
         __typename: "TicketBatch",
         id: string,
         createdAt?: string | null,
@@ -1264,9 +1383,12 @@ export type DeleteTicketRefundMutation = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null,
-      ReleaseTx?:  {
+      releaseTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1275,9 +1397,12 @@ export type DeleteTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       progress: number,
-      OpenTx?:  {
+      openTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1286,8 +1411,11 @@ export type DeleteTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
-      DrawnTx?:  {
+      drawnTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1296,6 +1424,9 @@ export type DeleteTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       state: number,
       tokenId: string,
@@ -1304,7 +1435,7 @@ export type DeleteTicketRefundMutation = {
       ticketsSold: number,
       ticketBatches?: number | null,
       winningTicket?: number | null,
-      CloseTx?:  {
+      closeTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1313,12 +1444,15 @@ export type DeleteTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       chainId: string,
       winningAccount?: string | null,
       owner: string,
       contract: string,
-      NFT?:  {
+      nft?:  {
         __typename: "NFT",
         id: string,
         createdAt?: string | null,
@@ -1334,9 +1468,12 @@ export type DeleteTicketRefundMutation = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         nFTCollectionId?: string | null,
       } | null,
-      RefundTx?:  {
+      refundTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1345,13 +1482,19 @@ export type DeleteTicketRefundMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       raffleWinningBatchId?: string | null,
       raffleReleaseTxId?: string | null,
       raffleOpenTxId?: string | null,
       raffleDrawnTxId?: string | null,
       raffleCloseTxId?: string | null,
-      raffleNFTId?: string | null,
+      raffleNftId?: string | null,
       raffleRefundTxId?: string | null,
     } | null,
     tx?:  {
@@ -1363,9 +1506,15 @@ export type DeleteTicketRefundMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketRefundRaffleId?: string | null,
     ticketRefundTxId?: string | null,
   } | null,
@@ -1387,6 +1536,9 @@ export type CreateStatMutation = {
     rafflesCreated?: number | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -1406,6 +1558,9 @@ export type UpdateStatMutation = {
     rafflesCreated?: number | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -1425,6 +1580,9 @@ export type DeleteStatMutation = {
     rafflesCreated?: number | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -1440,7 +1598,7 @@ export type CreateTicketBatchMutation = {
     createdAt?: string | null,
     updatedAt?: string | null,
     lastTicket: number,
-    Transaction:  {
+    transaction:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1449,12 +1607,18 @@ export type CreateTicketBatchMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     },
     purchaser: string,
     ticketsBought: number,
     batchId: number,
     firstTicket: number,
     raffleID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketBatchTransactionId: string,
   } | null,
 };
@@ -1471,7 +1635,7 @@ export type UpdateTicketBatchMutation = {
     createdAt?: string | null,
     updatedAt?: string | null,
     lastTicket: number,
-    Transaction:  {
+    transaction:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1480,12 +1644,18 @@ export type UpdateTicketBatchMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     },
     purchaser: string,
     ticketsBought: number,
     batchId: number,
     firstTicket: number,
     raffleID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketBatchTransactionId: string,
   } | null,
 };
@@ -1502,7 +1672,7 @@ export type DeleteTicketBatchMutation = {
     createdAt?: string | null,
     updatedAt?: string | null,
     lastTicket: number,
-    Transaction:  {
+    transaction:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1511,12 +1681,18 @@ export type DeleteTicketBatchMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     },
     purchaser: string,
     ticketsBought: number,
     batchId: number,
     firstTicket: number,
     raffleID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketBatchTransactionId: string,
   } | null,
 };
@@ -1536,6 +1712,9 @@ export type CreateTransactionMutation = {
     eventType: number,
     hash: string,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -1554,6 +1733,9 @@ export type UpdateTransactionMutation = {
     eventType: number,
     hash: string,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -1572,6 +1754,9 @@ export type DeleteTransactionMutation = {
     eventType: number,
     hash: string,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -1601,17 +1786,21 @@ export type CreateRaffleMutation = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    WinningBatch?:  {
+    winningBatch?:  {
       __typename: "TicketBatch",
       id: string,
       createdAt?: string | null,
       updatedAt?: string | null,
       lastTicket: number,
-      Transaction:  {
+      transaction:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1620,15 +1809,21 @@ export type CreateRaffleMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       },
       purchaser: string,
       ticketsBought: number,
       batchId: number,
       firstTicket: number,
       raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       ticketBatchTransactionId: string,
     } | null,
-    ReleaseTx?:  {
+    releaseTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1637,9 +1832,12 @@ export type CreateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     progress: number,
-    OpenTx?:  {
+    openTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1648,8 +1846,11 @@ export type CreateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
-    DrawnTx?:  {
+    drawnTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1658,6 +1859,9 @@ export type CreateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     state: number,
     tokenId: string,
@@ -1666,7 +1870,7 @@ export type CreateRaffleMutation = {
     ticketsSold: number,
     ticketBatches?: number | null,
     winningTicket?: number | null,
-    CloseTx?:  {
+    closeTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1675,12 +1879,15 @@ export type CreateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     chainId: string,
     winningAccount?: string | null,
     owner: string,
     contract: string,
-    NFT?:  {
+    nft?:  {
       __typename: "NFT",
       id: string,
       createdAt?: string | null,
@@ -1696,7 +1903,7 @@ export type CreateRaffleMutation = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
-      Collection?:  {
+      collection?:  {
         __typename: "Collection",
         id: string,
         contractAddress: string,
@@ -1709,10 +1916,16 @@ export type CreateRaffleMutation = {
         tokenType: string,
         totalSupply?: string | null,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       nFTCollectionId?: string | null,
     } | null,
-    RefundTx?:  {
+    refundTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1721,13 +1934,19 @@ export type CreateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     raffleWinningBatchId?: string | null,
     raffleReleaseTxId?: string | null,
     raffleOpenTxId?: string | null,
     raffleDrawnTxId?: string | null,
     raffleCloseTxId?: string | null,
-    raffleNFTId?: string | null,
+    raffleNftId?: string | null,
     raffleRefundTxId?: string | null,
   } | null,
 };
@@ -1758,17 +1977,21 @@ export type UpdateRaffleMutation = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    WinningBatch?:  {
+    winningBatch?:  {
       __typename: "TicketBatch",
       id: string,
       createdAt?: string | null,
       updatedAt?: string | null,
       lastTicket: number,
-      Transaction:  {
+      transaction:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1777,15 +2000,21 @@ export type UpdateRaffleMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       },
       purchaser: string,
       ticketsBought: number,
       batchId: number,
       firstTicket: number,
       raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       ticketBatchTransactionId: string,
     } | null,
-    ReleaseTx?:  {
+    releaseTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1794,9 +2023,12 @@ export type UpdateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     progress: number,
-    OpenTx?:  {
+    openTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1805,8 +2037,11 @@ export type UpdateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
-    DrawnTx?:  {
+    drawnTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1815,6 +2050,9 @@ export type UpdateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     state: number,
     tokenId: string,
@@ -1823,7 +2061,7 @@ export type UpdateRaffleMutation = {
     ticketsSold: number,
     ticketBatches?: number | null,
     winningTicket?: number | null,
-    CloseTx?:  {
+    closeTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1832,12 +2070,15 @@ export type UpdateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     chainId: string,
     winningAccount?: string | null,
     owner: string,
     contract: string,
-    NFT?:  {
+    nft?:  {
       __typename: "NFT",
       id: string,
       createdAt?: string | null,
@@ -1853,7 +2094,7 @@ export type UpdateRaffleMutation = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
-      Collection?:  {
+      collection?:  {
         __typename: "Collection",
         id: string,
         contractAddress: string,
@@ -1866,10 +2107,16 @@ export type UpdateRaffleMutation = {
         tokenType: string,
         totalSupply?: string | null,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       nFTCollectionId?: string | null,
     } | null,
-    RefundTx?:  {
+    refundTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1878,13 +2125,19 @@ export type UpdateRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     raffleWinningBatchId?: string | null,
     raffleReleaseTxId?: string | null,
     raffleOpenTxId?: string | null,
     raffleDrawnTxId?: string | null,
     raffleCloseTxId?: string | null,
-    raffleNFTId?: string | null,
+    raffleNftId?: string | null,
     raffleRefundTxId?: string | null,
   } | null,
 };
@@ -1915,17 +2168,21 @@ export type DeleteRaffleMutation = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    WinningBatch?:  {
+    winningBatch?:  {
       __typename: "TicketBatch",
       id: string,
       createdAt?: string | null,
       updatedAt?: string | null,
       lastTicket: number,
-      Transaction:  {
+      transaction:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -1934,15 +2191,21 @@ export type DeleteRaffleMutation = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       },
       purchaser: string,
       ticketsBought: number,
       batchId: number,
       firstTicket: number,
       raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       ticketBatchTransactionId: string,
     } | null,
-    ReleaseTx?:  {
+    releaseTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1951,9 +2214,12 @@ export type DeleteRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     progress: number,
-    OpenTx?:  {
+    openTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1962,8 +2228,11 @@ export type DeleteRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
-    DrawnTx?:  {
+    drawnTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1972,6 +2241,9 @@ export type DeleteRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     state: number,
     tokenId: string,
@@ -1980,7 +2252,7 @@ export type DeleteRaffleMutation = {
     ticketsSold: number,
     ticketBatches?: number | null,
     winningTicket?: number | null,
-    CloseTx?:  {
+    closeTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -1989,12 +2261,15 @@ export type DeleteRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     chainId: string,
     winningAccount?: string | null,
     owner: string,
     contract: string,
-    NFT?:  {
+    nft?:  {
       __typename: "NFT",
       id: string,
       createdAt?: string | null,
@@ -2010,7 +2285,7 @@ export type DeleteRaffleMutation = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
-      Collection?:  {
+      collection?:  {
         __typename: "Collection",
         id: string,
         contractAddress: string,
@@ -2023,10 +2298,16 @@ export type DeleteRaffleMutation = {
         tokenType: string,
         totalSupply?: string | null,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       nFTCollectionId?: string | null,
     } | null,
-    RefundTx?:  {
+    refundTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -2035,13 +2316,19 @@ export type DeleteRaffleMutation = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     raffleWinningBatchId?: string | null,
     raffleReleaseTxId?: string | null,
     raffleOpenTxId?: string | null,
     raffleDrawnTxId?: string | null,
     raffleCloseTxId?: string | null,
-    raffleNFTId?: string | null,
+    raffleNftId?: string | null,
     raffleRefundTxId?: string | null,
   } | null,
 };
@@ -2068,7 +2355,7 @@ export type CreateNFTMutation = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
-    Collection?:  {
+    collection?:  {
       __typename: "Collection",
       id: string,
       contractAddress: string,
@@ -2081,7 +2368,13 @@ export type CreateNFTMutation = {
       tokenType: string,
       totalSupply?: string | null,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     nFTCollectionId?: string | null,
   } | null,
 };
@@ -2108,7 +2401,7 @@ export type UpdateNFTMutation = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
-    Collection?:  {
+    collection?:  {
       __typename: "Collection",
       id: string,
       contractAddress: string,
@@ -2121,7 +2414,13 @@ export type UpdateNFTMutation = {
       tokenType: string,
       totalSupply?: string | null,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     nFTCollectionId?: string | null,
   } | null,
 };
@@ -2148,7 +2447,7 @@ export type DeleteNFTMutation = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
-    Collection?:  {
+    collection?:  {
       __typename: "Collection",
       id: string,
       contractAddress: string,
@@ -2161,7 +2460,13 @@ export type DeleteNFTMutation = {
       tokenType: string,
       totalSupply?: string | null,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     nFTCollectionId?: string | null,
   } | null,
 };
@@ -2185,6 +2490,9 @@ export type CreateCollectionMutation = {
     tokenType: string,
     totalSupply?: string | null,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -2207,6 +2515,9 @@ export type UpdateCollectionMutation = {
     tokenType: string,
     totalSupply?: string | null,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -2229,6 +2540,9 @@ export type DeleteCollectionMutation = {
     tokenType: string,
     totalSupply?: string | null,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -2248,6 +2562,9 @@ export type CreateAccountMutation = {
     rafflesWon?: number | null,
     rafflesEntered?: number | null,
     ticketsBought?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -2267,6 +2584,9 @@ export type UpdateAccountMutation = {
     rafflesWon?: number | null,
     rafflesEntered?: number | null,
     ticketsBought?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -2286,6 +2606,9 @@ export type DeleteAccountMutation = {
     rafflesWon?: number | null,
     rafflesEntered?: number | null,
     ticketsBought?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -2299,7 +2622,7 @@ export type GetTicketRefundQuery = {
     id: string,
     ethAmount?: number | null,
     refundee?: string | null,
-    Raffle?:  {
+    raffle?:  {
       __typename: "Raffle",
       id: string,
       createdAt?: string | null,
@@ -2309,8 +2632,9 @@ export type GetTicketRefundQuery = {
       TicketBatches?:  {
         __typename: "ModelTicketBatchConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      WinningBatch?:  {
+      winningBatch?:  {
         __typename: "TicketBatch",
         id: string,
         createdAt?: string | null,
@@ -2321,9 +2645,12 @@ export type GetTicketRefundQuery = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null,
-      ReleaseTx?:  {
+      releaseTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2332,9 +2659,12 @@ export type GetTicketRefundQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       progress: number,
-      OpenTx?:  {
+      openTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2343,8 +2673,11 @@ export type GetTicketRefundQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
-      DrawnTx?:  {
+      drawnTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2353,6 +2686,9 @@ export type GetTicketRefundQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       state: number,
       tokenId: string,
@@ -2361,7 +2697,7 @@ export type GetTicketRefundQuery = {
       ticketsSold: number,
       ticketBatches?: number | null,
       winningTicket?: number | null,
-      CloseTx?:  {
+      closeTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2370,12 +2706,15 @@ export type GetTicketRefundQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       chainId: string,
       winningAccount?: string | null,
       owner: string,
       contract: string,
-      NFT?:  {
+      nft?:  {
         __typename: "NFT",
         id: string,
         createdAt?: string | null,
@@ -2391,9 +2730,12 @@ export type GetTicketRefundQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         nFTCollectionId?: string | null,
       } | null,
-      RefundTx?:  {
+      refundTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2402,13 +2744,19 @@ export type GetTicketRefundQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       raffleWinningBatchId?: string | null,
       raffleReleaseTxId?: string | null,
       raffleOpenTxId?: string | null,
       raffleDrawnTxId?: string | null,
       raffleCloseTxId?: string | null,
-      raffleNFTId?: string | null,
+      raffleNftId?: string | null,
       raffleRefundTxId?: string | null,
     } | null,
     tx?:  {
@@ -2420,9 +2768,15 @@ export type GetTicketRefundQuery = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketRefundRaffleId?: string | null,
     ticketRefundTxId?: string | null,
   } | null,
@@ -2442,7 +2796,7 @@ export type ListTicketRefundsQuery = {
       id: string,
       ethAmount?: number | null,
       refundee?: string | null,
-      Raffle?:  {
+      raffle?:  {
         __typename: "Raffle",
         id: string,
         createdAt?: string | null,
@@ -2461,12 +2815,15 @@ export type ListTicketRefundsQuery = {
         winningAccount?: string | null,
         owner: string,
         contract: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         raffleWinningBatchId?: string | null,
         raffleReleaseTxId?: string | null,
         raffleOpenTxId?: string | null,
         raffleDrawnTxId?: string | null,
         raffleCloseTxId?: string | null,
-        raffleNFTId?: string | null,
+        raffleNftId?: string | null,
         raffleRefundTxId?: string | null,
       } | null,
       tx?:  {
@@ -2478,13 +2835,91 @@ export type ListTicketRefundsQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       ticketRefundRaffleId?: string | null,
       ticketRefundTxId?: string | null,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncTicketRefundsQueryVariables = {
+  filter?: ModelTicketRefundFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncTicketRefundsQuery = {
+  syncTicketRefunds?:  {
+    __typename: "ModelTicketRefundConnection",
+    items:  Array< {
+      __typename: "TicketRefund",
+      id: string,
+      ethAmount?: number | null,
+      refundee?: string | null,
+      raffle?:  {
+        __typename: "Raffle",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        ticketsAvailable: number,
+        raffleId: number,
+        progress: number,
+        state: number,
+        tokenId: string,
+        expires: string,
+        nftAddress: string,
+        ticketsSold: number,
+        ticketBatches?: number | null,
+        winningTicket?: number | null,
+        chainId: string,
+        winningAccount?: string | null,
+        owner: string,
+        contract: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        raffleWinningBatchId?: string | null,
+        raffleReleaseTxId?: string | null,
+        raffleOpenTxId?: string | null,
+        raffleDrawnTxId?: string | null,
+        raffleCloseTxId?: string | null,
+        raffleNftId?: string | null,
+        raffleRefundTxId?: string | null,
+      } | null,
+      tx?:  {
+        __typename: "Transaction",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        date: string,
+        eventType: number,
+        hash: string,
+        chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      ticketRefundRaffleId?: string | null,
+      ticketRefundTxId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -2503,6 +2938,9 @@ export type GetStatQuery = {
     rafflesCreated?: number | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -2525,8 +2963,41 @@ export type ListStatsQuery = {
       rafflesCreated?: number | null,
       createdAt: string,
       updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncStatsQueryVariables = {
+  filter?: ModelStatFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncStatsQuery = {
+  syncStats?:  {
+    __typename: "ModelStatConnection",
+    items:  Array< {
+      __typename: "Stat",
+      id: string,
+      ethPaid?: number | null,
+      ticketsBought?: number | null,
+      royaltiesPaid?: number | null,
+      chainId: string,
+      rafflesCreated?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -2541,7 +3012,7 @@ export type GetTicketBatchQuery = {
     createdAt?: string | null,
     updatedAt?: string | null,
     lastTicket: number,
-    Transaction:  {
+    transaction:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -2550,12 +3021,18 @@ export type GetTicketBatchQuery = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     },
     purchaser: string,
     ticketsBought: number,
     batchId: number,
     firstTicket: number,
     raffleID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketBatchTransactionId: string,
   } | null,
 };
@@ -2575,7 +3052,7 @@ export type ListTicketBatchesQuery = {
       createdAt?: string | null,
       updatedAt?: string | null,
       lastTicket: number,
-      Transaction:  {
+      transaction:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2584,15 +3061,111 @@ export type ListTicketBatchesQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       },
       purchaser: string,
       ticketsBought: number,
       batchId: number,
       firstTicket: number,
       raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       ticketBatchTransactionId: string,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncTicketBatchesQueryVariables = {
+  filter?: ModelTicketBatchFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncTicketBatchesQuery = {
+  syncTicketBatches?:  {
+    __typename: "ModelTicketBatchConnection",
+    items:  Array< {
+      __typename: "TicketBatch",
+      id: string,
+      createdAt?: string | null,
+      updatedAt?: string | null,
+      lastTicket: number,
+      transaction:  {
+        __typename: "Transaction",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        date: string,
+        eventType: number,
+        hash: string,
+        chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      purchaser: string,
+      ticketsBought: number,
+      batchId: number,
+      firstTicket: number,
+      raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      ticketBatchTransactionId: string,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type TicketBatchesByRaffleIDQueryVariables = {
+  raffleID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelTicketBatchFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type TicketBatchesByRaffleIDQuery = {
+  ticketBatchesByRaffleID?:  {
+    __typename: "ModelTicketBatchConnection",
+    items:  Array< {
+      __typename: "TicketBatch",
+      id: string,
+      createdAt?: string | null,
+      updatedAt?: string | null,
+      lastTicket: number,
+      transaction:  {
+        __typename: "Transaction",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        date: string,
+        eventType: number,
+        hash: string,
+        chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      purchaser: string,
+      ticketsBought: number,
+      batchId: number,
+      firstTicket: number,
+      raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      ticketBatchTransactionId: string,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -2610,6 +3183,9 @@ export type GetTransactionQuery = {
     eventType: number,
     hash: string,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -2631,8 +3207,40 @@ export type ListTransactionsQuery = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncTransactionsQueryVariables = {
+  filter?: ModelTransactionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncTransactionsQuery = {
+  syncTransactions?:  {
+    __typename: "ModelTransactionConnection",
+    items:  Array< {
+      __typename: "Transaction",
+      id: string,
+      createdAt?: string | null,
+      updatedAt?: string | null,
+      date: string,
+      eventType: number,
+      hash: string,
+      chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -2661,17 +3269,21 @@ export type GetRaffleQuery = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    WinningBatch?:  {
+    winningBatch?:  {
       __typename: "TicketBatch",
       id: string,
       createdAt?: string | null,
       updatedAt?: string | null,
       lastTicket: number,
-      Transaction:  {
+      transaction:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2680,15 +3292,21 @@ export type GetRaffleQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       },
       purchaser: string,
       ticketsBought: number,
       batchId: number,
       firstTicket: number,
       raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       ticketBatchTransactionId: string,
     } | null,
-    ReleaseTx?:  {
+    releaseTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -2697,9 +3315,12 @@ export type GetRaffleQuery = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     progress: number,
-    OpenTx?:  {
+    openTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -2708,8 +3329,11 @@ export type GetRaffleQuery = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
-    DrawnTx?:  {
+    drawnTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -2718,6 +3342,9 @@ export type GetRaffleQuery = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     state: number,
     tokenId: string,
@@ -2726,7 +3353,7 @@ export type GetRaffleQuery = {
     ticketsSold: number,
     ticketBatches?: number | null,
     winningTicket?: number | null,
-    CloseTx?:  {
+    closeTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -2735,12 +3362,15 @@ export type GetRaffleQuery = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     chainId: string,
     winningAccount?: string | null,
     owner: string,
     contract: string,
-    NFT?:  {
+    nft?:  {
       __typename: "NFT",
       id: string,
       createdAt?: string | null,
@@ -2756,7 +3386,7 @@ export type GetRaffleQuery = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
-      Collection?:  {
+      collection?:  {
         __typename: "Collection",
         id: string,
         contractAddress: string,
@@ -2769,10 +3399,16 @@ export type GetRaffleQuery = {
         tokenType: string,
         totalSupply?: string | null,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       nFTCollectionId?: string | null,
     } | null,
-    RefundTx?:  {
+    refundTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -2781,13 +3417,19 @@ export type GetRaffleQuery = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     raffleWinningBatchId?: string | null,
     raffleReleaseTxId?: string | null,
     raffleOpenTxId?: string | null,
     raffleDrawnTxId?: string | null,
     raffleCloseTxId?: string | null,
-    raffleNFTId?: string | null,
+    raffleNftId?: string | null,
     raffleRefundTxId?: string | null,
   } | null,
 };
@@ -2811,8 +3453,9 @@ export type ListRafflesQuery = {
       TicketBatches?:  {
         __typename: "ModelTicketBatchConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      WinningBatch?:  {
+      winningBatch?:  {
         __typename: "TicketBatch",
         id: string,
         createdAt?: string | null,
@@ -2823,9 +3466,12 @@ export type ListRafflesQuery = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null,
-      ReleaseTx?:  {
+      releaseTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2834,9 +3480,12 @@ export type ListRafflesQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       progress: number,
-      OpenTx?:  {
+      openTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2845,8 +3494,11 @@ export type ListRafflesQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
-      DrawnTx?:  {
+      drawnTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2855,6 +3507,9 @@ export type ListRafflesQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       state: number,
       tokenId: string,
@@ -2863,7 +3518,7 @@ export type ListRafflesQuery = {
       ticketsSold: number,
       ticketBatches?: number | null,
       winningTicket?: number | null,
-      CloseTx?:  {
+      closeTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2872,12 +3527,15 @@ export type ListRafflesQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       chainId: string,
       winningAccount?: string | null,
       owner: string,
       contract: string,
-      NFT?:  {
+      nft?:  {
         __typename: "NFT",
         id: string,
         createdAt?: string | null,
@@ -2893,9 +3551,12 @@ export type ListRafflesQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         nFTCollectionId?: string | null,
       } | null,
-      RefundTx?:  {
+      refundTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -2904,16 +3565,175 @@ export type ListRafflesQuery = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       raffleWinningBatchId?: string | null,
       raffleReleaseTxId?: string | null,
       raffleOpenTxId?: string | null,
       raffleDrawnTxId?: string | null,
       raffleCloseTxId?: string | null,
-      raffleNFTId?: string | null,
+      raffleNftId?: string | null,
       raffleRefundTxId?: string | null,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncRafflesQueryVariables = {
+  filter?: ModelRaffleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncRafflesQuery = {
+  syncRaffles?:  {
+    __typename: "ModelRaffleConnection",
+    items:  Array< {
+      __typename: "Raffle",
+      id: string,
+      createdAt?: string | null,
+      updatedAt?: string | null,
+      ticketsAvailable: number,
+      raffleId: number,
+      TicketBatches?:  {
+        __typename: "ModelTicketBatchConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      winningBatch?:  {
+        __typename: "TicketBatch",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        lastTicket: number,
+        purchaser: string,
+        ticketsBought: number,
+        batchId: number,
+        firstTicket: number,
+        raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        ticketBatchTransactionId: string,
+      } | null,
+      releaseTx?:  {
+        __typename: "Transaction",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        date: string,
+        eventType: number,
+        hash: string,
+        chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      progress: number,
+      openTx?:  {
+        __typename: "Transaction",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        date: string,
+        eventType: number,
+        hash: string,
+        chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      drawnTx?:  {
+        __typename: "Transaction",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        date: string,
+        eventType: number,
+        hash: string,
+        chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      state: number,
+      tokenId: string,
+      expires: string,
+      nftAddress: string,
+      ticketsSold: number,
+      ticketBatches?: number | null,
+      winningTicket?: number | null,
+      closeTx?:  {
+        __typename: "Transaction",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        date: string,
+        eventType: number,
+        hash: string,
+        chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      chainId: string,
+      winningAccount?: string | null,
+      owner: string,
+      contract: string,
+      nft?:  {
+        __typename: "NFT",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        contractAddress: string,
+        metadata: string,
+        tokenUri?: string | null,
+        tokenId: string,
+        symbol?: string | null,
+        imageUri?: string | null,
+        tokenName: string,
+        collectionName: string,
+        lastSales?: string | null,
+        chainId: string,
+        rarityData?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        nFTCollectionId?: string | null,
+      } | null,
+      refundTx?:  {
+        __typename: "Transaction",
+        id: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        date: string,
+        eventType: number,
+        hash: string,
+        chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      raffleWinningBatchId?: string | null,
+      raffleReleaseTxId?: string | null,
+      raffleOpenTxId?: string | null,
+      raffleDrawnTxId?: string | null,
+      raffleCloseTxId?: string | null,
+      raffleNftId?: string | null,
+      raffleRefundTxId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -2938,7 +3758,7 @@ export type GetNFTQuery = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
-    Collection?:  {
+    collection?:  {
       __typename: "Collection",
       id: string,
       contractAddress: string,
@@ -2951,7 +3771,13 @@ export type GetNFTQuery = {
       tokenType: string,
       totalSupply?: string | null,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     nFTCollectionId?: string | null,
   } | null,
 };
@@ -2981,7 +3807,7 @@ export type ListNFTSQuery = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
-      Collection?:  {
+      collection?:  {
         __typename: "Collection",
         id: string,
         contractAddress: string,
@@ -2994,10 +3820,70 @@ export type ListNFTSQuery = {
         tokenType: string,
         totalSupply?: string | null,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       nFTCollectionId?: string | null,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncNFTSQueryVariables = {
+  filter?: ModelNFTFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncNFTSQuery = {
+  syncNFTS?:  {
+    __typename: "ModelNFTConnection",
+    items:  Array< {
+      __typename: "NFT",
+      id: string,
+      createdAt?: string | null,
+      updatedAt?: string | null,
+      contractAddress: string,
+      metadata: string,
+      tokenUri?: string | null,
+      tokenId: string,
+      symbol?: string | null,
+      imageUri?: string | null,
+      tokenName: string,
+      collectionName: string,
+      lastSales?: string | null,
+      chainId: string,
+      rarityData?: string | null,
+      collection?:  {
+        __typename: "Collection",
+        id: string,
+        contractAddress: string,
+        createdAt?: string | null,
+        updatedAt?: string | null,
+        symbol?: string | null,
+        rafflesCreated?: number | null,
+        contractDeployer?: string | null,
+        deployedBlockNumber?: number | null,
+        tokenType: string,
+        totalSupply?: string | null,
+        chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      nFTCollectionId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -3019,6 +3905,9 @@ export type GetCollectionQuery = {
     tokenType: string,
     totalSupply?: string | null,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -3044,8 +3933,44 @@ export type ListCollectionsQuery = {
       tokenType: string,
       totalSupply?: string | null,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncCollectionsQueryVariables = {
+  filter?: ModelCollectionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncCollectionsQuery = {
+  syncCollections?:  {
+    __typename: "ModelCollectionConnection",
+    items:  Array< {
+      __typename: "Collection",
+      id: string,
+      contractAddress: string,
+      createdAt?: string | null,
+      updatedAt?: string | null,
+      symbol?: string | null,
+      rafflesCreated?: number | null,
+      contractDeployer?: string | null,
+      deployedBlockNumber?: number | null,
+      tokenType: string,
+      totalSupply?: string | null,
+      chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -3064,6 +3989,9 @@ export type GetAccountQuery = {
     rafflesWon?: number | null,
     rafflesEntered?: number | null,
     ticketsBought?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -3086,46 +4014,41 @@ export type ListAccountsQuery = {
       rafflesWon?: number | null,
       rafflesEntered?: number | null,
       ticketsBought?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
-export type TicketBatchesByRaffleIDQueryVariables = {
-  raffleID: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelTicketBatchFilterInput | null,
+export type SyncAccountsQueryVariables = {
+  filter?: ModelAccountFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  lastSync?: number | null,
 };
 
-export type TicketBatchesByRaffleIDQuery = {
-  ticketBatchesByRaffleID?:  {
-    __typename: "ModelTicketBatchConnection",
+export type SyncAccountsQuery = {
+  syncAccounts?:  {
+    __typename: "ModelAccountConnection",
     items:  Array< {
-      __typename: "TicketBatch",
+      __typename: "Account",
       id: string,
       createdAt?: string | null,
       updatedAt?: string | null,
-      lastTicket: number,
-      Transaction:  {
-        __typename: "Transaction",
-        id: string,
-        createdAt?: string | null,
-        updatedAt?: string | null,
-        date: string,
-        eventType: number,
-        hash: string,
-        chainId: string,
-      },
-      purchaser: string,
-      ticketsBought: number,
-      batchId: number,
-      firstTicket: number,
-      raffleID: string,
-      ticketBatchTransactionId: string,
+      address: string,
+      rafflesCreated?: number | null,
+      rafflesWon?: number | null,
+      rafflesEntered?: number | null,
+      ticketsBought?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -3139,7 +4062,7 @@ export type OnCreateTicketRefundSubscription = {
     id: string,
     ethAmount?: number | null,
     refundee?: string | null,
-    Raffle?:  {
+    raffle?:  {
       __typename: "Raffle",
       id: string,
       createdAt?: string | null,
@@ -3149,8 +4072,9 @@ export type OnCreateTicketRefundSubscription = {
       TicketBatches?:  {
         __typename: "ModelTicketBatchConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      WinningBatch?:  {
+      winningBatch?:  {
         __typename: "TicketBatch",
         id: string,
         createdAt?: string | null,
@@ -3161,9 +4085,12 @@ export type OnCreateTicketRefundSubscription = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null,
-      ReleaseTx?:  {
+      releaseTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3172,9 +4099,12 @@ export type OnCreateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       progress: number,
-      OpenTx?:  {
+      openTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3183,8 +4113,11 @@ export type OnCreateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
-      DrawnTx?:  {
+      drawnTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3193,6 +4126,9 @@ export type OnCreateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       state: number,
       tokenId: string,
@@ -3201,7 +4137,7 @@ export type OnCreateTicketRefundSubscription = {
       ticketsSold: number,
       ticketBatches?: number | null,
       winningTicket?: number | null,
-      CloseTx?:  {
+      closeTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3210,12 +4146,15 @@ export type OnCreateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       chainId: string,
       winningAccount?: string | null,
       owner: string,
       contract: string,
-      NFT?:  {
+      nft?:  {
         __typename: "NFT",
         id: string,
         createdAt?: string | null,
@@ -3231,9 +4170,12 @@ export type OnCreateTicketRefundSubscription = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         nFTCollectionId?: string | null,
       } | null,
-      RefundTx?:  {
+      refundTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3242,13 +4184,19 @@ export type OnCreateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       raffleWinningBatchId?: string | null,
       raffleReleaseTxId?: string | null,
       raffleOpenTxId?: string | null,
       raffleDrawnTxId?: string | null,
       raffleCloseTxId?: string | null,
-      raffleNFTId?: string | null,
+      raffleNftId?: string | null,
       raffleRefundTxId?: string | null,
     } | null,
     tx?:  {
@@ -3260,9 +4208,15 @@ export type OnCreateTicketRefundSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketRefundRaffleId?: string | null,
     ticketRefundTxId?: string | null,
   } | null,
@@ -3278,7 +4232,7 @@ export type OnUpdateTicketRefundSubscription = {
     id: string,
     ethAmount?: number | null,
     refundee?: string | null,
-    Raffle?:  {
+    raffle?:  {
       __typename: "Raffle",
       id: string,
       createdAt?: string | null,
@@ -3288,8 +4242,9 @@ export type OnUpdateTicketRefundSubscription = {
       TicketBatches?:  {
         __typename: "ModelTicketBatchConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      WinningBatch?:  {
+      winningBatch?:  {
         __typename: "TicketBatch",
         id: string,
         createdAt?: string | null,
@@ -3300,9 +4255,12 @@ export type OnUpdateTicketRefundSubscription = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null,
-      ReleaseTx?:  {
+      releaseTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3311,9 +4269,12 @@ export type OnUpdateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       progress: number,
-      OpenTx?:  {
+      openTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3322,8 +4283,11 @@ export type OnUpdateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
-      DrawnTx?:  {
+      drawnTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3332,6 +4296,9 @@ export type OnUpdateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       state: number,
       tokenId: string,
@@ -3340,7 +4307,7 @@ export type OnUpdateTicketRefundSubscription = {
       ticketsSold: number,
       ticketBatches?: number | null,
       winningTicket?: number | null,
-      CloseTx?:  {
+      closeTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3349,12 +4316,15 @@ export type OnUpdateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       chainId: string,
       winningAccount?: string | null,
       owner: string,
       contract: string,
-      NFT?:  {
+      nft?:  {
         __typename: "NFT",
         id: string,
         createdAt?: string | null,
@@ -3370,9 +4340,12 @@ export type OnUpdateTicketRefundSubscription = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         nFTCollectionId?: string | null,
       } | null,
-      RefundTx?:  {
+      refundTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3381,13 +4354,19 @@ export type OnUpdateTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       raffleWinningBatchId?: string | null,
       raffleReleaseTxId?: string | null,
       raffleOpenTxId?: string | null,
       raffleDrawnTxId?: string | null,
       raffleCloseTxId?: string | null,
-      raffleNFTId?: string | null,
+      raffleNftId?: string | null,
       raffleRefundTxId?: string | null,
     } | null,
     tx?:  {
@@ -3399,9 +4378,15 @@ export type OnUpdateTicketRefundSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketRefundRaffleId?: string | null,
     ticketRefundTxId?: string | null,
   } | null,
@@ -3417,7 +4402,7 @@ export type OnDeleteTicketRefundSubscription = {
     id: string,
     ethAmount?: number | null,
     refundee?: string | null,
-    Raffle?:  {
+    raffle?:  {
       __typename: "Raffle",
       id: string,
       createdAt?: string | null,
@@ -3427,8 +4412,9 @@ export type OnDeleteTicketRefundSubscription = {
       TicketBatches?:  {
         __typename: "ModelTicketBatchConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      WinningBatch?:  {
+      winningBatch?:  {
         __typename: "TicketBatch",
         id: string,
         createdAt?: string | null,
@@ -3439,9 +4425,12 @@ export type OnDeleteTicketRefundSubscription = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null,
-      ReleaseTx?:  {
+      releaseTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3450,9 +4439,12 @@ export type OnDeleteTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       progress: number,
-      OpenTx?:  {
+      openTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3461,8 +4453,11 @@ export type OnDeleteTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
-      DrawnTx?:  {
+      drawnTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3471,6 +4466,9 @@ export type OnDeleteTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       state: number,
       tokenId: string,
@@ -3479,7 +4477,7 @@ export type OnDeleteTicketRefundSubscription = {
       ticketsSold: number,
       ticketBatches?: number | null,
       winningTicket?: number | null,
-      CloseTx?:  {
+      closeTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3488,12 +4486,15 @@ export type OnDeleteTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
       chainId: string,
       winningAccount?: string | null,
       owner: string,
       contract: string,
-      NFT?:  {
+      nft?:  {
         __typename: "NFT",
         id: string,
         createdAt?: string | null,
@@ -3509,9 +4510,12 @@ export type OnDeleteTicketRefundSubscription = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         nFTCollectionId?: string | null,
       } | null,
-      RefundTx?:  {
+      refundTx?:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3520,13 +4524,19 @@ export type OnDeleteTicketRefundSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       raffleWinningBatchId?: string | null,
       raffleReleaseTxId?: string | null,
       raffleOpenTxId?: string | null,
       raffleDrawnTxId?: string | null,
       raffleCloseTxId?: string | null,
-      raffleNFTId?: string | null,
+      raffleNftId?: string | null,
       raffleRefundTxId?: string | null,
     } | null,
     tx?:  {
@@ -3538,9 +4548,15 @@ export type OnDeleteTicketRefundSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketRefundRaffleId?: string | null,
     ticketRefundTxId?: string | null,
   } | null,
@@ -3561,6 +4577,9 @@ export type OnCreateStatSubscription = {
     rafflesCreated?: number | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -3579,6 +4598,9 @@ export type OnUpdateStatSubscription = {
     rafflesCreated?: number | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -3597,6 +4619,9 @@ export type OnDeleteStatSubscription = {
     rafflesCreated?: number | null,
     createdAt: string,
     updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -3611,7 +4636,7 @@ export type OnCreateTicketBatchSubscription = {
     createdAt?: string | null,
     updatedAt?: string | null,
     lastTicket: number,
-    Transaction:  {
+    transaction:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3620,12 +4645,18 @@ export type OnCreateTicketBatchSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     },
     purchaser: string,
     ticketsBought: number,
     batchId: number,
     firstTicket: number,
     raffleID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketBatchTransactionId: string,
   } | null,
 };
@@ -3641,7 +4672,7 @@ export type OnUpdateTicketBatchSubscription = {
     createdAt?: string | null,
     updatedAt?: string | null,
     lastTicket: number,
-    Transaction:  {
+    transaction:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3650,12 +4681,18 @@ export type OnUpdateTicketBatchSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     },
     purchaser: string,
     ticketsBought: number,
     batchId: number,
     firstTicket: number,
     raffleID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketBatchTransactionId: string,
   } | null,
 };
@@ -3671,7 +4708,7 @@ export type OnDeleteTicketBatchSubscription = {
     createdAt?: string | null,
     updatedAt?: string | null,
     lastTicket: number,
-    Transaction:  {
+    transaction:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3680,12 +4717,18 @@ export type OnDeleteTicketBatchSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     },
     purchaser: string,
     ticketsBought: number,
     batchId: number,
     firstTicket: number,
     raffleID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     ticketBatchTransactionId: string,
   } | null,
 };
@@ -3704,6 +4747,9 @@ export type OnCreateTransactionSubscription = {
     eventType: number,
     hash: string,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -3721,6 +4767,9 @@ export type OnUpdateTransactionSubscription = {
     eventType: number,
     hash: string,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -3738,6 +4787,9 @@ export type OnDeleteTransactionSubscription = {
     eventType: number,
     hash: string,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -3766,17 +4818,21 @@ export type OnCreateRaffleSubscription = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    WinningBatch?:  {
+    winningBatch?:  {
       __typename: "TicketBatch",
       id: string,
       createdAt?: string | null,
       updatedAt?: string | null,
       lastTicket: number,
-      Transaction:  {
+      transaction:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3785,15 +4841,21 @@ export type OnCreateRaffleSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       },
       purchaser: string,
       ticketsBought: number,
       batchId: number,
       firstTicket: number,
       raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       ticketBatchTransactionId: string,
     } | null,
-    ReleaseTx?:  {
+    releaseTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3802,9 +4864,12 @@ export type OnCreateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     progress: number,
-    OpenTx?:  {
+    openTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3813,8 +4878,11 @@ export type OnCreateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
-    DrawnTx?:  {
+    drawnTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3823,6 +4891,9 @@ export type OnCreateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     state: number,
     tokenId: string,
@@ -3831,7 +4902,7 @@ export type OnCreateRaffleSubscription = {
     ticketsSold: number,
     ticketBatches?: number | null,
     winningTicket?: number | null,
-    CloseTx?:  {
+    closeTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3840,12 +4911,15 @@ export type OnCreateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     chainId: string,
     winningAccount?: string | null,
     owner: string,
     contract: string,
-    NFT?:  {
+    nft?:  {
       __typename: "NFT",
       id: string,
       createdAt?: string | null,
@@ -3861,7 +4935,7 @@ export type OnCreateRaffleSubscription = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
-      Collection?:  {
+      collection?:  {
         __typename: "Collection",
         id: string,
         contractAddress: string,
@@ -3874,10 +4948,16 @@ export type OnCreateRaffleSubscription = {
         tokenType: string,
         totalSupply?: string | null,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       nFTCollectionId?: string | null,
     } | null,
-    RefundTx?:  {
+    refundTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3886,13 +4966,19 @@ export type OnCreateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     raffleWinningBatchId?: string | null,
     raffleReleaseTxId?: string | null,
     raffleOpenTxId?: string | null,
     raffleDrawnTxId?: string | null,
     raffleCloseTxId?: string | null,
-    raffleNFTId?: string | null,
+    raffleNftId?: string | null,
     raffleRefundTxId?: string | null,
   } | null,
 };
@@ -3922,17 +5008,21 @@ export type OnUpdateRaffleSubscription = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    WinningBatch?:  {
+    winningBatch?:  {
       __typename: "TicketBatch",
       id: string,
       createdAt?: string | null,
       updatedAt?: string | null,
       lastTicket: number,
-      Transaction:  {
+      transaction:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -3941,15 +5031,21 @@ export type OnUpdateRaffleSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       },
       purchaser: string,
       ticketsBought: number,
       batchId: number,
       firstTicket: number,
       raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       ticketBatchTransactionId: string,
     } | null,
-    ReleaseTx?:  {
+    releaseTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3958,9 +5054,12 @@ export type OnUpdateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     progress: number,
-    OpenTx?:  {
+    openTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3969,8 +5068,11 @@ export type OnUpdateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
-    DrawnTx?:  {
+    drawnTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3979,6 +5081,9 @@ export type OnUpdateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     state: number,
     tokenId: string,
@@ -3987,7 +5092,7 @@ export type OnUpdateRaffleSubscription = {
     ticketsSold: number,
     ticketBatches?: number | null,
     winningTicket?: number | null,
-    CloseTx?:  {
+    closeTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -3996,12 +5101,15 @@ export type OnUpdateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     chainId: string,
     winningAccount?: string | null,
     owner: string,
     contract: string,
-    NFT?:  {
+    nft?:  {
       __typename: "NFT",
       id: string,
       createdAt?: string | null,
@@ -4017,7 +5125,7 @@ export type OnUpdateRaffleSubscription = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
-      Collection?:  {
+      collection?:  {
         __typename: "Collection",
         id: string,
         contractAddress: string,
@@ -4030,10 +5138,16 @@ export type OnUpdateRaffleSubscription = {
         tokenType: string,
         totalSupply?: string | null,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       nFTCollectionId?: string | null,
     } | null,
-    RefundTx?:  {
+    refundTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -4042,13 +5156,19 @@ export type OnUpdateRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     raffleWinningBatchId?: string | null,
     raffleReleaseTxId?: string | null,
     raffleOpenTxId?: string | null,
     raffleDrawnTxId?: string | null,
     raffleCloseTxId?: string | null,
-    raffleNFTId?: string | null,
+    raffleNftId?: string | null,
     raffleRefundTxId?: string | null,
   } | null,
 };
@@ -4078,17 +5198,21 @@ export type OnDeleteRaffleSubscription = {
         batchId: number,
         firstTicket: number,
         raffleID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         ticketBatchTransactionId: string,
       } | null >,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    WinningBatch?:  {
+    winningBatch?:  {
       __typename: "TicketBatch",
       id: string,
       createdAt?: string | null,
       updatedAt?: string | null,
       lastTicket: number,
-      Transaction:  {
+      transaction:  {
         __typename: "Transaction",
         id: string,
         createdAt?: string | null,
@@ -4097,15 +5221,21 @@ export type OnDeleteRaffleSubscription = {
         eventType: number,
         hash: string,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       },
       purchaser: string,
       ticketsBought: number,
       batchId: number,
       firstTicket: number,
       raffleID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       ticketBatchTransactionId: string,
     } | null,
-    ReleaseTx?:  {
+    releaseTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -4114,9 +5244,12 @@ export type OnDeleteRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     progress: number,
-    OpenTx?:  {
+    openTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -4125,8 +5258,11 @@ export type OnDeleteRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
-    DrawnTx?:  {
+    drawnTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -4135,6 +5271,9 @@ export type OnDeleteRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     state: number,
     tokenId: string,
@@ -4143,7 +5282,7 @@ export type OnDeleteRaffleSubscription = {
     ticketsSold: number,
     ticketBatches?: number | null,
     winningTicket?: number | null,
-    CloseTx?:  {
+    closeTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -4152,12 +5291,15 @@ export type OnDeleteRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
     chainId: string,
     winningAccount?: string | null,
     owner: string,
     contract: string,
-    NFT?:  {
+    nft?:  {
       __typename: "NFT",
       id: string,
       createdAt?: string | null,
@@ -4173,7 +5315,7 @@ export type OnDeleteRaffleSubscription = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
-      Collection?:  {
+      collection?:  {
         __typename: "Collection",
         id: string,
         contractAddress: string,
@@ -4186,10 +5328,16 @@ export type OnDeleteRaffleSubscription = {
         tokenType: string,
         totalSupply?: string | null,
         chainId: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       nFTCollectionId?: string | null,
     } | null,
-    RefundTx?:  {
+    refundTx?:  {
       __typename: "Transaction",
       id: string,
       createdAt?: string | null,
@@ -4198,13 +5346,19 @@ export type OnDeleteRaffleSubscription = {
       eventType: number,
       hash: string,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     raffleWinningBatchId?: string | null,
     raffleReleaseTxId?: string | null,
     raffleOpenTxId?: string | null,
     raffleDrawnTxId?: string | null,
     raffleCloseTxId?: string | null,
-    raffleNFTId?: string | null,
+    raffleNftId?: string | null,
     raffleRefundTxId?: string | null,
   } | null,
 };
@@ -4230,7 +5384,7 @@ export type OnCreateNFTSubscription = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
-    Collection?:  {
+    collection?:  {
       __typename: "Collection",
       id: string,
       contractAddress: string,
@@ -4243,7 +5397,13 @@ export type OnCreateNFTSubscription = {
       tokenType: string,
       totalSupply?: string | null,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     nFTCollectionId?: string | null,
   } | null,
 };
@@ -4269,7 +5429,7 @@ export type OnUpdateNFTSubscription = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
-    Collection?:  {
+    collection?:  {
       __typename: "Collection",
       id: string,
       contractAddress: string,
@@ -4282,7 +5442,13 @@ export type OnUpdateNFTSubscription = {
       tokenType: string,
       totalSupply?: string | null,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     nFTCollectionId?: string | null,
   } | null,
 };
@@ -4308,7 +5474,7 @@ export type OnDeleteNFTSubscription = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
-    Collection?:  {
+    collection?:  {
       __typename: "Collection",
       id: string,
       contractAddress: string,
@@ -4321,7 +5487,13 @@ export type OnDeleteNFTSubscription = {
       tokenType: string,
       totalSupply?: string | null,
       chainId: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     nFTCollectionId?: string | null,
   } | null,
 };
@@ -4344,6 +5516,9 @@ export type OnCreateCollectionSubscription = {
     tokenType: string,
     totalSupply?: string | null,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -4365,6 +5540,9 @@ export type OnUpdateCollectionSubscription = {
     tokenType: string,
     totalSupply?: string | null,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -4386,6 +5564,9 @@ export type OnDeleteCollectionSubscription = {
     tokenType: string,
     totalSupply?: string | null,
     chainId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -4404,6 +5585,9 @@ export type OnCreateAccountSubscription = {
     rafflesWon?: number | null,
     rafflesEntered?: number | null,
     ticketsBought?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -4422,6 +5606,9 @@ export type OnUpdateAccountSubscription = {
     rafflesWon?: number | null,
     rafflesEntered?: number | null,
     ticketsBought?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -4440,5 +5627,8 @@ export type OnDeleteAccountSubscription = {
     rafflesWon?: number | null,
     rafflesEntered?: number | null,
     ticketsBought?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };

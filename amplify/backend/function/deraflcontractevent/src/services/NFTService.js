@@ -160,6 +160,6 @@ const createNft = async (input) => {
     const body = { query: mutations_1.createNFT, variables };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     console.log("CREATE NFT: ", JSON.stringify(response.data));
-    return response?.data?.data?.createNft;
+    return response?.data?.data?.createNFT;
 };
 //# sourceMappingURL=NFTService.js.map

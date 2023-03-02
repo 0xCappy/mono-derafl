@@ -2,7 +2,7 @@ type TicketRefund @model @auth(rules: [{allow: public}]) {
   id: ID!
   ethAmount: Float
   refundee: String
-  Raffle: Raffle @hasOne
+  raffle: Raffle @hasOne
   tx: Transaction @hasOne
 }
 
@@ -20,7 +20,7 @@ type TicketBatch @model @auth(rules: [{allow: public}]) {
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
   lastTicket: Int!
-  Transaction: Transaction! @hasOne
+  transaction: Transaction! @hasOne
   purchaser: String!
   ticketsBought: Int!
   batchId: Int!
@@ -45,11 +45,11 @@ type Raffle @model @auth(rules: [{allow: public}]) {
   ticketsAvailable: Int!
   raffleId: Int!
   TicketBatches: [TicketBatch] @hasMany(indexName: "byRaffle", fields: ["id"])
-  WinningBatch: TicketBatch @hasOne
-  ReleaseTx: Transaction @hasOne
+  winningBatch: TicketBatch @hasOne
+  releaseTx: Transaction @hasOne
   progress: Float!
-  OpenTx: Transaction @hasOne
-  DrawnTx: Transaction @hasOne
+  openTx: Transaction @hasOne
+  drawnTx: Transaction @hasOne
   state: Int!
   tokenId: String!
   expires: AWSDateTime!
@@ -57,13 +57,13 @@ type Raffle @model @auth(rules: [{allow: public}]) {
   ticketsSold: Int!
   ticketBatches: Int
   winningTicket: Int
-  CloseTx: Transaction @hasOne
+  closeTx: Transaction @hasOne
   chainId: String!
   winningAccount: String
   owner: String!
   contract: String!
-  NFT: NFT @hasOne
-  RefundTx: Transaction @hasOne
+  nft: NFT @hasOne
+  refundTx: Transaction @hasOne
 }
 
 type NFT @model @auth(rules: [{allow: public}]) {
@@ -81,7 +81,7 @@ type NFT @model @auth(rules: [{allow: public}]) {
   lastSales: AWSJSON
   chainId: String!
   rarityData: AWSJSON
-  Collection: Collection @hasOne
+  collection: Collection @hasOne
 }
 
 type Collection @model @auth(rules: [{allow: public}]) {

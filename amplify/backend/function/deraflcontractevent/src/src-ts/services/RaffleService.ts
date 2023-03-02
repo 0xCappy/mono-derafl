@@ -228,7 +228,7 @@ export const createRaffle = async (
       chainId,
       owner,
       contract,
-      raffleNFTId: nftID,
+      raffleNftId: nftID,
       raffleOpenTxId: openTxId
     }
   }
@@ -242,6 +242,7 @@ export const createRaffle = async (
 
   const body = { query: createRaffleMutation, variables }
   const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+  console.log("RAFFLE CREATE: ", JSON.stringify(response.data))
   return response?.data?.data?.createRaffle
 }
 

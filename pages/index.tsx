@@ -1,4 +1,4 @@
-import { listRaffles } from '@/src/graphql/queries';
+import { listAccounts, listRaffles, listTicketBatches } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify'
 import { Account, Raffle, TicketBatch } from '@/types';
 import axios from 'axios';
@@ -8,14 +8,28 @@ import { Home } from '../features'
 
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
-  const h = listRaffles
-  const raffles_ = await API.graphql(graphqlOperation(listRaffles)) as any
-  const todos = raffles_.data.listRaffles.items
-  console.log("RAFFLES: ", todos)
-  const response = await axios.post(`${process.env.API_URL}/initHomepage`)
-  const raffles = await response.data.raffles as Raffle
-  const purchases = await response.data.purchases.ticketBatches as TicketBatch[]
-  const accounts = await response.data.accounts.accounts as Account[]
+  // const h = listRaffles
+  // const raffles_ = await API.graphql(graphqlOperation(raffleByRaffleId, {
+  //   sortDirection: 'DESC',
+  //   raffleId: 1
+  // })) as any
+  // console.log("RESPONSE: ", raffles_)
+  // const todos = raffles_.data.listRaffles.items
+  // console.log("RAFFLES: ", todos)
+  // const response = await axios.post(`${process.env.API_URL}/initHomepage`)
+  // // const raffles = await response.data.raffles as Raffle
+  // // const purchases = await response.data.purchases.ticketBatches as TicketBatch[]
+  // // const accounts = await response.data.accounts.accounts as Account[]
+
+  const accountData = await API.graphql(graphqlOperation(listAccounts)) as any
+  const accounts = accountData.data.listAccounts.items
+
+  const raffleData = await API.graphql(graphqlOperation(listRaffles)) as any
+  const raffles = raffleData.data.listRaffles.items
+  console.log("RAFFLES: ", raffles)
+
+  const purchasesData = await API.graphql(graphqlOperation(listTicketBatches)) as any
+  const purchases = purchasesData.data.listTicketBatches.items
 
   return {
     props: {

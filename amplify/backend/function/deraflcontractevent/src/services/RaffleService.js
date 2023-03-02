@@ -196,7 +196,7 @@ exports.createRaffle = async (raffleId, chainId, nftID, owner, contract, tickets
             chainId,
             owner,
             contract,
-            raffleNFTId: nftID,
+            raffleNftId: nftID,
             raffleOpenTxId: openTxId
         }
     };
@@ -208,6 +208,7 @@ exports.createRaffle = async (raffleId, chainId, nftID, owner, contract, tickets
     };
     const body = { query: mutations_1.createRaffle, variables };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
+    console.log("RAFFLE CREATE: ", JSON.stringify(response.data));
     return response?.data?.data?.createRaffle;
 };
 exports.updateRaffle = async (input) => {

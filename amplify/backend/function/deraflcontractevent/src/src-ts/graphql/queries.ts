@@ -8,48 +8,21 @@ export const getTicketRefund = /* GraphQL */ `
       id
       ethAmount
       refundee
-      Raffle {
+      raffle {
         id
         createdAt
         updatedAt
         ticketsAvailable
         raffleId
         TicketBatches {
-          items {
-            id
-            createdAt
-            updatedAt
-            lastTicket
-            purchaser
-            ticketsBought
-            batchId
-            firstTicket
-            raffleID
-            _version
-            _deleted
-            _lastChangedAt
-            ticketBatchTransactionId
-          }
           nextToken
           startedAt
         }
-        WinningBatch {
+        winningBatch {
           id
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -60,7 +33,7 @@ export const getTicketRefund = /* GraphQL */ `
           _lastChangedAt
           ticketBatchTransactionId
         }
-        ReleaseTx {
+        releaseTx {
           id
           createdAt
           updatedAt
@@ -73,7 +46,7 @@ export const getTicketRefund = /* GraphQL */ `
           _lastChangedAt
         }
         progress
-        OpenTx {
+        openTx {
           id
           createdAt
           updatedAt
@@ -85,7 +58,7 @@ export const getTicketRefund = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        DrawnTx {
+        drawnTx {
           id
           createdAt
           updatedAt
@@ -104,7 +77,7 @@ export const getTicketRefund = /* GraphQL */ `
         ticketsSold
         ticketBatches
         winningTicket
-        CloseTx {
+        closeTx {
           id
           createdAt
           updatedAt
@@ -120,7 +93,7 @@ export const getTicketRefund = /* GraphQL */ `
         winningAccount
         owner
         contract
-        NFT {
+        nft {
           id
           createdAt
           updatedAt
@@ -135,28 +108,12 @@ export const getTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          Collection {
-            id
-            contractAddress
-            createdAt
-            updatedAt
-            symbol
-            rafflesCreated
-            contractDeployer
-            deployedBlockNumber
-            tokenType
-            totalSupply
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           _version
           _deleted
           _lastChangedAt
           nFTCollectionId
         }
-        RefundTx {
+        refundTx {
           id
           createdAt
           updatedAt
@@ -176,7 +133,7 @@ export const getTicketRefund = /* GraphQL */ `
         raffleOpenTxId
         raffleDrawnTxId
         raffleCloseTxId
-        raffleNFTId
+        raffleNftId
         raffleRefundTxId
       }
       tx {
@@ -212,68 +169,13 @@ export const listTicketRefunds = /* GraphQL */ `
         id
         ethAmount
         refundee
-        Raffle {
+        raffle {
           id
           createdAt
           updatedAt
           ticketsAvailable
           raffleId
-          TicketBatches {
-            nextToken
-            startedAt
-          }
-          WinningBatch {
-            id
-            createdAt
-            updatedAt
-            lastTicket
-            purchaser
-            ticketsBought
-            batchId
-            firstTicket
-            raffleID
-            _version
-            _deleted
-            _lastChangedAt
-            ticketBatchTransactionId
-          }
-          ReleaseTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           progress
-          OpenTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          DrawnTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           state
           tokenId
           expires
@@ -281,54 +183,10 @@ export const listTicketRefunds = /* GraphQL */ `
           ticketsSold
           ticketBatches
           winningTicket
-          CloseTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           chainId
           winningAccount
           owner
           contract
-          NFT {
-            id
-            createdAt
-            updatedAt
-            contractAddress
-            metadata
-            tokenUri
-            tokenId
-            symbol
-            imageUri
-            tokenName
-            collectionName
-            lastSales
-            chainId
-            rarityData
-            _version
-            _deleted
-            _lastChangedAt
-            nFTCollectionId
-          }
-          RefundTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           _version
           _deleted
           _lastChangedAt
@@ -337,7 +195,7 @@ export const listTicketRefunds = /* GraphQL */ `
           raffleOpenTxId
           raffleDrawnTxId
           raffleCloseTxId
-          raffleNFTId
+          raffleNftId
           raffleRefundTxId
         }
         tx {
@@ -382,68 +240,13 @@ export const syncTicketRefunds = /* GraphQL */ `
         id
         ethAmount
         refundee
-        Raffle {
+        raffle {
           id
           createdAt
           updatedAt
           ticketsAvailable
           raffleId
-          TicketBatches {
-            nextToken
-            startedAt
-          }
-          WinningBatch {
-            id
-            createdAt
-            updatedAt
-            lastTicket
-            purchaser
-            ticketsBought
-            batchId
-            firstTicket
-            raffleID
-            _version
-            _deleted
-            _lastChangedAt
-            ticketBatchTransactionId
-          }
-          ReleaseTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           progress
-          OpenTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          DrawnTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           state
           tokenId
           expires
@@ -451,54 +254,10 @@ export const syncTicketRefunds = /* GraphQL */ `
           ticketsSold
           ticketBatches
           winningTicket
-          CloseTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           chainId
           winningAccount
           owner
           contract
-          NFT {
-            id
-            createdAt
-            updatedAt
-            contractAddress
-            metadata
-            tokenUri
-            tokenId
-            symbol
-            imageUri
-            tokenName
-            collectionName
-            lastSales
-            chainId
-            rarityData
-            _version
-            _deleted
-            _lastChangedAt
-            nFTCollectionId
-          }
-          RefundTx {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           _version
           _deleted
           _lastChangedAt
@@ -507,7 +266,7 @@ export const syncTicketRefunds = /* GraphQL */ `
           raffleOpenTxId
           raffleDrawnTxId
           raffleCloseTxId
-          raffleNFTId
+          raffleNftId
           raffleRefundTxId
         }
         tx {
@@ -615,7 +374,7 @@ export const getTicketBatch = /* GraphQL */ `
       createdAt
       updatedAt
       lastTicket
-      Transaction {
+      transaction {
         id
         createdAt
         updatedAt
@@ -651,7 +410,7 @@ export const listTicketBatches = /* GraphQL */ `
         createdAt
         updatedAt
         lastTicket
-        Transaction {
+        transaction {
           id
           createdAt
           updatedAt
@@ -696,7 +455,7 @@ export const syncTicketBatches = /* GraphQL */ `
         createdAt
         updatedAt
         lastTicket
-        Transaction {
+        transaction {
           id
           createdAt
           updatedAt
@@ -743,7 +502,7 @@ export const ticketBatchesByRaffleID = /* GraphQL */ `
         createdAt
         updatedAt
         lastTicket
-        Transaction {
+        transaction {
           id
           createdAt
           updatedAt
@@ -854,18 +613,6 @@ export const getRaffle = /* GraphQL */ `
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -879,12 +626,12 @@ export const getRaffle = /* GraphQL */ `
         nextToken
         startedAt
       }
-      WinningBatch {
+      winningBatch {
         id
         createdAt
         updatedAt
         lastTicket
-        Transaction {
+        transaction {
           id
           createdAt
           updatedAt
@@ -906,7 +653,7 @@ export const getRaffle = /* GraphQL */ `
         _lastChangedAt
         ticketBatchTransactionId
       }
-      ReleaseTx {
+      releaseTx {
         id
         createdAt
         updatedAt
@@ -919,7 +666,7 @@ export const getRaffle = /* GraphQL */ `
         _lastChangedAt
       }
       progress
-      OpenTx {
+      openTx {
         id
         createdAt
         updatedAt
@@ -931,7 +678,7 @@ export const getRaffle = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      DrawnTx {
+      drawnTx {
         id
         createdAt
         updatedAt
@@ -950,7 +697,7 @@ export const getRaffle = /* GraphQL */ `
       ticketsSold
       ticketBatches
       winningTicket
-      CloseTx {
+      closeTx {
         id
         createdAt
         updatedAt
@@ -966,7 +713,7 @@ export const getRaffle = /* GraphQL */ `
       winningAccount
       owner
       contract
-      NFT {
+      nft {
         id
         createdAt
         updatedAt
@@ -981,7 +728,7 @@ export const getRaffle = /* GraphQL */ `
         lastSales
         chainId
         rarityData
-        Collection {
+        collection {
           id
           contractAddress
           createdAt
@@ -1002,7 +749,7 @@ export const getRaffle = /* GraphQL */ `
         _lastChangedAt
         nFTCollectionId
       }
-      RefundTx {
+      refundTx {
         id
         createdAt
         updatedAt
@@ -1022,7 +769,7 @@ export const getRaffle = /* GraphQL */ `
       raffleOpenTxId
       raffleDrawnTxId
       raffleCloseTxId
-      raffleNFTId
+      raffleNftId
       raffleRefundTxId
     }
   }
@@ -1041,41 +788,14 @@ export const listRaffles = /* GraphQL */ `
         ticketsAvailable
         raffleId
         TicketBatches {
-          items {
-            id
-            createdAt
-            updatedAt
-            lastTicket
-            purchaser
-            ticketsBought
-            batchId
-            firstTicket
-            raffleID
-            _version
-            _deleted
-            _lastChangedAt
-            ticketBatchTransactionId
-          }
           nextToken
           startedAt
         }
-        WinningBatch {
+        winningBatch {
           id
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -1086,7 +806,7 @@ export const listRaffles = /* GraphQL */ `
           _lastChangedAt
           ticketBatchTransactionId
         }
-        ReleaseTx {
+        releaseTx {
           id
           createdAt
           updatedAt
@@ -1099,7 +819,7 @@ export const listRaffles = /* GraphQL */ `
           _lastChangedAt
         }
         progress
-        OpenTx {
+        openTx {
           id
           createdAt
           updatedAt
@@ -1111,7 +831,7 @@ export const listRaffles = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        DrawnTx {
+        drawnTx {
           id
           createdAt
           updatedAt
@@ -1130,7 +850,7 @@ export const listRaffles = /* GraphQL */ `
         ticketsSold
         ticketBatches
         winningTicket
-        CloseTx {
+        closeTx {
           id
           createdAt
           updatedAt
@@ -1146,7 +866,7 @@ export const listRaffles = /* GraphQL */ `
         winningAccount
         owner
         contract
-        NFT {
+        nft {
           id
           createdAt
           updatedAt
@@ -1161,28 +881,12 @@ export const listRaffles = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          Collection {
-            id
-            contractAddress
-            createdAt
-            updatedAt
-            symbol
-            rafflesCreated
-            contractDeployer
-            deployedBlockNumber
-            tokenType
-            totalSupply
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           _version
           _deleted
           _lastChangedAt
           nFTCollectionId
         }
-        RefundTx {
+        refundTx {
           id
           createdAt
           updatedAt
@@ -1202,7 +906,7 @@ export const listRaffles = /* GraphQL */ `
         raffleOpenTxId
         raffleDrawnTxId
         raffleCloseTxId
-        raffleNFTId
+        raffleNftId
         raffleRefundTxId
       }
       nextToken
@@ -1230,41 +934,14 @@ export const syncRaffles = /* GraphQL */ `
         ticketsAvailable
         raffleId
         TicketBatches {
-          items {
-            id
-            createdAt
-            updatedAt
-            lastTicket
-            purchaser
-            ticketsBought
-            batchId
-            firstTicket
-            raffleID
-            _version
-            _deleted
-            _lastChangedAt
-            ticketBatchTransactionId
-          }
           nextToken
           startedAt
         }
-        WinningBatch {
+        winningBatch {
           id
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -1275,7 +952,7 @@ export const syncRaffles = /* GraphQL */ `
           _lastChangedAt
           ticketBatchTransactionId
         }
-        ReleaseTx {
+        releaseTx {
           id
           createdAt
           updatedAt
@@ -1288,7 +965,7 @@ export const syncRaffles = /* GraphQL */ `
           _lastChangedAt
         }
         progress
-        OpenTx {
+        openTx {
           id
           createdAt
           updatedAt
@@ -1300,7 +977,7 @@ export const syncRaffles = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        DrawnTx {
+        drawnTx {
           id
           createdAt
           updatedAt
@@ -1319,7 +996,7 @@ export const syncRaffles = /* GraphQL */ `
         ticketsSold
         ticketBatches
         winningTicket
-        CloseTx {
+        closeTx {
           id
           createdAt
           updatedAt
@@ -1335,7 +1012,7 @@ export const syncRaffles = /* GraphQL */ `
         winningAccount
         owner
         contract
-        NFT {
+        nft {
           id
           createdAt
           updatedAt
@@ -1350,28 +1027,12 @@ export const syncRaffles = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          Collection {
-            id
-            contractAddress
-            createdAt
-            updatedAt
-            symbol
-            rafflesCreated
-            contractDeployer
-            deployedBlockNumber
-            tokenType
-            totalSupply
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           _version
           _deleted
           _lastChangedAt
           nFTCollectionId
         }
-        RefundTx {
+        refundTx {
           id
           createdAt
           updatedAt
@@ -1391,7 +1052,7 @@ export const syncRaffles = /* GraphQL */ `
         raffleOpenTxId
         raffleDrawnTxId
         raffleCloseTxId
-        raffleNFTId
+        raffleNftId
         raffleRefundTxId
       }
       nextToken
@@ -1416,7 +1077,7 @@ export const getNFT = /* GraphQL */ `
       lastSales
       chainId
       rarityData
-      Collection {
+      collection {
         id
         contractAddress
         createdAt
@@ -1461,7 +1122,7 @@ export const listNFTS = /* GraphQL */ `
         lastSales
         chainId
         rarityData
-        Collection {
+        collection {
           id
           contractAddress
           createdAt
@@ -1515,7 +1176,7 @@ export const syncNFTS = /* GraphQL */ `
         lastSales
         chainId
         rarityData
-        Collection {
+        collection {
           id
           contractAddress
           createdAt

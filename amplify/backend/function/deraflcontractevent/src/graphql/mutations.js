@@ -13,48 +13,21 @@ exports.createTicketRefund = `
       id
       ethAmount
       refundee
-      Raffle {
+      raffle {
         id
         createdAt
         updatedAt
         ticketsAvailable
         raffleId
         TicketBatches {
-          items {
-            id
-            createdAt
-            updatedAt
-            lastTicket
-            purchaser
-            ticketsBought
-            batchId
-            firstTicket
-            raffleID
-            _version
-            _deleted
-            _lastChangedAt
-            ticketBatchTransactionId
-          }
           nextToken
           startedAt
         }
-        WinningBatch {
+        winningBatch {
           id
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -65,7 +38,7 @@ exports.createTicketRefund = `
           _lastChangedAt
           ticketBatchTransactionId
         }
-        ReleaseTx {
+        releaseTx {
           id
           createdAt
           updatedAt
@@ -78,7 +51,7 @@ exports.createTicketRefund = `
           _lastChangedAt
         }
         progress
-        OpenTx {
+        openTx {
           id
           createdAt
           updatedAt
@@ -90,7 +63,7 @@ exports.createTicketRefund = `
           _deleted
           _lastChangedAt
         }
-        DrawnTx {
+        drawnTx {
           id
           createdAt
           updatedAt
@@ -109,7 +82,7 @@ exports.createTicketRefund = `
         ticketsSold
         ticketBatches
         winningTicket
-        CloseTx {
+        closeTx {
           id
           createdAt
           updatedAt
@@ -125,7 +98,7 @@ exports.createTicketRefund = `
         winningAccount
         owner
         contract
-        NFT {
+        nft {
           id
           createdAt
           updatedAt
@@ -140,28 +113,12 @@ exports.createTicketRefund = `
           lastSales
           chainId
           rarityData
-          Collection {
-            id
-            contractAddress
-            createdAt
-            updatedAt
-            symbol
-            rafflesCreated
-            contractDeployer
-            deployedBlockNumber
-            tokenType
-            totalSupply
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           _version
           _deleted
           _lastChangedAt
           nFTCollectionId
         }
-        RefundTx {
+        refundTx {
           id
           createdAt
           updatedAt
@@ -181,7 +138,7 @@ exports.createTicketRefund = `
         raffleOpenTxId
         raffleDrawnTxId
         raffleCloseTxId
-        raffleNFTId
+        raffleNftId
         raffleRefundTxId
       }
       tx {
@@ -215,48 +172,21 @@ exports.updateTicketRefund = `
       id
       ethAmount
       refundee
-      Raffle {
+      raffle {
         id
         createdAt
         updatedAt
         ticketsAvailable
         raffleId
         TicketBatches {
-          items {
-            id
-            createdAt
-            updatedAt
-            lastTicket
-            purchaser
-            ticketsBought
-            batchId
-            firstTicket
-            raffleID
-            _version
-            _deleted
-            _lastChangedAt
-            ticketBatchTransactionId
-          }
           nextToken
           startedAt
         }
-        WinningBatch {
+        winningBatch {
           id
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -267,7 +197,7 @@ exports.updateTicketRefund = `
           _lastChangedAt
           ticketBatchTransactionId
         }
-        ReleaseTx {
+        releaseTx {
           id
           createdAt
           updatedAt
@@ -280,7 +210,7 @@ exports.updateTicketRefund = `
           _lastChangedAt
         }
         progress
-        OpenTx {
+        openTx {
           id
           createdAt
           updatedAt
@@ -292,7 +222,7 @@ exports.updateTicketRefund = `
           _deleted
           _lastChangedAt
         }
-        DrawnTx {
+        drawnTx {
           id
           createdAt
           updatedAt
@@ -311,7 +241,7 @@ exports.updateTicketRefund = `
         ticketsSold
         ticketBatches
         winningTicket
-        CloseTx {
+        closeTx {
           id
           createdAt
           updatedAt
@@ -327,7 +257,7 @@ exports.updateTicketRefund = `
         winningAccount
         owner
         contract
-        NFT {
+        nft {
           id
           createdAt
           updatedAt
@@ -342,28 +272,12 @@ exports.updateTicketRefund = `
           lastSales
           chainId
           rarityData
-          Collection {
-            id
-            contractAddress
-            createdAt
-            updatedAt
-            symbol
-            rafflesCreated
-            contractDeployer
-            deployedBlockNumber
-            tokenType
-            totalSupply
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           _version
           _deleted
           _lastChangedAt
           nFTCollectionId
         }
-        RefundTx {
+        refundTx {
           id
           createdAt
           updatedAt
@@ -383,7 +297,7 @@ exports.updateTicketRefund = `
         raffleOpenTxId
         raffleDrawnTxId
         raffleCloseTxId
-        raffleNFTId
+        raffleNftId
         raffleRefundTxId
       }
       tx {
@@ -417,48 +331,21 @@ exports.deleteTicketRefund = `
       id
       ethAmount
       refundee
-      Raffle {
+      raffle {
         id
         createdAt
         updatedAt
         ticketsAvailable
         raffleId
         TicketBatches {
-          items {
-            id
-            createdAt
-            updatedAt
-            lastTicket
-            purchaser
-            ticketsBought
-            batchId
-            firstTicket
-            raffleID
-            _version
-            _deleted
-            _lastChangedAt
-            ticketBatchTransactionId
-          }
           nextToken
           startedAt
         }
-        WinningBatch {
+        winningBatch {
           id
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -469,7 +356,7 @@ exports.deleteTicketRefund = `
           _lastChangedAt
           ticketBatchTransactionId
         }
-        ReleaseTx {
+        releaseTx {
           id
           createdAt
           updatedAt
@@ -482,7 +369,7 @@ exports.deleteTicketRefund = `
           _lastChangedAt
         }
         progress
-        OpenTx {
+        openTx {
           id
           createdAt
           updatedAt
@@ -494,7 +381,7 @@ exports.deleteTicketRefund = `
           _deleted
           _lastChangedAt
         }
-        DrawnTx {
+        drawnTx {
           id
           createdAt
           updatedAt
@@ -513,7 +400,7 @@ exports.deleteTicketRefund = `
         ticketsSold
         ticketBatches
         winningTicket
-        CloseTx {
+        closeTx {
           id
           createdAt
           updatedAt
@@ -529,7 +416,7 @@ exports.deleteTicketRefund = `
         winningAccount
         owner
         contract
-        NFT {
+        nft {
           id
           createdAt
           updatedAt
@@ -544,28 +431,12 @@ exports.deleteTicketRefund = `
           lastSales
           chainId
           rarityData
-          Collection {
-            id
-            contractAddress
-            createdAt
-            updatedAt
-            symbol
-            rafflesCreated
-            contractDeployer
-            deployedBlockNumber
-            tokenType
-            totalSupply
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           _version
           _deleted
           _lastChangedAt
           nFTCollectionId
         }
-        RefundTx {
+        refundTx {
           id
           createdAt
           updatedAt
@@ -585,7 +456,7 @@ exports.deleteTicketRefund = `
         raffleOpenTxId
         raffleDrawnTxId
         raffleCloseTxId
-        raffleNFTId
+        raffleNftId
         raffleRefundTxId
       }
       tx {
@@ -680,7 +551,7 @@ exports.createTicketBatch = `
       createdAt
       updatedAt
       lastTicket
-      Transaction {
+      transaction {
         id
         createdAt
         updatedAt
@@ -714,7 +585,7 @@ exports.updateTicketBatch = `
       createdAt
       updatedAt
       lastTicket
-      Transaction {
+      transaction {
         id
         createdAt
         updatedAt
@@ -748,7 +619,7 @@ exports.deleteTicketBatch = `
       createdAt
       updatedAt
       lastTicket
-      Transaction {
+      transaction {
         id
         createdAt
         updatedAt
@@ -846,18 +717,6 @@ exports.createRaffle = `
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -871,12 +730,12 @@ exports.createRaffle = `
         nextToken
         startedAt
       }
-      WinningBatch {
+      winningBatch {
         id
         createdAt
         updatedAt
         lastTicket
-        Transaction {
+        transaction {
           id
           createdAt
           updatedAt
@@ -898,7 +757,7 @@ exports.createRaffle = `
         _lastChangedAt
         ticketBatchTransactionId
       }
-      ReleaseTx {
+      releaseTx {
         id
         createdAt
         updatedAt
@@ -911,7 +770,7 @@ exports.createRaffle = `
         _lastChangedAt
       }
       progress
-      OpenTx {
+      openTx {
         id
         createdAt
         updatedAt
@@ -923,7 +782,7 @@ exports.createRaffle = `
         _deleted
         _lastChangedAt
       }
-      DrawnTx {
+      drawnTx {
         id
         createdAt
         updatedAt
@@ -942,7 +801,7 @@ exports.createRaffle = `
       ticketsSold
       ticketBatches
       winningTicket
-      CloseTx {
+      closeTx {
         id
         createdAt
         updatedAt
@@ -958,7 +817,7 @@ exports.createRaffle = `
       winningAccount
       owner
       contract
-      NFT {
+      nft {
         id
         createdAt
         updatedAt
@@ -973,7 +832,7 @@ exports.createRaffle = `
         lastSales
         chainId
         rarityData
-        Collection {
+        collection {
           id
           contractAddress
           createdAt
@@ -994,7 +853,7 @@ exports.createRaffle = `
         _lastChangedAt
         nFTCollectionId
       }
-      RefundTx {
+      refundTx {
         id
         createdAt
         updatedAt
@@ -1014,7 +873,7 @@ exports.createRaffle = `
       raffleOpenTxId
       raffleDrawnTxId
       raffleCloseTxId
-      raffleNFTId
+      raffleNftId
       raffleRefundTxId
     }
   }
@@ -1036,18 +895,6 @@ exports.updateRaffle = `
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -1061,12 +908,12 @@ exports.updateRaffle = `
         nextToken
         startedAt
       }
-      WinningBatch {
+      winningBatch {
         id
         createdAt
         updatedAt
         lastTicket
-        Transaction {
+        transaction {
           id
           createdAt
           updatedAt
@@ -1088,7 +935,7 @@ exports.updateRaffle = `
         _lastChangedAt
         ticketBatchTransactionId
       }
-      ReleaseTx {
+      releaseTx {
         id
         createdAt
         updatedAt
@@ -1101,7 +948,7 @@ exports.updateRaffle = `
         _lastChangedAt
       }
       progress
-      OpenTx {
+      openTx {
         id
         createdAt
         updatedAt
@@ -1113,7 +960,7 @@ exports.updateRaffle = `
         _deleted
         _lastChangedAt
       }
-      DrawnTx {
+      drawnTx {
         id
         createdAt
         updatedAt
@@ -1132,7 +979,7 @@ exports.updateRaffle = `
       ticketsSold
       ticketBatches
       winningTicket
-      CloseTx {
+      closeTx {
         id
         createdAt
         updatedAt
@@ -1148,7 +995,7 @@ exports.updateRaffle = `
       winningAccount
       owner
       contract
-      NFT {
+      nft {
         id
         createdAt
         updatedAt
@@ -1163,7 +1010,7 @@ exports.updateRaffle = `
         lastSales
         chainId
         rarityData
-        Collection {
+        collection {
           id
           contractAddress
           createdAt
@@ -1184,7 +1031,7 @@ exports.updateRaffle = `
         _lastChangedAt
         nFTCollectionId
       }
-      RefundTx {
+      refundTx {
         id
         createdAt
         updatedAt
@@ -1204,7 +1051,7 @@ exports.updateRaffle = `
       raffleOpenTxId
       raffleDrawnTxId
       raffleCloseTxId
-      raffleNFTId
+      raffleNftId
       raffleRefundTxId
     }
   }
@@ -1226,18 +1073,6 @@ exports.deleteRaffle = `
           createdAt
           updatedAt
           lastTicket
-          Transaction {
-            id
-            createdAt
-            updatedAt
-            date
-            eventType
-            hash
-            chainId
-            _version
-            _deleted
-            _lastChangedAt
-          }
           purchaser
           ticketsBought
           batchId
@@ -1251,12 +1086,12 @@ exports.deleteRaffle = `
         nextToken
         startedAt
       }
-      WinningBatch {
+      winningBatch {
         id
         createdAt
         updatedAt
         lastTicket
-        Transaction {
+        transaction {
           id
           createdAt
           updatedAt
@@ -1278,7 +1113,7 @@ exports.deleteRaffle = `
         _lastChangedAt
         ticketBatchTransactionId
       }
-      ReleaseTx {
+      releaseTx {
         id
         createdAt
         updatedAt
@@ -1291,7 +1126,7 @@ exports.deleteRaffle = `
         _lastChangedAt
       }
       progress
-      OpenTx {
+      openTx {
         id
         createdAt
         updatedAt
@@ -1303,7 +1138,7 @@ exports.deleteRaffle = `
         _deleted
         _lastChangedAt
       }
-      DrawnTx {
+      drawnTx {
         id
         createdAt
         updatedAt
@@ -1322,7 +1157,7 @@ exports.deleteRaffle = `
       ticketsSold
       ticketBatches
       winningTicket
-      CloseTx {
+      closeTx {
         id
         createdAt
         updatedAt
@@ -1338,7 +1173,7 @@ exports.deleteRaffle = `
       winningAccount
       owner
       contract
-      NFT {
+      nft {
         id
         createdAt
         updatedAt
@@ -1353,7 +1188,7 @@ exports.deleteRaffle = `
         lastSales
         chainId
         rarityData
-        Collection {
+        collection {
           id
           contractAddress
           createdAt
@@ -1374,7 +1209,7 @@ exports.deleteRaffle = `
         _lastChangedAt
         nFTCollectionId
       }
-      RefundTx {
+      refundTx {
         id
         createdAt
         updatedAt
@@ -1394,7 +1229,7 @@ exports.deleteRaffle = `
       raffleOpenTxId
       raffleDrawnTxId
       raffleCloseTxId
-      raffleNFTId
+      raffleNftId
       raffleRefundTxId
     }
   }
@@ -1419,7 +1254,7 @@ exports.createNFT = `
       lastSales
       chainId
       rarityData
-      Collection {
+      collection {
         id
         contractAddress
         createdAt
@@ -1462,7 +1297,7 @@ exports.updateNFT = `
       lastSales
       chainId
       rarityData
-      Collection {
+      collection {
         id
         contractAddress
         createdAt
@@ -1505,7 +1340,7 @@ exports.deleteNFT = `
       lastSales
       chainId
       rarityData
-      Collection {
+      collection {
         id
         contractAddress
         createdAt

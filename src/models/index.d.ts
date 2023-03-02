@@ -14,7 +14,7 @@ type EagerTicketRefund = {
   readonly id: string;
   readonly ethAmount?: number | null;
   readonly refundee?: string | null;
-  readonly Raffle?: Raffle | null;
+  readonly raffle?: Raffle | null;
   readonly tx?: Transaction | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -30,7 +30,7 @@ type LazyTicketRefund = {
   readonly id: string;
   readonly ethAmount?: number | null;
   readonly refundee?: string | null;
-  readonly Raffle: AsyncItem<Raffle | undefined>;
+  readonly raffle: AsyncItem<Raffle | undefined>;
   readonly tx: AsyncItem<Transaction | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -88,7 +88,7 @@ type EagerTicketBatch = {
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly lastTicket: number;
-  readonly Transaction: Transaction;
+  readonly transaction: Transaction;
   readonly purchaser: string;
   readonly ticketsBought: number;
   readonly batchId: number;
@@ -105,7 +105,7 @@ type LazyTicketBatch = {
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly lastTicket: number;
-  readonly Transaction: AsyncItem<Transaction>;
+  readonly transaction: AsyncItem<Transaction>;
   readonly purchaser: string;
   readonly ticketsBought: number;
   readonly batchId: number;
@@ -162,11 +162,11 @@ type EagerRaffle = {
   readonly ticketsAvailable: number;
   readonly raffleId: number;
   readonly TicketBatches?: (TicketBatch | null)[] | null;
-  readonly WinningBatch?: TicketBatch | null;
-  readonly ReleaseTx?: Transaction | null;
+  readonly winningBatch?: TicketBatch | null;
+  readonly releaseTx?: Transaction | null;
   readonly progress: number;
-  readonly OpenTx?: Transaction | null;
-  readonly DrawnTx?: Transaction | null;
+  readonly openTx?: Transaction | null;
+  readonly drawnTx?: Transaction | null;
   readonly state: number;
   readonly tokenId: string;
   readonly expires: string;
@@ -174,19 +174,19 @@ type EagerRaffle = {
   readonly ticketsSold: number;
   readonly ticketBatches?: number | null;
   readonly winningTicket?: number | null;
-  readonly CloseTx?: Transaction | null;
+  readonly closeTx?: Transaction | null;
   readonly chainId: string;
   readonly winningAccount?: string | null;
   readonly owner: string;
   readonly contract: string;
-  readonly NFT?: NFT | null;
-  readonly RefundTx?: Transaction | null;
+  readonly nft?: NFT | null;
+  readonly refundTx?: Transaction | null;
   readonly raffleWinningBatchId?: string | null;
   readonly raffleReleaseTxId?: string | null;
   readonly raffleOpenTxId?: string | null;
   readonly raffleDrawnTxId?: string | null;
   readonly raffleCloseTxId?: string | null;
-  readonly raffleNFTId?: string | null;
+  readonly raffleNftId?: string | null;
   readonly raffleRefundTxId?: string | null;
 }
 
@@ -200,11 +200,11 @@ type LazyRaffle = {
   readonly ticketsAvailable: number;
   readonly raffleId: number;
   readonly TicketBatches: AsyncCollection<TicketBatch>;
-  readonly WinningBatch: AsyncItem<TicketBatch | undefined>;
-  readonly ReleaseTx: AsyncItem<Transaction | undefined>;
+  readonly winningBatch: AsyncItem<TicketBatch | undefined>;
+  readonly releaseTx: AsyncItem<Transaction | undefined>;
   readonly progress: number;
-  readonly OpenTx: AsyncItem<Transaction | undefined>;
-  readonly DrawnTx: AsyncItem<Transaction | undefined>;
+  readonly openTx: AsyncItem<Transaction | undefined>;
+  readonly drawnTx: AsyncItem<Transaction | undefined>;
   readonly state: number;
   readonly tokenId: string;
   readonly expires: string;
@@ -212,19 +212,19 @@ type LazyRaffle = {
   readonly ticketsSold: number;
   readonly ticketBatches?: number | null;
   readonly winningTicket?: number | null;
-  readonly CloseTx: AsyncItem<Transaction | undefined>;
+  readonly closeTx: AsyncItem<Transaction | undefined>;
   readonly chainId: string;
   readonly winningAccount?: string | null;
   readonly owner: string;
   readonly contract: string;
-  readonly NFT: AsyncItem<NFT | undefined>;
-  readonly RefundTx: AsyncItem<Transaction | undefined>;
+  readonly nft: AsyncItem<NFT | undefined>;
+  readonly refundTx: AsyncItem<Transaction | undefined>;
   readonly raffleWinningBatchId?: string | null;
   readonly raffleReleaseTxId?: string | null;
   readonly raffleOpenTxId?: string | null;
   readonly raffleDrawnTxId?: string | null;
   readonly raffleCloseTxId?: string | null;
-  readonly raffleNFTId?: string | null;
+  readonly raffleNftId?: string | null;
   readonly raffleRefundTxId?: string | null;
 }
 
@@ -252,7 +252,7 @@ type EagerNFT = {
   readonly lastSales?: string | null;
   readonly chainId: string;
   readonly rarityData?: string | null;
-  readonly Collection?: Collection | null;
+  readonly collection?: Collection | null;
   readonly nFTCollectionId?: string | null;
 }
 
@@ -274,7 +274,7 @@ type LazyNFT = {
   readonly lastSales?: string | null;
   readonly chainId: string;
   readonly rarityData?: string | null;
-  readonly Collection: AsyncItem<Collection | undefined>;
+  readonly collection: AsyncItem<Collection | undefined>;
   readonly nFTCollectionId?: string | null;
 }
 

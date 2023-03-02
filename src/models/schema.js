@@ -24,8 +24,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Raffle": {
-                    "name": "Raffle",
+                "raffle": {
+                    "name": "raffle",
                     "isArray": false,
                     "type": {
                         "model": "Raffle"
@@ -234,8 +234,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Transaction": {
-                    "name": "Transaction",
+                "transaction": {
+                    "name": "transaction",
                     "isArray": false,
                     "type": {
                         "model": "Transaction"
@@ -461,8 +461,8 @@ export const schema = {
                         ]
                     }
                 },
-                "WinningBatch": {
-                    "name": "WinningBatch",
+                "winningBatch": {
+                    "name": "winningBatch",
                     "isArray": false,
                     "type": {
                         "model": "TicketBatch"
@@ -479,8 +479,8 @@ export const schema = {
                         ]
                     }
                 },
-                "ReleaseTx": {
-                    "name": "ReleaseTx",
+                "releaseTx": {
+                    "name": "releaseTx",
                     "isArray": false,
                     "type": {
                         "model": "Transaction"
@@ -504,8 +504,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "OpenTx": {
-                    "name": "OpenTx",
+                "openTx": {
+                    "name": "openTx",
                     "isArray": false,
                     "type": {
                         "model": "Transaction"
@@ -522,8 +522,8 @@ export const schema = {
                         ]
                     }
                 },
-                "DrawnTx": {
-                    "name": "DrawnTx",
+                "drawnTx": {
+                    "name": "drawnTx",
                     "isArray": false,
                     "type": {
                         "model": "Transaction"
@@ -589,8 +589,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "CloseTx": {
-                    "name": "CloseTx",
+                "closeTx": {
+                    "name": "closeTx",
                     "isArray": false,
                     "type": {
                         "model": "Transaction"
@@ -635,8 +635,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "NFT": {
-                    "name": "NFT",
+                "nft": {
+                    "name": "nft",
                     "isArray": false,
                     "type": {
                         "model": "NFT"
@@ -649,12 +649,12 @@ export const schema = {
                             "id"
                         ],
                         "targetNames": [
-                            "raffleNFTId"
+                            "raffleNftId"
                         ]
                     }
                 },
-                "RefundTx": {
-                    "name": "RefundTx",
+                "refundTx": {
+                    "name": "refundTx",
                     "isArray": false,
                     "type": {
                         "model": "Transaction"
@@ -706,8 +706,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "raffleNFTId": {
-                    "name": "raffleNFTId",
+                "raffleNftId": {
+                    "name": "raffleNftId",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
@@ -847,8 +847,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Collection": {
-                    "name": "Collection",
+                "collection": {
+                    "name": "collection",
                     "isArray": false,
                     "type": {
                         "model": "Collection"
@@ -1093,5 +1093,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "d1b8e0d2e1a369dd740272a9d393e3c7"
+    "version": "9ebb48fe9d0dd016942f2e7cc91fe1b2"
 };
