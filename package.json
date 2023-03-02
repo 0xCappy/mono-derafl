@@ -45,6 +45,7 @@
     "@usedapp/core": "^1.2.2",
     "abi-decoder": "^2.4.0",
     "alchemy-sdk": "^2.5.0",
+    "aws-amplify": "^5.0.16",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "cookies-next": "^2.1.1",

@@ -1,3 +1,5 @@
+import { listRaffles } from '@/src/graphql/queries';
+import { API, graphqlOperation } from 'aws-amplify'
 import { Account, Raffle, TicketBatch } from '@/types';
 import axios from 'axios';
 import Head from 'next/head';
@@ -6,6 +8,10 @@ import { Home } from '../features'
 
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
+  const h = listRaffles
+  const raffles_ = await API.graphql(graphqlOperation(listRaffles)) as any
+  const todos = raffles_.data.listRaffles.items
+  console.log("RAFFLES: ", todos)
   const response = await axios.post(`${process.env.API_URL}/initHomepage`)
   const raffles = await response.data.raffles as Raffle
   const purchases = await response.data.purchases.ticketBatches as TicketBatch[]

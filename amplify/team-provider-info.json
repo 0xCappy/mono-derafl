@@ -30,7 +30,7 @@
           "discordRaffleCreateWebhookUrl": "https://discord.com/api/webhooks/1079377429744848957/fHbzIX7_r54QD8MddO2p0eI52EDoyTiYJhQrAHjP2tN9RvqSXEaUYZ05gZ_TSiqSBkYm",
           "discordRaffleClosedWebhookUrl": "https://discord.com/api/webhooks/1079377754325274634/JuJUozAzBMVXyOuD_4BMyr6-Ljnx6V12-z8wt-RRySN_Rjm62IR7TNshCswSVIHLTEhr",
           "deploymentBucketName": "amplify-derafl-dev-121800-deployment",
-          "s3Key": "amplify-builds/deraflcontractevent-746e6e67526b766f716f-build.zip"
+          "s3Key": "amplify-builds/deraflcontractevent-52716b2b5139756d2f70-build.zip"
         }
       }
     }
