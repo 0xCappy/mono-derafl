@@ -13,11 +13,10 @@ import useTicketsOwned from '@/hooks/useTicketsOwned';
 
 interface RaffleDetailProps {
     raffle: Raffle
-    ticketBatches: TicketBatch[]
     trending: Raffle[]
 }
 
-const RaffleDetail = ({ raffle, ticketBatches, trending }: RaffleDetailProps) => {
+const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
     const { address } = useWallet()
     const [viewedBatch, setViewedBatch] = useState(0)
     const [hasSetViewed, setHasSetViewed] = useState(false)
@@ -25,12 +24,7 @@ const RaffleDetail = ({ raffle, ticketBatches, trending }: RaffleDetailProps) =>
     const ticketsOwned = useTicketsOwned(raffle.raffleId.toString(), address, parseInt(raffle.chainId), raffle.contract)
     const [raffleInfo, setRaffleInfo] = useState<RaffleInfo | undefined>()
     const [winningBatch, setWinningBatch] = useState<TicketBatch>()
-    const [purchases, setPurchases] = useState<TicketBatch[]>([])
     const [updatedRaffle, setUpdatedRaffle] = useState<Raffle>(raffle)
-
-    useEffect(() => {
-        setPurchases(ticketBatches)
-    }, [])
 
     useEffect(() => {
         setRaffleInfo(_raffleInfo)
@@ -176,7 +170,7 @@ const RaffleDetail = ({ raffle, ticketBatches, trending }: RaffleDetailProps) =>
                 </MediaQuery>
 
                 <Box>
-                    <PurchasesCard onPurchasesRefreshed={() => setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))} raffleId={raffle.id} unviewedPurchaseCount={parseInt(raffleInfo?.batchIndex.toString() || '0') - viewedBatch} purchases={purchases} />
+                    <PurchasesCard onPurchasesRefreshed={() => setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))} raffleId={raffle.id} unviewedPurchaseCount={parseInt(raffleInfo?.batchIndex.toString() || '0') - viewedBatch} />
                 </Box>
 
                 <Box>

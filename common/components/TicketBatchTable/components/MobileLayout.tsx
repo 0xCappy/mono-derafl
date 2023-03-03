@@ -52,14 +52,14 @@ const MobileLayout = ({ loading, ticketBatches, pageSize }: MobileLayoutProps) =
                                             <Divider mb="1rem" />
                                             <Stack>
                                             <AccountAnchor withBlockie address={batch.purchaser} />
-                                            <Anchor target="_blank" href={buildTransactionUrl(batch.tx.chainId, batch.tx.hash)}>View on explorer</Anchor>
+                                            <Anchor target="_blank" href={buildTransactionUrl(batch.transaction.chainId, batch.transaction.hash)}>View on explorer</Anchor>
                                             </Stack>
                                         </Accordion.Panel>
                                     </Accordion.Item>
                                 </Accordion>
                                 <Group position="apart" spacing={0} mt="1rem">
                                     <Group position="center" w="40%" spacing={6}><IconTicket /><Text>{batch.ticketsBought}</Text></Group>
-                                    <Group position="center" w="60%" spacing={6} style={{ borderLeft: '1px solid grey' }}><IconClock /><Text><TimeAgo date={new Date(batch.tx.date)} /></Text></Group>
+                                    <Group position="center" w="60%" spacing={6} style={{ borderLeft: '1px solid grey' }}><IconClock /><Text><TimeAgo date={new Date(batch.transaction.date)} /></Text></Group>
                                 </Group>
                             </Paper>
                             // </Anchor>

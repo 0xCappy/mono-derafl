@@ -8,14 +8,12 @@
 // import { mapTicketBatch } from "./TicketBatchService";
 // import { mapTransaction } from "./TransactionService";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateRaffle = exports.createRaffle = exports.getRaffleByRaffleId = exports.getRaffle = void 0;
+exports.updateRaffle = exports.createRaffle = exports.getRaffleByRaffleId = void 0;
 const axios_1 = require("axios");
 const queries_1 = require("../graphql/queries");
 const mutations_1 = require("../graphql/mutations");
 const types_1 = require("../types");
 // import { Raffle } from '../../models';
-exports.getRaffle = async (raffleId) => {
-};
 // export const getAccountRaffles = async (
 //     address: string,
 //     asc: boolean,

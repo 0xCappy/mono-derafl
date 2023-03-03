@@ -104,26 +104,28 @@ export const getAccountParticipation = async (address: string, raffleId: string)
 }
 
 export const createTicketBatch = async (
-    raffleId: number,
+    ticketBatchRaffleId: number,
     ticketsBought: number,
     firstTicket: number,
     lastTicket: number,
     batchId: number,
     purchaser: string,
-    ticketBatchTransactionId: string
+    ticketBatchTransactionId: string,
+    raffleId: string
 ) => {
     const variables = {
         input: {
             createdAt: new Date(),
             updatedAt: new Date(),
-            raffleId,
+            ticketBatchRaffleId,
             ticketsBought,
             firstTicket,
             lastTicket,
             batchId,
             purchaser,
             ticketBatchTransactionId,
-            type: 'TicketBatch'
+            type: 'TicketBatch',
+            raffleId
         }
     }
     const options = {

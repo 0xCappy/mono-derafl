@@ -1,6 +1,6 @@
 import { formatEther } from "ethers";
 import { sendRaffleCompleteWebhook } from "../clients/DiscordClient";
-import { getRaffle, updateRaffle } from "../services/RaffleService";
+import { getRaffleByRaffleId, updateRaffle } from "../services/RaffleService";
 import { incrementEth, incrementRoyalties } from "../services/StatService";
 import { createTransactionRecord } from "../services/TransactionService";
 import { EventType, RaffleReleaseEvent, RaffleState } from "../types";
@@ -11,7 +11,7 @@ export const handleRaffleRelease = async (
   timestamp: string,
   chainId: string
 ) => {
-  var raffle = await getRaffle(parseInt(log.raffleId.toString()));
+  var raffle = await getRaffleByRaffleId(parseInt(log.raffleId.toString()));
   if (!raffle) {
     throw new Error("Invalid raffle Id");
   }

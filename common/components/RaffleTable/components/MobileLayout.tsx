@@ -61,7 +61,7 @@ const MobileLayout = ({ loading, raffles, pageSize }: MobileLayoutProps) => {
                                                 {raffle.winningAccount && <Group spacing={6}><IconTrophy /><AccountAnchor address={raffle.winningAccount} /></Group>}
 
                                                 {/* <AccountAnchor withBlockie address={batch.purchaser} />
-                                                <Anchor target="_blank" href={`https://goerli.etherscan.io/tx/${batch.tx.hash}`}>View on explorer</Anchor> */}
+                                                <Anchor target="_blank" href={`https://goerli.etherscan.io/tx/${batch.transaction.hash}`}>View on explorer</Anchor> */}
                                             </Stack>
                                         </Accordion.Panel>
                                     </Accordion.Item>

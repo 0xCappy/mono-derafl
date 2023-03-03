@@ -8,7 +8,7 @@ interface TicketBatch extends Base {
   lastTicket: number;
   purchaser: string;
   ticketsBought: number;
-  tx: Transaction
+  transaction: Transaction
   raffle?: Raffle
 }
 

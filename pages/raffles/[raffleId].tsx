@@ -12,32 +12,22 @@ import { getRaffle, listRaffles, listTicketBatches } from '@/src/graphql/queries
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
   const raffleId = context.query.raffleId
-
-  // const response = await axios.post(`${process.env.API_URL}/raffles/detail`, { raffleId: parseInt(raffleId) })
-  // // const raffle = await response.data.raffle as Raffle
-  // // const ticketBatches = await response.data.ticketBatches as TicketBatch[]
-  // const trending = await response.data.trending as Raffle[]
-
   const listRaffleData = await API.graphql(graphqlOperation(listRaffles, {
     filter: { raffleId: { eq: raffleId } }
   })) as any
   const raffleBasic = listRaffleData.data.listRaffles.items[0]
-  console.log("raffleBasic: ", raffleBasic)
-
-  const raffleData = await API.graphql(graphqlOperation(getRaffle), { id: raffleBasic.id }) as any
+  const raffleData = await API.graphql(graphqlOperation(getRaffle, { id: raffleBasic.id })) as any
   const raffle = raffleData.data.getRaffle
-  console.log("raffle: ", raffle)
-
-  const ticketBatchData = await API.graphql(graphqlOperation(listTicketBatches, {
-    filter: { raffleID: { eq: raffle.id } }
-  })) as any
-  const ticketBatches = ticketBatchData.data.listTicketBatches.items
-  console.log("RAFFLES: ", raffle)
 
   return {
     props: {
-      raffle,
-      ticketBatches,
+      raffle: {
+        ...raffle,
+        nft: {
+          ...raffle.nft,
+          metadata: raffle.nft.metadata ? JSON.parse(raffle.nft.metadata) : undefined
+        }
+      },
       trending: []
     }
   }
@@ -45,11 +35,10 @@ export const getServerSideProps = async (context: any) => {
 
 interface RaffleDetailPageProps {
   raffle: Raffle,
-  ticketBatches: TicketBatch[],
   trending: Raffle[]
 }
 
-export default function RaffleDetailPage({ raffle, ticketBatches, trending }: RaffleDetailPageProps) {
+export default function RaffleDetailPage({ raffle, trending }: RaffleDetailPageProps) {
   return (
     <>
       <Head>
@@ -67,7 +56,7 @@ export default function RaffleDetailPage({ raffle, ticketBatches, trending }: Ra
 
       <main>
         <Box mt="8rem">
-          <RaffleDetail ticketBatches={ticketBatches} raffle={raffle} trending={trending} />
+          <RaffleDetail raffle={raffle} trending={trending} />
         </Box>
       </main>
     </>

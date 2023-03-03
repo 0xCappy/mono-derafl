@@ -1,5 +1,5 @@
 import { getOrCreateAccount, updateAccount } from "../services/AccountService";
-import { getRaffle, updateRaffle } from "../services/RaffleService";
+import { getRaffleByRaffleId, updateRaffle } from "../services/RaffleService";
 import { getWinningBatch } from "../services/TicketBatchService";
 import { createTransactionRecord } from "../services/TransactionService";
 import { EventType, RaffleDrawnEvent, RaffleState } from "../types";
@@ -10,7 +10,7 @@ export const handleRaffleDrawn = async (
   timestamp: string,
   chainId: string
 ) => {
-  var raffle = await getRaffle(parseInt(log.raffleId.toString()));
+  var raffle = await getRaffleByRaffleId(parseInt(log.raffleId.toString()));
   if (!raffle) {
     throw new Error("Invalid raffle Id");
   }

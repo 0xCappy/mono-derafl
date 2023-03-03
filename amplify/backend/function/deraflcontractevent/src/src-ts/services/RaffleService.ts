@@ -15,12 +15,6 @@ import { RaffleState } from '../types';
 
 // import { Raffle } from '../../models';
 
-export const getRaffle = async (
-  raffleId: number
-): Promise<any> => {
-
-};
-
 // export const getAccountRaffles = async (
 //     address: string,
 //     asc: boolean,

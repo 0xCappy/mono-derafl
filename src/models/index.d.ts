@@ -1,6 +1,6 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncItem } from "@aws-amplify/datastore";
 
 
 
@@ -98,8 +98,10 @@ type EagerTicketBatch = {
   readonly ticketsBought: number;
   readonly batchId: number;
   readonly firstTicket: number;
-  readonly raffleID: string;
+  readonly raffleId: number;
+  readonly raffle?: Raffle | null;
   readonly ticketBatchTransactionId: string;
+  readonly ticketBatchRaffleId?: string | null;
 }
 
 type LazyTicketBatch = {
@@ -116,8 +118,10 @@ type LazyTicketBatch = {
   readonly ticketsBought: number;
   readonly batchId: number;
   readonly firstTicket: number;
-  readonly raffleID: string;
+  readonly raffleId: number;
+  readonly raffle: AsyncItem<Raffle | undefined>;
   readonly ticketBatchTransactionId: string;
+  readonly ticketBatchRaffleId?: string | null;
 }
 
 export declare type TicketBatch = LazyLoading extends LazyLoadingDisabled ? EagerTicketBatch : LazyTicketBatch
@@ -170,7 +174,6 @@ type EagerRaffle = {
   readonly updatedAt: string;
   readonly ticketsAvailable: number;
   readonly raffleId: number;
-  readonly TicketBatches?: (TicketBatch | null)[] | null;
   readonly winningBatch?: TicketBatch | null;
   readonly releaseTx?: Transaction | null;
   readonly progress: number;
@@ -209,7 +212,6 @@ type LazyRaffle = {
   readonly updatedAt: string;
   readonly ticketsAvailable: number;
   readonly raffleId: number;
-  readonly TicketBatches: AsyncCollection<TicketBatch>;
   readonly winningBatch: AsyncItem<TicketBatch | undefined>;
   readonly releaseTx: AsyncItem<Transaction | undefined>;
   readonly progress: number;

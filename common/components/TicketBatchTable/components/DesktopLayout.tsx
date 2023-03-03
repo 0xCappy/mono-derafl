@@ -56,7 +56,7 @@ const DesktopLayout = ({ loading, ticketBatches, includeAccount }: DesktopLayout
                 header: 'Date',
                 accessorFn: (batch) => (
                     <Group spacing={4}>
-                        <IconCalendarEvent /><Text>{new Date(batch.tx.date).toLocaleDateString()}</Text>
+                        <IconCalendarEvent /><Text>{new Date(batch.transaction.date).toLocaleDateString()}</Text>
                     </Group>
                 ),
             },
@@ -65,7 +65,7 @@ const DesktopLayout = ({ loading, ticketBatches, includeAccount }: DesktopLayout
                 size: 100,
                 accessorFn: (batch) => (
                     <Group>
-                        <Anchor target="_blank" href={buildTransactionUrl(batch.tx.chainId, batch.tx.hash)}><ActionIcon><IconExternalLink /></ActionIcon></Anchor>
+                        <Anchor target="_blank" href={buildTransactionUrl(batch.transaction.chainId, batch.transaction.hash)}><ActionIcon><IconExternalLink /></ActionIcon></Anchor>
                     </Group>
                 )
             },

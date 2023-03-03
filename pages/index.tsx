@@ -1,4 +1,4 @@
-import { listAccounts, listTicketBatches, rafflesByCreatedAt } from '@/src/graphql/queries';
+import { accountsByUpdatedAt, listAccounts, listTicketBatches, rafflesByCreatedAt, ticketBatchesByCreatedAt } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify'
 import { Account, Raffle, TicketBatch } from '@/types';
 import axios from 'axios';
@@ -22,19 +22,28 @@ export const getServerSideProps = async (context: any) => {
   // // const purchases = await response.data.purchases.ticketBatches as TicketBatch[]
   // // const accounts = await response.data.accounts.accounts as Account[]
 
-  const accountData = await API.graphql(graphqlOperation(listAccounts)) as any
-  const accounts = accountData.data.listAccounts.items
+  const accountData = await API.graphql(graphqlOperation(accountsByUpdatedAt, {
+    type: 'Account',
+    limit: 10,
+    sortDirection: 'DESC'
+  })) as any
+  const accounts = accountData.data.accountsByUpdatedAt.items
 
   const raffleData = await API.graphql(graphqlOperation(rafflesByUpdatedAt, {
-      type: 'Raffle',
-      limit: 10,
-      sortDirection: 'DESC'
+    type: 'Raffle',
+    limit: 10,
+    sortDirection: 'DESC'
   })) as any
   const raffles = raffleData.data.rafflesByUpdatedAt.items
   console.log("RAFFLES: ", raffles)
 
-  const purchasesData = await API.graphql(graphqlOperation(listTicketBatches)) as any
-  const purchases = purchasesData.data.listTicketBatches.items
+  const purchasesData = await API.graphql(graphqlOperation(ticketBatchesByCreatedAt, {
+    // filter: { raffleId: { eq: raffleId } },
+    type: 'TicketBatch',
+    sortDirection: 'DESC'
+  })) as any
+  const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
+
 
   return {
     props: {

@@ -17,7 +17,7 @@ type Stat @model @auth(rules: [{allow: public}]) {
   rafflesCreated: Int
 }
 
-type TicketBatch @model @auth(rules: [{allow: public}]) {
+type TicketBatch @model @count @auth(rules: [{allow: public}]) {
   id: ID!
   type: String!
   @index(name: "ticketBatchesByCreatedAt", queryField: "ticketBatchesByCreatedAt", sortKeyFields: ["createdAt"])
@@ -31,7 +31,8 @@ type TicketBatch @model @auth(rules: [{allow: public}]) {
   ticketsBought: Int!
   batchId: Int!
   firstTicket: Int!
-  raffleID: ID! @index(name: "byRaffle")
+  raffleId: Int!
+  raffle: Raffle @belongsTo
 }
 
 type Transaction @model @auth(rules: [{allow: public}]) {
@@ -45,7 +46,7 @@ type Transaction @model @auth(rules: [{allow: public}]) {
   chainId: String!
 }
 
-type Raffle @model @auth(rules: [{allow: public}]) {
+type Raffle @model @count @auth(rules: [{allow: public}]) {
   id: ID!
   type: String! 
   @index(name: "rafflesByCreatedAt", queryField: "rafflesByCreatedAt", sortKeyFields: ["createdAt"])
@@ -58,7 +59,6 @@ type Raffle @model @auth(rules: [{allow: public}]) {
   updatedAt: AWSDateTime!
   ticketsAvailable: Int!
   raffleId: Int!
-  TicketBatches: [TicketBatch] @hasMany(indexName: "byRaffle", fields: ["id"])
   winningBatch: TicketBatch @hasOne
   releaseTx: Transaction @hasOne
   progress: Float!
@@ -114,7 +114,7 @@ type Collection @model @auth(rules: [{allow: public}]) {
   chainId: String!
 }
 
-type Account @model @auth(rules: [{allow: public}]) {
+type Account @model @count @auth(rules: [{allow: public}]) {
   id: ID!
   type: String! 
   @index(name: "accountsByTicketsBought", queryField: "accountsByTicketsBought", sortKeyFields: ["ticketsBought"])
@@ -130,4 +130,4 @@ type Account @model @auth(rules: [{allow: public}]) {
   rafflesWon: Int!
   rafflesEntered: Int!
   ticketsBought: Int!
-} 
+}

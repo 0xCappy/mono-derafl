@@ -10,17 +10,19 @@ import { MRT_ColumnDef, MantineReactTable } from 'mantine-react-table';
 import { useEffect, useMemo, useState } from 'react';
 import makeBlockie from 'ethereum-blockies-base64';
 import { buildTransactionUrl } from '@/common/utils';
+import { API, graphqlOperation } from 'aws-amplify';
+import { listTicketBatches, ticketBatchesByCreatedAt } from '@/src/graphql/queries';
 
 const PAGE_LENGTH = 10
 
 interface PurchasesCardProps {
-    purchases: TicketBatch[]
+    purchases: []
     unviewedPurchaseCount: number
     raffleId: string
     onPurchasesRefreshed: () => void
 }
 
-const PurchasesCard = ({ purchases, unviewedPurchaseCount, raffleId, onPurchasesRefreshed }: PurchasesCardProps) => {
+const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }: PurchasesCardProps) => {
     const [batches, setBatches] = useState<TicketBatch[]>([])
     const [batchCount, setBatchCount] = useState(0)
     const [page, setPage] = useState(1)
@@ -35,30 +37,44 @@ const PurchasesCard = ({ purchases, unviewedPurchaseCount, raffleId, onPurchases
         fetchTicketBatches(1)
     }, [])
 
+    // const fetchTicketBatches = async (_page: number) => {
+    //     setLoading(true)
+    //     const data = await fetch("/api/ticketBatches", {
+    //         method: "POST",
+    //         body: JSON.stringify({
+    //             sortKey: 'createdAt',
+    //             asc: false,
+    //             skip: (_page - 1) * PAGE_LENGTH,
+    //             limit: PAGE_LENGTH,
+    //             raffleId
+    //         }),
+    //     });
+    //     const response = await data.json()
+    //     setBatches(response.ticketBatches)
+    //     setBatchCount(response.count)
+    //     setLoading(false)
+    // }
+
     const fetchTicketBatches = async (_page: number) => {
         setLoading(true)
-        const data = await fetch("/api/ticketBatches", {
-            method: "POST",
-            body: JSON.stringify({
-                sortKey: 'createdAt',
-                asc: false,
-                skip: (_page - 1) * PAGE_LENGTH,
-                limit: PAGE_LENGTH,
-                raffleId
-            }),
-        });
-        const response = await data.json()
-        setBatches(response.ticketBatches)
-        setBatchCount(response.count)
+
+        const purchasesData = await API.graphql(graphqlOperation(ticketBatchesByCreatedAt, {
+            // filter: { raffleId: { eq: raffleId } },
+            type: 'TicketBatch',
+            sortDirection: 'DESC'
+        })) as any
+        const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
+        setBatches(purchases)
+        setBatchCount(100)
         setLoading(false)
-}
+    }
 
     const onRefresh = () => {
         setPage(1)
         fetchTicketBatches(1)
         onPurchasesRefreshed()
     }
-    
+
     const columns = useMemo<MRT_ColumnDef<TicketBatch>[]>(
         () => [
             {
@@ -86,7 +102,7 @@ const PurchasesCard = ({ purchases, unviewedPurchaseCount, raffleId, onPurchases
                 header: 'Date',
                 accessorFn: (batch) => (
                     <Group spacing={4}>
-                        <IconCalendarEvent /><Text><TimeAgo date={new Date(batch.tx.date) || ''} /></Text>
+                        <IconCalendarEvent /><Text><TimeAgo date={new Date(batch.transaction.date) || ''} /></Text>
                     </Group>
                 ),
             },
@@ -95,7 +111,7 @@ const PurchasesCard = ({ purchases, unviewedPurchaseCount, raffleId, onPurchases
                 minSize: 30,
                 accessorFn: (batch) => (
                     <Group>
-                        <Anchor target="_blank" href={buildTransactionUrl(batch.tx.chainId, batch.tx.hash)}><ActionIcon><IconExternalLink /></ActionIcon></Anchor>
+                        <Anchor target="_blank" href={buildTransactionUrl(batch.transaction.chainId, batch.transaction.hash)}><ActionIcon><IconExternalLink /></ActionIcon></Anchor>
                     </Group>
                 )
             },
@@ -126,7 +142,7 @@ const PurchasesCard = ({ purchases, unviewedPurchaseCount, raffleId, onPurchases
                 rowCount={1}
                 state={{
                     isLoading: loading,
-                }}    
+                }}
                 mantineTableProps={{
                     sx: {
                         tableLayout: 'fixed',

@@ -1,5 +1,5 @@
 import { getOrCreateAccount, updateAccount } from "../services/AccountService";
-import { getRaffle, updateRaffle } from "../services/RaffleService";
+import { getRaffleByRaffleId, updateRaffle } from "../services/RaffleService";
 import { incrementTickets } from "../services/StatService";
 import { createTicketBatch, getAccountParticipation } from "../services/TicketBatchService";
 import { createTransactionRecord } from "../services/TransactionService";
@@ -11,7 +11,7 @@ export const handleTicketPurchase = async (
   timestamp: string,
   chainId: string
 ) => {
-  var raffle = await getRaffle(parseInt(log.raffleId.toString()));
+  var raffle = await getRaffleByRaffleId(parseInt(log.raffleId.toString()));
   if (!raffle) {
     throw new Error("Invalid raffle Id");
   }
@@ -39,7 +39,8 @@ export const handleTicketPurchase = async (
     lastTicket,
     parseInt(log.batchId.toString()),
     log.purchaser.toLowerCase(),
-    transaction.id
+    transaction.id,
+    log.raffleId.toString()
   )
 
   // increment tickets bought on account

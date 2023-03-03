@@ -5,7 +5,7 @@ const RaffleService_1 = require("../services/RaffleService");
 const TransactionService_1 = require("../services/TransactionService");
 const types_1 = require("../types");
 exports.handleRaffleClose = async (log, txId, timestamp, chainId) => {
-    var raffle = await RaffleService_1.getRaffle(parseInt(log.raffleId.toString()));
+    var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()));
     if (!raffle) {
         throw new Error("Invalid raffle Id");
     }

@@ -301,18 +301,40 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "raffleID": {
-                    "name": "raffleID",
+                "raffleId": {
+                    "name": "raffleId",
                     "isArray": false,
-                    "type": "ID",
+                    "type": "Int",
                     "isRequired": true,
                     "attributes": []
+                },
+                "raffle": {
+                    "name": "raffle",
+                    "isArray": false,
+                    "type": {
+                        "model": "Raffle"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "ticketBatchRaffleId"
+                        ]
+                    }
                 },
                 "ticketBatchTransactionId": {
                     "name": "ticketBatchTransactionId",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "ticketBatchRaffleId": {
+                    "name": "ticketBatchRaffleId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
                     "attributes": []
                 }
             },
@@ -331,15 +353,6 @@ export const schema = {
                         "fields": [
                             "type",
                             "createdAt"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byRaffle",
-                        "fields": [
-                            "raffleID"
                         ]
                     }
                 },
@@ -490,22 +503,6 @@ export const schema = {
                     "type": "Int",
                     "isRequired": true,
                     "attributes": []
-                },
-                "TicketBatches": {
-                    "name": "TicketBatches",
-                    "isArray": true,
-                    "type": {
-                        "model": "TicketBatch"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "raffleID"
-                        ]
-                    }
                 },
                 "winningBatch": {
                     "name": "winningBatch",
@@ -1182,5 +1179,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "da1cd4d13d36dd38a9019dae5a7cab0d"
+    "version": "d372705e3e58beebf482d36a876958cf"
 };
