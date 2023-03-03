@@ -7,7 +7,6 @@
 // import { mapTicketBatch } from "./TicketBatchService";
 // import { mapTransaction } from "./TransactionService";
 
-import { DataStore } from '@aws-amplify/datastore';
 import axios from 'axios';
 import { listRaffles } from '../graphql/queries';
 import { createRaffle as createRaffleMutation, updateRaffle as updateRaffleMutation } from '../graphql/mutations';

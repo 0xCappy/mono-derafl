@@ -2,7 +2,6 @@
 // import Transaction from "../types/Transaction";
 
 import { EventType } from "../types";
-import { DataStore } from '@aws-amplify/datastore';
 import { createTransaction } from "../graphql/mutations";
 import axios from "axios";
 

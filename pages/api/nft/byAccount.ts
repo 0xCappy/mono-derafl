@@ -17,7 +17,6 @@ export default async function handler(
 ) {
   const { address, offset, pageSize, pageKey, chainId } = JSON.parse(req.body)
   const response = await getNftsForOwner(address, pageSize, mapHexToAlchemyChain(chainId), pageKey)
-  // const response = await axios.post(`${process.env.API_URL}/fetchAddressNFT`, { address, offset, pageSize, pageKey, chainId })
   res.status(200).json(response)
 }
 

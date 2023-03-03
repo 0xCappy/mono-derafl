@@ -15,7 +15,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const { tokenId, contractAddress, chainId } = JSON.parse(req.body)
-    const response = await getNft(contractAddress, tokenId, mapHexToAlchemyChain(chainId)) // await axios.post(`${process.env.API_URL}/fetchNFT`, { tokenId, contractAddress, chainId })
+    const response = await getNft(contractAddress, tokenId, mapHexToAlchemyChain(chainId))
     res.status(200).json(response)
 }
 
