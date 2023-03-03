@@ -183,12 +183,12 @@ export type TicketBatch = {
   batchId: number,
   firstTicket: number,
   chainId: string,
-  raffle?: Raffle | null,
+  raffle: Raffle,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
   ticketBatchTransactionId: string,
-  ticketBatchRaffleId?: string | null,
+  ticketBatchRaffleId: string,
 };
 
 export type Transaction = {
@@ -352,7 +352,7 @@ export type CreateTicketBatchInput = {
   chainId: string,
   _version?: number | null,
   ticketBatchTransactionId: string,
-  ticketBatchRaffleId?: string | null,
+  ticketBatchRaffleId: string,
 };
 
 export type ModelTicketBatchConditionInput = {
@@ -1587,7 +1587,7 @@ export type CreateTicketRefundMutation = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -1773,7 +1773,7 @@ export type UpdateTicketRefundMutation = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -1959,7 +1959,7 @@ export type DeleteTicketRefundMutation = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -2207,7 +2207,7 @@ export type CreateTicketBatchMutation = {
     batchId: number,
     firstTicket: number,
     chainId: string,
-    raffle?:  {
+    raffle:  {
       __typename: "Raffle",
       id: string,
       type: string,
@@ -2232,7 +2232,7 @@ export type CreateTicketBatchMutation = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -2353,12 +2353,12 @@ export type CreateTicketBatchMutation = {
       raffleCloseTxId?: string | null,
       raffleNftId: string,
       raffleRefundTxId?: string | null,
-    } | null,
+    },
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     ticketBatchTransactionId: string,
-    ticketBatchRaffleId?: string | null,
+    ticketBatchRaffleId: string,
   } | null,
 };
 
@@ -2396,7 +2396,7 @@ export type UpdateTicketBatchMutation = {
     batchId: number,
     firstTicket: number,
     chainId: string,
-    raffle?:  {
+    raffle:  {
       __typename: "Raffle",
       id: string,
       type: string,
@@ -2421,7 +2421,7 @@ export type UpdateTicketBatchMutation = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -2542,12 +2542,12 @@ export type UpdateTicketBatchMutation = {
       raffleCloseTxId?: string | null,
       raffleNftId: string,
       raffleRefundTxId?: string | null,
-    } | null,
+    },
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     ticketBatchTransactionId: string,
-    ticketBatchRaffleId?: string | null,
+    ticketBatchRaffleId: string,
   } | null,
 };
 
@@ -2585,7 +2585,7 @@ export type DeleteTicketBatchMutation = {
     batchId: number,
     firstTicket: number,
     chainId: string,
-    raffle?:  {
+    raffle:  {
       __typename: "Raffle",
       id: string,
       type: string,
@@ -2610,7 +2610,7 @@ export type DeleteTicketBatchMutation = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -2731,12 +2731,12 @@ export type DeleteTicketBatchMutation = {
       raffleCloseTxId?: string | null,
       raffleNftId: string,
       raffleRefundTxId?: string | null,
-    } | null,
+    },
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     ticketBatchTransactionId: string,
-    ticketBatchRaffleId?: string | null,
+    ticketBatchRaffleId: string,
   } | null,
 };
 
@@ -2851,7 +2851,7 @@ export type CreateRaffleMutation = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -2881,12 +2881,12 @@ export type CreateRaffleMutation = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null,
     releaseTx?:  {
       __typename: "Transaction",
@@ -3078,7 +3078,7 @@ export type UpdateRaffleMutation = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -3108,12 +3108,12 @@ export type UpdateRaffleMutation = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null,
     releaseTx?:  {
       __typename: "Transaction",
@@ -3305,7 +3305,7 @@ export type DeleteRaffleMutation = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -3335,12 +3335,12 @@ export type DeleteRaffleMutation = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null,
     releaseTx?:  {
       __typename: "Transaction",
@@ -3869,7 +3869,7 @@ export type GetTicketRefundQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -4281,7 +4281,7 @@ export type GetTicketBatchQuery = {
     batchId: number,
     firstTicket: number,
     chainId: string,
-    raffle?:  {
+    raffle:  {
       __typename: "Raffle",
       id: string,
       type: string,
@@ -4306,7 +4306,7 @@ export type GetTicketBatchQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -4427,12 +4427,12 @@ export type GetTicketBatchQuery = {
       raffleCloseTxId?: string | null,
       raffleNftId: string,
       raffleRefundTxId?: string | null,
-    } | null,
+    },
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     ticketBatchTransactionId: string,
-    ticketBatchRaffleId?: string | null,
+    ticketBatchRaffleId: string,
   } | null,
 };
 
@@ -4473,7 +4473,7 @@ export type ListTicketBatchesQuery = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -4503,12 +4503,12 @@ export type ListTicketBatchesQuery = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -4553,7 +4553,7 @@ export type SyncTicketBatchesQuery = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -4583,12 +4583,12 @@ export type SyncTicketBatchesQuery = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -4635,7 +4635,7 @@ export type TicketBatchesByCreatedAtQuery = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -4665,12 +4665,12 @@ export type TicketBatchesByCreatedAtQuery = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -4717,7 +4717,7 @@ export type TicketBatchesByUpdatedAtQuery = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -4747,12 +4747,12 @@ export type TicketBatchesByUpdatedAtQuery = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -4799,7 +4799,7 @@ export type TicketBatchesByTicketsBoughtQuery = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -4829,12 +4829,12 @@ export type TicketBatchesByTicketsBoughtQuery = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -4881,7 +4881,7 @@ export type SearchTicketBatchesQuery = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -4911,12 +4911,12 @@ export type SearchTicketBatchesQuery = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null >,
     nextToken?: string | null,
     total?: number | null,
@@ -5061,7 +5061,7 @@ export type GetRaffleQuery = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -5091,12 +5091,12 @@ export type GetRaffleQuery = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null,
     releaseTx?:  {
       __typename: "Transaction",
@@ -5280,7 +5280,7 @@ export type ListRafflesQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -5442,7 +5442,7 @@ export type SyncRafflesQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -5606,7 +5606,7 @@ export type RafflesByCreatedAtQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -5770,7 +5770,7 @@ export type RafflesByUpdatedAtQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -5934,7 +5934,7 @@ export type RafflesByProgressQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -6098,7 +6098,7 @@ export type RafflesByTicketsAvailableQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -6262,7 +6262,7 @@ export type RafflesByExpiresQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -6426,7 +6426,7 @@ export type RafflesByTicketsSoldQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -6590,7 +6590,7 @@ export type SearchRafflesQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -7388,7 +7388,7 @@ export type OnCreateTicketRefundSubscription = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -7573,7 +7573,7 @@ export type OnUpdateTicketRefundSubscription = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -7758,7 +7758,7 @@ export type OnDeleteTicketRefundSubscription = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -8002,7 +8002,7 @@ export type OnCreateTicketBatchSubscription = {
     batchId: number,
     firstTicket: number,
     chainId: string,
-    raffle?:  {
+    raffle:  {
       __typename: "Raffle",
       id: string,
       type: string,
@@ -8027,7 +8027,7 @@ export type OnCreateTicketBatchSubscription = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -8148,12 +8148,12 @@ export type OnCreateTicketBatchSubscription = {
       raffleCloseTxId?: string | null,
       raffleNftId: string,
       raffleRefundTxId?: string | null,
-    } | null,
+    },
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     ticketBatchTransactionId: string,
-    ticketBatchRaffleId?: string | null,
+    ticketBatchRaffleId: string,
   } | null,
 };
 
@@ -8190,7 +8190,7 @@ export type OnUpdateTicketBatchSubscription = {
     batchId: number,
     firstTicket: number,
     chainId: string,
-    raffle?:  {
+    raffle:  {
       __typename: "Raffle",
       id: string,
       type: string,
@@ -8215,7 +8215,7 @@ export type OnUpdateTicketBatchSubscription = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -8336,12 +8336,12 @@ export type OnUpdateTicketBatchSubscription = {
       raffleCloseTxId?: string | null,
       raffleNftId: string,
       raffleRefundTxId?: string | null,
-    } | null,
+    },
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     ticketBatchTransactionId: string,
-    ticketBatchRaffleId?: string | null,
+    ticketBatchRaffleId: string,
   } | null,
 };
 
@@ -8378,7 +8378,7 @@ export type OnDeleteTicketBatchSubscription = {
     batchId: number,
     firstTicket: number,
     chainId: string,
-    raffle?:  {
+    raffle:  {
       __typename: "Raffle",
       id: string,
       type: string,
@@ -8403,7 +8403,7 @@ export type OnDeleteTicketBatchSubscription = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
         ticketBatchTransactionId: string,
-        ticketBatchRaffleId?: string | null,
+        ticketBatchRaffleId: string,
       } | null,
       releaseTx?:  {
         __typename: "Transaction",
@@ -8524,12 +8524,12 @@ export type OnDeleteTicketBatchSubscription = {
       raffleCloseTxId?: string | null,
       raffleNftId: string,
       raffleRefundTxId?: string | null,
-    } | null,
+    },
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     ticketBatchTransactionId: string,
-    ticketBatchRaffleId?: string | null,
+    ticketBatchRaffleId: string,
   } | null,
 };
 
@@ -8640,7 +8640,7 @@ export type OnCreateRaffleSubscription = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -8670,12 +8670,12 @@ export type OnCreateRaffleSubscription = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null,
     releaseTx?:  {
       __typename: "Transaction",
@@ -8866,7 +8866,7 @@ export type OnUpdateRaffleSubscription = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -8896,12 +8896,12 @@ export type OnUpdateRaffleSubscription = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null,
     releaseTx?:  {
       __typename: "Transaction",
@@ -9092,7 +9092,7 @@ export type OnDeleteRaffleSubscription = {
       batchId: number,
       firstTicket: number,
       chainId: string,
-      raffle?:  {
+      raffle:  {
         __typename: "Raffle",
         id: string,
         type: string,
@@ -9122,12 +9122,12 @@ export type OnDeleteRaffleSubscription = {
         raffleCloseTxId?: string | null,
         raffleNftId: string,
         raffleRefundTxId?: string | null,
-      } | null,
+      },
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       ticketBatchTransactionId: string,
-      ticketBatchRaffleId?: string | null,
+      ticketBatchRaffleId: string,
     } | null,
     releaseTx?:  {
       __typename: "Transaction",

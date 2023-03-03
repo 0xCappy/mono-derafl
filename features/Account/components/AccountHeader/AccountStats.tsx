@@ -1,4 +1,4 @@
-import { Account } from "@/types"
+import { Account } from "@/src/API"
 import { Box, Card, createStyles, SimpleGrid, Text } from '@mantine/core';
 
 const data = [

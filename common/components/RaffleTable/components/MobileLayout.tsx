@@ -1,4 +1,4 @@
-import { Account, Raffle, TicketBatch } from "@/types"
+import { Account, Raffle, TicketBatch } from "@/src/API"
 import { Group, Paper, SimpleGrid, Stack, Text, Center, Flex, Badge, Box, Title, Avatar, Skeleton, Accordion, Anchor, Divider } from "@mantine/core"
 import { IconCaretDown, IconCaretRight, IconCircleDotted, IconClock, IconEye, IconHash, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons"
 import AccountAnchor from "../../AccountAnchor"
@@ -35,7 +35,7 @@ const MobileLayout = ({ loading, raffles, pageSize }: MobileLayoutProps) => {
                                     <Accordion.Item value="customization">
                                         <Accordion.Control pt={6}>
                                             <Flex gap="sm" justify="space-between">
-                                                <Anchor href={`/raffles/${raffle!.raffleId}`}>
+                                                <Anchor href={`/raffles/${raffle.raffleNonce}`}>
                                                     <Flex gap={8}>
                                                         <Center>
                                                             <Avatar size={50} src={raffle!.nft.imageUri ? formatIpfsUrl(raffle!.nft.imageUri) : undefined}></Avatar>
@@ -67,7 +67,7 @@ const MobileLayout = ({ loading, raffles, pageSize }: MobileLayoutProps) => {
                                     </Accordion.Item>
                                 </Accordion>
                                 <Group position="apart" spacing={0} mt="1rem">
-                                    <Group position="center" w="30%" spacing={6}><IconHash /><Text>{raffle.raffleId}</Text></Group>
+                                    <Group position="center" w="30%" spacing={6}><IconHash /><Text>{raffle.raffleNonce}</Text></Group>
                                     <Group position="center" w="70%" spacing={6} style={{ borderLeft: '1px solid grey' }}><RaffleStateBadge progress={raffle!.progress} raffleState={raffle!.state} /></Group>
                                 </Group>
                             </Paper>

@@ -1,9 +1,10 @@
 import { AccountAnchor, AccountsTable, RaffleStateBadge } from "@/common/components";
-import ticketBatches from "@/pages/api/account/ticketBatches";
-import { Account } from "@/types";
+import { Account } from "@/src/API";
+import { searchAccounts } from "@/src/graphql/queries";
 import { Title, Stack, Box, Avatar, Group, Center, Text, Card, Pagination, ActionIcon, Anchor } from "@mantine/core"
 import { IconArrowDown, IconArrowsSort, IconArrowUp, IconBoxMultiple, IconCalendar, IconCalendarEvent, IconCalendarTime, IconDice5, IconExternalLink, IconHash, IconPlus, IconSortAscending, IconSortDescending, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons";
 import { shortenAddress } from "@usedapp/core";
+import { API, graphqlOperation } from "aws-amplify";
 import makeBlockie from "ethereum-blockies-base64";
 import { MantineReactTable, MRT_ColumnDef } from "mantine-react-table";
 import { useEffect, useMemo, useState } from "react";
@@ -33,18 +34,14 @@ export const Accounts = () => {
 
     const fetchAccounts = async (nextFilter: AccountFilter) => {
         setLoading(true)
-        const data = await fetch("/api/accounts", {
-            method: "POST",
-            body: JSON.stringify({
-                sortKey: nextFilter.sortKey,
-                asc: nextFilter.asc,
-                skip: nextFilter.page * PAGE_LENGTH,
-                limit: PAGE_LENGTH
-            }),
-        });
-        const response = await data.json()
-        setAccounts(response.accounts)
-        setAccountCount(response.count)
+        const accountData = await API.graphql(graphqlOperation(searchAccounts, {
+            sort:{field: nextFilter.sortKey, direction: nextFilter.asc ? 'asc' : 'desc'},
+            limit: PAGE_LENGTH,
+            from: nextFilter.page * PAGE_LENGTH
+        })) as any
+        const { items, total } = accountData.data.searchAccounts
+        setAccounts(items)
+        setAccountCount(total)
         setLoading(false)
     }
 

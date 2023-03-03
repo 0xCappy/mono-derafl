@@ -1,10 +1,12 @@
 import { RaffleTable, TicketBatchTable } from "@/common/components";
-import { Account, Raffle, TicketBatch } from "@/types"
+import { Account, Raffle, TicketBatch } from "@/src/API"
 import { Tabs, Card, Title, Divider, TabsValue, Transition, Button } from '@mantine/core';
 import { IconPhoto, IconMessageCircle, IconSettings, IconTicket, IconTrophy, IconSquarePlus } from '@tabler/icons';
 import { useEffect, useState } from "react";
 import { SortType } from "rsuite-table";
 import Parse from 'parse'
+import { searchRaffles, searchTicketBatches } from "@/src/graphql/queries";
+import { API, graphqlOperation } from "aws-amplify";
 
 const PAGE_LENGTH = 10
 
@@ -111,77 +113,69 @@ const AccountTabs = ({ account }: AccountTabsProps) => {
 
     const fetchRafflesCreated = async () => {
         setRafflesCreatedProps({ ...rafflesCreatedProps, loading: true })
-        const data = await fetch("/api/account/raffles", {
-            method: "POST",
-            body: JSON.stringify({
-                sortKey: rafflesCreatedProps.sortKey,
-                asc: rafflesCreatedProps.sort === 'asc',
-                skip: (rafflesCreatedProps.page - 1) * PAGE_LENGTH,
-                limit: PAGE_LENGTH,
-                filterKey: rafflesCreatedProps.type,
-                address: account.address
-            }),
-        });
-        const response = await data.json()
+        const rafflesData = await API.graphql(graphqlOperation(searchRaffles, {
+            sort:{
+                field: rafflesCreatedProps.sortKey,
+                direction: rafflesCreatedProps.sort
+            },
+            filter: {
+                owner: { eq: account.address }
+            },
+            limit: PAGE_LENGTH,
+            from: (rafflesCreatedProps.page - 1) * PAGE_LENGTH
+        })) as any
+        const { items, total } = rafflesData.data.searchRaffles
         setRafflesCreatedProps({
             ...rafflesCreatedProps,
-            raffles: response.raffles,
-            raffleCount: response.count,
+            raffles: items,
+            raffleCount: total,
             loading: false
         })
     }
 
     const fetchRafflesWon = async () => {
         setRafflesWonProps({ ...rafflesWonProps, loading: true })
-        const data = await fetch("/api/account/raffles", {
-            method: "POST",
-            body: JSON.stringify({
-                sortKey: rafflesWonProps.sortKey,
-                asc: rafflesWonProps.sort === 'asc',
-                skip: (rafflesWonProps.page - 1) * PAGE_LENGTH,
-                limit: PAGE_LENGTH,
-                filterKey: rafflesWonProps.type,
-                address: account.address
-            }),
-        });
-        const response = await data.json()
+        const rafflesData = await API.graphql(graphqlOperation(searchRaffles, {
+            sort:{
+                field: rafflesWonProps.sortKey,
+                direction: rafflesWonProps.sort
+            },
+            filter: {
+                winningAccount: { eq: account.address }
+            },
+            limit: PAGE_LENGTH,
+            from: (rafflesWonProps.page - 1) * PAGE_LENGTH
+        })) as any
+        const { items, total } = rafflesData.data.searchRaffles
         setRafflesWonProps({
             ...rafflesWonProps,
-            raffles: response.raffles,
-            raffleCount: response.count,
+            raffles: items,
+            raffleCount: total,
             loading: false
         })
     }
 
     const fetchTicketBatches = async () => {
         setTicketBatchesProps({ ...ticketBatchesProps, loading: true })
-        const data = await fetch("/api/account/ticketBatches", {
-            method: "POST",
-            body: JSON.stringify({
-                sortKey: ticketBatchesProps.sortKey,
-                asc: ticketBatchesProps.sort === 'asc',
-                skip: (ticketBatchesProps.page - 1) * PAGE_LENGTH,
-                limit: PAGE_LENGTH,
-                filterKey: ticketBatchesProps.type,
-                address: account.address
-            }),
-        });
-        const response = await data.json()
-        setTimeout(() => {
-            setTicketBatchesProps({
-                ...ticketBatchesProps,
-                ticketBatches: response.ticketBatches,
-                count: response.count,
-                loading: false
-            })
-
-        }, 2000);
-        // setTicketBatchesProps({
-        //     ...ticketBatchesProps,
-        //     ticketBatches: response.ticketBatches,
-        //     count: response.count,
-        //     loading: false
-        // })
+        const ticketBatchData = await API.graphql(graphqlOperation(searchTicketBatches, {
+            sort:{
+                field: ticketBatchesProps.sortKey,
+                direction: ticketBatchesProps.sort
+            },
+            filter: {
+                purchaser: { eq: account.address },
+                _deleted: { eq: false }
+            },
+            limit: PAGE_LENGTH,
+            from: (ticketBatchesProps.page - 1) * PAGE_LENGTH
+        })) as any
+        const { items, total } = ticketBatchData.data.searchTicketBatches
+        setTicketBatchesProps({
+            ...ticketBatchesProps,
+            ticketBatches: items,
+            count: total,
+            loading: false
+        })
     }
 
     const onTabChange = (tabIndex: TabsValue) => {

@@ -1,9 +1,10 @@
 import { AccountAnchor, AccountsTable, RaffleStateBadge, TicketBatchTable } from "@/common/components";
-import ticketBatches from "@/pages/api/account/ticketBatches";
-import { Account, TicketBatch } from "@/types";
+import { searchTicketBatches } from "@/src/graphql/queries";
+import { Account, TicketBatch } from "@/src/API";
 import { Title, Stack, Box, Avatar, Group, Center, Text, Card, Pagination, ActionIcon, Anchor } from "@mantine/core"
 import { IconArrowDown, IconArrowsSort, IconArrowUp, IconBoxMultiple, IconCalendar, IconCalendarEvent, IconCalendarTime, IconDice5, IconExternalLink, IconHash, IconPlus, IconSortAscending, IconSortDescending, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons";
 import { shortenAddress } from "@usedapp/core";
+import { API, graphqlOperation } from "aws-amplify";
 import makeBlockie from "ethereum-blockies-base64";
 import { MantineReactTable, MRT_ColumnDef } from "mantine-react-table";
 import { useEffect, useMemo, useState } from "react";
@@ -34,18 +35,20 @@ export const Purchases = () => {
 
     const fetchPurchases = async (nextFilter: Filter) => {
         setLoading(true)
-        const data = await fetch("/api/account/ticketBatches", {
-            method: "POST",
-            body: JSON.stringify({
-                sortKey: nextFilter.sortKey,
-                asc: nextFilter.asc,
-                skip: nextFilter.page * PAGE_LENGTH,
-                limit: PAGE_LENGTH
-            }),
-        });
-        const response = await data.json()
-        setPurchases(response.ticketBatches)
-        setCount(response.count)
+        const ticketBatchData = await API.graphql(graphqlOperation(searchTicketBatches, {
+            sort:{
+                field: nextFilter.sortKey,
+                direction: nextFilter.asc ? 'asc' : 'desc'
+            },
+            filter: {
+                _deleted: { eq: false }
+            },
+            limit: PAGE_LENGTH,
+            from: nextFilter.page * PAGE_LENGTH
+        })) as any
+        const { items, total } = ticketBatchData.data.searchTicketBatches
+        setPurchases(items)
+        setCount(total)
         setLoading(false)
     }
 

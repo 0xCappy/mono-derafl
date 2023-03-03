@@ -1,11 +1,13 @@
 import { NFTCardSkeleton, RaffleCard } from 'common/components';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { Raffle, RaffleState } from 'types';
+import { Raffle } from '@/src/API';
 import { RafflesTopBar } from './components'
 import { Anchor, Box, SimpleGrid } from '@mantine/core';
 import { RaffleFilter, raffleFilterOptions, raffleSortOptions } from './types';
 import { Pagination } from '@mantine/core';
+import { searchRaffles } from '@/src/graphql/queries';
+import { API, graphqlOperation } from 'aws-amplify';
 
 const PAGE_LENGTH = 24
 
@@ -21,19 +23,24 @@ const Raffles = () => {
 
     const fetchRaffles = async (nextFilter: RaffleFilter) => {
         setLoading(true)
-        const data = await fetch("/api/raffles", {
-            method: "POST",
-            body: JSON.stringify({
-                sortKey: nextFilter.sort.key,
-                asc: nextFilter.sort.asc,
-                filter: nextFilter.filter.value,
-                skip: nextFilter.page * PAGE_LENGTH,
-                limit: PAGE_LENGTH
-            }),
-        });
-        const response = await data.json()
-        setRaffles(response.raffles)
-        setRaffleCount(response.count)
+        const raffleData = await API.graphql(graphqlOperation(searchRaffles, {
+            sort:{
+                field: nextFilter.sort.key,
+                direction: nextFilter.sort.asc ? 'asc' : 'desc'
+            },
+            filter: {
+                _deleted: { eq: false },
+                state: nextFilter.filter.value === 'active' ?
+                { eq: 1}
+                :
+                { gt: 1}
+            },
+            limit: PAGE_LENGTH,
+            from: nextFilter.page * PAGE_LENGTH
+        })) as any
+        const { items, total } = raffleData.data.searchRaffles
+        setRaffles(items)
+        setRaffleCount(total)
         setLoading(false)
     }
 
@@ -65,7 +72,7 @@ const Raffles = () => {
                         :
                         <>
                             {raffles.map((raffle: Raffle, index) => (
-                                <Anchor transform='none' underline={false} key={index} href={`/raffles/${raffle.raffleId}`}>
+                                <Anchor transform='none' underline={false} key={index} href={`/raffles/${raffle.raffleNonce}`}>
                                         <RaffleCard raffle={raffle} />
                                 </Anchor>
                             ))}

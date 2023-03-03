@@ -100,9 +100,9 @@ type EagerTicketBatch = {
   readonly batchId: number;
   readonly firstTicket: number;
   readonly chainId: string;
-  readonly raffle?: Raffle | null;
+  readonly raffle: Raffle;
   readonly ticketBatchTransactionId: string;
-  readonly ticketBatchRaffleId?: string | null;
+  readonly ticketBatchRaffleId: string;
 }
 
 type LazyTicketBatch = {
@@ -121,9 +121,9 @@ type LazyTicketBatch = {
   readonly batchId: number;
   readonly firstTicket: number;
   readonly chainId: string;
-  readonly raffle: AsyncItem<Raffle | undefined>;
+  readonly raffle: AsyncItem<Raffle>;
   readonly ticketBatchTransactionId: string;
-  readonly ticketBatchRaffleId?: string | null;
+  readonly ticketBatchRaffleId: string;
 }
 
 export declare type TicketBatch = LazyLoading extends LazyLoadingDisabled ? EagerTicketBatch : LazyTicketBatch

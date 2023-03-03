@@ -1,7 +1,9 @@
-import { Account } from "@/types";
+import { Account } from "@/src/API";
+import { searchAccounts } from "@/src/graphql/queries";
 import { Title, Stack, Box, Avatar, Group, Center, Text, Card, Pagination } from "@mantine/core"
 import { IconArrowDown, IconArrowsSort, IconArrowUp, IconSortAscending, IconSortDescending } from "@tabler/icons";
 import { shortenAddress } from "@usedapp/core";
+import { API, graphqlOperation } from "aws-amplify";
 import makeBlockie from "ethereum-blockies-base64";
 import { useEffect, useState } from "react";
 import { Table, Column, HeaderCell, Cell, SortType } from 'rsuite-table';
@@ -9,7 +11,7 @@ import 'rsuite-table/dist/css/rsuite-table.css'
 import { AccountHeader, AccountTabs } from "./components";
 import AccountStats from "./components/AccountHeader/AccountStats";
 
-const PAGE_LENGTH = 20
+const PAGE_LENGTH = 1
 
 interface AccountFilter {
     page: number
@@ -22,56 +24,6 @@ interface AccountDetailProps {
 }
 
 export const AccountDetail = ({account}: AccountDetailProps) => {
-    const [accounts, setAccounts] = useState<Account[]>([])
-    const [loading, setLoading] = useState(false)
-    const [accountCount, setAccountCount] = useState(0)
-    const [accountFilter, setAccountFilter] = useState<AccountFilter>({
-        page: 0,
-        sortKey: 'createdAt',
-        asc: true
-    })
-    useEffect(() => {
-        fetchAccounts(accountFilter)
-    }, [])
-
-    const fetchAccounts = async (nextFilter: AccountFilter) => {
-        setLoading(true)
-        const data = await fetch("/api/accounts", {
-            method: "POST",
-            body: JSON.stringify({
-                sortKey: nextFilter.sortKey,
-                asc: nextFilter.asc,
-                skip: nextFilter.page * PAGE_LENGTH,
-                limit: PAGE_LENGTH
-            }),
-        });
-        const response = await data.json()
-        setAccounts(response.accounts)
-        setAccountCount(response.count)
-        setLoading(false)
-    }
-
-    const handleFilterChange = (nextFilter: AccountFilter) => {
-        setAccountFilter(nextFilter)
-        fetchAccounts(nextFilter)
-    }
-
-    const handlePageChange = (page: number) => {
-        window.scrollTo(0, 0)
-        handleFilterChange({
-            ...accountFilter,
-            page: page - 1
-        })
-    }
-
-    const handleSort = (key: string, type?: SortType) => {
-        handleFilterChange({
-            ...accountFilter,
-            sortKey: key,
-            asc: type === 'asc'
-        })
-    }
-
     return (
         <Box mt="8rem" pb="8rem">
             <Stack justify="space-between">

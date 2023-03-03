@@ -331,7 +331,7 @@ export const schema = {
                     "type": {
                         "model": "Raffle"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
@@ -351,7 +351,7 @@ export const schema = {
                     "name": "ticketBatchRaffleId",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 }
             },
@@ -1271,5 +1271,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "befbebe018ce618533393d7e5331a1e7"
+    "version": "21f691cfd6c5fc80a5c12b8cfc9d0ed5"
 };

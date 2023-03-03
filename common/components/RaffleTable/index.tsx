@@ -1,5 +1,5 @@
-import { renderSortIcon } from "@/common/utils"
-import { Raffle, TicketBatch } from "@/types"
+import { formatIpfsUrl, renderSortIcon } from "@/common/utils"
+import { Raffle, TicketBatch } from "@/src/API"
 import { Group, Avatar, Stack, Pagination, Text, Image, Anchor, ActionIcon } from "@mantine/core"
 import { IconTicket, IconBoxMultiple, IconHash, IconCalendarEvent, IconExternalLink, IconCalendarPlus, IconCircleDotted } from "@tabler/icons"
 import { MRT_ColumnDef, MantineReactTable } from "mantine-react-table"
@@ -28,14 +28,14 @@ const RaffleTable = ({ raffles, sort, sortKey, raffleCount, loading, page, onSor
             {
                 header: 'Raffle',
                 size: 70,
-                accessorFn: (raffle) => <Anchor href={`/raffles/${raffle.raffleId}`}><strong>#{raffle.raffleId}</strong></Anchor>
+                accessorFn: (raffle) => <Anchor href={`/raffles/${raffle.raffleNonce}`}><strong>#{raffle.raffleNonce}</strong></Anchor>
             },
             {
                 header: 'NFT',
                 size: 80,
                 accessorFn: (raffle) => (
                     <Group>
-                        <Avatar size="sm" src={raffle.nft.openseaImage}></Avatar>
+                        <Avatar size="sm" src={formatIpfsUrl(raffle.nft.imageUri || '')}></Avatar>
                     </Group>
                 )
             },

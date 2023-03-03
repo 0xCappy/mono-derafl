@@ -1,5 +1,5 @@
 import accounts from "@/pages/accounts"
-import { Account } from "@/types"
+import { Account } from "@/src/API"
 import { Avatar, Box, Group, Paper, Stack, Text, Title } from "@mantine/core"
 import { shortenAddress } from "@usedapp/core"
 import makeBlockie from "ethereum-blockies-base64"
