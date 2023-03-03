@@ -185,11 +185,11 @@ export const getRaffleByRaffleId = async (raffleNonce: number) => {
   console.log("RAFF ID: ", raffleNonce)
   const options = {
     headers: {
-      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
     }
   };
   const body = { query: listRaffles, variables: { filter: { raffleNonce: { eq: raffleNonce } } } }
-  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
   return response?.data?.data?.listRaffles?.items?.[0]
 }
 
@@ -230,12 +230,12 @@ export const createRaffle = async (
   console.log("Create VAR: ", variables)
   const options = {
     headers: {
-      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
     }
   };
 
   const body = { query: createRaffleMutation, variables }
-  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
   console.log("RAFFLE CREATE: ", JSON.stringify(response.data))
   return response?.data?.data?.createRaffle
 }
@@ -244,11 +244,11 @@ export const updateRaffle = async (input: any) => {
   const variables = { input }
   const options = {
     headers: {
-      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
     }
   };
 
   const body = { query: updateRaffleMutation, variables }
-  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
   return response?.data?.data?.updateRaffle
 }

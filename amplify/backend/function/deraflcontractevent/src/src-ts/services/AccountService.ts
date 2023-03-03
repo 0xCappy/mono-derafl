@@ -68,11 +68,11 @@ export const getOrCreateAccount = async (address: string) => {
 const getAccountByAddress = async (address: string) => {
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
         }
     };
     const body = { query: listAccounts, variables: { filter: { address: { eq: address } } } }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
     console.log("GET ACCOUNT: ", JSON.stringify(response.data))
     return response?.data?.data?.listAccounts?.items?.[0]
 }
@@ -92,12 +92,12 @@ const createEmptyAccount = async (address: string) => {
     }
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
         }
     };
 
     const body = { query: createAccountMutation, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
     console.log("CREATE ACCOUNT: ", JSON.stringify(response.data))
 
     return response?.data?.data?.createAccount
@@ -107,11 +107,11 @@ export const updateAccount = async (input: any) => {
     const variables = { input }
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
         }
     };
 
     const body = { query: updateAccountMutation, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
     return response?.data?.data?.updateAccount
 }

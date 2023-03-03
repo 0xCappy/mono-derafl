@@ -6,7 +6,7 @@ import { formatIpfsUrl } from "../utils/image";
 export const sendRaffleCreateWebhook = async (raffle: any, nft: any) => {
     const content = generateCreateTemplate(raffle, nft)
     console.log("CONTENT: ", JSON.stringify(content))
-    const result = await axios.post(process.env.DISCORD_RAFFLE_CREATE_WEBHOOK_URL, JSON.stringify(content), {
+    const result = await axios.post(process.env.DISCORD_RAFFLE_CREATE_WEBHOOK_URL as string, JSON.stringify(content), {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -16,7 +16,7 @@ export const sendRaffleCreateWebhook = async (raffle: any, nft: any) => {
 export const sendRaffleCompleteWebhook = async (raffle: any, nft: any) => {
     const content = generateCompleteTemplate(raffle, nft)
     console.log("CONTENT: ", JSON.stringify(content))
-    const result = await axios.post(process.env.DISCORD_RAFFLE_CLOSED_WEBHOOK_URL, JSON.stringify(content), {
+    const result = await axios.post(process.env.DISCORD_RAFFLE_CLOSED_WEBHOOK_URL as string, JSON.stringify(content), {
         headers: {
             'Content-Type': 'application/json',
         },

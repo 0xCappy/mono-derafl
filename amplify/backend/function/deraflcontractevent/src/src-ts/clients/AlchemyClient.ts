@@ -16,7 +16,7 @@ export const getNft = async (
   alchemyNetwork: Network,
 ): Promise<AlchemyNft> => {
   const alchemyConfig = {
-    apiKey: process.env.ALCHEMY_KEY,
+    apiKey: process.env.ALCHEMY_KEY as string,
     network: alchemyNetwork
   };
   const alchemy = new Alchemy(alchemyConfig);
@@ -79,7 +79,7 @@ export const getNftLastSalePrice = async (
 ): Promise<NftSale[] | []> => {
   try {
     const response = await axios.get<GetNftSalesResponse>(
-      `https://${alchemyNetwork}.g.alchemy.com/nft/v2/${process.env.ALCHEMY_KEY}/getNFTSales?fromBlock=0&toBlock=latest&order=desc&contractAddress=${address}&tokenId=${tokenId}&limit=3`
+      `https://${alchemyNetwork}.g.alchemy.com/nft/v2/${process.env.ALCHEMY_KEY as string}/getNFTSales?fromBlock=0&toBlock=latest&order=desc&contractAddress=${address}&tokenId=${tokenId}&limit=3`
     );
     const salesResponse = response.data;
     return salesResponse.nftSales.map((nft) => ({

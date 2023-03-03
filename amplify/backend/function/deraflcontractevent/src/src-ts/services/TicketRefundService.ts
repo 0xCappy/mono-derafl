@@ -11,12 +11,12 @@ export const createTicketRefund = async (raffleId: string, transactionId: string
     }
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
         }
     };
 
     const body = { query: createTicketRefund, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
     console.log("CREATE REFUND: ", JSON.stringify(response.data))
 
     return response?.data?.data?.createTicketRefund

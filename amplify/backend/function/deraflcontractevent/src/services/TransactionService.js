@@ -20,11 +20,11 @@ exports.createTransactionRecord = async (txHash, timestamp, eventType, chainId, 
     };
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
         }
     };
     const body = { query: mutations_1.createTransaction, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options);
     return response?.data?.data?.createTransaction;
 };
 // export const mapTransaction = (tx: Parse.Object): Transaction => ({

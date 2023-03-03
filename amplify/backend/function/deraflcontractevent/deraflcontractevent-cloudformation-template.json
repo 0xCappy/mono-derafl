@@ -100,10 +100,10 @@
             "API_DERAFL_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apideraflGraphQLAPIIdOutput"
             },
-            "API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT": {
+            "API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string": {
               "Ref": "apideraflGraphQLAPIEndpointOutput"
             },
-            "API_DERAFL_GRAPHQLAPIKEYOUTPUT": {
+            "API_DERAFL_GRAPHQLAPIKEYOUTPUT as string": {
               "Ref": "apideraflGraphQLAPIKeyOutput"
             },
             "MORALIS_API_KEY": {

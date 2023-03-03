@@ -66,11 +66,11 @@ const getOrCreateStatsByChainId = async (chainId: string) => {
 const getStatsByChainId = async (chainId: string) => {
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
         }
     };
     const body = { query: listStats, variables: { filter: { chainId: { eq: chainId } } } }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
     return response?.data?.data?.listStats?.items?.[0]
 }
 
@@ -89,12 +89,12 @@ const createStats = async (chainId: string) => {
     }
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
         }
     };
 
     const body = { query: createStatMutation, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
     return response?.data?.data?.createStat
 }
 
@@ -107,12 +107,12 @@ const updateStats = async (input: any) => {
     }
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
         }
     };
 
     const body = { query: updateStatMutation, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
     return response?.data?.data?.updateStat
 }
 

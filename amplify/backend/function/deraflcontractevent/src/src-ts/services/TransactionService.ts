@@ -26,12 +26,12 @@ export const createTransactionRecord = async (
     }
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
         }
     };
 
     const body = { query: createTransaction, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
+    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options)
     return response?.data?.data?.createTransaction
 };
 

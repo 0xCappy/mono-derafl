@@ -8,7 +8,7 @@ export const getNftRank = async (address: string, tokenId: string): Promise<Rari
             method: "GET",
             headers: {
                 accept: "application/json",
-                "x-ts-api-key": process.env.TRAIT_SNIPER_KEY,
+                "x-ts-api-key": process.env.TRAIT_SNIPER_KEY  as string,
             },
         };
         const response = await axios.get<NftRankResponse>(`https://api.traitsniper.com/v1/collections/${address}/ranks?page=1&limit=50&trait_count=true&include_traits=true&token_ids=${tokenId}`, options);
