@@ -240,7 +240,6 @@ const AccountTabs = ({ account }: AccountTabsProps) => {
                         }
                     </Transition>
                 </Tabs.Panel>
-
                 <Tabs.Panel value="owner" pt="xs">
                     <Transition mounted={selectedTab === 'owner'} transition="fade" duration={800} timingFunction="ease">
                         {(styles) =>
