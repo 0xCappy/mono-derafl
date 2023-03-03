@@ -5,7 +5,7 @@ const alchemy_sdk_1 = require("alchemy-sdk");
 const axios_1 = require("axios");
 exports.getNft = async (address, tokenId, alchemyNetwork) => {
     const alchemyConfig = {
-        apiKey: process.env.ALCHEMY_KEY,
+        apiKey: process.env.ALCHEMY_KEY || '',
         network: alchemyNetwork
     };
     const alchemy = new alchemy_sdk_1.Alchemy(alchemyConfig);
@@ -57,7 +57,7 @@ const mapAlchemyNftToNFt = (alchemyNft, chainId) => {
 // };
 exports.getNftLastSalePrice = async (address, tokenId, alchemyNetwork) => {
     try {
-        const response = await axios_1.default.get(`https://${alchemyNetwork}.g.alchemy.com/nft/v2/${process.env.ALCHEMY_KEY}/getNFTSales?fromBlock=0&toBlock=latest&order=desc&contractAddress=${address}&tokenId=${tokenId}&limit=3`);
+        const response = await axios_1.default.get(`https://${alchemyNetwork}.g.alchemy.com/nft/v2/${process.env.ALCHEMY_KEY || ''}/getNFTSales?fromBlock=0&toBlock=latest&order=desc&contractAddress=${address}&tokenId=${tokenId}&limit=3`);
         const salesResponse = response.data;
         return salesResponse.nftSales.map((nft) => ({
             marketPlace: nft.marketplace,

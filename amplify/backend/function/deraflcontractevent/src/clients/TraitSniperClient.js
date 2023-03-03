@@ -8,7 +8,7 @@ exports.getNftRank = async (address, tokenId) => {
             method: "GET",
             headers: {
                 accept: "application/json",
-                "x-ts-api-key": process.env.TRAIT_SNIPER_KEY,
+                "x-ts-api-key": process.env.TRAIT_SNIPER_KEY || '',
             },
         };
         const response = await axios_1.default.get(`https://api.traitsniper.com/v1/collections/${address}/ranks?page=1&limit=50&trait_count=true&include_traits=true&token_ids=${tokenId}`, options);

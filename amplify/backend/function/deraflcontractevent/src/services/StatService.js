@@ -62,11 +62,11 @@ const getOrCreateStatsByChainId = async (chainId) => {
 const getStatsByChainId = async (chainId) => {
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
         }
     };
     const body = { query: queries_1.listStats, variables: { filter: { chainId: { eq: chainId } } } };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
     return response?.data?.data?.listStats?.items?.[0];
 };
 const createStats = async (chainId) => {
@@ -84,11 +84,11 @@ const createStats = async (chainId) => {
     };
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
         }
     };
     const body = { query: mutations_1.createStat, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
     return response?.data?.data?.createStat;
 };
 const updateStats = async (input) => {
@@ -100,11 +100,11 @@ const updateStats = async (input) => {
     };
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
         }
     };
     const body = { query: mutations_1.updateStat, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
     return response?.data?.data?.updateStat;
 };
 //# sourceMappingURL=StatService.js.map

@@ -7,7 +7,7 @@ const image_1 = require("../utils/image");
 exports.sendRaffleCreateWebhook = async (raffle, nft) => {
     const content = generateCreateTemplate(raffle, nft);
     console.log("CONTENT: ", JSON.stringify(content));
-    const result = await axios_1.default.post(process.env.DISCORD_RAFFLE_CREATE_WEBHOOK_URL, JSON.stringify(content), {
+    const result = await axios_1.default.post(process.env.DISCORD_RAFFLE_CREATE_WEBHOOK_URL || '', JSON.stringify(content), {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -16,7 +16,7 @@ exports.sendRaffleCreateWebhook = async (raffle, nft) => {
 exports.sendRaffleCompleteWebhook = async (raffle, nft) => {
     const content = generateCompleteTemplate(raffle, nft);
     console.log("CONTENT: ", JSON.stringify(content));
-    const result = await axios_1.default.post(process.env.DISCORD_RAFFLE_CLOSED_WEBHOOK_URL, JSON.stringify(content), {
+    const result = await axios_1.default.post(process.env.DISCORD_RAFFLE_CLOSED_WEBHOOK_URL || '', JSON.stringify(content), {
         headers: {
             'Content-Type': 'application/json',
         },

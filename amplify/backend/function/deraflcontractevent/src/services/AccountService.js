@@ -62,11 +62,11 @@ exports.getOrCreateAccount = async (address) => {
 const getAccountByAddress = async (address) => {
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
         }
     };
     const body = { query: queries_1.listAccounts, variables: { filter: { address: { eq: address } } } };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
     console.log("GET ACCOUNT: ", JSON.stringify(response.data));
     return response?.data?.data?.listAccounts?.items?.[0];
 };
@@ -85,11 +85,11 @@ const createEmptyAccount = async (address) => {
     };
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
         }
     };
     const body = { query: mutations_1.createAccount, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
     console.log("CREATE ACCOUNT: ", JSON.stringify(response.data));
     return response?.data?.data?.createAccount;
 };
@@ -97,11 +97,11 @@ exports.updateAccount = async (input) => {
     const variables = { input };
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
         }
     };
     const body = { query: mutations_1.updateAccount, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
     return response?.data?.data?.updateAccount;
 };
 //# sourceMappingURL=AccountService.js.map
