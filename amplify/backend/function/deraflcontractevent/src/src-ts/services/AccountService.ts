@@ -71,7 +71,7 @@ const getAccountByAddress = async (address: string) => {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: listAccounts, variables: { input: { filter: { address: { eq: address } } } } }
+    const body = { query: listAccounts, variables: { filter: { address: { eq: address } } } }
     const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
     console.log("GET ACCOUNT: ", JSON.stringify(response.data))
     return response?.data?.data?.listAccounts?.items?.[0]

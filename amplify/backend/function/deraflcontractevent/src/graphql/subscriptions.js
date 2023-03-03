@@ -10,10 +10,12 @@ exports.onCreateTicketRefund = `
   ) {
     onCreateTicketRefund(filter: $filter) {
       id
+      type
       ethAmount
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -24,6 +26,7 @@ exports.onCreateTicketRefund = `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -39,6 +42,7 @@ exports.onCreateTicketRefund = `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -52,6 +56,7 @@ exports.onCreateTicketRefund = `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -64,6 +69,7 @@ exports.onCreateTicketRefund = `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -83,6 +89,7 @@ exports.onCreateTicketRefund = `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -99,6 +106,7 @@ exports.onCreateTicketRefund = `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -119,6 +127,7 @@ exports.onCreateTicketRefund = `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -142,6 +151,7 @@ exports.onCreateTicketRefund = `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -168,10 +178,12 @@ exports.onUpdateTicketRefund = `
   ) {
     onUpdateTicketRefund(filter: $filter) {
       id
+      type
       ethAmount
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -182,6 +194,7 @@ exports.onUpdateTicketRefund = `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -197,6 +210,7 @@ exports.onUpdateTicketRefund = `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -210,6 +224,7 @@ exports.onUpdateTicketRefund = `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -222,6 +237,7 @@ exports.onUpdateTicketRefund = `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -241,6 +257,7 @@ exports.onUpdateTicketRefund = `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -257,6 +274,7 @@ exports.onUpdateTicketRefund = `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -277,6 +295,7 @@ exports.onUpdateTicketRefund = `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -300,6 +319,7 @@ exports.onUpdateTicketRefund = `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -326,10 +346,12 @@ exports.onDeleteTicketRefund = `
   ) {
     onDeleteTicketRefund(filter: $filter) {
       id
+      type
       ethAmount
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -340,6 +362,7 @@ exports.onDeleteTicketRefund = `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -355,6 +378,7 @@ exports.onDeleteTicketRefund = `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -368,6 +392,7 @@ exports.onDeleteTicketRefund = `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -380,6 +405,7 @@ exports.onDeleteTicketRefund = `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -399,6 +425,7 @@ exports.onDeleteTicketRefund = `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -415,6 +442,7 @@ exports.onDeleteTicketRefund = `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -435,6 +463,7 @@ exports.onDeleteTicketRefund = `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -458,6 +487,7 @@ exports.onDeleteTicketRefund = `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -482,6 +512,7 @@ exports.onCreateStat = `
   subscription OnCreateStat($filter: ModelSubscriptionStatFilterInput) {
     onCreateStat(filter: $filter) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -499,6 +530,7 @@ exports.onUpdateStat = `
   subscription OnUpdateStat($filter: ModelSubscriptionStatFilterInput) {
     onUpdateStat(filter: $filter) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -516,6 +548,7 @@ exports.onDeleteStat = `
   subscription OnDeleteStat($filter: ModelSubscriptionStatFilterInput) {
     onDeleteStat(filter: $filter) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -535,11 +568,13 @@ exports.onCreateTicketBatch = `
   ) {
     onCreateTicketBatch(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -568,11 +603,13 @@ exports.onUpdateTicketBatch = `
   ) {
     onUpdateTicketBatch(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -601,11 +638,13 @@ exports.onDeleteTicketBatch = `
   ) {
     onDeleteTicketBatch(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -634,6 +673,7 @@ exports.onCreateTransaction = `
   ) {
     onCreateTransaction(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -652,6 +692,7 @@ exports.onUpdateTransaction = `
   ) {
     onUpdateTransaction(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -670,6 +711,7 @@ exports.onDeleteTransaction = `
   ) {
     onDeleteTransaction(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -686,6 +728,7 @@ exports.onCreateRaffle = `
   subscription OnCreateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
     onCreateRaffle(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -693,6 +736,7 @@ exports.onCreateRaffle = `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -711,11 +755,13 @@ exports.onCreateRaffle = `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -738,6 +784,7 @@ exports.onCreateRaffle = `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -751,6 +798,7 @@ exports.onCreateRaffle = `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -763,6 +811,7 @@ exports.onCreateRaffle = `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -782,6 +831,7 @@ exports.onCreateRaffle = `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -798,6 +848,7 @@ exports.onCreateRaffle = `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -813,6 +864,7 @@ exports.onCreateRaffle = `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -834,6 +886,7 @@ exports.onCreateRaffle = `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -861,6 +914,7 @@ exports.onUpdateRaffle = `
   subscription OnUpdateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
     onUpdateRaffle(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -868,6 +922,7 @@ exports.onUpdateRaffle = `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -886,11 +941,13 @@ exports.onUpdateRaffle = `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -913,6 +970,7 @@ exports.onUpdateRaffle = `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -926,6 +984,7 @@ exports.onUpdateRaffle = `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -938,6 +997,7 @@ exports.onUpdateRaffle = `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -957,6 +1017,7 @@ exports.onUpdateRaffle = `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -973,6 +1034,7 @@ exports.onUpdateRaffle = `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -988,6 +1050,7 @@ exports.onUpdateRaffle = `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -1009,6 +1072,7 @@ exports.onUpdateRaffle = `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1036,6 +1100,7 @@ exports.onDeleteRaffle = `
   subscription OnDeleteRaffle($filter: ModelSubscriptionRaffleFilterInput) {
     onDeleteRaffle(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -1043,6 +1108,7 @@ exports.onDeleteRaffle = `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -1061,11 +1127,13 @@ exports.onDeleteRaffle = `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -1088,6 +1156,7 @@ exports.onDeleteRaffle = `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1101,6 +1170,7 @@ exports.onDeleteRaffle = `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1113,6 +1183,7 @@ exports.onDeleteRaffle = `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1132,6 +1203,7 @@ exports.onDeleteRaffle = `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1148,6 +1220,7 @@ exports.onDeleteRaffle = `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -1163,6 +1236,7 @@ exports.onDeleteRaffle = `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -1184,6 +1258,7 @@ exports.onDeleteRaffle = `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1211,6 +1286,7 @@ exports.onCreateNFT = `
   subscription OnCreateNFT($filter: ModelSubscriptionNFTFilterInput) {
     onCreateNFT(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1226,6 +1302,7 @@ exports.onCreateNFT = `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1251,6 +1328,7 @@ exports.onUpdateNFT = `
   subscription OnUpdateNFT($filter: ModelSubscriptionNFTFilterInput) {
     onUpdateNFT(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1266,6 +1344,7 @@ exports.onUpdateNFT = `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1291,6 +1370,7 @@ exports.onDeleteNFT = `
   subscription OnDeleteNFT($filter: ModelSubscriptionNFTFilterInput) {
     onDeleteNFT(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1306,6 +1386,7 @@ exports.onDeleteNFT = `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1333,6 +1414,7 @@ exports.onCreateCollection = `
   ) {
     onCreateCollection(filter: $filter) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1355,6 +1437,7 @@ exports.onUpdateCollection = `
   ) {
     onUpdateCollection(filter: $filter) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1377,6 +1460,7 @@ exports.onDeleteCollection = `
   ) {
     onDeleteCollection(filter: $filter) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1397,6 +1481,7 @@ exports.onCreateAccount = `
   subscription OnCreateAccount($filter: ModelSubscriptionAccountFilterInput) {
     onCreateAccount(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1414,6 +1499,7 @@ exports.onUpdateAccount = `
   subscription OnUpdateAccount($filter: ModelSubscriptionAccountFilterInput) {
     onUpdateAccount(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1431,6 +1517,7 @@ exports.onDeleteAccount = `
   subscription OnDeleteAccount($filter: ModelSubscriptionAccountFilterInput) {
     onDeleteAccount(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       address

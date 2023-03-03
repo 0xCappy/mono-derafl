@@ -72,6 +72,7 @@ exports.getOrCreateNft = async (address, tokenId, chainId) => {
     const lastSale = await AlchemyClient_1.getNftLastSalePrice(address, tokenId, mapHexToAlchemyChain_1.mapHexToAlchemyChain(chainId));
     if (!collection) {
         collection = await createCollection({
+            type: 'Collection',
             contractAddress: alchemyNft.contract.address,
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -86,6 +87,7 @@ exports.getOrCreateNft = async (address, tokenId, chainId) => {
     }
     if (!nft) {
         nft = await createNft({
+            type: 'NFT',
             contractAddress: alchemyNft.contract.address,
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -105,11 +107,6 @@ exports.getOrCreateNft = async (address, tokenId, chainId) => {
             rarityData: rank
         });
     }
-    // console.log("NFT: ", JSON.stringify(nft.data))
-    // console.log("NFTID: ", nftId)
-    // console.log("COLL: ", JSON.stringify(collection.data))
-    // console.log("COLLID: ", collectionId)
-    // console.log("NFTDATA: ", alchemyNft)
     return nft;
 };
 const getNftByContractAddress = async (address, tokenId) => {
@@ -118,7 +115,7 @@ const getNftByContractAddress = async (address, tokenId) => {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: queries_1.listNFTS, variables: { input: { filter: { contractAddress: { eq: address } }, tokenId: { eq: tokenId } } } };
+    const body = { query: queries_1.listNFTS, variables: { filter: { contractAddress: { eq: address } }, tokenId: { eq: tokenId } } };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     return response?.data?.data?.listNFTS?.items?.[0];
 };
@@ -130,10 +127,7 @@ const getCollectionByContractAddress = async (address) => {
     };
     const body = { query: queries_1.listCollections, variables: { input: { filter: { contractAddress: { eq: address } } } } };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
-    console.log("GET COLL: ", JSON.stringify(response.data));
     return response?.data?.data?.listCollections?.items?.[0];
-};
-const updateCollection = (input) => {
 };
 const createCollection = async (input) => {
     const variables = { input };
@@ -144,13 +138,11 @@ const createCollection = async (input) => {
     };
     const body = { query: mutations_1.createCollection, variables };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
-    console.log("CREATE COLL: ", JSON.stringify(response.data));
     return response?.data?.data?.createCollection;
 };
 const updateNft = (input) => {
 };
 const createNft = async (input) => {
-    console.log("CREATING NFT: ", input);
     const variables = { input };
     const options = {
         headers: {
@@ -159,7 +151,6 @@ const createNft = async (input) => {
     };
     const body = { query: mutations_1.createNFT, variables };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
-    console.log("CREATE NFT: ", JSON.stringify(response.data));
     return response?.data?.data?.createNFT;
 };
 //# sourceMappingURL=NFTService.js.map

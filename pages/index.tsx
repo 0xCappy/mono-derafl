@@ -1,10 +1,11 @@
-import { listAccounts, listRaffles, listTicketBatches } from '@/src/graphql/queries';
+import { listAccounts, listTicketBatches, rafflesByCreatedAt } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify'
 import { Account, Raffle, TicketBatch } from '@/types';
 import axios from 'axios';
 import Head from 'next/head';
 import React from 'react';
 import { Home } from '../features'
+import { rafflesByUpdatedAt } from '@/graphql/getTrendingRaffles';
 
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
@@ -24,8 +25,12 @@ export const getServerSideProps = async (context: any) => {
   const accountData = await API.graphql(graphqlOperation(listAccounts)) as any
   const accounts = accountData.data.listAccounts.items
 
-  const raffleData = await API.graphql(graphqlOperation(listRaffles)) as any
-  const raffles = raffleData.data.listRaffles.items
+  const raffleData = await API.graphql(graphqlOperation(rafflesByUpdatedAt, {
+      type: 'Raffle',
+      limit: 10,
+      sortDirection: 'DESC'
+  })) as any
+  const raffles = raffleData.data.rafflesByUpdatedAt.items
   console.log("RAFFLES: ", raffles)
 
   const purchasesData = await API.graphql(graphqlOperation(listTicketBatches)) as any

@@ -169,13 +169,13 @@ exports.getRaffle = async (raffleId) => {
 //   };
 // };
 exports.getRaffleByRaffleId = async (raffleId) => {
-    console.log("PROCESS: ", process.env);
+    console.log("RAFF ID: ", raffleId);
     const options = {
         headers: {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: queries_1.listRaffles, variables: { input: { filter: { raffleId: { eq: raffleId } } } } };
+    const body = { query: queries_1.listRaffles, variables: { filter: { raffleId: { eq: raffleId } } } };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     return response?.data?.data?.listRaffles?.items?.[0];
 };
@@ -197,7 +197,8 @@ exports.createRaffle = async (raffleId, chainId, nftID, owner, contract, tickets
             owner,
             contract,
             raffleNftId: nftID,
-            raffleOpenTxId: openTxId
+            raffleOpenTxId: openTxId,
+            type: 'Raffle'
         }
     };
     console.log("Create VAR: ", variables);

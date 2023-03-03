@@ -12,6 +12,7 @@ type EagerTicketRefund = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly type: string;
   readonly ethAmount?: number | null;
   readonly refundee?: string | null;
   readonly raffle?: Raffle | null;
@@ -28,6 +29,7 @@ type LazyTicketRefund = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly type: string;
   readonly ethAmount?: number | null;
   readonly refundee?: string | null;
   readonly raffle: AsyncItem<Raffle | undefined>;
@@ -50,6 +52,7 @@ type EagerStat = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly type: string;
   readonly ethPaid?: number | null;
   readonly ticketsBought?: number | null;
   readonly royaltiesPaid?: number | null;
@@ -65,6 +68,7 @@ type LazyStat = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly type: string;
   readonly ethPaid?: number | null;
   readonly ticketsBought?: number | null;
   readonly royaltiesPaid?: number | null;
@@ -127,6 +131,7 @@ type EagerTransaction = {
     identifier: ManagedIdentifier<Transaction, 'id'>;
   };
   readonly id: string;
+  readonly type: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly date: string;
@@ -140,6 +145,7 @@ type LazyTransaction = {
     identifier: ManagedIdentifier<Transaction, 'id'>;
   };
   readonly id: string;
+  readonly type: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly date: string;
@@ -243,6 +249,7 @@ type EagerNFT = {
     identifier: ManagedIdentifier<NFT, 'id'>;
   };
   readonly id: string;
+  readonly type: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly contractAddress: string;
@@ -265,6 +272,7 @@ type LazyNFT = {
     identifier: ManagedIdentifier<NFT, 'id'>;
   };
   readonly id: string;
+  readonly type: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly contractAddress: string;
@@ -293,6 +301,7 @@ type EagerCollection = {
     identifier: ManagedIdentifier<Collection, 'id'>;
   };
   readonly id: string;
+  readonly type: string;
   readonly contractAddress: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -310,6 +319,7 @@ type LazyCollection = {
     identifier: ManagedIdentifier<Collection, 'id'>;
   };
   readonly id: string;
+  readonly type: string;
   readonly contractAddress: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

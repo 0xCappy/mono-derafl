@@ -22,7 +22,7 @@ export const handler = async (
 
   try {
     console.log("EVENT: ", event)
-    await handleWebhookStream(event as any)
+    await handleWebhookStream(JSON.parse(event.body))
   } catch (error) {
     console.log("STREAM ERROR: ", error)
   }

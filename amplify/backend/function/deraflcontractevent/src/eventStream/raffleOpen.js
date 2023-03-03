@@ -15,7 +15,9 @@ exports.handleRaffleOpen = async (log, txId, timestamp, createdBy, chainId, cont
     if (!raffle) {
         try {
             const transaction = await TransactionService_1.createTransactionRecord(txId, timestamp, types_1.EventType.RaffleOpen, chainId);
+            console.log("TX: ", transaction);
             const nft = await NFTService_1.getOrCreateNft(log.nftAddress, log.tokenId.toString(), chainId);
+            console.log("NFT: ", nft);
             const raffle = await RaffleService_1.createRaffle(parseInt(log.raffleId.toString()), chainId, nft.id, createdBy, contract, parseInt(log.tickets.toString()), log.tokenId.toString(), log.nftAddress, new Date(parseInt(log.expires.toString()) * 1000), transaction.id);
             const account = await AccountService_1.getOrCreateAccount(createdBy);
             console.log("GOT ACCOUNT: ", account);

@@ -2,7 +2,7 @@ import { NFT, ParseObjectBase, RaffleState, TicketBatch, Transaction } from "./"
 
 export default interface Raffle extends ParseObjectBase {
     expires: Date
-    NFT: NFT
+    nft: NFT
     progress: number
     raffleId: number
     state: RaffleState

@@ -92,7 +92,7 @@ exports.getAccountParticipation = async (address, raffleId) => {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: queries_1.listTicketBatches, variables: { input: { filter: { purchaser: { eq: address }, raffleId: { eq: raffleId } } } } };
+    const body = { query: queries_1.listTicketBatches, variables: { filter: { purchaser: { eq: address }, raffleId: { eq: raffleId } } } };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     console.log("GET ACCOUNT PARTICIPATION: ", JSON.stringify(response.data));
     return response?.data?.data?.listTicketBatches?.items?.[0];
@@ -108,7 +108,8 @@ exports.createTicketBatch = async (raffleId, ticketsBought, firstTicket, lastTic
             lastTicket,
             batchId,
             purchaser,
-            ticketBatchTransactionId
+            ticketBatchTransactionId,
+            type: 'TicketBatch'
         }
     };
     const options = {
@@ -128,12 +129,10 @@ exports.getWinningBatch = async (raffleId, winningTicket) => {
         }
     };
     const variables = {
-        input: {
-            filter: {
-                raffleId: { eq: raffleId },
-                lastTicket: { gte: winningTicket },
-                firstTicket: { lte: winningTicket }
-            }
+        filter: {
+            raffleId: { eq: raffleId },
+            lastTicket: { gte: winningTicket },
+            firstTicket: { lte: winningTicket }
         }
     };
     const body = { query: queries_1.listTicketBatches, variables };

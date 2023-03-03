@@ -69,7 +69,7 @@ const getStatsByChainId = async (chainId: string) => {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: listStats, variables: { input: { filter: { chainId: { eq: chainId } } } } }
+    const body = { query: listStats, variables: { filter: { chainId: { eq: chainId } } } }
     const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
     return response?.data?.data?.listStats?.items?.[0]
 }
@@ -81,7 +81,8 @@ const createStats = async (chainId: string) => {
             ethPaid: 0,
             ticketsBought: 0,
             royaltiesPaid: 0,
-            rafflesCreated: 0
+            rafflesCreated: 0,
+            type: 'Stat'
         }
     }
     const options = {

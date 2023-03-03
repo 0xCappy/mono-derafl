@@ -6,21 +6,39 @@ import { EncodedParseQuery, encodeParseQuery } from '@parse/react-ssr';
 import { Raffle, TicketBatch } from 'types';
 import { Box } from '@mantine/core';
 import axios from 'axios';
+import { API, graphqlOperation } from 'aws-amplify';
+import { getRaffle, listRaffles, listTicketBatches } from '@/src/graphql/queries';
 
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
   const raffleId = context.query.raffleId
 
-  const response = await axios.post(`${process.env.API_URL}/raffles/detail`, {raffleId: parseInt(raffleId)})
-  const raffle = await response.data.raffle as Raffle
-  const ticketBatches = await response.data.ticketBatches as TicketBatch[]
-  const trending = await response.data.trending as Raffle[]
+  // const response = await axios.post(`${process.env.API_URL}/raffles/detail`, { raffleId: parseInt(raffleId) })
+  // // const raffle = await response.data.raffle as Raffle
+  // // const ticketBatches = await response.data.ticketBatches as TicketBatch[]
+  // const trending = await response.data.trending as Raffle[]
+
+  const listRaffleData = await API.graphql(graphqlOperation(listRaffles, {
+    filter: { raffleId: { eq: raffleId } }
+  })) as any
+  const raffleBasic = listRaffleData.data.listRaffles.items[0]
+  console.log("raffleBasic: ", raffleBasic)
+
+  const raffleData = await API.graphql(graphqlOperation(getRaffle), { id: raffleBasic.id }) as any
+  const raffle = raffleData.data.getRaffle
+  console.log("raffle: ", raffle)
+
+  const ticketBatchData = await API.graphql(graphqlOperation(listTicketBatches, {
+    filter: { raffleID: { eq: raffle.id } }
+  })) as any
+  const ticketBatches = ticketBatchData.data.listTicketBatches.items
+  console.log("RAFFLES: ", raffle)
 
   return {
     props: {
       raffle,
       ticketBatches,
-      trending
+      trending: []
     }
   }
 }
@@ -38,9 +56,9 @@ export default function RaffleDetailPage({ raffle, ticketBatches, trending }: Ra
         <title>{raffle.nft.tokenName} | DeRafl</title>
         <meta name="description" content="DeRafl brings you the opportunity to win unique digital assets with our revolutionary decentrailized raffle protocol" />
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:title" content={`${raffle.nft.tokenName} | DeRafl`}/>
-        <meta property="og:description" content="DeRafl brings you the opportunity to win unique digital assets with our revolutionary decentrailized raffle protocol"/>
-        <meta property="og:type" content="website"/>
+        <meta property="og:title" content={`${raffle.nft.tokenName} | DeRafl`} />
+        <meta property="og:description" content="DeRafl brings you the opportunity to win unique digital assets with our revolutionary decentrailized raffle protocol" />
+        <meta property="og:type" content="website" />
         <meta property="og:image" content={raffle.nft.imageUri}></meta>
         <meta name="twitter:site" content="@derafl_"></meta>
         <meta name="twitter:card" content="summary_large_image"></meta>

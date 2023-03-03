@@ -97,7 +97,7 @@ export const getAccountParticipation = async (address: string, raffleId: string)
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: listTicketBatches, variables: { input: { filter: { purchaser: { eq: address }, raffleId : { eq: raffleId }} } } }
+    const body = { query: listTicketBatches, variables: { filter: { purchaser: { eq: address }, raffleId: { eq: raffleId } } } }
     const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
     console.log("GET ACCOUNT PARTICIPATION: ", JSON.stringify(response.data))
     return response?.data?.data?.listTicketBatches?.items?.[0]
@@ -146,12 +146,10 @@ export const getWinningBatch = async (raffleId: string, winningTicket: number) =
         }
     };
     const variables = {
-        input: {
-            filter: {
-                raffleId: { eq: raffleId },
-                lastTicket: { gte: winningTicket },
-                firstTicket: { lte: winningTicket }
-            }
+        filter: {
+            raffleId: { eq: raffleId },
+            lastTicket: { gte: winningTicket },
+            firstTicket: { lte: winningTicket }
         }
     }
     const body = { query: listTicketBatches, variables }

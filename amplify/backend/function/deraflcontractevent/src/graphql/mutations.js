@@ -11,10 +11,12 @@ exports.createTicketRefund = `
   ) {
     createTicketRefund(input: $input, condition: $condition) {
       id
+      type
       ethAmount
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -25,6 +27,7 @@ exports.createTicketRefund = `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -40,6 +43,7 @@ exports.createTicketRefund = `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -53,6 +57,7 @@ exports.createTicketRefund = `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -65,6 +70,7 @@ exports.createTicketRefund = `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -84,6 +90,7 @@ exports.createTicketRefund = `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -100,6 +107,7 @@ exports.createTicketRefund = `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -120,6 +128,7 @@ exports.createTicketRefund = `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -143,6 +152,7 @@ exports.createTicketRefund = `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -170,10 +180,12 @@ exports.updateTicketRefund = `
   ) {
     updateTicketRefund(input: $input, condition: $condition) {
       id
+      type
       ethAmount
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -184,6 +196,7 @@ exports.updateTicketRefund = `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -199,6 +212,7 @@ exports.updateTicketRefund = `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -212,6 +226,7 @@ exports.updateTicketRefund = `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -224,6 +239,7 @@ exports.updateTicketRefund = `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -243,6 +259,7 @@ exports.updateTicketRefund = `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -259,6 +276,7 @@ exports.updateTicketRefund = `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -279,6 +297,7 @@ exports.updateTicketRefund = `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -302,6 +321,7 @@ exports.updateTicketRefund = `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -329,10 +349,12 @@ exports.deleteTicketRefund = `
   ) {
     deleteTicketRefund(input: $input, condition: $condition) {
       id
+      type
       ethAmount
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -343,6 +365,7 @@ exports.deleteTicketRefund = `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -358,6 +381,7 @@ exports.deleteTicketRefund = `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -371,6 +395,7 @@ exports.deleteTicketRefund = `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -383,6 +408,7 @@ exports.deleteTicketRefund = `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -402,6 +428,7 @@ exports.deleteTicketRefund = `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -418,6 +445,7 @@ exports.deleteTicketRefund = `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -438,6 +466,7 @@ exports.deleteTicketRefund = `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -461,6 +490,7 @@ exports.deleteTicketRefund = `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -488,6 +518,7 @@ exports.createStat = `
   ) {
     createStat(input: $input, condition: $condition) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -508,6 +539,7 @@ exports.updateStat = `
   ) {
     updateStat(input: $input, condition: $condition) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -528,6 +560,7 @@ exports.deleteStat = `
   ) {
     deleteStat(input: $input, condition: $condition) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -548,11 +581,13 @@ exports.createTicketBatch = `
   ) {
     createTicketBatch(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -582,11 +617,13 @@ exports.updateTicketBatch = `
   ) {
     updateTicketBatch(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -616,11 +653,13 @@ exports.deleteTicketBatch = `
   ) {
     deleteTicketBatch(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -650,6 +689,7 @@ exports.createTransaction = `
   ) {
     createTransaction(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -669,6 +709,7 @@ exports.updateTransaction = `
   ) {
     updateTransaction(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -688,6 +729,7 @@ exports.deleteTransaction = `
   ) {
     deleteTransaction(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -707,6 +749,7 @@ exports.createRaffle = `
   ) {
     createRaffle(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -714,6 +757,7 @@ exports.createRaffle = `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -732,11 +776,13 @@ exports.createRaffle = `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -759,6 +805,7 @@ exports.createRaffle = `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -772,6 +819,7 @@ exports.createRaffle = `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -784,6 +832,7 @@ exports.createRaffle = `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -803,6 +852,7 @@ exports.createRaffle = `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -819,6 +869,7 @@ exports.createRaffle = `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -834,6 +885,7 @@ exports.createRaffle = `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -855,6 +907,7 @@ exports.createRaffle = `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -885,6 +938,7 @@ exports.updateRaffle = `
   ) {
     updateRaffle(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -892,6 +946,7 @@ exports.updateRaffle = `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -910,11 +965,13 @@ exports.updateRaffle = `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -937,6 +994,7 @@ exports.updateRaffle = `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -950,6 +1008,7 @@ exports.updateRaffle = `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -962,6 +1021,7 @@ exports.updateRaffle = `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -981,6 +1041,7 @@ exports.updateRaffle = `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -997,6 +1058,7 @@ exports.updateRaffle = `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -1012,6 +1074,7 @@ exports.updateRaffle = `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -1033,6 +1096,7 @@ exports.updateRaffle = `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1063,6 +1127,7 @@ exports.deleteRaffle = `
   ) {
     deleteRaffle(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -1070,6 +1135,7 @@ exports.deleteRaffle = `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -1088,11 +1154,13 @@ exports.deleteRaffle = `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -1115,6 +1183,7 @@ exports.deleteRaffle = `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1128,6 +1197,7 @@ exports.deleteRaffle = `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1140,6 +1210,7 @@ exports.deleteRaffle = `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1159,6 +1230,7 @@ exports.deleteRaffle = `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1175,6 +1247,7 @@ exports.deleteRaffle = `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -1190,6 +1263,7 @@ exports.deleteRaffle = `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -1211,6 +1285,7 @@ exports.deleteRaffle = `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1241,6 +1316,7 @@ exports.createNFT = `
   ) {
     createNFT(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1256,6 +1332,7 @@ exports.createNFT = `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1284,6 +1361,7 @@ exports.updateNFT = `
   ) {
     updateNFT(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1299,6 +1377,7 @@ exports.updateNFT = `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1327,6 +1406,7 @@ exports.deleteNFT = `
   ) {
     deleteNFT(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1342,6 +1422,7 @@ exports.deleteNFT = `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1370,6 +1451,7 @@ exports.createCollection = `
   ) {
     createCollection(input: $input, condition: $condition) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1393,6 +1475,7 @@ exports.updateCollection = `
   ) {
     updateCollection(input: $input, condition: $condition) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1416,6 +1499,7 @@ exports.deleteCollection = `
   ) {
     deleteCollection(input: $input, condition: $condition) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1439,6 +1523,7 @@ exports.createAccount = `
   ) {
     createAccount(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1459,6 +1544,7 @@ exports.updateAccount = `
   ) {
     updateAccount(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1479,6 +1565,7 @@ exports.deleteAccount = `
   ) {
     deleteAccount(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       address

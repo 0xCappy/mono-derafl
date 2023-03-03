@@ -189,13 +189,13 @@ export const getRaffle = async (
 // };
 
 export const getRaffleByRaffleId = async (raffleId: number) => {
-  console.log("PROCESS: ", process.env)
+  console.log("RAFF ID: ", raffleId)
   const options = {
     headers: {
       'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
     }
   };
-  const body = { query: listRaffles, variables: { input: { filter: { raffleId: { eq: raffleId } } } } }
+  const body = { query: listRaffles, variables: { filter: { raffleId: { eq: raffleId } } } }
   const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
   return response?.data?.data?.listRaffles?.items?.[0]
 }

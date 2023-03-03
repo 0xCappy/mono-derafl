@@ -8,10 +8,12 @@ export const onCreateTicketRefund = /* GraphQL */ `
   ) {
     onCreateTicketRefund(filter: $filter) {
       id
+      type
       ethAmount
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -22,6 +24,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -37,6 +40,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -50,6 +54,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -62,6 +67,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -81,6 +87,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -97,6 +104,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -117,6 +125,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -140,6 +149,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -166,10 +176,12 @@ export const onUpdateTicketRefund = /* GraphQL */ `
   ) {
     onUpdateTicketRefund(filter: $filter) {
       id
+      type
       ethAmount
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -180,6 +192,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -195,6 +208,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -208,6 +222,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -220,6 +235,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -239,6 +255,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -255,6 +272,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -275,6 +293,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -298,6 +317,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -324,10 +344,12 @@ export const onDeleteTicketRefund = /* GraphQL */ `
   ) {
     onDeleteTicketRefund(filter: $filter) {
       id
+      type
       ethAmount
       refundee
       raffle {
         id
+        type
         createdAt
         updatedAt
         ticketsAvailable
@@ -338,6 +360,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
         }
         winningBatch {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -353,6 +376,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -366,6 +390,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -378,6 +403,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -397,6 +423,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -413,6 +440,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -433,6 +461,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -456,6 +485,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -480,6 +510,7 @@ export const onCreateStat = /* GraphQL */ `
   subscription OnCreateStat($filter: ModelSubscriptionStatFilterInput) {
     onCreateStat(filter: $filter) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -497,6 +528,7 @@ export const onUpdateStat = /* GraphQL */ `
   subscription OnUpdateStat($filter: ModelSubscriptionStatFilterInput) {
     onUpdateStat(filter: $filter) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -514,6 +546,7 @@ export const onDeleteStat = /* GraphQL */ `
   subscription OnDeleteStat($filter: ModelSubscriptionStatFilterInput) {
     onDeleteStat(filter: $filter) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -533,11 +566,13 @@ export const onCreateTicketBatch = /* GraphQL */ `
   ) {
     onCreateTicketBatch(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -566,11 +601,13 @@ export const onUpdateTicketBatch = /* GraphQL */ `
   ) {
     onUpdateTicketBatch(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -599,11 +636,13 @@ export const onDeleteTicketBatch = /* GraphQL */ `
   ) {
     onDeleteTicketBatch(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -632,6 +671,7 @@ export const onCreateTransaction = /* GraphQL */ `
   ) {
     onCreateTransaction(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -650,6 +690,7 @@ export const onUpdateTransaction = /* GraphQL */ `
   ) {
     onUpdateTransaction(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -668,6 +709,7 @@ export const onDeleteTransaction = /* GraphQL */ `
   ) {
     onDeleteTransaction(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -684,6 +726,7 @@ export const onCreateRaffle = /* GraphQL */ `
   subscription OnCreateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
     onCreateRaffle(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -691,6 +734,7 @@ export const onCreateRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -709,11 +753,13 @@ export const onCreateRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -736,6 +782,7 @@ export const onCreateRaffle = /* GraphQL */ `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -749,6 +796,7 @@ export const onCreateRaffle = /* GraphQL */ `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -761,6 +809,7 @@ export const onCreateRaffle = /* GraphQL */ `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -780,6 +829,7 @@ export const onCreateRaffle = /* GraphQL */ `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -796,6 +846,7 @@ export const onCreateRaffle = /* GraphQL */ `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -811,6 +862,7 @@ export const onCreateRaffle = /* GraphQL */ `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -832,6 +884,7 @@ export const onCreateRaffle = /* GraphQL */ `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -859,6 +912,7 @@ export const onUpdateRaffle = /* GraphQL */ `
   subscription OnUpdateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
     onUpdateRaffle(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -866,6 +920,7 @@ export const onUpdateRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -884,11 +939,13 @@ export const onUpdateRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -911,6 +968,7 @@ export const onUpdateRaffle = /* GraphQL */ `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -924,6 +982,7 @@ export const onUpdateRaffle = /* GraphQL */ `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -936,6 +995,7 @@ export const onUpdateRaffle = /* GraphQL */ `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -955,6 +1015,7 @@ export const onUpdateRaffle = /* GraphQL */ `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -971,6 +1032,7 @@ export const onUpdateRaffle = /* GraphQL */ `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -986,6 +1048,7 @@ export const onUpdateRaffle = /* GraphQL */ `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -1007,6 +1070,7 @@ export const onUpdateRaffle = /* GraphQL */ `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1034,6 +1098,7 @@ export const onDeleteRaffle = /* GraphQL */ `
   subscription OnDeleteRaffle($filter: ModelSubscriptionRaffleFilterInput) {
     onDeleteRaffle(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       ticketsAvailable
@@ -1041,6 +1106,7 @@ export const onDeleteRaffle = /* GraphQL */ `
       TicketBatches {
         items {
           id
+          type
           createdAt
           updatedAt
           lastTicket
@@ -1059,11 +1125,13 @@ export const onDeleteRaffle = /* GraphQL */ `
       }
       winningBatch {
         id
+        type
         createdAt
         updatedAt
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -1086,6 +1154,7 @@ export const onDeleteRaffle = /* GraphQL */ `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1099,6 +1168,7 @@ export const onDeleteRaffle = /* GraphQL */ `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1111,6 +1181,7 @@ export const onDeleteRaffle = /* GraphQL */ `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1130,6 +1201,7 @@ export const onDeleteRaffle = /* GraphQL */ `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1146,6 +1218,7 @@ export const onDeleteRaffle = /* GraphQL */ `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -1161,6 +1234,7 @@ export const onDeleteRaffle = /* GraphQL */ `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -1182,6 +1256,7 @@ export const onDeleteRaffle = /* GraphQL */ `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1209,6 +1284,7 @@ export const onCreateNFT = /* GraphQL */ `
   subscription OnCreateNFT($filter: ModelSubscriptionNFTFilterInput) {
     onCreateNFT(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1224,6 +1300,7 @@ export const onCreateNFT = /* GraphQL */ `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1249,6 +1326,7 @@ export const onUpdateNFT = /* GraphQL */ `
   subscription OnUpdateNFT($filter: ModelSubscriptionNFTFilterInput) {
     onUpdateNFT(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1264,6 +1342,7 @@ export const onUpdateNFT = /* GraphQL */ `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1289,6 +1368,7 @@ export const onDeleteNFT = /* GraphQL */ `
   subscription OnDeleteNFT($filter: ModelSubscriptionNFTFilterInput) {
     onDeleteNFT(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1304,6 +1384,7 @@ export const onDeleteNFT = /* GraphQL */ `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1331,6 +1412,7 @@ export const onCreateCollection = /* GraphQL */ `
   ) {
     onCreateCollection(filter: $filter) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1353,6 +1435,7 @@ export const onUpdateCollection = /* GraphQL */ `
   ) {
     onUpdateCollection(filter: $filter) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1375,6 +1458,7 @@ export const onDeleteCollection = /* GraphQL */ `
   ) {
     onDeleteCollection(filter: $filter) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1395,6 +1479,7 @@ export const onCreateAccount = /* GraphQL */ `
   subscription OnCreateAccount($filter: ModelSubscriptionAccountFilterInput) {
     onCreateAccount(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1412,6 +1497,7 @@ export const onUpdateAccount = /* GraphQL */ `
   subscription OnUpdateAccount($filter: ModelSubscriptionAccountFilterInput) {
     onUpdateAccount(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       address
@@ -1429,6 +1515,7 @@ export const onDeleteAccount = /* GraphQL */ `
   subscription OnDeleteAccount($filter: ModelSubscriptionAccountFilterInput) {
     onDeleteAccount(filter: $filter) {
       id
+      type
       createdAt
       updatedAt
       address

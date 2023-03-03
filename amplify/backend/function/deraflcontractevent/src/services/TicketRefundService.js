@@ -4,7 +4,9 @@ exports.createTicketRefund = void 0;
 const axios_1 = require("axios");
 exports.createTicketRefund = async (raffleId, transactionId, ethAmount, refundee) => {
     const variables = {
-        input: {}
+        input: {
+            type: 'TicketRefund'
+        }
     };
     const options = {
         headers: {

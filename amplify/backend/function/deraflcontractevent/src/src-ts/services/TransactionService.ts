@@ -19,7 +19,8 @@ export const createTransactionRecord = async (
             date: new Date(parseInt(timestamp) * 1000),
             eventType: eventType,
             hash: txHash,
-            chainId: chainId
+            chainId: chainId,
+            type: 'Transaction'
         }
     }
     const options = {

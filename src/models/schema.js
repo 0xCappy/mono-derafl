@@ -10,6 +10,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "ethAmount": {
                     "name": "ethAmount",
                     "isArray": false,
@@ -123,6 +130,13 @@ export const schema = {
                     "name": "id",
                     "isArray": false,
                     "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -312,13 +326,11 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "ticketBatchesWithSort",
-                        "queryField": "ticketBatchesWithSort",
+                        "name": "ticketBatchesByCreatedAt",
+                        "queryField": "ticketBatchesByCreatedAt",
                         "fields": [
                             "type",
-                            "createdAt",
-                            "updatedAt",
-                            "ticketsBought"
+                            "createdAt"
                         ]
                     }
                 },
@@ -356,6 +368,13 @@ export const schema = {
                     "name": "id",
                     "isArray": false,
                     "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -758,16 +777,11 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "rafflesWithSort",
-                        "queryField": "rafflesWithSort",
+                        "name": "rafflesByCreatedAt",
+                        "queryField": "rafflesByCreatedAt",
                         "fields": [
                             "type",
-                            "createdAt",
-                            "updatedAt",
-                            "ticketsAvailable",
-                            "progress",
-                            "expires",
-                            "ticketsSold"
+                            "createdAt"
                         ]
                     }
                 },
@@ -796,6 +810,13 @@ export const schema = {
                     "name": "id",
                     "isArray": false,
                     "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -948,6 +969,13 @@ export const schema = {
                     "name": "id",
                     "isArray": false,
                     "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -1124,15 +1152,10 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "accountsWithSort",
-                        "queryField": "accountsWithSort",
+                        "name": "accountsByTicketsBought",
+                        "queryField": "accountsByTicketsBought",
                         "fields": [
                             "type",
-                            "createdAt",
-                            "updatedAt",
-                            "rafflesCreated",
-                            "rafflesWon",
-                            "rafflesEntered",
                             "ticketsBought"
                         ]
                     }
@@ -1159,5 +1182,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "23890eb242a07517cc4b91c3e6fb71ec"
+    "version": "da1cd4d13d36dd38a9019dae5a7cab0d"
 };

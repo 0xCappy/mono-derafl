@@ -65,7 +65,7 @@ const getAccountByAddress = async (address) => {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: queries_1.listAccounts, variables: { input: { filter: { address: { eq: address } } } } };
+    const body = { query: queries_1.listAccounts, variables: { filter: { address: { eq: address } } } };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     console.log("GET ACCOUNT: ", JSON.stringify(response.data));
     return response?.data?.data?.listAccounts?.items?.[0];
@@ -79,7 +79,8 @@ const createEmptyAccount = async (address) => {
             rafflesCreated: 0,
             rafflesWon: 0,
             rafflesEntered: 0,
-            ticketsBought: 0
+            ticketsBought: 0,
+            type: 'Account'
         }
     };
     const options = {

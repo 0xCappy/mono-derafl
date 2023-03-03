@@ -84,6 +84,7 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
 
   if (!collection) {
     collection = await createCollection({
+      type: 'Collection',
       contractAddress: alchemyNft.contract.address,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -99,6 +100,7 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
 
   if (!nft) {
     nft = await createNft({
+      type: 'NFT',
       contractAddress: alchemyNft.contract.address,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -118,11 +120,6 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
       rarityData: rank
     })
   }
-  // console.log("NFT: ", JSON.stringify(nft.data))
-  // console.log("NFTID: ", nftId)
-  // console.log("COLL: ", JSON.stringify(collection.data))
-  // console.log("COLLID: ", collectionId)
-  // console.log("NFTDATA: ", alchemyNft)
   return nft
 }
 
@@ -132,7 +129,7 @@ const getNftByContractAddress = async (address: string, tokenId: string) => {
       'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
     }
   };
-  const body = { query: listNFTS, variables: { input: { filter: { contractAddress: { eq: address } }, tokenId: { eq: tokenId } } } }
+  const body = { query: listNFTS, variables: { filter: { contractAddress: { eq: address } }, tokenId: { eq: tokenId } } }
   const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
   return response?.data?.data?.listNFTS?.items?.[0]
 }
@@ -145,15 +142,10 @@ const getCollectionByContractAddress = async (address: string) => {
   };
   const body = { query: listCollections, variables: { input: { filter: { contractAddress: { eq: address } } } } }
   const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
-  console.log("GET COLL: ", JSON.stringify(response.data))
   return response?.data?.data?.listCollections?.items?.[0]
 }
 
-const updateCollection = (input: Collection) => {
-
-}
-
-const createCollection = async (input: Collection) => {
+const createCollection = async (input: any) => {
   const variables = { input }
   const options = {
     headers: {
@@ -163,7 +155,6 @@ const createCollection = async (input: Collection) => {
 
   const body = { query: createCollectionMutation, variables }
   const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
-  console.log("CREATE COLL: ", JSON.stringify(response.data))
   return response?.data?.data?.createCollection
 }
 
@@ -172,7 +163,6 @@ const updateNft = (input: Collection) => {
 }
 
 const createNft = async (input: any) => {
-  console.log("CREATING NFT: ", input)
   const variables = { input }
   const options = {
     headers: {
@@ -182,6 +172,5 @@ const createNft = async (input: any) => {
 
   const body = { query: createNftMutation, variables }
   const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
-  console.log("CREATE NFT: ", JSON.stringify(response.data))
   return response?.data?.data?.createNFT
 }

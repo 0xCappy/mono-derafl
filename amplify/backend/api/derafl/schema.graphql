@@ -1,5 +1,6 @@
 type TicketRefund @model @auth(rules: [{allow: public}]) {
   id: ID!
+  type: String!
   ethAmount: Float
   refundee: String
   raffle: Raffle @hasOne
@@ -8,6 +9,7 @@ type TicketRefund @model @auth(rules: [{allow: public}]) {
 
 type Stat @model @auth(rules: [{allow: public}]) {
   id: ID!
+  type: String!
   ethPaid: Float
   ticketsBought: Int
   royaltiesPaid: Float
@@ -17,7 +19,10 @@ type Stat @model @auth(rules: [{allow: public}]) {
 
 type TicketBatch @model @auth(rules: [{allow: public}]) {
   id: ID!
-  type: String! @index(name: "ticketBatchesWithSort", queryField: "ticketBatchesWithSort", sortKeyFields: ["createdAt", "updatedAt", "ticketsBought"])
+  type: String!
+  @index(name: "ticketBatchesByCreatedAt", queryField: "ticketBatchesByCreatedAt", sortKeyFields: ["createdAt"])
+  @index(name: "ticketBatchesByUpdatedAt", queryField: "ticketBatchesByUpdatedAt", sortKeyFields: ["updatedAt"])
+  @index(name: "ticketBatchesByTicketsBought", queryField: "ticketBatchesByTicketsBought", sortKeyFields: ["ticketsBought"])
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   lastTicket: Int!
@@ -31,6 +36,7 @@ type TicketBatch @model @auth(rules: [{allow: public}]) {
 
 type Transaction @model @auth(rules: [{allow: public}]) {
   id: ID!
+  type: String!
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
   date: AWSDateTime!
@@ -41,7 +47,13 @@ type Transaction @model @auth(rules: [{allow: public}]) {
 
 type Raffle @model @auth(rules: [{allow: public}]) {
   id: ID!
-  type: String! @index(name: "rafflesWithSort", queryField: "rafflesWithSort", sortKeyFields: ["createdAt", "updatedAt", "ticketsAvailable", "progress", "expires", "ticketsSold"])
+  type: String! 
+  @index(name: "rafflesByCreatedAt", queryField: "rafflesByCreatedAt", sortKeyFields: ["createdAt"])
+  @index(name: "rafflesByUpdatedAt", queryField: "rafflesByUpdatedAt", sortKeyFields: ["updatedAt"])
+  @index(name: "rafflesByProgress", queryField: "rafflesByProgress", sortKeyFields: ["progress"])
+  @index(name: "rafflesByTicketsAvailable", queryField: "rafflesByTicketsAvailable", sortKeyFields: ["ticketsAvailable"])
+  @index(name: "rafflesByExpires", queryField: "rafflesByExpires", sortKeyFields: ["expires"])
+  @index(name: "rafflesByTicketsSold", queryField: "rafflesByTicketsSold", sortKeyFields: ["ticketsSold"])
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   ticketsAvailable: Int!
@@ -70,6 +82,7 @@ type Raffle @model @auth(rules: [{allow: public}]) {
 
 type NFT @model @auth(rules: [{allow: public}]) {
   id: ID!
+  type: String!
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
   contractAddress: String!
@@ -88,6 +101,7 @@ type NFT @model @auth(rules: [{allow: public}]) {
 
 type Collection @model @auth(rules: [{allow: public}]) {
   id: ID!
+  type: String!
   contractAddress: String!
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
@@ -102,7 +116,13 @@ type Collection @model @auth(rules: [{allow: public}]) {
 
 type Account @model @auth(rules: [{allow: public}]) {
   id: ID!
-  type: String! @index(name: "accountsWithSort", queryField: "accountsWithSort", sortKeyFields: ["createdAt", "updatedAt", "rafflesCreated", "rafflesWon", "rafflesEntered", "ticketsBought"])
+  type: String! 
+  @index(name: "accountsByTicketsBought", queryField: "accountsByTicketsBought", sortKeyFields: ["ticketsBought"])
+  @index(name: "accountsByRafflesEntered", queryField: "accountsByRafflesEntered", sortKeyFields: ["rafflesEntered"])
+  @index(name: "accountsByRafflesWon", queryField: "accountsByRafflesWon", sortKeyFields: ["rafflesWon"])
+  @index(name: "accountsByRafflesCreated", queryField: "accountsByRafflesCreated", sortKeyFields: ["rafflesCreated"])
+  @index(name: "accountsByUpdatedAt", queryField: "accountsByUpdatedAt", sortKeyFields: ["updatedAt"])
+  @index(name: "accountsByCreatedAt", queryField: "accountsByCreatedAt", sortKeyFields: ["createdAt"])
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   address: String!

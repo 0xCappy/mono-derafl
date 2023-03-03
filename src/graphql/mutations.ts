@@ -9,6 +9,7 @@ export const createTicketRefund = /* GraphQL */ `
   ) {
     createTicketRefund(input: $input, condition: $condition) {
       id
+      type
       ethAmount
       refundee
       raffle {
@@ -40,6 +41,7 @@ export const createTicketRefund = /* GraphQL */ `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -53,6 +55,7 @@ export const createTicketRefund = /* GraphQL */ `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -65,6 +68,7 @@ export const createTicketRefund = /* GraphQL */ `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -84,6 +88,7 @@ export const createTicketRefund = /* GraphQL */ `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -100,6 +105,7 @@ export const createTicketRefund = /* GraphQL */ `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -120,6 +126,7 @@ export const createTicketRefund = /* GraphQL */ `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -143,6 +150,7 @@ export const createTicketRefund = /* GraphQL */ `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -170,6 +178,7 @@ export const updateTicketRefund = /* GraphQL */ `
   ) {
     updateTicketRefund(input: $input, condition: $condition) {
       id
+      type
       ethAmount
       refundee
       raffle {
@@ -201,6 +210,7 @@ export const updateTicketRefund = /* GraphQL */ `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -214,6 +224,7 @@ export const updateTicketRefund = /* GraphQL */ `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -226,6 +237,7 @@ export const updateTicketRefund = /* GraphQL */ `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -245,6 +257,7 @@ export const updateTicketRefund = /* GraphQL */ `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -261,6 +274,7 @@ export const updateTicketRefund = /* GraphQL */ `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -281,6 +295,7 @@ export const updateTicketRefund = /* GraphQL */ `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -304,6 +319,7 @@ export const updateTicketRefund = /* GraphQL */ `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -331,6 +347,7 @@ export const deleteTicketRefund = /* GraphQL */ `
   ) {
     deleteTicketRefund(input: $input, condition: $condition) {
       id
+      type
       ethAmount
       refundee
       raffle {
@@ -362,6 +379,7 @@ export const deleteTicketRefund = /* GraphQL */ `
         }
         releaseTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -375,6 +393,7 @@ export const deleteTicketRefund = /* GraphQL */ `
         progress
         openTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -387,6 +406,7 @@ export const deleteTicketRefund = /* GraphQL */ `
         }
         drawnTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -406,6 +426,7 @@ export const deleteTicketRefund = /* GraphQL */ `
         winningTicket
         closeTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -422,6 +443,7 @@ export const deleteTicketRefund = /* GraphQL */ `
         contract
         nft {
           id
+          type
           createdAt
           updatedAt
           contractAddress
@@ -442,6 +464,7 @@ export const deleteTicketRefund = /* GraphQL */ `
         }
         refundTx {
           id
+          type
           createdAt
           updatedAt
           date
@@ -465,6 +488,7 @@ export const deleteTicketRefund = /* GraphQL */ `
       }
       tx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -492,6 +516,7 @@ export const createStat = /* GraphQL */ `
   ) {
     createStat(input: $input, condition: $condition) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -512,6 +537,7 @@ export const updateStat = /* GraphQL */ `
   ) {
     updateStat(input: $input, condition: $condition) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -532,6 +558,7 @@ export const deleteStat = /* GraphQL */ `
   ) {
     deleteStat(input: $input, condition: $condition) {
       id
+      type
       ethPaid
       ticketsBought
       royaltiesPaid
@@ -558,6 +585,7 @@ export const createTicketBatch = /* GraphQL */ `
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -593,6 +621,7 @@ export const updateTicketBatch = /* GraphQL */ `
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -628,6 +657,7 @@ export const deleteTicketBatch = /* GraphQL */ `
       lastTicket
       transaction {
         id
+        type
         createdAt
         updatedAt
         date
@@ -657,6 +687,7 @@ export const createTransaction = /* GraphQL */ `
   ) {
     createTransaction(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -676,6 +707,7 @@ export const updateTransaction = /* GraphQL */ `
   ) {
     updateTransaction(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -695,6 +727,7 @@ export const deleteTransaction = /* GraphQL */ `
   ) {
     deleteTransaction(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       date
@@ -747,6 +780,7 @@ export const createRaffle = /* GraphQL */ `
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -769,6 +803,7 @@ export const createRaffle = /* GraphQL */ `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -782,6 +817,7 @@ export const createRaffle = /* GraphQL */ `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -794,6 +830,7 @@ export const createRaffle = /* GraphQL */ `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -813,6 +850,7 @@ export const createRaffle = /* GraphQL */ `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -829,6 +867,7 @@ export const createRaffle = /* GraphQL */ `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -844,6 +883,7 @@ export const createRaffle = /* GraphQL */ `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -865,6 +905,7 @@ export const createRaffle = /* GraphQL */ `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -928,6 +969,7 @@ export const updateRaffle = /* GraphQL */ `
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -950,6 +992,7 @@ export const updateRaffle = /* GraphQL */ `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -963,6 +1006,7 @@ export const updateRaffle = /* GraphQL */ `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -975,6 +1019,7 @@ export const updateRaffle = /* GraphQL */ `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -994,6 +1039,7 @@ export const updateRaffle = /* GraphQL */ `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1010,6 +1056,7 @@ export const updateRaffle = /* GraphQL */ `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -1025,6 +1072,7 @@ export const updateRaffle = /* GraphQL */ `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -1046,6 +1094,7 @@ export const updateRaffle = /* GraphQL */ `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1109,6 +1158,7 @@ export const deleteRaffle = /* GraphQL */ `
         lastTicket
         transaction {
           id
+          type
           createdAt
           updatedAt
           date
@@ -1131,6 +1181,7 @@ export const deleteRaffle = /* GraphQL */ `
       }
       releaseTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1144,6 +1195,7 @@ export const deleteRaffle = /* GraphQL */ `
       progress
       openTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1156,6 +1208,7 @@ export const deleteRaffle = /* GraphQL */ `
       }
       drawnTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1175,6 +1228,7 @@ export const deleteRaffle = /* GraphQL */ `
       winningTicket
       closeTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1191,6 +1245,7 @@ export const deleteRaffle = /* GraphQL */ `
       contract
       nft {
         id
+        type
         createdAt
         updatedAt
         contractAddress
@@ -1206,6 +1261,7 @@ export const deleteRaffle = /* GraphQL */ `
         rarityData
         collection {
           id
+          type
           contractAddress
           createdAt
           updatedAt
@@ -1227,6 +1283,7 @@ export const deleteRaffle = /* GraphQL */ `
       }
       refundTx {
         id
+        type
         createdAt
         updatedAt
         date
@@ -1257,6 +1314,7 @@ export const createNFT = /* GraphQL */ `
   ) {
     createNFT(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1272,6 +1330,7 @@ export const createNFT = /* GraphQL */ `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1300,6 +1359,7 @@ export const updateNFT = /* GraphQL */ `
   ) {
     updateNFT(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1315,6 +1375,7 @@ export const updateNFT = /* GraphQL */ `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1343,6 +1404,7 @@ export const deleteNFT = /* GraphQL */ `
   ) {
     deleteNFT(input: $input, condition: $condition) {
       id
+      type
       createdAt
       updatedAt
       contractAddress
@@ -1358,6 +1420,7 @@ export const deleteNFT = /* GraphQL */ `
       rarityData
       collection {
         id
+        type
         contractAddress
         createdAt
         updatedAt
@@ -1386,6 +1449,7 @@ export const createCollection = /* GraphQL */ `
   ) {
     createCollection(input: $input, condition: $condition) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1409,6 +1473,7 @@ export const updateCollection = /* GraphQL */ `
   ) {
     updateCollection(input: $input, condition: $condition) {
       id
+      type
       contractAddress
       createdAt
       updatedAt
@@ -1432,6 +1497,7 @@ export const deleteCollection = /* GraphQL */ `
   ) {
     deleteCollection(input: $input, condition: $condition) {
       id
+      type
       contractAddress
       createdAt
       updatedAt

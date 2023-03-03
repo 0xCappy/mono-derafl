@@ -17,7 +17,7 @@ const eventStream_1 = require("./eventStream");
 exports.handler = async (event) => {
     try {
         console.log("EVENT: ", event);
-        await eventStream_1.handleWebhookStream(event);
+        await eventStream_1.handleWebhookStream(JSON.parse(event.body));
     }
     catch (error) {
         console.log("STREAM ERROR: ", error);
