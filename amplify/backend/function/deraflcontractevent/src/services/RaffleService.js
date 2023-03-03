@@ -170,11 +170,11 @@ exports.getRaffleByRaffleId = async (raffleNonce) => {
     console.log("RAFF ID: ", raffleNonce);
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
     const body = { query: queries_1.listRaffles, variables: { filter: { raffleNonce: { eq: raffleNonce } } } };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     return response?.data?.data?.listRaffles?.items?.[0];
 };
 exports.createRaffle = async (raffleNonce, chainId, nftID, owner, contract, ticketsAvailable, tokenId, nftAddress, expires, openTxId) => {
@@ -202,11 +202,11 @@ exports.createRaffle = async (raffleNonce, chainId, nftID, owner, contract, tick
     console.log("Create VAR: ", variables);
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
     const body = { query: mutations_1.createRaffle, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     console.log("RAFFLE CREATE: ", JSON.stringify(response.data));
     return response?.data?.data?.createRaffle;
 };
@@ -214,11 +214,11 @@ exports.updateRaffle = async (input) => {
     const variables = { input };
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
     const body = { query: mutations_1.updateRaffle, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     return response?.data?.data?.updateRaffle;
 };
 //# sourceMappingURL=RaffleService.js.map

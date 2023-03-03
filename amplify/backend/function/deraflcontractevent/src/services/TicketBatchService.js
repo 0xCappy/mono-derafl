@@ -89,11 +89,11 @@ const queries_1 = require("../graphql/queries");
 exports.getAccountParticipation = async (address, raffleNonce) => {
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
     const body = { query: queries_1.listTicketBatches, variables: { filter: { purchaser: { eq: address }, raffleId: { eq: raffleNonce } } } };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     console.log("GET ACCOUNT PARTICIPATION: ", JSON.stringify(response.data));
     return response?.data?.data?.listTicketBatches?.items?.[0];
 };
@@ -117,18 +117,18 @@ exports.createTicketBatch = async (ticketBatchRaffleId, ticketsBought, firstTick
     console.log("TICKET BATCH INPUT: ", variables);
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
     const body = { query: mutations_1.createTicketBatch, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     console.log("CREATE Ticket batch: ", JSON.stringify(response.data));
     return response?.data?.data?.createTicketBatch;
 };
 exports.getWinningBatch = async (raffleId, winningTicket) => {
     const options = {
         headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT as string
+            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
     const variables = {
@@ -139,7 +139,7 @@ exports.getWinningBatch = async (raffleId, winningTicket) => {
         }
     };
     const body = { query: queries_1.listTicketBatches, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT as string, body, options);
+    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     console.log("GET WINNING TICKET: ", JSON.stringify(response.data));
     return response?.data?.data?.listTicketBatches?.items?.[0];
 };
