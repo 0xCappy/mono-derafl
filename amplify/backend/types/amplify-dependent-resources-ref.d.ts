@@ -7,7 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "deraflcontractevent": {
+    "deraflstreamevent": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

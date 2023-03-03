@@ -10,10 +10,6 @@
   "lambdaLayers": [],
   "environmentVariableList": [
     {
-      "cloudFormationParameterName": "moralisApiKey",
-      "environmentVariableName": "MORALIS_API_KEY"
-    },
-    {
       "cloudFormationParameterName": "alchemyKey",
       "environmentVariableName": "ALCHEMY_KEY"
     },
@@ -28,6 +24,10 @@
     {
       "cloudFormationParameterName": "discordRaffleClosedWebhookUrl",
       "environmentVariableName": "DISCORD_RAFFLE_CLOSED_WEBHOOK_URL"
+    },
+    {
+      "cloudFormationParameterName": "moralisApiKey",
+      "environmentVariableName": "MORALIS_API_KEY"
     }
   ]
 }

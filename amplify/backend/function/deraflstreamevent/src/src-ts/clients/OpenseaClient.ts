@@ -1,5 +1,6 @@
 // import config from "../../config"
 // import axios from 'axios';
+
 // export const getContract = async (address: string) => {
 //     const response = await axios.get(`${config.OPENSEA_URL}asset_contract/${address}`, {headers: {"X-API-KEY":""}})
 //     return {
@@ -7,14 +8,17 @@
 //         ...mapContractAsset(response.data)
 //     }
 // }
+
 // export const getAsset = async (address: string, tokenId: string) => {
 //     const response = await axios.get(`${config.OPENSEA_URL}asset/${address}/${tokenId}`, {headers: {"X-API-KEY":""}})
 //     return mapAsset(response.data)
 // }
+
 // export const getAccountAssets = async (address: string, offset: string, pageSize: number) => {
 //     const response = await axios.get(`${config.OPENSEA_URL}assets?order_direction=desc&offset=${offset}&limit=${pageSize}&include_orders=false&owner=${address}`, {headers: {"X-API-KEY":""}})
 //     return response.data.assets.map((asset: any) => mapAsset(asset))
 // }
+
 // const mapAsset = (asset: any) => ({
 //     contractAddress: asset.asset_contract.address,
 //     tokenAddress: asset.asset_contract.address,
@@ -33,6 +37,7 @@
 //         ...mapContractAsset(asset.asset_contract)
 //     }
 // })
+
 // const mapContractAsset = (contractAsset: any) => ({
 //     contractAddress: contractAsset.address,
 //     name: contractAsset.name,
@@ -43,6 +48,7 @@
 //     description: contractAsset.description,
 //     imageUrl: contractAsset.image_url,
 // })
+
 // const mapCollection = (collection: any) => ({
 //     bannerImageUrl: collection.banner_image_url,
 //     discordUrl: collection.discord_url,
@@ -59,6 +65,7 @@
 //     nsfw: collection.is_nsfw,
 //     floor: collection.stats?.floor_price
 // })
+
 // const mapRarityData = (rarityData: any) => ({
 //     strategyId: rarityData.strategy_id,
 //     strategyVersion: rarityData.strategy_version,
@@ -69,6 +76,7 @@
 //     tokensScored: rarityData.tokens_scored,
 //     rankingFeatures: rarityData.ranking_features
 // })
+
 // // {
 // //     "collection": {
 // //       "banner_image_url": "https://i.seadn.io/gcs/files/73e2704199e073c0726b59d842325671.png?w=500&auto=format",
@@ -137,4 +145,5 @@
 // //     "seller_fee_basis_points": 250,
 // //     "payout_address": null
 // //   }
-//# sourceMappingURL=OpenseaClient.js.map
+
+export {}

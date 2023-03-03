@@ -104,7 +104,7 @@ const TicketBatchTable = ({ ticketBatches, sort, sortKey, count, loading, page, 
                     <Cell dataKey="tx.date">
                         {(rowData, rowIndex) =>
                             <Group>
-                                <Text>{new Date(ticketBatches[rowIndex!].tx.date).toLocaleDateString()}</Text>
+                                <Text>{new Date(ticketBatches[rowIndex!].transaction.date).toLocaleDateString()}</Text>
                             </Group>
                         }
                     </Cell>

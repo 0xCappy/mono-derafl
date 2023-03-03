@@ -4,8 +4,6 @@ import { ActionIcon, Anchor, Avatar, Box, Card, Group, Indicator, Pagination, St
 import { TicketBatch } from 'types';
 import { IconBoxMultiple, IconCalendarEvent, IconExternalLink, IconHash, IconLink, IconRefresh, IconTicket } from '@tabler/icons';
 import { AccountAnchor, RaffleStateBadge } from '@/common/components';
-import ticketBatches from '@/pages/api/account/ticketBatches';
-import { count } from 'console';
 import { MRT_ColumnDef, MantineReactTable } from 'mantine-react-table';
 import { useEffect, useMemo, useState } from 'react';
 import makeBlockie from 'ethereum-blockies-base64';

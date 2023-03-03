@@ -6,7 +6,6 @@ import TimeAgo from 'react-timeago'
 import makeBlockie from "ethereum-blockies-base64"
 import { MRT_ColumnDef, MantineReactTable } from "mantine-react-table"
 import { useMemo } from "react"
-import ticketBatches from "@/pages/api/account/ticketBatches"
 import RaffleStateBadge from "../../RaffleStateBadge"
 
 interface DesktopLayoutProps {

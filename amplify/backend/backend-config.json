@@ -23,7 +23,7 @@
     }
   },
   "function": {
-    "deraflcontractevent": {
+    "deraflstreamevent": {
       "build": true,
       "dependsOn": [
         {
@@ -41,63 +41,15 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_deraflcontractevent_alchemyKey": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "deraflcontractevent"
-        }
-      ]
-    },
-    "AMPLIFY_function_deraflcontractevent_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "deraflcontractevent"
-        }
-      ]
-    },
-    "AMPLIFY_function_deraflcontractevent_discordRaffleClosedWebhookUrl": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "deraflcontractevent"
-        }
-      ]
-    },
-    "AMPLIFY_function_deraflcontractevent_discordRaffleCreateWebhookUrl": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "deraflcontractevent"
-        }
-      ]
-    },
-    "AMPLIFY_function_deraflcontractevent_moralisApiKey": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "deraflcontractevent"
-        }
-      ]
-    },
-    "AMPLIFY_function_deraflcontractevent_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "deraflcontractevent"
-        }
-      ]
-    },
-    "AMPLIFY_function_deraflcontractevent_traitSniperKey": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "deraflcontractevent"
-        }
-      ]
-    },
     "AMPLIFY_function_deraflstreamevent_alchemyKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflstreamevent"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflstreamevent_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
@@ -122,6 +74,14 @@
       ]
     },
     "AMPLIFY_function_deraflstreamevent_moralisApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflstreamevent"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflstreamevent_s3Key": {
       "usedBy": [
         {
           "category": "function",

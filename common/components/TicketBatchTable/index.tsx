@@ -14,7 +14,6 @@ import type {
 import { useMemo } from "react"
 import RaffleStateBadge from "../RaffleStateBadge"
 import makeBlockie from "ethereum-blockies-base64"
-import account from "@/pages/api/account"
 import AccountAnchor from "../AccountAnchor"
 import accounts from "@/pages/accounts"
 import { DesktopLayout, MobileLayout } from "./components"

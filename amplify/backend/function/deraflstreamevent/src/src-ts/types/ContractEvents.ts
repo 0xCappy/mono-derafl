@@ -1,4 +1,4 @@
-import { BigNumber } from "@moralisweb3/core";
+import { BigNumber } from "alchemy-sdk";
 
 export interface RaffleOpenEvent {
     raffleId: BigNumber;

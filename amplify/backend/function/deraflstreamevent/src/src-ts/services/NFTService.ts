@@ -93,10 +93,10 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
       contractAddress: alchemyNft.contract.address,
       createdAt: new Date(),
       updatedAt: new Date(),
-      metadata: JSON.stringify({
+      metadata: alchemyNft?.rawMetadata ? JSON.stringify({
         image: alchemyNft.rawMetadata.image,
         attributes: alchemyNft.rawMetadata.attributes as NFTAttribute[]
-      }),
+      }) : JSON.stringify({}),
       tokenUri: alchemyNft.tokenUri?.raw,
       tokenId: alchemyNft.tokenId,
       symbol: alchemyNft.contract.symbol,

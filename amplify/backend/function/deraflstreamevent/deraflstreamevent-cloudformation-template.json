@@ -16,8 +16,17 @@
     "s3Key": {
       "Type": "String"
     },
-    "moralisApiKey": {
-      "Type": "String"
+    "apideraflGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apideraflGraphQLAPIIdOutput"
+    },
+    "apideraflGraphQLAPIEndpointOutput": {
+      "Type": "String",
+      "Default": "apideraflGraphQLAPIEndpointOutput"
+    },
+    "apideraflGraphQLAPIKeyOutput": {
+      "Type": "String",
+      "Default": "apideraflGraphQLAPIKeyOutput"
     },
     "alchemyKey": {
       "Type": "String"
@@ -31,17 +40,8 @@
     "discordRaffleClosedWebhookUrl": {
       "Type": "String"
     },
-    "apideraflGraphQLAPIIdOutput": {
-      "Type": "String",
-      "Default": "apideraflGraphQLAPIIdOutput"
-    },
-    "apideraflGraphQLAPIEndpointOutput": {
-      "Type": "String",
-      "Default": "apideraflGraphQLAPIEndpointOutput"
-    },
-    "apideraflGraphQLAPIKeyOutput": {
-      "Type": "String",
-      "Default": "apideraflGraphQLAPIKeyOutput"
+    "moralisApiKey": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -74,12 +74,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "deraflcontractevent",
+            "deraflstreamevent",
             {
               "Fn::Join": [
                 "",
                 [
-                  "deraflcontractevent",
+                  "deraflstreamevent",
                   "-",
                   {
                     "Ref": "env"
@@ -100,14 +100,11 @@
             "API_DERAFL_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apideraflGraphQLAPIIdOutput"
             },
-            "API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || ''": {
+            "API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT": {
               "Ref": "apideraflGraphQLAPIEndpointOutput"
             },
-            "API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''": {
+            "API_DERAFL_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apideraflGraphQLAPIKeyOutput"
-            },
-            "MORALIS_API_KEY": {
-              "Ref": "moralisApiKey"
             },
             "ALCHEMY_KEY": {
               "Ref": "alchemyKey"
@@ -120,6 +117,9 @@
             },
             "DISCORD_RAFFLE_CLOSED_WEBHOOK_URL": {
               "Ref": "discordRaffleClosedWebhookUrl"
+            },
+            "MORALIS_API_KEY": {
+              "Ref": "moralisApiKey"
             }
           }
         },
@@ -140,12 +140,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "deraflLambdaRolefdbe9d83",
+            "deraflLambdaRole223119c3",
             {
               "Fn::Join": [
                 "",
                 [
-                  "deraflLambdaRolefdbe9d83",
+                  "deraflLambdaRole223119c3",
                   "-",
                   {
                     "Ref": "env"

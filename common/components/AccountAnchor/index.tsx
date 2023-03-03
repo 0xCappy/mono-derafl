@@ -1,4 +1,3 @@
-import account from "@/pages/api/account"
 import { Center, Flex, Anchor, Avatar } from "@mantine/core"
 import { IconExternalLink, IconEye, IconUser } from "@tabler/icons"
 import { shortenAddress } from "@usedapp/core"
