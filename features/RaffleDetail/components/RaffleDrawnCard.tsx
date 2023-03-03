@@ -1,6 +1,7 @@
 import { Card, Stack, Text, Title, Group } from '@mantine/core';
 import { IconTicket, IconUser } from '@tabler/icons';
-import { RaffleInfo, TicketBatch } from 'types';
+import { RaffleInfo } from 'types';
+import { TicketBatch } from '@/src/API';
 import { AccountAnchor } from '@/common/components';
 import Abi from '@/types/Abi';
 import { ContractActionButton } from '@/features';

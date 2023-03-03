@@ -16,7 +16,7 @@ exports.handleRaffleDrawn = async (log, txId, timestamp, chainId) => {
     if (!winningBatch) {
         // shit
     }
-    const transaction = await TransactionService_1.createTransactionRecord(txId, timestamp, types_1.EventType.RaffleDrawn, chainId);
+    const transaction = await TransactionService_1.createTransactionRecord(txId, timestamp, types_1.EventType.RaffleDrawn, chainId, raffle.raffleNonce);
     await RaffleService_1.updateRaffle({
         id: raffle.id,
         state: types_1.RaffleState.DRAWN,

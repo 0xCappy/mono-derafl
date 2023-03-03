@@ -1,6 +1,6 @@
 import { Card, Divider, Flex, Group, Input, Stack, Title, Text, createStyles, ThemeIcon } from '@mantine/core';
 import { IconArrowsHorizontal, IconArrowsVertical, IconCurrencyEthereum, IconTicket } from '@tabler/icons';
-import { Raffle } from 'types';
+import { Raffle } from '@/src/API';
 import { parseEther } from 'ethers/lib/utils';
 import { useState } from 'react';
 import ContractActionButton from '@/features/ContractActionButton';
@@ -124,7 +124,7 @@ const BuyTicketsCard = ({ raffle }: BuyTicketsCardProps) => {
                 buttonTitle="Buy Tickets"
                 abi={Abi.DERAFL}
                 functionName="buyTickets"
-                args={[raffle.raffleId, ticketAmount, { value: parseEther('0' + ethAmount.toString()) }]}
+                args={[raffle.raffleNonce, ticketAmount, { value: parseEther('0' + ethAmount.toString()) }]}
                 disabled={!parseInt(ticketAmount)}
             />
         </Card>

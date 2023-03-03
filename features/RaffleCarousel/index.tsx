@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Flex, Title, Stack, Container, ActionIcon, Center, Button } from "@mantine/core";
 import { IconArrowBigLeft, IconArrowBigRight, IconCompass, IconTicket } from '@tabler/icons'
-import { Raffle } from "types";
+import { Raffle } from "@/src/API";
 import { NFTCardSkeleton, RaffleCard } from "common/components";
 import { Anchor } from "react-bootstrap";
 import { Carousel } from '@mantine/carousel';
@@ -56,7 +56,7 @@ const RaffleCarousel = ({ raffles }: RaffleCarouselProps) => {
                         >
                             {raffles.map(raffle => (
                                 <Carousel.Slide>
-                                    <Anchor href={`/raffles/${raffle.raffleId}`}>
+                                    <Anchor href={`/raffles/${raffle.raffleNonce}`}>
                                         <RaffleCard raffle={raffle} />
                                     </Anchor>
                                 </Carousel.Slide>

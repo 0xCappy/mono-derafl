@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createTransactionRecord = void 0;
 const mutations_1 = require("../graphql/mutations");
 const axios_1 = require("axios");
-exports.createTransactionRecord = async (txHash, timestamp, eventType, chainId) => {
+exports.createTransactionRecord = async (txHash, timestamp, eventType, chainId, raffleNonce) => {
     const variables = {
         input: {
             createdAt: new Date(),
@@ -14,7 +14,8 @@ exports.createTransactionRecord = async (txHash, timestamp, eventType, chainId) 
             eventType: eventType,
             hash: txHash,
             chainId: chainId,
-            type: 'Transaction'
+            type: 'Transaction',
+            raffleNonce
         }
     };
     const options = {

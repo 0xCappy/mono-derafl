@@ -1,5 +1,5 @@
 import accounts from "@/pages/accounts";
-import { Account } from "@/types";
+import { Account } from "@/src/API";
 import { Group, Avatar, Box, Title, Stack, Pagination, Text, MediaQuery } from "@mantine/core";
 import { IconSquarePlus, IconTrophy, IconDice5, IconTicket, IconCalendar, IconCalendarTime } from "@tabler/icons";
 import makeBlockie from "ethereum-blockies-base64";

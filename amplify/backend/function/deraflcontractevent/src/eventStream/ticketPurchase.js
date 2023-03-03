@@ -24,8 +24,8 @@ exports.handleTicketPurchase = async (log, txId, timestamp, chainId) => {
         ticketsSold: raffle.ticketsSold + ticketsBought,
         state: totalTicketsBought === ticketsAvailable ? types_1.RaffleState.CLOSED : types_1.RaffleState.ACTIVE
     });
-    const transaction = await TransactionService_1.createTransactionRecord(txId, timestamp, types_1.EventType.TicketPurchase, chainId);
-    const ticketBatch = await TicketBatchService_1.createTicketBatch(raffle.raffleId, ticketsBought, firstTicket, lastTicket, parseInt(log.batchId.toString()), log.purchaser.toLowerCase(), transaction.id, log.raffleId.toString());
+    const transaction = await TransactionService_1.createTransactionRecord(txId, timestamp, types_1.EventType.TicketPurchase, chainId, raffle.raffleNonce);
+    const ticketBatch = await TicketBatchService_1.createTicketBatch(raffle.raffleId, ticketsBought, firstTicket, lastTicket, parseInt(log.batchId.toString()), log.purchaser.toLowerCase(), transaction.id, raffle.raffleNonce, chainId);
     // increment tickets bought on account
     const hasParticipated = await TicketBatchService_1.getAccountParticipation(log.purchaser.toLowerCase(), raffle.raffleId);
     let account = await AccountService_1.getOrCreateAccount(log.purchaser.toLowerCase());

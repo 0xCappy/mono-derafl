@@ -1,6 +1,6 @@
 import { OpenSeaBadge } from "@/common/components"
 import { buildAddressUrl } from "@/common/utils"
-import NFT from "@/types/NFT"
+import { NFT } from "@/src/API"
 import { Accordion, Card, Center, Divider, Flex, Group, SimpleGrid, Stack, Text, Title, Anchor } from "@mantine/core"
 import { IconBoxMultiple, IconExternalLink, IconExternalLinkOff, IconHomeLink, IconLinkOff, IconTicket } from "@tabler/icons"
 import { shortenAddress } from "@usedapp/core"

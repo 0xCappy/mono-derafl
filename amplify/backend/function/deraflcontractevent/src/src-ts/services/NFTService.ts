@@ -13,6 +13,7 @@ import { mapHexToAlchemyChain } from "../utils/mapHexToAlchemyChain";
 import Collection from "../types/Collection";
 import { getNftRank } from "../clients/TraitSniperClient";
 import { NFT, NFTAttribute } from "../types";
+import { Nft as AlchemyNft } from 'alchemy-sdk'
 
 // // called when raffle is created
 // // if no NFT exists, create one
@@ -83,19 +84,7 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
   const lastSale = await getNftLastSalePrice(address, tokenId, mapHexToAlchemyChain(chainId));
 
   if (!collection) {
-    collection = await createCollection({
-      type: 'Collection',
-      contractAddress: alchemyNft.contract.address,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      symbol: alchemyNft.contract.symbol,
-      rafflesCreated: 1,
-      contractDeployer: alchemyNft.contract.contractDeployer,
-      deployedBlockNumber: alchemyNft.contract.deployedBlockNumber,
-      tokenType: alchemyNft.contract.tokenType,
-      totalSupply: alchemyNft.contract.totalSupply,
-      chainId
-    })
+    collection = await createCollection(alchemyNft, chainId)
   }
 
   if (!nft) {
@@ -145,7 +134,29 @@ const getCollectionByContractAddress = async (address: string) => {
   return response?.data?.data?.listCollections?.items?.[0]
 }
 
-const createCollection = async (input: any) => {
+const createCollection = async (alchemyNft: AlchemyNft, chainId: string) => {
+  const input = {
+    type: 'Collection',
+    contractAddress: alchemyNft.contract.address,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    symbol: alchemyNft.contract.symbol,
+    rafflesCreated: 1,
+    contractDeployer: alchemyNft.contract.contractDeployer,
+    deployedBlockNumber: alchemyNft.contract.deployedBlockNumber,
+    tokenType: alchemyNft.contract.tokenType,
+    totalSupply: alchemyNft.contract.totalSupply,
+    chainId,
+    name: alchemyNft.contract.name,
+    openseaSlug: alchemyNft.contract.openSea?.collectionName,
+    imageUrl: alchemyNft.contract.openSea?.imageUrl,
+    externalUrl: alchemyNft.contract.openSea?.externalUrl,
+    discordUrl: alchemyNft.contract.openSea?.discordUrl,
+    twitterUsername: alchemyNft.contract.openSea?.twitterUsername,
+    description: alchemyNft.contract.openSea?.description,
+    floorPrice: alchemyNft.contract.openSea?.floorPrice,
+  }
+
   const variables = { input }
   const options = {
     headers: {

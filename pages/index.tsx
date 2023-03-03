@@ -1,27 +1,13 @@
-import { accountsByUpdatedAt, listAccounts, listTicketBatches, rafflesByCreatedAt, ticketBatchesByCreatedAt } from '@/src/graphql/queries';
+import { accountsByUpdatedAt, listAccounts, listTicketBatches, rafflesByCreatedAt, rafflesByUpdatedAt, ticketBatchesByCreatedAt } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify'
-import { Account, Raffle, TicketBatch } from '@/types';
+import { Account, Raffle, TicketBatch } from '@/src/API';
 import axios from 'axios';
 import Head from 'next/head';
 import React from 'react';
 import { Home } from '../features'
-import { rafflesByUpdatedAt } from '@/graphql/getTrendingRaffles';
 
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
-  // const h = listRaffles
-  // const raffles_ = await API.graphql(graphqlOperation(raffleByRaffleId, {
-  //   sortDirection: 'DESC',
-  //   raffleId: 1
-  // })) as any
-  // console.log("RESPONSE: ", raffles_)
-  // const todos = raffles_.data.listRaffles.items
-  // console.log("RAFFLES: ", todos)
-  // const response = await axios.post(`${process.env.API_URL}/initHomepage`)
-  // // const raffles = await response.data.raffles as Raffle
-  // // const purchases = await response.data.purchases.ticketBatches as TicketBatch[]
-  // // const accounts = await response.data.accounts.accounts as Account[]
-
   const accountData = await API.graphql(graphqlOperation(accountsByUpdatedAt, {
     type: 'Account',
     limit: 10,
@@ -43,7 +29,7 @@ export const getServerSideProps = async (context: any) => {
     sortDirection: 'DESC'
   })) as any
   const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
-
+  console.log("PURCHASE: ", purchases)
 
   return {
     props: {

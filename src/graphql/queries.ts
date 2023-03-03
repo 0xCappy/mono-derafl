@@ -7,26 +7,31 @@ export const getTicketRefund = /* GraphQL */ `
     getTicketRefund(id: $id) {
       id
       type
+      createdAt
+      updatedAt
+      raffleNonce
       ethAmount
       refundee
+      chainId
       raffle {
         id
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -38,6 +43,7 @@ export const getTicketRefund = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -52,6 +58,7 @@ export const getTicketRefund = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -65,6 +72,7 @@ export const getTicketRefund = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -85,6 +93,7 @@ export const getTicketRefund = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -123,6 +132,7 @@ export const getTicketRefund = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -147,6 +157,7 @@ export const getTicketRefund = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -155,8 +166,6 @@ export const getTicketRefund = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      createdAt
-      updatedAt
       _version
       _deleted
       _lastChangedAt
@@ -175,15 +184,19 @@ export const listTicketRefunds = /* GraphQL */ `
       items {
         id
         type
+        createdAt
+        updatedAt
+        raffleNonce
         ethAmount
         refundee
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -212,6 +225,7 @@ export const listTicketRefunds = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -220,8 +234,6 @@ export const listTicketRefunds = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        createdAt
-        updatedAt
         _version
         _deleted
         _lastChangedAt
@@ -249,15 +261,19 @@ export const syncTicketRefunds = /* GraphQL */ `
       items {
         id
         type
+        createdAt
+        updatedAt
+        raffleNonce
         ethAmount
         refundee
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -286,6 +302,7 @@ export const syncTicketRefunds = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -294,8 +311,6 @@ export const syncTicketRefunds = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        createdAt
-        updatedAt
         _version
         _deleted
         _lastChangedAt
@@ -312,13 +327,13 @@ export const getStat = /* GraphQL */ `
     getStat(id: $id) {
       id
       type
+      createdAt
+      updatedAt
       ethPaid
       ticketsBought
       royaltiesPaid
       chainId
       rafflesCreated
-      createdAt
-      updatedAt
       _version
       _deleted
       _lastChangedAt
@@ -335,13 +350,13 @@ export const listStats = /* GraphQL */ `
       items {
         id
         type
+        createdAt
+        updatedAt
         ethPaid
         ticketsBought
         royaltiesPaid
         chainId
         rafflesCreated
-        createdAt
-        updatedAt
         _version
         _deleted
         _lastChangedAt
@@ -367,13 +382,13 @@ export const syncStats = /* GraphQL */ `
       items {
         id
         type
+        createdAt
+        updatedAt
         ethPaid
         ticketsBought
         royaltiesPaid
         chainId
         rafflesCreated
-        createdAt
-        updatedAt
         _version
         _deleted
         _lastChangedAt
@@ -390,12 +405,14 @@ export const getTicketBatch = /* GraphQL */ `
       type
       createdAt
       updatedAt
+      raffleNonce
       lastTicket
       transaction {
         id
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -408,25 +425,26 @@ export const getTicketBatch = /* GraphQL */ `
       ticketsBought
       batchId
       firstTicket
-      raffleId
+      chainId
       raffle {
         id
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -438,6 +456,7 @@ export const getTicketBatch = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -452,6 +471,7 @@ export const getTicketBatch = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -465,6 +485,7 @@ export const getTicketBatch = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -485,6 +506,7 @@ export const getTicketBatch = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -523,6 +545,7 @@ export const getTicketBatch = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -562,12 +585,14 @@ export const listTicketBatches = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -580,14 +605,14 @@ export const listTicketBatches = /* GraphQL */ `
         ticketsBought
         batchId
         firstTicket
-        raffleId
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -640,12 +665,14 @@ export const syncTicketBatches = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -658,14 +685,14 @@ export const syncTicketBatches = /* GraphQL */ `
         ticketsBought
         batchId
         firstTicket
-        raffleId
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -722,12 +749,14 @@ export const ticketBatchesByCreatedAt = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -740,14 +769,14 @@ export const ticketBatchesByCreatedAt = /* GraphQL */ `
         ticketsBought
         batchId
         firstTicket
-        raffleId
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -804,12 +833,14 @@ export const ticketBatchesByUpdatedAt = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -822,14 +853,14 @@ export const ticketBatchesByUpdatedAt = /* GraphQL */ `
         ticketsBought
         batchId
         firstTicket
-        raffleId
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -886,12 +917,14 @@ export const ticketBatchesByTicketsBought = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -904,14 +937,14 @@ export const ticketBatchesByTicketsBought = /* GraphQL */ `
         ticketsBought
         batchId
         firstTicket
-        raffleId
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -946,6 +979,104 @@ export const ticketBatchesByTicketsBought = /* GraphQL */ `
     }
   }
 `;
+export const searchTicketBatches = /* GraphQL */ `
+  query SearchTicketBatches(
+    $filter: SearchableTicketBatchFilterInput
+    $sort: [SearchableTicketBatchSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableTicketBatchAggregationInput]
+  ) {
+    searchTicketBatches(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        type
+        createdAt
+        updatedAt
+        raffleNonce
+        lastTicket
+        transaction {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        purchaser
+        ticketsBought
+        batchId
+        firstTicket
+        chainId
+        raffle {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          ticketsAvailable
+          progress
+          state
+          tokenId
+          expires
+          nftAddress
+          ticketsSold
+          ticketBatches
+          winningTicket
+          chainId
+          winningAccount
+          owner
+          contract
+          _version
+          _deleted
+          _lastChangedAt
+          raffleWinningBatchId
+          raffleReleaseTxId
+          raffleOpenTxId
+          raffleDrawnTxId
+          raffleCloseTxId
+          raffleNftId
+          raffleRefundTxId
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        ticketBatchTransactionId
+        ticketBatchRaffleId
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getTransaction = /* GraphQL */ `
   query GetTransaction($id: ID!) {
     getTransaction(id: $id) {
@@ -953,6 +1084,7 @@ export const getTransaction = /* GraphQL */ `
       type
       createdAt
       updatedAt
+      raffleNonce
       date
       eventType
       hash
@@ -975,6 +1107,7 @@ export const listTransactions = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1006,6 +1139,7 @@ export const syncTransactions = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1026,19 +1160,21 @@ export const getRaffle = /* GraphQL */ `
       type
       createdAt
       updatedAt
+      raffleNonce
       ticketsAvailable
-      raffleId
       winningBatch {
         id
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1051,14 +1187,14 @@ export const getRaffle = /* GraphQL */ `
         ticketsBought
         batchId
         firstTicket
-        raffleId
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -1093,6 +1229,7 @@ export const getRaffle = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1107,6 +1244,7 @@ export const getRaffle = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1120,6 +1258,7 @@ export const getRaffle = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1140,6 +1279,7 @@ export const getRaffle = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1181,6 +1321,14 @@ export const getRaffle = /* GraphQL */ `
           tokenType
           totalSupply
           chainId
+          name
+          openseaSlug
+          imageUrl
+          externalUrl
+          discordUrl
+          twitterUsername
+          description
+          floorPrice
           _version
           _deleted
           _lastChangedAt
@@ -1195,6 +1343,7 @@ export const getRaffle = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1228,19 +1377,20 @@ export const listRaffles = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1252,6 +1402,7 @@ export const listRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1266,6 +1417,7 @@ export const listRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1279,6 +1431,7 @@ export const listRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1299,6 +1452,7 @@ export const listRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1337,6 +1491,7 @@ export const listRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1379,19 +1534,20 @@ export const syncRaffles = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1403,6 +1559,7 @@ export const syncRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1417,6 +1574,7 @@ export const syncRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1430,6 +1588,7 @@ export const syncRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1450,6 +1609,7 @@ export const syncRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1488,6 +1648,7 @@ export const syncRaffles = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1534,19 +1695,20 @@ export const rafflesByCreatedAt = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1558,6 +1720,7 @@ export const rafflesByCreatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1572,6 +1735,7 @@ export const rafflesByCreatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1585,6 +1749,7 @@ export const rafflesByCreatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1605,6 +1770,7 @@ export const rafflesByCreatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1643,6 +1809,7 @@ export const rafflesByCreatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1689,19 +1856,20 @@ export const rafflesByUpdatedAt = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1713,6 +1881,7 @@ export const rafflesByUpdatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1727,6 +1896,7 @@ export const rafflesByUpdatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1740,6 +1910,7 @@ export const rafflesByUpdatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1760,6 +1931,7 @@ export const rafflesByUpdatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1798,6 +1970,7 @@ export const rafflesByUpdatedAt = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1844,19 +2017,20 @@ export const rafflesByProgress = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1868,6 +2042,7 @@ export const rafflesByProgress = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1882,6 +2057,7 @@ export const rafflesByProgress = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1895,6 +2071,7 @@ export const rafflesByProgress = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1915,6 +2092,7 @@ export const rafflesByProgress = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1953,6 +2131,7 @@ export const rafflesByProgress = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1999,19 +2178,20 @@ export const rafflesByTicketsAvailable = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -2023,6 +2203,7 @@ export const rafflesByTicketsAvailable = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2037,6 +2218,7 @@ export const rafflesByTicketsAvailable = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2050,6 +2232,7 @@ export const rafflesByTicketsAvailable = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2070,6 +2253,7 @@ export const rafflesByTicketsAvailable = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2108,6 +2292,7 @@ export const rafflesByTicketsAvailable = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2154,19 +2339,20 @@ export const rafflesByExpires = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -2178,6 +2364,7 @@ export const rafflesByExpires = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2192,6 +2379,7 @@ export const rafflesByExpires = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2205,6 +2393,7 @@ export const rafflesByExpires = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2225,6 +2414,7 @@ export const rafflesByExpires = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2263,6 +2453,7 @@ export const rafflesByExpires = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2309,19 +2500,20 @@ export const rafflesByTicketsSold = /* GraphQL */ `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
-          raffleId
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -2333,6 +2525,7 @@ export const rafflesByTicketsSold = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2347,6 +2540,7 @@ export const rafflesByTicketsSold = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2360,6 +2554,7 @@ export const rafflesByTicketsSold = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2380,6 +2575,7 @@ export const rafflesByTicketsSold = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2418,6 +2614,7 @@ export const rafflesByTicketsSold = /* GraphQL */ `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2439,6 +2636,181 @@ export const rafflesByTicketsSold = /* GraphQL */ `
       }
       nextToken
       startedAt
+    }
+  }
+`;
+export const searchRaffles = /* GraphQL */ `
+  query SearchRaffles(
+    $filter: SearchableRaffleFilterInput
+    $sort: [SearchableRaffleSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableRaffleAggregationInput]
+  ) {
+    searchRaffles(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        type
+        createdAt
+        updatedAt
+        raffleNonce
+        ticketsAvailable
+        winningBatch {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          lastTicket
+          purchaser
+          ticketsBought
+          batchId
+          firstTicket
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+          ticketBatchTransactionId
+          ticketBatchRaffleId
+        }
+        releaseTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        progress
+        openTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        drawnTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        state
+        tokenId
+        expires
+        nftAddress
+        ticketsSold
+        ticketBatches
+        winningTicket
+        closeTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        chainId
+        winningAccount
+        owner
+        contract
+        nft {
+          id
+          type
+          createdAt
+          updatedAt
+          contractAddress
+          metadata
+          tokenUri
+          tokenId
+          symbol
+          imageUri
+          tokenName
+          collectionName
+          lastSales
+          chainId
+          rarityData
+          _version
+          _deleted
+          _lastChangedAt
+          nFTCollectionId
+        }
+        refundTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        raffleWinningBatchId
+        raffleReleaseTxId
+        raffleOpenTxId
+        raffleDrawnTxId
+        raffleCloseTxId
+        raffleNftId
+        raffleRefundTxId
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -2473,6 +2845,14 @@ export const getNFT = /* GraphQL */ `
         tokenType
         totalSupply
         chainId
+        name
+        openseaSlug
+        imageUrl
+        externalUrl
+        discordUrl
+        twitterUsername
+        description
+        floorPrice
         _version
         _deleted
         _lastChangedAt
@@ -2520,6 +2900,14 @@ export const listNFTS = /* GraphQL */ `
           tokenType
           totalSupply
           chainId
+          name
+          openseaSlug
+          imageUrl
+          externalUrl
+          discordUrl
+          twitterUsername
+          description
+          floorPrice
           _version
           _deleted
           _lastChangedAt
@@ -2576,6 +2964,14 @@ export const syncNFTS = /* GraphQL */ `
           tokenType
           totalSupply
           chainId
+          name
+          openseaSlug
+          imageUrl
+          externalUrl
+          discordUrl
+          twitterUsername
+          description
+          floorPrice
           _version
           _deleted
           _lastChangedAt
@@ -2605,6 +3001,14 @@ export const getCollection = /* GraphQL */ `
       tokenType
       totalSupply
       chainId
+      name
+      openseaSlug
+      imageUrl
+      externalUrl
+      discordUrl
+      twitterUsername
+      description
+      floorPrice
       _version
       _deleted
       _lastChangedAt
@@ -2631,6 +3035,14 @@ export const listCollections = /* GraphQL */ `
         tokenType
         totalSupply
         chainId
+        name
+        openseaSlug
+        imageUrl
+        externalUrl
+        discordUrl
+        twitterUsername
+        description
+        floorPrice
         _version
         _deleted
         _lastChangedAt
@@ -2666,6 +3078,14 @@ export const syncCollections = /* GraphQL */ `
         tokenType
         totalSupply
         chainId
+        name
+        openseaSlug
+        imageUrl
+        externalUrl
+        discordUrl
+        twitterUsername
+        description
+        floorPrice
         _version
         _deleted
         _lastChangedAt
@@ -2964,6 +3384,56 @@ export const accountsByCreatedAt = /* GraphQL */ `
       }
       nextToken
       startedAt
+    }
+  }
+`;
+export const searchAccounts = /* GraphQL */ `
+  query SearchAccounts(
+    $filter: SearchableAccountFilterInput
+    $sort: [SearchableAccountSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableAccountAggregationInput]
+  ) {
+    searchAccounts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        type
+        createdAt
+        updatedAt
+        address
+        rafflesCreated
+        rafflesWon
+        rafflesEntered
+        ticketsBought
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;

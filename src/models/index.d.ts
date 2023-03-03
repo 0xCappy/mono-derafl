@@ -9,16 +9,17 @@ import { LazyLoading, LazyLoadingDisabled, AsyncItem } from "@aws-amplify/datast
 type EagerTicketRefund = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<TicketRefund, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly raffleNonce: number;
   readonly ethAmount?: number | null;
   readonly refundee?: string | null;
+  readonly chainId: string;
   readonly raffle?: Raffle | null;
   readonly tx?: Transaction | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
   readonly ticketRefundRaffleId?: string | null;
   readonly ticketRefundTxId?: string | null;
 }
@@ -26,16 +27,17 @@ type EagerTicketRefund = {
 type LazyTicketRefund = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<TicketRefund, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly raffleNonce: number;
   readonly ethAmount?: number | null;
   readonly refundee?: string | null;
+  readonly chainId: string;
   readonly raffle: AsyncItem<Raffle | undefined>;
   readonly tx: AsyncItem<Transaction | undefined>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
   readonly ticketRefundRaffleId?: string | null;
   readonly ticketRefundTxId?: string | null;
 }
@@ -49,33 +51,31 @@ export declare const TicketRefund: (new (init: ModelInit<TicketRefund>) => Ticke
 type EagerStat = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Stat, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly ethPaid?: number | null;
   readonly ticketsBought?: number | null;
   readonly royaltiesPaid?: number | null;
   readonly chainId: string;
   readonly rafflesCreated?: number | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
 }
 
 type LazyStat = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Stat, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly type: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly ethPaid?: number | null;
   readonly ticketsBought?: number | null;
   readonly royaltiesPaid?: number | null;
   readonly chainId: string;
   readonly rafflesCreated?: number | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
 }
 
 export declare type Stat = LazyLoading extends LazyLoadingDisabled ? EagerStat : LazyStat
@@ -92,13 +92,14 @@ type EagerTicketBatch = {
   readonly type: string;
   readonly createdAt: string;
   readonly updatedAt: string;
+  readonly raffleNonce: number;
   readonly lastTicket: number;
   readonly transaction: Transaction;
   readonly purchaser: string;
   readonly ticketsBought: number;
   readonly batchId: number;
   readonly firstTicket: number;
-  readonly raffleId: number;
+  readonly chainId: string;
   readonly raffle?: Raffle | null;
   readonly ticketBatchTransactionId: string;
   readonly ticketBatchRaffleId?: string | null;
@@ -112,13 +113,14 @@ type LazyTicketBatch = {
   readonly type: string;
   readonly createdAt: string;
   readonly updatedAt: string;
+  readonly raffleNonce: number;
   readonly lastTicket: number;
   readonly transaction: AsyncItem<Transaction>;
   readonly purchaser: string;
   readonly ticketsBought: number;
   readonly batchId: number;
   readonly firstTicket: number;
-  readonly raffleId: number;
+  readonly chainId: string;
   readonly raffle: AsyncItem<Raffle | undefined>;
   readonly ticketBatchTransactionId: string;
   readonly ticketBatchRaffleId?: string | null;
@@ -136,8 +138,9 @@ type EagerTransaction = {
   };
   readonly id: string;
   readonly type: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly raffleNonce: number;
   readonly date: string;
   readonly eventType: number;
   readonly hash: string;
@@ -150,8 +153,9 @@ type LazyTransaction = {
   };
   readonly id: string;
   readonly type: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly raffleNonce: number;
   readonly date: string;
   readonly eventType: number;
   readonly hash: string;
@@ -172,8 +176,8 @@ type EagerRaffle = {
   readonly type: string;
   readonly createdAt: string;
   readonly updatedAt: string;
+  readonly raffleNonce: number;
   readonly ticketsAvailable: number;
-  readonly raffleId: number;
   readonly winningBatch?: TicketBatch | null;
   readonly releaseTx?: Transaction | null;
   readonly progress: number;
@@ -191,14 +195,14 @@ type EagerRaffle = {
   readonly winningAccount?: string | null;
   readonly owner: string;
   readonly contract: string;
-  readonly nft?: NFT | null;
+  readonly nft: NFT;
   readonly refundTx?: Transaction | null;
   readonly raffleWinningBatchId?: string | null;
   readonly raffleReleaseTxId?: string | null;
   readonly raffleOpenTxId?: string | null;
   readonly raffleDrawnTxId?: string | null;
   readonly raffleCloseTxId?: string | null;
-  readonly raffleNftId?: string | null;
+  readonly raffleNftId: string;
   readonly raffleRefundTxId?: string | null;
 }
 
@@ -210,8 +214,8 @@ type LazyRaffle = {
   readonly type: string;
   readonly createdAt: string;
   readonly updatedAt: string;
+  readonly raffleNonce: number;
   readonly ticketsAvailable: number;
-  readonly raffleId: number;
   readonly winningBatch: AsyncItem<TicketBatch | undefined>;
   readonly releaseTx: AsyncItem<Transaction | undefined>;
   readonly progress: number;
@@ -229,14 +233,14 @@ type LazyRaffle = {
   readonly winningAccount?: string | null;
   readonly owner: string;
   readonly contract: string;
-  readonly nft: AsyncItem<NFT | undefined>;
+  readonly nft: AsyncItem<NFT>;
   readonly refundTx: AsyncItem<Transaction | undefined>;
   readonly raffleWinningBatchId?: string | null;
   readonly raffleReleaseTxId?: string | null;
   readonly raffleOpenTxId?: string | null;
   readonly raffleDrawnTxId?: string | null;
   readonly raffleCloseTxId?: string | null;
-  readonly raffleNftId?: string | null;
+  readonly raffleNftId: string;
   readonly raffleRefundTxId?: string | null;
 }
 
@@ -252,8 +256,8 @@ type EagerNFT = {
   };
   readonly id: string;
   readonly type: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly contractAddress: string;
   readonly metadata: string;
   readonly tokenUri?: string | null;
@@ -265,8 +269,8 @@ type EagerNFT = {
   readonly lastSales?: string | null;
   readonly chainId: string;
   readonly rarityData?: string | null;
-  readonly collection?: Collection | null;
-  readonly nFTCollectionId?: string | null;
+  readonly collection: Collection;
+  readonly nFTCollectionId: string;
 }
 
 type LazyNFT = {
@@ -275,8 +279,8 @@ type LazyNFT = {
   };
   readonly id: string;
   readonly type: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly contractAddress: string;
   readonly metadata: string;
   readonly tokenUri?: string | null;
@@ -288,8 +292,8 @@ type LazyNFT = {
   readonly lastSales?: string | null;
   readonly chainId: string;
   readonly rarityData?: string | null;
-  readonly collection: AsyncItem<Collection | undefined>;
-  readonly nFTCollectionId?: string | null;
+  readonly collection: AsyncItem<Collection>;
+  readonly nFTCollectionId: string;
 }
 
 export declare type NFT = LazyLoading extends LazyLoadingDisabled ? EagerNFT : LazyNFT
@@ -305,8 +309,8 @@ type EagerCollection = {
   readonly id: string;
   readonly type: string;
   readonly contractAddress: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly symbol?: string | null;
   readonly rafflesCreated?: number | null;
   readonly contractDeployer?: string | null;
@@ -314,6 +318,14 @@ type EagerCollection = {
   readonly tokenType: string;
   readonly totalSupply?: string | null;
   readonly chainId: string;
+  readonly name: string;
+  readonly openseaSlug?: string | null;
+  readonly imageUrl?: string | null;
+  readonly externalUrl?: string | null;
+  readonly discordUrl?: string | null;
+  readonly twitterUsername?: string | null;
+  readonly description?: string | null;
+  readonly floorPrice?: number | null;
 }
 
 type LazyCollection = {
@@ -323,8 +335,8 @@ type LazyCollection = {
   readonly id: string;
   readonly type: string;
   readonly contractAddress: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly symbol?: string | null;
   readonly rafflesCreated?: number | null;
   readonly contractDeployer?: string | null;
@@ -332,6 +344,14 @@ type LazyCollection = {
   readonly tokenType: string;
   readonly totalSupply?: string | null;
   readonly chainId: string;
+  readonly name: string;
+  readonly openseaSlug?: string | null;
+  readonly imageUrl?: string | null;
+  readonly externalUrl?: string | null;
+  readonly discordUrl?: string | null;
+  readonly twitterUsername?: string | null;
+  readonly description?: string | null;
+  readonly floorPrice?: number | null;
 }
 
 export declare type Collection = LazyLoading extends LazyLoadingDisabled ? EagerCollection : LazyCollection

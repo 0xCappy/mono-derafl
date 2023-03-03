@@ -1,7 +1,8 @@
 import { shortenAddress } from '@usedapp/core'
 import TimeAgo from 'react-timeago'
 import { ActionIcon, Anchor, Avatar, Box, Card, Group, Text, Table, Title } from '@mantine/core';
-import { Raffle, RaffleEventTitleMap, TicketBatch, Transaction } from 'types';
+import { RaffleEventTitleMap } from 'types';
+import { Raffle, Transaction } from '@/src/API'
 import { useMemo } from 'react';
 import { IconCalendarEvent, IconExternalLink, IconInfoCircle, IconLink, IconTicket } from '@tabler/icons';
 import { AccountAnchor } from '@/common/components';
@@ -38,7 +39,7 @@ const TransactionsCard = ({ raffle }: TransactionsCardProps) => {
         () => [
             {
                 header: 'TX Type',
-                accessorFn: (tx) => (
+                accessorFn: (tx: Transaction) => (
                     <Group spacing={4}>
                         <IconInfoCircle /><Text>{RaffleEventTitleMap[tx.eventType]}</Text>
                     </Group>

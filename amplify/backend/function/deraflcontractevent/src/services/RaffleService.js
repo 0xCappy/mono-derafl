@@ -173,17 +173,17 @@ exports.getRaffleByRaffleId = async (raffleId) => {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: queries_1.listRaffles, variables: { filter: { raffleId: { eq: raffleId } } } };
+    const body = { query: queries_1.listRaffles, variables: { filter: { raffleNonce: { eq: raffleId } } } };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     return response?.data?.data?.listRaffles?.items?.[0];
 };
-exports.createRaffle = async (raffleId, chainId, nftID, owner, contract, ticketsAvailable, tokenId, nftAddress, expires, openTxId) => {
+exports.createRaffle = async (raffleNonce, chainId, nftID, owner, contract, ticketsAvailable, tokenId, nftAddress, expires, openTxId) => {
     const variables = {
         input: {
             createdAt: new Date(),
             updatedAt: new Date(),
             ticketsAvailable,
-            raffleId,
+            raffleNonce,
             progress: 0,
             state: types_1.RaffleState.ACTIVE,
             tokenId,

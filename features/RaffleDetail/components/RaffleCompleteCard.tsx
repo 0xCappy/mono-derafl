@@ -1,6 +1,7 @@
 import { Card, Group, Stack, Title, Text, Button, Anchor } from '@mantine/core';
 import { IconTicket, IconUser } from '@tabler/icons';
-import { RaffleInfo, TicketBatch } from 'types';
+import { RaffleInfo } from 'types';
+import { TicketBatch } from '@/src/API';
 import { AccountAnchor } from '@/common/components';
 
 interface RaffleDrawnCardProps {

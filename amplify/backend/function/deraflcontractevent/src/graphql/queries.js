@@ -3,31 +3,37 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.accountsByCreatedAt = exports.accountsByUpdatedAt = exports.accountsByRafflesCreated = exports.accountsByRafflesWon = exports.accountsByRafflesEntered = exports.accountsByTicketsBought = exports.syncAccounts = exports.listAccounts = exports.getAccount = exports.syncCollections = exports.listCollections = exports.getCollection = exports.syncNFTS = exports.listNFTS = exports.getNFT = exports.rafflesByTicketsSold = exports.rafflesByExpires = exports.rafflesByTicketsAvailable = exports.rafflesByProgress = exports.rafflesByUpdatedAt = exports.rafflesByCreatedAt = exports.syncRaffles = exports.listRaffles = exports.getRaffle = exports.syncTransactions = exports.listTransactions = exports.getTransaction = exports.ticketBatchesByTicketsBought = exports.ticketBatchesByUpdatedAt = exports.ticketBatchesByCreatedAt = exports.syncTicketBatches = exports.listTicketBatches = exports.getTicketBatch = exports.syncStats = exports.listStats = exports.getStat = exports.syncTicketRefunds = exports.listTicketRefunds = exports.getTicketRefund = void 0;
+exports.searchAccounts = exports.accountsByCreatedAt = exports.accountsByUpdatedAt = exports.accountsByRafflesCreated = exports.accountsByRafflesWon = exports.accountsByRafflesEntered = exports.accountsByTicketsBought = exports.syncAccounts = exports.listAccounts = exports.getAccount = exports.syncCollections = exports.listCollections = exports.getCollection = exports.syncNFTS = exports.listNFTS = exports.getNFT = exports.searchRaffles = exports.rafflesByTicketsSold = exports.rafflesByExpires = exports.rafflesByTicketsAvailable = exports.rafflesByProgress = exports.rafflesByUpdatedAt = exports.rafflesByCreatedAt = exports.syncRaffles = exports.listRaffles = exports.getRaffle = exports.syncTransactions = exports.listTransactions = exports.getTransaction = exports.searchTicketBatches = exports.ticketBatchesByTicketsBought = exports.ticketBatchesByUpdatedAt = exports.ticketBatchesByCreatedAt = exports.syncTicketBatches = exports.listTicketBatches = exports.getTicketBatch = exports.syncStats = exports.listStats = exports.getStat = exports.syncTicketRefunds = exports.listTicketRefunds = exports.getTicketRefund = void 0;
 exports.getTicketRefund = `
   query GetTicketRefund($id: ID!) {
     getTicketRefund(id: $id) {
       id
       type
+      createdAt
+      updatedAt
+      raffleNonce
       ethAmount
       refundee
+      chainId
       raffle {
         id
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -39,6 +45,7 @@ exports.getTicketRefund = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -53,6 +60,7 @@ exports.getTicketRefund = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -66,6 +74,7 @@ exports.getTicketRefund = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -86,6 +95,7 @@ exports.getTicketRefund = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -124,6 +134,7 @@ exports.getTicketRefund = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -148,6 +159,7 @@ exports.getTicketRefund = `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -156,8 +168,6 @@ exports.getTicketRefund = `
         _deleted
         _lastChangedAt
       }
-      createdAt
-      updatedAt
       _version
       _deleted
       _lastChangedAt
@@ -176,15 +186,19 @@ exports.listTicketRefunds = `
       items {
         id
         type
+        createdAt
+        updatedAt
+        raffleNonce
         ethAmount
         refundee
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -213,6 +227,7 @@ exports.listTicketRefunds = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -221,8 +236,6 @@ exports.listTicketRefunds = `
           _deleted
           _lastChangedAt
         }
-        createdAt
-        updatedAt
         _version
         _deleted
         _lastChangedAt
@@ -250,15 +263,19 @@ exports.syncTicketRefunds = `
       items {
         id
         type
+        createdAt
+        updatedAt
+        raffleNonce
         ethAmount
         refundee
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -287,6 +304,7 @@ exports.syncTicketRefunds = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -295,8 +313,6 @@ exports.syncTicketRefunds = `
           _deleted
           _lastChangedAt
         }
-        createdAt
-        updatedAt
         _version
         _deleted
         _lastChangedAt
@@ -313,13 +329,13 @@ exports.getStat = `
     getStat(id: $id) {
       id
       type
+      createdAt
+      updatedAt
       ethPaid
       ticketsBought
       royaltiesPaid
       chainId
       rafflesCreated
-      createdAt
-      updatedAt
       _version
       _deleted
       _lastChangedAt
@@ -336,13 +352,13 @@ exports.listStats = `
       items {
         id
         type
+        createdAt
+        updatedAt
         ethPaid
         ticketsBought
         royaltiesPaid
         chainId
         rafflesCreated
-        createdAt
-        updatedAt
         _version
         _deleted
         _lastChangedAt
@@ -368,13 +384,13 @@ exports.syncStats = `
       items {
         id
         type
+        createdAt
+        updatedAt
         ethPaid
         ticketsBought
         royaltiesPaid
         chainId
         rafflesCreated
-        createdAt
-        updatedAt
         _version
         _deleted
         _lastChangedAt
@@ -391,12 +407,14 @@ exports.getTicketBatch = `
       type
       createdAt
       updatedAt
+      raffleNonce
       lastTicket
       transaction {
         id
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -409,23 +427,26 @@ exports.getTicketBatch = `
       ticketsBought
       batchId
       firstTicket
+      chainId
       raffle {
         id
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -437,6 +458,7 @@ exports.getTicketBatch = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -451,6 +473,7 @@ exports.getTicketBatch = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -464,6 +487,7 @@ exports.getTicketBatch = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -484,6 +508,7 @@ exports.getTicketBatch = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -522,6 +547,7 @@ exports.getTicketBatch = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -561,12 +587,14 @@ exports.listTicketBatches = `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -579,13 +607,14 @@ exports.listTicketBatches = `
         ticketsBought
         batchId
         firstTicket
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -638,12 +667,14 @@ exports.syncTicketBatches = `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -656,13 +687,14 @@ exports.syncTicketBatches = `
         ticketsBought
         batchId
         firstTicket
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -719,12 +751,14 @@ exports.ticketBatchesByCreatedAt = `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -737,13 +771,14 @@ exports.ticketBatchesByCreatedAt = `
         ticketsBought
         batchId
         firstTicket
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -800,12 +835,14 @@ exports.ticketBatchesByUpdatedAt = `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -818,13 +855,14 @@ exports.ticketBatchesByUpdatedAt = `
         ticketsBought
         batchId
         firstTicket
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -881,12 +919,14 @@ exports.ticketBatchesByTicketsBought = `
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -899,13 +939,14 @@ exports.ticketBatchesByTicketsBought = `
         ticketsBought
         batchId
         firstTicket
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -940,6 +981,104 @@ exports.ticketBatchesByTicketsBought = `
     }
   }
 `;
+exports.searchTicketBatches = `
+  query SearchTicketBatches(
+    $filter: SearchableTicketBatchFilterInput
+    $sort: [SearchableTicketBatchSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableTicketBatchAggregationInput]
+  ) {
+    searchTicketBatches(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        type
+        createdAt
+        updatedAt
+        raffleNonce
+        lastTicket
+        transaction {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        purchaser
+        ticketsBought
+        batchId
+        firstTicket
+        chainId
+        raffle {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          ticketsAvailable
+          progress
+          state
+          tokenId
+          expires
+          nftAddress
+          ticketsSold
+          ticketBatches
+          winningTicket
+          chainId
+          winningAccount
+          owner
+          contract
+          _version
+          _deleted
+          _lastChangedAt
+          raffleWinningBatchId
+          raffleReleaseTxId
+          raffleOpenTxId
+          raffleDrawnTxId
+          raffleCloseTxId
+          raffleNftId
+          raffleRefundTxId
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        ticketBatchTransactionId
+        ticketBatchRaffleId
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 exports.getTransaction = `
   query GetTransaction($id: ID!) {
     getTransaction(id: $id) {
@@ -947,6 +1086,7 @@ exports.getTransaction = `
       type
       createdAt
       updatedAt
+      raffleNonce
       date
       eventType
       hash
@@ -969,6 +1109,7 @@ exports.listTransactions = `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1000,6 +1141,7 @@ exports.syncTransactions = `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1020,19 +1162,21 @@ exports.getRaffle = `
       type
       createdAt
       updatedAt
+      raffleNonce
       ticketsAvailable
-      raffleId
       winningBatch {
         id
         type
         createdAt
         updatedAt
+        raffleNonce
         lastTicket
         transaction {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1045,13 +1189,14 @@ exports.getRaffle = `
         ticketsBought
         batchId
         firstTicket
+        chainId
         raffle {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           ticketsAvailable
-          raffleId
           progress
           state
           tokenId
@@ -1086,6 +1231,7 @@ exports.getRaffle = `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1100,6 +1246,7 @@ exports.getRaffle = `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1113,6 +1260,7 @@ exports.getRaffle = `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1133,6 +1281,7 @@ exports.getRaffle = `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1188,6 +1337,7 @@ exports.getRaffle = `
         type
         createdAt
         updatedAt
+        raffleNonce
         date
         eventType
         hash
@@ -1221,18 +1371,20 @@ exports.listRaffles = `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1244,6 +1396,7 @@ exports.listRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1258,6 +1411,7 @@ exports.listRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1271,6 +1425,7 @@ exports.listRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1291,6 +1446,7 @@ exports.listRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1329,6 +1485,7 @@ exports.listRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1371,18 +1528,20 @@ exports.syncRaffles = `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1394,6 +1553,7 @@ exports.syncRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1408,6 +1568,7 @@ exports.syncRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1421,6 +1582,7 @@ exports.syncRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1441,6 +1603,7 @@ exports.syncRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1479,6 +1642,7 @@ exports.syncRaffles = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1525,18 +1689,20 @@ exports.rafflesByCreatedAt = `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1548,6 +1714,7 @@ exports.rafflesByCreatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1562,6 +1729,7 @@ exports.rafflesByCreatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1575,6 +1743,7 @@ exports.rafflesByCreatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1595,6 +1764,7 @@ exports.rafflesByCreatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1633,6 +1803,7 @@ exports.rafflesByCreatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1679,18 +1850,20 @@ exports.rafflesByUpdatedAt = `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1702,6 +1875,7 @@ exports.rafflesByUpdatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1716,6 +1890,7 @@ exports.rafflesByUpdatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1729,6 +1904,7 @@ exports.rafflesByUpdatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1749,6 +1925,7 @@ exports.rafflesByUpdatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1787,6 +1964,7 @@ exports.rafflesByUpdatedAt = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1833,18 +2011,20 @@ exports.rafflesByProgress = `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -1856,6 +2036,7 @@ exports.rafflesByProgress = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1870,6 +2051,7 @@ exports.rafflesByProgress = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1883,6 +2065,7 @@ exports.rafflesByProgress = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1903,6 +2086,7 @@ exports.rafflesByProgress = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1941,6 +2125,7 @@ exports.rafflesByProgress = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -1987,18 +2172,20 @@ exports.rafflesByTicketsAvailable = `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -2010,6 +2197,7 @@ exports.rafflesByTicketsAvailable = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2024,6 +2212,7 @@ exports.rafflesByTicketsAvailable = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2037,6 +2226,7 @@ exports.rafflesByTicketsAvailable = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2057,6 +2247,7 @@ exports.rafflesByTicketsAvailable = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2095,6 +2286,7 @@ exports.rafflesByTicketsAvailable = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2141,18 +2333,20 @@ exports.rafflesByExpires = `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -2164,6 +2358,7 @@ exports.rafflesByExpires = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2178,6 +2373,7 @@ exports.rafflesByExpires = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2191,6 +2387,7 @@ exports.rafflesByExpires = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2211,6 +2408,7 @@ exports.rafflesByExpires = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2249,6 +2447,7 @@ exports.rafflesByExpires = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2295,18 +2494,20 @@ exports.rafflesByTicketsSold = `
         type
         createdAt
         updatedAt
+        raffleNonce
         ticketsAvailable
-        raffleId
         winningBatch {
           id
           type
           createdAt
           updatedAt
+          raffleNonce
           lastTicket
           purchaser
           ticketsBought
           batchId
           firstTicket
+          chainId
           _version
           _deleted
           _lastChangedAt
@@ -2318,6 +2519,7 @@ exports.rafflesByTicketsSold = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2332,6 +2534,7 @@ exports.rafflesByTicketsSold = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2345,6 +2548,7 @@ exports.rafflesByTicketsSold = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2365,6 +2569,7 @@ exports.rafflesByTicketsSold = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2403,6 +2608,7 @@ exports.rafflesByTicketsSold = `
           type
           createdAt
           updatedAt
+          raffleNonce
           date
           eventType
           hash
@@ -2424,6 +2630,181 @@ exports.rafflesByTicketsSold = `
       }
       nextToken
       startedAt
+    }
+  }
+`;
+exports.searchRaffles = `
+  query SearchRaffles(
+    $filter: SearchableRaffleFilterInput
+    $sort: [SearchableRaffleSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableRaffleAggregationInput]
+  ) {
+    searchRaffles(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        type
+        createdAt
+        updatedAt
+        raffleNonce
+        ticketsAvailable
+        winningBatch {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          lastTicket
+          purchaser
+          ticketsBought
+          batchId
+          firstTicket
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+          ticketBatchTransactionId
+          ticketBatchRaffleId
+        }
+        releaseTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        progress
+        openTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        drawnTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        state
+        tokenId
+        expires
+        nftAddress
+        ticketsSold
+        ticketBatches
+        winningTicket
+        closeTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        chainId
+        winningAccount
+        owner
+        contract
+        nft {
+          id
+          type
+          createdAt
+          updatedAt
+          contractAddress
+          metadata
+          tokenUri
+          tokenId
+          symbol
+          imageUri
+          tokenName
+          collectionName
+          lastSales
+          chainId
+          rarityData
+          _version
+          _deleted
+          _lastChangedAt
+          nFTCollectionId
+        }
+        refundTx {
+          id
+          type
+          createdAt
+          updatedAt
+          raffleNonce
+          date
+          eventType
+          hash
+          chainId
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        raffleWinningBatchId
+        raffleReleaseTxId
+        raffleOpenTxId
+        raffleDrawnTxId
+        raffleCloseTxId
+        raffleNftId
+        raffleRefundTxId
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -2949,6 +3330,56 @@ exports.accountsByCreatedAt = `
       }
       nextToken
       startedAt
+    }
+  }
+`;
+exports.searchAccounts = `
+  query SearchAccounts(
+    $filter: SearchableAccountFilterInput
+    $sort: [SearchableAccountSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableAccountAggregationInput]
+  ) {
+    searchAccounts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        type
+        createdAt
+        updatedAt
+        address
+        rafflesCreated
+        rafflesWon
+        rafflesEntered
+        ticketsBought
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;

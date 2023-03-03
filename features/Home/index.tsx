@@ -1,4 +1,4 @@
-import { Account, Raffle, TicketBatch } from "@/types"
+import { Account, Raffle, TicketBatch } from "@/src/API"
 import { Box } from "@mantine/core"
 import { RaffleCarousel } from ".."
 import { ActiveAccounts, Create, Hero, Intro, Open, Purchases, SupportingCreators, Transparent } from "./components"

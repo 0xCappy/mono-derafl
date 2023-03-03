@@ -1,5 +1,5 @@
 import { renderSortIcon } from "@/common/utils"
-import { Raffle, TicketBatch } from "@/types"
+import { TicketBatch } from "@/src/API"
 import { Group, Avatar, Stack, Pagination, Text, Image, Table, Anchor, ActionIcon, Box, MediaQuery } from "@mantine/core"
 import { IconBoxMultiple, IconCalendarEvent, IconExternalLink, IconHash, IconTicket } from "@tabler/icons"
 import { Column, HeaderCell, Cell, Table as OldTable, SortType } from "rsuite-table"

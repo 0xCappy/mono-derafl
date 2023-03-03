@@ -1,4 +1,5 @@
-import { NFT, Raffle, RaffleInfo, RaffleState, TicketBatch, Transaction } from 'types';
+import { NFT, Raffle, TicketBatch, Transaction } from '@/src/API';
+import { RaffleInfo, RaffleState } from '@/types'
 import { countdownRenderer } from 'common/utils';
 import useRaffleInfo from '../../hooks/useRaffleInfo';
 import Link from 'next/link';
@@ -20,8 +21,8 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
     const { address } = useWallet()
     const [viewedBatch, setViewedBatch] = useState(0)
     const [hasSetViewed, setHasSetViewed] = useState(false)
-    const _raffleInfo = useRaffleInfo(raffle.raffleId.toString(), parseInt(raffle.chainId), raffle.contract)
-    const ticketsOwned = useTicketsOwned(raffle.raffleId.toString(), address, parseInt(raffle.chainId), raffle.contract)
+    const _raffleInfo = useRaffleInfo(raffle.raffleNonce.toString(), parseInt(raffle.chainId), raffle.contract)
+    const ticketsOwned = useTicketsOwned(raffle.raffleNonce.toString(), address, parseInt(raffle.chainId), raffle.contract)
     const [raffleInfo, setRaffleInfo] = useState<RaffleInfo | undefined>()
     const [winningBatch, setWinningBatch] = useState<TicketBatch>()
     const [updatedRaffle, setUpdatedRaffle] = useState<Raffle>(raffle)
@@ -74,7 +75,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
         const data = await fetch("/api/raffles/detail", {
             method: "POST",
             body: JSON.stringify({
-                raffleId: updatedRaffle.raffleId
+                raffleId: updatedRaffle.raffleNonce
             }),
         });
         const response = await data.json()
@@ -133,7 +134,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                     <Flex direction={{ base: 'column', sm: 'row' }} gap="xl">
                         <Stack style={{ flex: 2 }} spacing="xl">
                             <Image style={{ width: '100%', aspectRatio: '1/1' }} src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
-                            {updatedRaffle.nft.metadata?.attributes && <MetadataCard totalSupply={raffle.nft.collection.totalSupply} metadata={updatedRaffle.nft.metadata} />}
+                            {updatedRaffle.nft.metadata && <MetadataCard nft={raffle.nft} />}
                             <TokenInfoCard nft={updatedRaffle.nft} />
                             {/* <CollectionInfoCard collection={raffle.nft.collection} /> */}
                         </Stack>
@@ -163,7 +164,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                                 {renderRaffleAction()}
                             </>
                         }
-                        {updatedRaffle.nft.metadata?.attributes && <MetadataCard totalSupply={raffle.nft.collection.totalSupply} metadata={updatedRaffle.nft.metadata} />}
+                        {updatedRaffle.nft.metadata && <MetadataCard nft={raffle.nft} />}
                         <TokenInfoCard nft={updatedRaffle.nft} />
                         {/* <CollectionInfoCard collection={raffle.nft.collection} /> */}
                     </Stack>

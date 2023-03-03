@@ -10,7 +10,8 @@ export const createTransactionRecord = async (
     txHash: string,
     timestamp: string,
     eventType: EventType,
-    chainId: string
+    chainId: string,
+    raffleNonce: number
 ): Promise<any> => {
     const variables = {
         input: {
@@ -20,7 +21,8 @@ export const createTransactionRecord = async (
             eventType: eventType,
             hash: txHash,
             chainId: chainId,
-            type: 'Transaction'
+            type: 'Transaction',
+            raffleNonce
         }
     }
     const options = {

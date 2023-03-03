@@ -12,7 +12,7 @@ exports.handleRaffleRelease = async (log, txId, timestamp, chainId) => {
     if (!raffle) {
         throw new Error("Invalid raffle Id");
     }
-    const transaction = await TransactionService_1.createTransactionRecord(txId, timestamp, types_1.EventType.RaffleRelease, chainId);
+    const transaction = await TransactionService_1.createTransactionRecord(txId, timestamp, types_1.EventType.RaffleRelease, chainId, raffle.raffleNonce);
     await RaffleService_1.updateRaffle({
         id: raffle.id,
         state: types_1.RaffleState.RELEASED,

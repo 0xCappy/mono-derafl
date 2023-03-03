@@ -1,4 +1,4 @@
-import { Account } from "@/types"
+import { Account } from "@/src/API"
 import { Group, Paper, SimpleGrid, Stack, Text, Center, Flex, Badge, Box, Title, Avatar, Skeleton, Anchor } from "@mantine/core"
 import { IconCaretDown, IconCaretRight, IconEye, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons"
 import AccountAnchor from "../../AccountAnchor"

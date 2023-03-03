@@ -72,6 +72,8 @@ const getStatsByChainId = async (chainId) => {
 const createStats = async (chainId) => {
     const variables = {
         input: {
+            createdAt: new Date(),
+            updatedAt: new Date(),
             chainId,
             ethPaid: 0,
             ticketsBought: 0,
@@ -87,12 +89,15 @@ const createStats = async (chainId) => {
     };
     const body = { query: mutations_1.createStat, variables };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
-    console.log("CREATE STAT: ", JSON.stringify(response.data));
     return response?.data?.data?.createStat;
 };
 const updateStats = async (input) => {
-    console.log("UDPATEING: ", input);
-    const variables = { input };
+    const variables = {
+        input: {
+            ...input,
+            updatedAt: new Date()
+        }
+    };
     const options = {
         headers: {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
@@ -100,7 +105,6 @@ const updateStats = async (input) => {
     };
     const body = { query: mutations_1.updateStat, variables };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
-    console.log("UPDATE STAT: ", JSON.stringify(response.data));
     return response?.data?.data?.updateStat;
 };
 //# sourceMappingURL=StatService.js.map

@@ -71,19 +71,7 @@ exports.getOrCreateNft = async (address, tokenId, chainId) => {
     const rank = await TraitSniperClient_1.getNftRank(address, tokenId);
     const lastSale = await AlchemyClient_1.getNftLastSalePrice(address, tokenId, mapHexToAlchemyChain_1.mapHexToAlchemyChain(chainId));
     if (!collection) {
-        collection = await createCollection({
-            type: 'Collection',
-            contractAddress: alchemyNft.contract.address,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            symbol: alchemyNft.contract.symbol,
-            rafflesCreated: 1,
-            contractDeployer: alchemyNft.contract.contractDeployer,
-            deployedBlockNumber: alchemyNft.contract.deployedBlockNumber,
-            tokenType: alchemyNft.contract.tokenType,
-            totalSupply: alchemyNft.contract.totalSupply,
-            chainId
-        });
+        collection = await createCollection(alchemyNft, chainId);
     }
     if (!nft) {
         nft = await createNft({
@@ -129,7 +117,28 @@ const getCollectionByContractAddress = async (address) => {
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     return response?.data?.data?.listCollections?.items?.[0];
 };
-const createCollection = async (input) => {
+const createCollection = async (alchemyNft, chainId) => {
+    const input = {
+        type: 'Collection',
+        contractAddress: alchemyNft.contract.address,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        symbol: alchemyNft.contract.symbol,
+        rafflesCreated: 1,
+        contractDeployer: alchemyNft.contract.contractDeployer,
+        deployedBlockNumber: alchemyNft.contract.deployedBlockNumber,
+        tokenType: alchemyNft.contract.tokenType,
+        totalSupply: alchemyNft.contract.totalSupply,
+        chainId,
+        name: alchemyNft.contract.name,
+        openseaSlug: alchemyNft.contract.openSea?.collectionName,
+        imageUrl: alchemyNft.contract.openSea?.imageUrl,
+        externalUrl: alchemyNft.contract.openSea?.externalUrl,
+        discordUrl: alchemyNft.contract.openSea?.discordUrl,
+        twitterUsername: alchemyNft.contract.openSea?.twitterUsername,
+        description: alchemyNft.contract.openSea?.description,
+        floorPrice: alchemyNft.contract.openSea?.floorPrice,
+    };
     const variables = { input };
     const options = {
         headers: {

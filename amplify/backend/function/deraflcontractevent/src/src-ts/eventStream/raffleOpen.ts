@@ -20,7 +20,7 @@ export const handleRaffleOpen = async (
 
   if (!raffle) {
   try {
-    const transaction = await createTransactionRecord(txId, timestamp, EventType.RaffleOpen, chainId)
+    const transaction = await createTransactionRecord(txId, timestamp, EventType.RaffleOpen, chainId, parseInt(log.raffleId.toString()))
     console.log("TX: ", transaction)
     const nft = await getOrCreateNft(log.nftAddress, log.tokenId.toString(), chainId)
     console.log("NFT: ", nft)

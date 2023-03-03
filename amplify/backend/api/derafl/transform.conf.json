@@ -1,7 +1,6 @@
 {
     "Version": 5,
     "ElasticsearchWarning": true,
-    "transformers": ["amplify-count-directive"],
     "ResolverConfig": {
         "project": {
             "ConflictHandler": "AUTOMERGE",

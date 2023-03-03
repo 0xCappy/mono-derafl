@@ -22,7 +22,7 @@ export const handleRaffleDrawn = async (
     // shit
   }
 
-  const transaction = await createTransactionRecord(txId, timestamp, EventType.RaffleDrawn, chainId);
+  const transaction = await createTransactionRecord(txId, timestamp, EventType.RaffleDrawn, chainId, raffle.raffleNonce);
 
   await updateRaffle({
     id: raffle.id,

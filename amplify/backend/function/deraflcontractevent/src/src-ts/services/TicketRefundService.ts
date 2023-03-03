@@ -4,7 +4,9 @@ import { createTicketRefund as createTicketRefundMutation } from "../graphql/mut
 export const createTicketRefund = async (raffleId: string, transactionId: string, ethAmount: number, refundee: string) => {
     const variables = {
         input: {
-            type: 'TicketRefund'
+            type: 'TicketRefund',
+            createdAt: new Date(),
+            updatedAt: new Date(),      
         }
     }
     const options = {

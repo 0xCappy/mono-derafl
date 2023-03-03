@@ -13,7 +13,7 @@ export const handleRaffleClose = async (
         throw new Error("Invalid raffle Id");
     }
 
-    const transaction = await createTransactionRecord(txId, timestamp, EventType.RaffleClose, chainId)
+    const transaction = await createTransactionRecord(txId, timestamp, EventType.RaffleClose, chainId, raffle.raffleNonce)
     await updateRaffle({
         state: RaffleState.PENDING_DRAW,
         raffleCloseTxId: transaction.id,

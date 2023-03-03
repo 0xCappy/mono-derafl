@@ -3,17 +3,18 @@ import React from 'react';
 
 import { RaffleDetail } from '../../features'
 import { EncodedParseQuery, encodeParseQuery } from '@parse/react-ssr';
-import { Raffle, TicketBatch } from 'types';
+import { Raffle, TicketBatch } from '@/src/API';
 import { Box } from '@mantine/core';
 import axios from 'axios';
 import { API, graphqlOperation } from 'aws-amplify';
 import { getRaffle, listRaffles, listTicketBatches } from '@/src/graphql/queries';
+import { formatIpfsUrl } from '@/common/utils';
 
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
   const raffleId = context.query.raffleId
   const listRaffleData = await API.graphql(graphqlOperation(listRaffles, {
-    filter: { raffleId: { eq: raffleId } }
+    filter: { raffleNonce: { eq: raffleId } }
   })) as any
   const raffleBasic = listRaffleData.data.listRaffles.items[0]
   const raffleData = await API.graphql(graphqlOperation(getRaffle, { id: raffleBasic.id })) as any
@@ -21,13 +22,7 @@ export const getServerSideProps = async (context: any) => {
 
   return {
     props: {
-      raffle: {
-        ...raffle,
-        nft: {
-          ...raffle.nft,
-          metadata: raffle.nft.metadata ? JSON.parse(raffle.nft.metadata) : undefined
-        }
-      },
+      raffle,
       trending: []
     }
   }
@@ -48,7 +43,7 @@ export default function RaffleDetailPage({ raffle, trending }: RaffleDetailPageP
         <meta property="og:title" content={`${raffle.nft.tokenName} | DeRafl`} />
         <meta property="og:description" content="DeRafl brings you the opportunity to win unique digital assets with our revolutionary decentrailized raffle protocol" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={raffle.nft.imageUri}></meta>
+        <meta property="og:image" content={formatIpfsUrl(raffle.nft.imageUri || '')}></meta>
         <meta name="twitter:site" content="@derafl_"></meta>
         <meta name="twitter:card" content="summary_large_image"></meta>
         <meta name="robots" content="index,follow"></meta>

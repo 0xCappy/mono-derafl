@@ -11,12 +11,11 @@ import { useEffect, useMemo, useState } from 'react';
 import makeBlockie from 'ethereum-blockies-base64';
 import { buildTransactionUrl } from '@/common/utils';
 import { API, graphqlOperation } from 'aws-amplify';
-import { listTicketBatches, ticketBatchesByCreatedAt } from '@/src/graphql/queries';
+import { listTicketBatches, searchTicketBatches, ticketBatchesByCreatedAt } from '@/src/graphql/queries';
 
 const PAGE_LENGTH = 10
 
 interface PurchasesCardProps {
-    purchases: []
     unviewedPurchaseCount: number
     raffleId: string
     onPurchasesRefreshed: () => void
@@ -58,7 +57,7 @@ const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }
     const fetchTicketBatches = async (_page: number) => {
         setLoading(true)
 
-        const purchasesData = await API.graphql(graphqlOperation(ticketBatchesByCreatedAt, {
+        const purchasesData = await API.graphql(graphqlOperation(searchTicketBatches, {
             // filter: { raffleId: { eq: raffleId } },
             type: 'TicketBatch',
             sortDirection: 'DESC'

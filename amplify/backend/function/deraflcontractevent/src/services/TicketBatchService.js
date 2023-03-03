@@ -97,7 +97,7 @@ exports.getAccountParticipation = async (address, raffleId) => {
     console.log("GET ACCOUNT PARTICIPATION: ", JSON.stringify(response.data));
     return response?.data?.data?.listTicketBatches?.items?.[0];
 };
-exports.createTicketBatch = async (ticketBatchRaffleId, ticketsBought, firstTicket, lastTicket, batchId, purchaser, ticketBatchTransactionId, raffleId) => {
+exports.createTicketBatch = async (ticketBatchRaffleId, ticketsBought, firstTicket, lastTicket, batchId, purchaser, ticketBatchTransactionId, raffleNonce, chainId) => {
     const variables = {
         input: {
             createdAt: new Date(),
@@ -110,7 +110,8 @@ exports.createTicketBatch = async (ticketBatchRaffleId, ticketsBought, firstTick
             purchaser,
             ticketBatchTransactionId,
             type: 'TicketBatch',
-            raffleId
+            raffleNonce,
+            chainId
         }
     };
     const options = {

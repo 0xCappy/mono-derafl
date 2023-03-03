@@ -1,4 +1,4 @@
-import { Raffle } from "@/types"
+import { Raffle } from "@/src/API"
 import { ActionIcon, Menu, Anchor } from "@mantine/core"
 import { IconArrowsLeftRight, IconBrandTwitter, IconCopy, IconMessageCircle, IconPhoto, IconSearch, IconSettings, IconShare, IconTrash } from "@tabler/icons"
 import { useMemo } from "react"

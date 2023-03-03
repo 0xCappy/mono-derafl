@@ -17,6 +17,27 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "raffleNonce": {
+                    "name": "raffleNonce",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "ethAmount": {
                     "name": "ethAmount",
                     "isArray": false,
@@ -29,6 +50,13 @@ export const schema = {
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
+                    "attributes": []
+                },
+                "chainId": {
+                    "name": "chainId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "raffle": {
@@ -66,22 +94,6 @@ export const schema = {
                             "ticketRefundTxId"
                         ]
                     }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
                 },
                 "ticketRefundRaffleId": {
                     "name": "ticketRefundRaffleId",
@@ -140,6 +152,20 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "ethPaid": {
                     "name": "ethPaid",
                     "isArray": false,
@@ -174,22 +200,6 @@ export const schema = {
                     "type": "Int",
                     "isRequired": false,
                     "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
                 }
             },
             "syncable": true,
@@ -248,6 +258,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "raffleNonce": {
+                    "name": "raffleNonce",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "lastTicket": {
                     "name": "lastTicket",
                     "isArray": false,
@@ -301,10 +318,10 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "raffleId": {
-                    "name": "raffleId",
+                "chainId": {
+                    "name": "chainId",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -341,6 +358,10 @@ export const schema = {
             "syncable": true,
             "pluralName": "TicketBatches",
             "attributes": [
+                {
+                    "type": "searchable",
+                    "properties": {}
+                },
                 {
                     "type": "model",
                     "properties": {}
@@ -395,14 +416,21 @@ export const schema = {
                     "name": "createdAt",
                     "isArray": false,
                     "type": "AWSDateTime",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "updatedAt": {
                     "name": "updatedAt",
                     "isArray": false,
                     "type": "AWSDateTime",
-                    "isRequired": false,
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "raffleNonce": {
+                    "name": "raffleNonce",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "date": {
@@ -490,15 +518,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "ticketsAvailable": {
-                    "name": "ticketsAvailable",
+                "raffleNonce": {
+                    "name": "raffleNonce",
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
-                "raffleId": {
-                    "name": "raffleId",
+                "ticketsAvailable": {
+                    "name": "ticketsAvailable",
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
@@ -684,7 +712,7 @@ export const schema = {
                     "type": {
                         "model": "NFT"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "HAS_ONE",
@@ -753,7 +781,7 @@ export const schema = {
                     "name": "raffleNftId",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "raffleRefundTxId": {
@@ -769,6 +797,10 @@ export const schema = {
             "attributes": [
                 {
                     "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "searchable",
                     "properties": {}
                 },
                 {
@@ -821,14 +853,14 @@ export const schema = {
                     "name": "createdAt",
                     "isArray": false,
                     "type": "AWSDateTime",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "updatedAt": {
                     "name": "updatedAt",
                     "isArray": false,
                     "type": "AWSDateTime",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "contractAddress": {
@@ -914,7 +946,7 @@ export const schema = {
                     "type": {
                         "model": "Collection"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "HAS_ONE",
@@ -930,7 +962,7 @@ export const schema = {
                     "name": "nFTCollectionId",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 }
             },
@@ -987,14 +1019,14 @@ export const schema = {
                     "name": "createdAt",
                     "isArray": false,
                     "type": "AWSDateTime",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "updatedAt": {
                     "name": "updatedAt",
                     "isArray": false,
                     "type": "AWSDateTime",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "symbol": {
@@ -1044,6 +1076,62 @@ export const schema = {
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "openseaSlug": {
+                    "name": "openseaSlug",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "imageUrl": {
+                    "name": "imageUrl",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "externalUrl": {
+                    "name": "externalUrl",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "discordUrl": {
+                    "name": "discordUrl",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "twitterUsername": {
+                    "name": "twitterUsername",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "floorPrice": {
+                    "name": "floorPrice",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
                     "attributes": []
                 }
             },
@@ -1147,6 +1235,10 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
                     "type": "key",
                     "properties": {
                         "name": "accountsByTicketsBought",
@@ -1179,5 +1271,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "d372705e3e58beebf482d36a876958cf"
+    "version": "befbebe018ce618533393d7e5331a1e7"
 };

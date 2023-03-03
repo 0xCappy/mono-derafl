@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
-import { Raffle, RaffleState } from 'types';
+import { RaffleState } from 'types';
+import { Raffle } from '@/src/API';
 import { Line } from 'rc-progress';
 import { countdownRenderer } from '../utils';
 import Countdown from 'react-countdown';

@@ -13,6 +13,6 @@ export const handleTicketRefund = async (
   if (!raffle) {
     throw new Error("Invalid raffle Id");
   }
-  const transaction = await createTransactionRecord(txId, timestamp, EventType.TicketRefund, chainId);
+  const transaction = await createTransactionRecord(txId, timestamp, EventType.TicketRefund, chainId, raffle.raffleNonce);
   await createTicketRefund(raffle.id, transaction.id, parseFloat(log.ethAmount.toString()), log.refundee)
 };

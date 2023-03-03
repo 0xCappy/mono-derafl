@@ -1,8 +1,12 @@
 type TicketRefund @model @auth(rules: [{allow: public}]) {
   id: ID!
   type: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  raffleNonce: Int!
   ethAmount: Float
   refundee: String
+  chainId: String!
   raffle: Raffle @hasOne
   tx: Transaction @hasOne
 }
@@ -10,6 +14,8 @@ type TicketRefund @model @auth(rules: [{allow: public}]) {
 type Stat @model @auth(rules: [{allow: public}]) {
   id: ID!
   type: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
   ethPaid: Float
   ticketsBought: Int
   royaltiesPaid: Float
@@ -17,7 +23,7 @@ type Stat @model @auth(rules: [{allow: public}]) {
   rafflesCreated: Int
 }
 
-type TicketBatch @model @count @auth(rules: [{allow: public}]) {
+type TicketBatch @searchable @model @auth(rules: [{allow: public}]) {
   id: ID!
   type: String!
   @index(name: "ticketBatchesByCreatedAt", queryField: "ticketBatchesByCreatedAt", sortKeyFields: ["createdAt"])
@@ -25,28 +31,30 @@ type TicketBatch @model @count @auth(rules: [{allow: public}]) {
   @index(name: "ticketBatchesByTicketsBought", queryField: "ticketBatchesByTicketsBought", sortKeyFields: ["ticketsBought"])
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+  raffleNonce: Int!
   lastTicket: Int!
   transaction: Transaction! @hasOne
   purchaser: String!
   ticketsBought: Int!
   batchId: Int!
   firstTicket: Int!
-  raffleId: Int!
+  chainId: String!
   raffle: Raffle @belongsTo
 }
 
 type Transaction @model @auth(rules: [{allow: public}]) {
   id: ID!
   type: String!
-  createdAt: AWSDateTime
-  updatedAt: AWSDateTime
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  raffleNonce: Int!
   date: AWSDateTime!
   eventType: Int!
   hash: String!
   chainId: String!
 }
 
-type Raffle @model @count @auth(rules: [{allow: public}]) {
+type Raffle @model @searchable @auth(rules: [{allow: public}]) {
   id: ID!
   type: String! 
   @index(name: "rafflesByCreatedAt", queryField: "rafflesByCreatedAt", sortKeyFields: ["createdAt"])
@@ -57,8 +65,8 @@ type Raffle @model @count @auth(rules: [{allow: public}]) {
   @index(name: "rafflesByTicketsSold", queryField: "rafflesByTicketsSold", sortKeyFields: ["ticketsSold"])
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+  raffleNonce: Int!
   ticketsAvailable: Int!
-  raffleId: Int!
   winningBatch: TicketBatch @hasOne
   releaseTx: Transaction @hasOne
   progress: Float!
@@ -76,15 +84,15 @@ type Raffle @model @count @auth(rules: [{allow: public}]) {
   winningAccount: String
   owner: String!
   contract: String!
-  nft: NFT @hasOne
+  nft: NFT! @hasOne
   refundTx: Transaction @hasOne
 }
 
 type NFT @model @auth(rules: [{allow: public}]) {
   id: ID!
   type: String!
-  createdAt: AWSDateTime
-  updatedAt: AWSDateTime
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
   contractAddress: String!
   metadata: AWSJSON!
   tokenUri: String
@@ -96,15 +104,15 @@ type NFT @model @auth(rules: [{allow: public}]) {
   lastSales: AWSJSON
   chainId: String!
   rarityData: AWSJSON
-  collection: Collection @hasOne
+  collection: Collection! @hasOne
 }
 
 type Collection @model @auth(rules: [{allow: public}]) {
   id: ID!
   type: String!
   contractAddress: String!
-  createdAt: AWSDateTime
-  updatedAt: AWSDateTime
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
   symbol: String
   rafflesCreated: Int
   contractDeployer: String
@@ -112,9 +120,17 @@ type Collection @model @auth(rules: [{allow: public}]) {
   tokenType: String!
   totalSupply: String
   chainId: String!
+  name: String!
+  openseaSlug: String
+  imageUrl: String
+  externalUrl: String
+  discordUrl: String
+  twitterUsername: String
+  description: String
+  floorPrice: Float
 }
 
-type Account @model @count @auth(rules: [{allow: public}]) {
+type Account @model @searchable @auth(rules: [{allow: public}]) {
   id: ID!
   type: String! 
   @index(name: "accountsByTicketsBought", queryField: "accountsByTicketsBought", sortKeyFields: ["ticketsBought"])

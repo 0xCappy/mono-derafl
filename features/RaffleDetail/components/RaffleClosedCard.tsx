@@ -1,5 +1,5 @@
 import { Card, Text, Title } from '@mantine/core';
-import { Raffle } from 'types';
+import { Raffle } from '@/src/API';
 import { ContractActionButton } from '@/features';
 import Abi from '@/types/Abi';
 
@@ -20,7 +20,7 @@ const RaffleClosedCard = ({ raffle, address }: BuyTicketsCardProps) => {
                 buttonTitle="Draw Raffle"
                 abi={Abi.DERAFL}
                 functionName="drawRaffle"
-                args={[raffle.raffleId]}
+                args={[raffle.raffleNonce]}
                 disabled={false}
             />
         </Card>

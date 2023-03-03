@@ -1,5 +1,5 @@
 import { TicketBatchTable } from "@/common/components"
-import { TicketBatch } from "@/types"
+import { TicketBatch } from "@/src/API"
 import { Center, Box, Container, Stack, Anchor, Button, Title } from "@mantine/core"
 import { IconCash, IconCompass } from "@tabler/icons"
 import { useEffect, useState } from "react"

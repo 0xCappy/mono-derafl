@@ -1,4 +1,4 @@
-import { Account, TicketBatch } from "@/types"
+import { TicketBatch } from "@/src/API"
 import { Group, Paper, SimpleGrid, Stack, Text, Center, Flex, Badge, Box, Title, Avatar, Skeleton, Accordion, Anchor, Divider } from "@mantine/core"
 import { IconCaretDown, IconCaretRight, IconClock, IconEye, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons"
 import AccountAnchor from "../../AccountAnchor"
@@ -34,7 +34,7 @@ const MobileLayout = ({ loading, ticketBatches, pageSize }: MobileLayoutProps) =
                                     <Accordion.Item value="customization">
                                         <Accordion.Control pt={6}>
                                             <Flex gap="sm" justify="space-between">
-                                                <Anchor href={`/raffles/${batch.raffle!.raffleId}`}>
+                                                <Anchor href={`/raffles/${batch.raffle?.raffleNonce}`}>
                                                     <Flex gap={8}>
                                                         <Center>
                                                             <Avatar size={50} src={batch.raffle!.nft.imageUri ? formatIpfsUrl(batch.raffle!.nft.imageUri) : undefined}></Avatar>

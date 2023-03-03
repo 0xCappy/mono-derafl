@@ -111,7 +111,8 @@ export const createTicketBatch = async (
     batchId: number,
     purchaser: string,
     ticketBatchTransactionId: string,
-    raffleId: string
+    raffleNonce: number,
+    chainId: string
 ) => {
     const variables = {
         input: {
@@ -125,7 +126,8 @@ export const createTicketBatch = async (
             purchaser,
             ticketBatchTransactionId,
             type: 'TicketBatch',
-            raffleId
+            raffleNonce,
+            chainId
         }
     }
     const options = {
