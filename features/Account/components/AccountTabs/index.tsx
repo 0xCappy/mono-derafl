@@ -211,6 +211,7 @@ const AccountTabs = ({ account }: AccountTabsProps) => {
                     <Tabs.Tab icon={<IconSquarePlus />} style={{ flex: 2 }} value="owner"><strong>Raffles Created</strong></Tabs.Tab>
                 </Tabs.List>
 
+
                 <Tabs.Panel value="bought" pt="xs">
                     <Transition mounted={selectedTab === 'bought'} transition="fade" duration={800} timingFunction="ease">
                         {(styles) =>
