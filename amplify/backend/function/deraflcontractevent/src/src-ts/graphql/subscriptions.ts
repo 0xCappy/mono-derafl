@@ -29,11 +29,164 @@ export const onCreateTicketRefund = /* GraphQL */ `
           updatedAt
           raffleNonce
           lastTicket
+          transaction {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           purchaser
           ticketsBought
           batchId
           firstTicket
           chainId
+          raffle {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            ticketsAvailable
+            winningBatch {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              lastTicket
+              purchaser
+              ticketsBought
+              batchId
+              firstTicket
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+              ticketBatchTransactionId
+              ticketBatchRaffleId
+            }
+            releaseTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            progress
+            openTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            drawnTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            state
+            tokenId
+            expires
+            nftAddress
+            ticketsSold
+            ticketBatches
+            winningTicket
+            closeTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            chainId
+            winningAccount
+            owner
+            contract
+            nft {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              _version
+              _deleted
+              _lastChangedAt
+              nFTCollectionId
+            }
+            refundTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            raffleWinningBatchId
+            raffleReleaseTxId
+            raffleOpenTxId
+            raffleDrawnTxId
+            raffleCloseTxId
+            raffleNftId
+            raffleRefundTxId
+          }
           _version
           _deleted
           _lastChangedAt
@@ -124,6 +277,31 @@ export const onCreateTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          collection {
+            id
+            type
+            contractAddress
+            createdAt
+            updatedAt
+            symbol
+            rafflesCreated
+            contractDeployer
+            deployedBlockNumber
+            tokenType
+            totalSupply
+            chainId
+            name
+            openseaSlug
+            imageUrl
+            externalUrl
+            discordUrl
+            twitterUsername
+            description
+            floorPrice
+            _version
+            _deleted
+            _lastChangedAt
+          }
           _version
           _deleted
           _lastChangedAt
@@ -203,11 +381,164 @@ export const onUpdateTicketRefund = /* GraphQL */ `
           updatedAt
           raffleNonce
           lastTicket
+          transaction {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           purchaser
           ticketsBought
           batchId
           firstTicket
           chainId
+          raffle {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            ticketsAvailable
+            winningBatch {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              lastTicket
+              purchaser
+              ticketsBought
+              batchId
+              firstTicket
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+              ticketBatchTransactionId
+              ticketBatchRaffleId
+            }
+            releaseTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            progress
+            openTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            drawnTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            state
+            tokenId
+            expires
+            nftAddress
+            ticketsSold
+            ticketBatches
+            winningTicket
+            closeTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            chainId
+            winningAccount
+            owner
+            contract
+            nft {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              _version
+              _deleted
+              _lastChangedAt
+              nFTCollectionId
+            }
+            refundTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            raffleWinningBatchId
+            raffleReleaseTxId
+            raffleOpenTxId
+            raffleDrawnTxId
+            raffleCloseTxId
+            raffleNftId
+            raffleRefundTxId
+          }
           _version
           _deleted
           _lastChangedAt
@@ -298,6 +629,31 @@ export const onUpdateTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          collection {
+            id
+            type
+            contractAddress
+            createdAt
+            updatedAt
+            symbol
+            rafflesCreated
+            contractDeployer
+            deployedBlockNumber
+            tokenType
+            totalSupply
+            chainId
+            name
+            openseaSlug
+            imageUrl
+            externalUrl
+            discordUrl
+            twitterUsername
+            description
+            floorPrice
+            _version
+            _deleted
+            _lastChangedAt
+          }
           _version
           _deleted
           _lastChangedAt
@@ -377,11 +733,164 @@ export const onDeleteTicketRefund = /* GraphQL */ `
           updatedAt
           raffleNonce
           lastTicket
+          transaction {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           purchaser
           ticketsBought
           batchId
           firstTicket
           chainId
+          raffle {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            ticketsAvailable
+            winningBatch {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              lastTicket
+              purchaser
+              ticketsBought
+              batchId
+              firstTicket
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+              ticketBatchTransactionId
+              ticketBatchRaffleId
+            }
+            releaseTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            progress
+            openTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            drawnTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            state
+            tokenId
+            expires
+            nftAddress
+            ticketsSold
+            ticketBatches
+            winningTicket
+            closeTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            chainId
+            winningAccount
+            owner
+            contract
+            nft {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              _version
+              _deleted
+              _lastChangedAt
+              nFTCollectionId
+            }
+            refundTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            raffleWinningBatchId
+            raffleReleaseTxId
+            raffleOpenTxId
+            raffleDrawnTxId
+            raffleCloseTxId
+            raffleNftId
+            raffleRefundTxId
+          }
           _version
           _deleted
           _lastChangedAt
@@ -472,6 +981,31 @@ export const onDeleteTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          collection {
+            id
+            type
+            contractAddress
+            createdAt
+            updatedAt
+            symbol
+            rafflesCreated
+            contractDeployer
+            deployedBlockNumber
+            tokenType
+            totalSupply
+            chainId
+            name
+            openseaSlug
+            imageUrl
+            externalUrl
+            discordUrl
+            twitterUsername
+            description
+            floorPrice
+            _version
+            _deleted
+            _lastChangedAt
+          }
           _version
           _deleted
           _lastChangedAt
@@ -622,11 +1156,164 @@ export const onCreateTicketBatch = /* GraphQL */ `
           updatedAt
           raffleNonce
           lastTicket
+          transaction {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           purchaser
           ticketsBought
           batchId
           firstTicket
           chainId
+          raffle {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            ticketsAvailable
+            winningBatch {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              lastTicket
+              purchaser
+              ticketsBought
+              batchId
+              firstTicket
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+              ticketBatchTransactionId
+              ticketBatchRaffleId
+            }
+            releaseTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            progress
+            openTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            drawnTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            state
+            tokenId
+            expires
+            nftAddress
+            ticketsSold
+            ticketBatches
+            winningTicket
+            closeTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            chainId
+            winningAccount
+            owner
+            contract
+            nft {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              _version
+              _deleted
+              _lastChangedAt
+              nFTCollectionId
+            }
+            refundTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            raffleWinningBatchId
+            raffleReleaseTxId
+            raffleOpenTxId
+            raffleDrawnTxId
+            raffleCloseTxId
+            raffleNftId
+            raffleRefundTxId
+          }
           _version
           _deleted
           _lastChangedAt
@@ -717,6 +1404,31 @@ export const onCreateTicketBatch = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          collection {
+            id
+            type
+            contractAddress
+            createdAt
+            updatedAt
+            symbol
+            rafflesCreated
+            contractDeployer
+            deployedBlockNumber
+            tokenType
+            totalSupply
+            chainId
+            name
+            openseaSlug
+            imageUrl
+            externalUrl
+            discordUrl
+            twitterUsername
+            description
+            floorPrice
+            _version
+            _deleted
+            _lastChangedAt
+          }
           _version
           _deleted
           _lastChangedAt
@@ -799,11 +1511,164 @@ export const onUpdateTicketBatch = /* GraphQL */ `
           updatedAt
           raffleNonce
           lastTicket
+          transaction {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           purchaser
           ticketsBought
           batchId
           firstTicket
           chainId
+          raffle {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            ticketsAvailable
+            winningBatch {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              lastTicket
+              purchaser
+              ticketsBought
+              batchId
+              firstTicket
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+              ticketBatchTransactionId
+              ticketBatchRaffleId
+            }
+            releaseTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            progress
+            openTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            drawnTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            state
+            tokenId
+            expires
+            nftAddress
+            ticketsSold
+            ticketBatches
+            winningTicket
+            closeTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            chainId
+            winningAccount
+            owner
+            contract
+            nft {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              _version
+              _deleted
+              _lastChangedAt
+              nFTCollectionId
+            }
+            refundTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            raffleWinningBatchId
+            raffleReleaseTxId
+            raffleOpenTxId
+            raffleDrawnTxId
+            raffleCloseTxId
+            raffleNftId
+            raffleRefundTxId
+          }
           _version
           _deleted
           _lastChangedAt
@@ -894,6 +1759,31 @@ export const onUpdateTicketBatch = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          collection {
+            id
+            type
+            contractAddress
+            createdAt
+            updatedAt
+            symbol
+            rafflesCreated
+            contractDeployer
+            deployedBlockNumber
+            tokenType
+            totalSupply
+            chainId
+            name
+            openseaSlug
+            imageUrl
+            externalUrl
+            discordUrl
+            twitterUsername
+            description
+            floorPrice
+            _version
+            _deleted
+            _lastChangedAt
+          }
           _version
           _deleted
           _lastChangedAt
@@ -976,11 +1866,164 @@ export const onDeleteTicketBatch = /* GraphQL */ `
           updatedAt
           raffleNonce
           lastTicket
+          transaction {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           purchaser
           ticketsBought
           batchId
           firstTicket
           chainId
+          raffle {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            ticketsAvailable
+            winningBatch {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              lastTicket
+              purchaser
+              ticketsBought
+              batchId
+              firstTicket
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+              ticketBatchTransactionId
+              ticketBatchRaffleId
+            }
+            releaseTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            progress
+            openTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            drawnTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            state
+            tokenId
+            expires
+            nftAddress
+            ticketsSold
+            ticketBatches
+            winningTicket
+            closeTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            chainId
+            winningAccount
+            owner
+            contract
+            nft {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              _version
+              _deleted
+              _lastChangedAt
+              nFTCollectionId
+            }
+            refundTx {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            raffleWinningBatchId
+            raffleReleaseTxId
+            raffleOpenTxId
+            raffleDrawnTxId
+            raffleCloseTxId
+            raffleNftId
+            raffleRefundTxId
+          }
           _version
           _deleted
           _lastChangedAt
@@ -1071,6 +2114,31 @@ export const onDeleteTicketBatch = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          collection {
+            id
+            type
+            contractAddress
+            createdAt
+            updatedAt
+            symbol
+            rafflesCreated
+            contractDeployer
+            deployedBlockNumber
+            tokenType
+            totalSupply
+            chainId
+            name
+            openseaSlug
+            imageUrl
+            externalUrl
+            discordUrl
+            twitterUsername
+            description
+            floorPrice
+            _version
+            _deleted
+            _lastChangedAt
+          }
           _version
           _deleted
           _lastChangedAt
@@ -1211,7 +2279,111 @@ export const onCreateRaffle = /* GraphQL */ `
           updatedAt
           raffleNonce
           ticketsAvailable
+          winningBatch {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            lastTicket
+            transaction {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            purchaser
+            ticketsBought
+            batchId
+            firstTicket
+            chainId
+            raffle {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              ticketsAvailable
+              progress
+              state
+              tokenId
+              expires
+              nftAddress
+              ticketsSold
+              ticketBatches
+              winningTicket
+              chainId
+              winningAccount
+              owner
+              contract
+              _version
+              _deleted
+              _lastChangedAt
+              raffleWinningBatchId
+              raffleReleaseTxId
+              raffleOpenTxId
+              raffleDrawnTxId
+              raffleCloseTxId
+              raffleNftId
+              raffleRefundTxId
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            ticketBatchTransactionId
+            ticketBatchRaffleId
+          }
+          releaseTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           progress
+          openTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          drawnTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           state
           tokenId
           expires
@@ -1219,10 +2391,84 @@ export const onCreateRaffle = /* GraphQL */ `
           ticketsSold
           ticketBatches
           winningTicket
+          closeTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           chainId
           winningAccount
           owner
           contract
+          nft {
+            id
+            type
+            createdAt
+            updatedAt
+            contractAddress
+            metadata
+            tokenUri
+            tokenId
+            symbol
+            imageUri
+            tokenName
+            collectionName
+            lastSales
+            chainId
+            rarityData
+            collection {
+              id
+              type
+              contractAddress
+              createdAt
+              updatedAt
+              symbol
+              rafflesCreated
+              contractDeployer
+              deployedBlockNumber
+              tokenType
+              totalSupply
+              chainId
+              name
+              openseaSlug
+              imageUrl
+              externalUrl
+              discordUrl
+              twitterUsername
+              description
+              floorPrice
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            nFTCollectionId
+          }
+          refundTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           _version
           _deleted
           _lastChangedAt
@@ -1337,6 +2583,14 @@ export const onCreateRaffle = /* GraphQL */ `
           tokenType
           totalSupply
           chainId
+          name
+          openseaSlug
+          imageUrl
+          externalUrl
+          discordUrl
+          twitterUsername
+          description
+          floorPrice
           _version
           _deleted
           _lastChangedAt
@@ -1415,7 +2669,111 @@ export const onUpdateRaffle = /* GraphQL */ `
           updatedAt
           raffleNonce
           ticketsAvailable
+          winningBatch {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            lastTicket
+            transaction {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            purchaser
+            ticketsBought
+            batchId
+            firstTicket
+            chainId
+            raffle {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              ticketsAvailable
+              progress
+              state
+              tokenId
+              expires
+              nftAddress
+              ticketsSold
+              ticketBatches
+              winningTicket
+              chainId
+              winningAccount
+              owner
+              contract
+              _version
+              _deleted
+              _lastChangedAt
+              raffleWinningBatchId
+              raffleReleaseTxId
+              raffleOpenTxId
+              raffleDrawnTxId
+              raffleCloseTxId
+              raffleNftId
+              raffleRefundTxId
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            ticketBatchTransactionId
+            ticketBatchRaffleId
+          }
+          releaseTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           progress
+          openTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          drawnTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           state
           tokenId
           expires
@@ -1423,10 +2781,84 @@ export const onUpdateRaffle = /* GraphQL */ `
           ticketsSold
           ticketBatches
           winningTicket
+          closeTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           chainId
           winningAccount
           owner
           contract
+          nft {
+            id
+            type
+            createdAt
+            updatedAt
+            contractAddress
+            metadata
+            tokenUri
+            tokenId
+            symbol
+            imageUri
+            tokenName
+            collectionName
+            lastSales
+            chainId
+            rarityData
+            collection {
+              id
+              type
+              contractAddress
+              createdAt
+              updatedAt
+              symbol
+              rafflesCreated
+              contractDeployer
+              deployedBlockNumber
+              tokenType
+              totalSupply
+              chainId
+              name
+              openseaSlug
+              imageUrl
+              externalUrl
+              discordUrl
+              twitterUsername
+              description
+              floorPrice
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            nFTCollectionId
+          }
+          refundTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           _version
           _deleted
           _lastChangedAt
@@ -1541,6 +2973,14 @@ export const onUpdateRaffle = /* GraphQL */ `
           tokenType
           totalSupply
           chainId
+          name
+          openseaSlug
+          imageUrl
+          externalUrl
+          discordUrl
+          twitterUsername
+          description
+          floorPrice
           _version
           _deleted
           _lastChangedAt
@@ -1619,7 +3059,111 @@ export const onDeleteRaffle = /* GraphQL */ `
           updatedAt
           raffleNonce
           ticketsAvailable
+          winningBatch {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            lastTicket
+            transaction {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              date
+              eventType
+              hash
+              chainId
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            purchaser
+            ticketsBought
+            batchId
+            firstTicket
+            chainId
+            raffle {
+              id
+              type
+              createdAt
+              updatedAt
+              raffleNonce
+              ticketsAvailable
+              progress
+              state
+              tokenId
+              expires
+              nftAddress
+              ticketsSold
+              ticketBatches
+              winningTicket
+              chainId
+              winningAccount
+              owner
+              contract
+              _version
+              _deleted
+              _lastChangedAt
+              raffleWinningBatchId
+              raffleReleaseTxId
+              raffleOpenTxId
+              raffleDrawnTxId
+              raffleCloseTxId
+              raffleNftId
+              raffleRefundTxId
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            ticketBatchTransactionId
+            ticketBatchRaffleId
+          }
+          releaseTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           progress
+          openTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          drawnTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           state
           tokenId
           expires
@@ -1627,10 +3171,84 @@ export const onDeleteRaffle = /* GraphQL */ `
           ticketsSold
           ticketBatches
           winningTicket
+          closeTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           chainId
           winningAccount
           owner
           contract
+          nft {
+            id
+            type
+            createdAt
+            updatedAt
+            contractAddress
+            metadata
+            tokenUri
+            tokenId
+            symbol
+            imageUri
+            tokenName
+            collectionName
+            lastSales
+            chainId
+            rarityData
+            collection {
+              id
+              type
+              contractAddress
+              createdAt
+              updatedAt
+              symbol
+              rafflesCreated
+              contractDeployer
+              deployedBlockNumber
+              tokenType
+              totalSupply
+              chainId
+              name
+              openseaSlug
+              imageUrl
+              externalUrl
+              discordUrl
+              twitterUsername
+              description
+              floorPrice
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            nFTCollectionId
+          }
+          refundTx {
+            id
+            type
+            createdAt
+            updatedAt
+            raffleNonce
+            date
+            eventType
+            hash
+            chainId
+            _version
+            _deleted
+            _lastChangedAt
+          }
           _version
           _deleted
           _lastChangedAt
@@ -1745,6 +3363,14 @@ export const onDeleteRaffle = /* GraphQL */ `
           tokenType
           totalSupply
           chainId
+          name
+          openseaSlug
+          imageUrl
+          externalUrl
+          discordUrl
+          twitterUsername
+          description
+          floorPrice
           _version
           _deleted
           _lastChangedAt
@@ -1812,6 +3438,14 @@ export const onCreateNFT = /* GraphQL */ `
         tokenType
         totalSupply
         chainId
+        name
+        openseaSlug
+        imageUrl
+        externalUrl
+        discordUrl
+        twitterUsername
+        description
+        floorPrice
         _version
         _deleted
         _lastChangedAt
@@ -1854,6 +3488,14 @@ export const onUpdateNFT = /* GraphQL */ `
         tokenType
         totalSupply
         chainId
+        name
+        openseaSlug
+        imageUrl
+        externalUrl
+        discordUrl
+        twitterUsername
+        description
+        floorPrice
         _version
         _deleted
         _lastChangedAt
@@ -1896,6 +3538,14 @@ export const onDeleteNFT = /* GraphQL */ `
         tokenType
         totalSupply
         chainId
+        name
+        openseaSlug
+        imageUrl
+        externalUrl
+        discordUrl
+        twitterUsername
+        description
+        floorPrice
         _version
         _deleted
         _lastChangedAt
@@ -1924,6 +3574,14 @@ export const onCreateCollection = /* GraphQL */ `
       tokenType
       totalSupply
       chainId
+      name
+      openseaSlug
+      imageUrl
+      externalUrl
+      discordUrl
+      twitterUsername
+      description
+      floorPrice
       _version
       _deleted
       _lastChangedAt
@@ -1947,6 +3605,14 @@ export const onUpdateCollection = /* GraphQL */ `
       tokenType
       totalSupply
       chainId
+      name
+      openseaSlug
+      imageUrl
+      externalUrl
+      discordUrl
+      twitterUsername
+      description
+      floorPrice
       _version
       _deleted
       _lastChangedAt
@@ -1970,6 +3636,14 @@ export const onDeleteCollection = /* GraphQL */ `
       tokenType
       totalSupply
       chainId
+      name
+      openseaSlug
+      imageUrl
+      externalUrl
+      discordUrl
+      twitterUsername
+      description
+      floorPrice
       _version
       _deleted
       _lastChangedAt

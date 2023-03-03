@@ -91,20 +91,20 @@ import { listTicketBatches } from "../graphql/queries";
 //         raffle: includeRaffle ? mapRaffle(ticketBatch.get('raffle')) : undefined
 // })
 
-export const getAccountParticipation = async (address: string, raffleId: string) => {
+export const getAccountParticipation = async (address: string, raffleNonce: number) => {
     const options = {
         headers: {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: listTicketBatches, variables: { filter: { purchaser: { eq: address }, raffleId: { eq: raffleId } } } }
+    const body = { query: listTicketBatches, variables: { filter: { purchaser: { eq: address }, raffleId: { eq: raffleNonce } } } }
     const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
     console.log("GET ACCOUNT PARTICIPATION: ", JSON.stringify(response.data))
     return response?.data?.data?.listTicketBatches?.items?.[0]
 }
 
 export const createTicketBatch = async (
-    ticketBatchRaffleId: number,
+    ticketBatchRaffleId: string,
     ticketsBought: number,
     firstTicket: number,
     lastTicket: number,
@@ -130,6 +130,7 @@ export const createTicketBatch = async (
             chainId
         }
     }
+    console.log("TICKET BATCH INPUT: ", variables)
     const options = {
         headers: {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT

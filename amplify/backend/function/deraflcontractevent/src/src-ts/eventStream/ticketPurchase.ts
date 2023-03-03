@@ -33,7 +33,7 @@ export const handleTicketPurchase = async (
 
   const transaction = await createTransactionRecord(txId, timestamp, EventType.TicketPurchase, chainId, raffle.raffleNonce);
   const ticketBatch = await createTicketBatch(
-    raffle.raffleId,
+    raffle.id,
     ticketsBought,
     firstTicket,
     lastTicket,
@@ -46,7 +46,7 @@ export const handleTicketPurchase = async (
 
   // increment tickets bought on account
 
-  const hasParticipated = await getAccountParticipation(log.purchaser.toLowerCase(), raffle.raffleId)
+  const hasParticipated = await getAccountParticipation(log.purchaser.toLowerCase(), raffle.raffleNonce)
 
   let account = await getOrCreateAccount(log.purchaser.toLowerCase())
   await updateAccount({

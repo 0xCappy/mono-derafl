@@ -182,14 +182,14 @@ import { RaffleState } from '../types';
 //   };
 // };
 
-export const getRaffleByRaffleId = async (raffleId: number) => {
-  console.log("RAFF ID: ", raffleId)
+export const getRaffleByRaffleId = async (raffleNonce: number) => {
+  console.log("RAFF ID: ", raffleNonce)
   const options = {
     headers: {
       'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
     }
   };
-  const body = { query: listRaffles, variables: { filter: { raffleNonce: { eq: raffleId } } } }
+  const body = { query: listRaffles, variables: { filter: { raffleNonce: { eq: raffleNonce } } } }
   const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options)
   return response?.data?.data?.listRaffles?.items?.[0]
 }

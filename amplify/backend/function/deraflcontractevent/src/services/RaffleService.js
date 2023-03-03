@@ -166,14 +166,14 @@ const types_1 = require("../types");
 //     },
 //   };
 // };
-exports.getRaffleByRaffleId = async (raffleId) => {
-    console.log("RAFF ID: ", raffleId);
+exports.getRaffleByRaffleId = async (raffleNonce) => {
+    console.log("RAFF ID: ", raffleNonce);
     const options = {
         headers: {
             'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT
         }
     };
-    const body = { query: queries_1.listRaffles, variables: { filter: { raffleNonce: { eq: raffleId } } } };
+    const body = { query: queries_1.listRaffles, variables: { filter: { raffleNonce: { eq: raffleNonce } } } };
     const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT, body, options);
     return response?.data?.data?.listRaffles?.items?.[0];
 };

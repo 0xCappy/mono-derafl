@@ -39,7 +39,7 @@ type TicketBatch @searchable @model @auth(rules: [{allow: public}]) {
   batchId: Int!
   firstTicket: Int!
   chainId: String!
-  raffle: Raffle @belongsTo
+  raffle: Raffle! @belongsTo
 }
 
 type Transaction @model @auth(rules: [{allow: public}]) {

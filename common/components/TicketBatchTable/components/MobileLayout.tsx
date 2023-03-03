@@ -37,7 +37,7 @@ const MobileLayout = ({ loading, ticketBatches, pageSize }: MobileLayoutProps) =
                                                 <Anchor href={`/raffles/${batch.raffle?.raffleNonce}`}>
                                                     <Flex gap={8}>
                                                         <Center>
-                                                            <Avatar size={50} src={batch.raffle!.nft.imageUri ? formatIpfsUrl(batch.raffle!.nft.imageUri) : undefined}></Avatar>
+                                                            <Avatar size={50} src={batch.raffle.nft.imageUri ? formatIpfsUrl(batch.raffle.nft.imageUri) : undefined}></Avatar>
                                                         </Center>
                                                         <Stack style={{ flex: 2 }} spacing={0}>
                                                             <Text><strong>#{batch.raffle!.nft.tokenId}</strong></Text>
