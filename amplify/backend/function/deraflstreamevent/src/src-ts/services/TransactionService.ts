@@ -3,7 +3,14 @@
 
 import { EventType } from "../types";
 import { createTransaction } from "../graphql/mutations";
+import { signRequest } from "../utils/signRequest";
 import axios from "axios";
+import { HttpRequest } from "@aws-sdk/protocol-http";
+// import fetch from "node-fetch"
+// import { Request } from 'node-fetch'
+// import { default as fetch, Request } from 'node-fetch';
+import fetch from 'node-fetch'
+import { Request } from 'node-fetch'
 
 export const createTransactionRecord = async (
     txHash: string,
@@ -12,6 +19,7 @@ export const createTransactionRecord = async (
     chainId: string,
     raffleNonce: number
 ): Promise<any> => {
+    const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT!)
     const variables = {
         input: {
             createdAt: new Date(),
@@ -24,15 +32,32 @@ export const createTransactionRecord = async (
             raffleNonce
         }
     }
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
-
     const body = { query: createTransaction, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-    return response?.data?.data?.createTransaction
+
+    const requestToBeSigned = new HttpRequest({
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          host: endpoint.host
+        },
+        hostname: endpoint.host,
+        body: JSON.stringify(body),
+        path: endpoint.pathname
+      });
+
+    const signed = await signRequest(requestToBeSigned)
+    console.log("SIGNED:", signed)
+    console.log("URL: ", process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT)
+    const request = new Request(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT!, signed as any);
+    let response = await fetch(request);
+
+    // // let response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT!, signed)
+    // // const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', signedBody, options)
+
+    // // const request = new Request(endpoint, signed);
+    // // const response = await fetch(request) as any;
+    console.log("TX RES: ", JSON.stringify(response))
+    // return response?.data?.data?.createTransaction
 };
 
 // export const mapTransaction = (tx: Parse.Object): Transaction => ({
