@@ -1,6 +1,8 @@
-import axios from "axios"
+import { signRequest } from "../utils/signRequest";
+import fetch from 'node-fetch'
 import { listStats } from "../graphql/queries"
 import { createStat as createStatMutation, updateStat as updateStatMutation } from "../graphql/mutations"
+const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT!)
 
 export const incrementTickets = async (amount: number, chainId: string) => {
     const stat = await getOrCreateStatsByChainId(chainId)
@@ -60,14 +62,11 @@ const getOrCreateStatsByChainId = async (chainId: string) => {
 }
 
 const getStatsByChainId = async (chainId: string) => {
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: listStats, variables: { filter: { chainId: { eq: chainId } } } }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-    return response?.data?.data?.listStats?.items?.[0]
+    const request = await signRequest(body, endpoint)
+    let response = await fetch(request);
+    const json = await response.json()
+    return json?.data?.listStats?.items?.[0]
 }
 
 const createStats = async (chainId: string) => {
@@ -83,15 +82,11 @@ const createStats = async (chainId: string) => {
             type: 'Stat'
         }
     }
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
-
     const body = { query: createStatMutation, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-    return response?.data?.data?.createStat
+    const request = await signRequest(body, endpoint)
+    let response = await fetch(request);
+    const json = await response.json()
+    return json?.data?.createStat
 }
 
 const updateStats = async (input: any) => {
@@ -101,14 +96,10 @@ const updateStats = async (input: any) => {
             updatedAt: new Date()
         }
     }
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
-
     const body = { query: updateStatMutation, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-    return response?.data?.data?.updateStat
+    const request = await signRequest(body, endpoint)
+    let response = await fetch(request);
+    const json = await response.json()
+    return json?.data?.updateStat
 }
 

@@ -1,12 +1,11 @@
 "use strict";
-// import { TicketBatch } from "../types";
-// import { mapRaffle, mapRaffleDetail } from "./RaffleService";
-// import { mapTransaction } from "./TransactionService";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getWinningBatch = exports.createTicketBatch = exports.getAccountParticipation = void 0;
-const axios_1 = require("axios");
+const signRequest_1 = require("../utils/signRequest");
+const node_fetch_1 = require("node-fetch");
 const mutations_1 = require("../graphql/mutations");
 const queries_1 = require("../graphql/queries");
+const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT);
 // export const getTicketBatches = async (
 //     asc: boolean,
 //     sortKey: string,
@@ -87,15 +86,11 @@ const queries_1 = require("../graphql/queries");
 //         raffle: includeRaffle ? mapRaffle(ticketBatch.get('raffle')) : undefined
 // })
 exports.getAccountParticipation = async (address, raffleNonce) => {
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: queries_1.listTicketBatches, variables: { filter: { purchaser: { eq: address }, raffleId: { eq: raffleNonce } } } };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    console.log("GET ACCOUNT PARTICIPATION: ", JSON.stringify(response.data));
-    return response?.data?.data?.listTicketBatches?.items?.[0];
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.listTicketBatches?.items?.[0];
 };
 exports.createTicketBatch = async (ticketBatchRaffleId, ticketsBought, firstTicket, lastTicket, batchId, purchaser, ticketBatchTransactionId, raffleNonce, chainId) => {
     const variables = {
@@ -114,23 +109,13 @@ exports.createTicketBatch = async (ticketBatchRaffleId, ticketsBought, firstTick
             chainId
         }
     };
-    console.log("TICKET BATCH INPUT: ", variables);
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: mutations_1.createTicketBatch, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    console.log("CREATE Ticket batch: ", JSON.stringify(response.data));
-    return response?.data?.data?.createTicketBatch;
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.createTicketBatch;
 };
 exports.getWinningBatch = async (raffleId, winningTicket) => {
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const variables = {
         filter: {
             raffleId: { eq: raffleId },
@@ -139,8 +124,9 @@ exports.getWinningBatch = async (raffleId, winningTicket) => {
         }
     };
     const body = { query: queries_1.listTicketBatches, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    console.log("GET WINNING TICKET: ", JSON.stringify(response.data));
-    return response?.data?.data?.listTicketBatches?.items?.[0];
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.listTicketBatches?.items?.[0];
 };
 //# sourceMappingURL=TicketBatchService.js.map

@@ -1,18 +1,14 @@
 "use strict";
-// // import { getAsset, getContract } from "../clients/OpenseaClient";
-// import { mapHexToAlchemyChain } from "../../utils/mapChain";
-// import { getNft, getNftLastSalePrice } from "../clients/AlchemyClient";
-// import { getNftRank } from "../clients/TraitSniperClient";
-// import NFT from "../types/NFT";
-// import { createOrUpdateCollection } from "./CollectionService";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getOrCreateNft = void 0;
-const axios_1 = require("axios");
+const signRequest_1 = require("../utils/signRequest");
+const node_fetch_1 = require("node-fetch");
 const AlchemyClient_1 = require("../clients/AlchemyClient");
 const queries_1 = require("../graphql/queries");
 const mutations_1 = require("../graphql/mutations");
 const mapHexToAlchemyChain_1 = require("../utils/mapHexToAlchemyChain");
 const TraitSniperClient_1 = require("../clients/TraitSniperClient");
+const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT);
 // // called when raffle is created
 // // if no NFT exists, create one
 // // if NFT exists, update
@@ -98,24 +94,18 @@ exports.getOrCreateNft = async (address, tokenId, chainId) => {
     return nft;
 };
 const getNftByContractAddress = async (address, tokenId) => {
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: queries_1.listNFTS, variables: { filter: { contractAddress: { eq: address } }, tokenId: { eq: tokenId } } };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    return response?.data?.data?.listNFTS?.items?.[0];
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.listNFTS?.items?.[0];
 };
 const getCollectionByContractAddress = async (address) => {
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: queries_1.listCollections, variables: { input: { filter: { contractAddress: { eq: address } } } } };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    return response?.data?.data?.listCollections?.items?.[0];
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.listCollections?.items?.[0];
 };
 const createCollection = async (alchemyNft, chainId) => {
     const input = {
@@ -140,26 +130,20 @@ const createCollection = async (alchemyNft, chainId) => {
         floorPrice: alchemyNft.contract.openSea?.floorPrice,
     };
     const variables = { input };
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: mutations_1.createCollection, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    return response?.data?.data?.createCollection;
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.createCollection;
 };
 const updateNft = (input) => {
 };
 const createNft = async (input) => {
     const variables = { input };
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: mutations_1.createNFT, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    return response?.data?.data?.createNFT;
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.createNFT;
 };
 //# sourceMappingURL=NFTService.js.map
