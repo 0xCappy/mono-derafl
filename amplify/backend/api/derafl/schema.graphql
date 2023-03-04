@@ -1,4 +1,11 @@
-type TicketRefund @model @auth(rules: [{allow: public}]) {
+type TicketRefund
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: custom, operations: [read, create] }
+    ]
+  ) {
   id: ID!
   type: String!
   createdAt: AWSDateTime!
@@ -11,7 +18,14 @@ type TicketRefund @model @auth(rules: [{allow: public}]) {
   tx: Transaction @hasOne
 }
 
-type Stat @model @auth(rules: [{allow: public}]) {
+type Stat
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: custom, operations: [read, create] }
+    ]
+  ) {
   id: ID!
   type: String!
   createdAt: AWSDateTime!
@@ -23,12 +37,32 @@ type Stat @model @auth(rules: [{allow: public}]) {
   rafflesCreated: Int
 }
 
-type TicketBatch @searchable @model @auth(rules: [{allow: public}]) {
+type TicketBatch
+  @searchable
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: custom, operations: [read, create] }
+    ]
+  ) {
   id: ID!
   type: String!
-  @index(name: "ticketBatchesByCreatedAt", queryField: "ticketBatchesByCreatedAt", sortKeyFields: ["createdAt"])
-  @index(name: "ticketBatchesByUpdatedAt", queryField: "ticketBatchesByUpdatedAt", sortKeyFields: ["updatedAt"])
-  @index(name: "ticketBatchesByTicketsBought", queryField: "ticketBatchesByTicketsBought", sortKeyFields: ["ticketsBought"])
+    @index(
+      name: "ticketBatchesByCreatedAt"
+      queryField: "ticketBatchesByCreatedAt"
+      sortKeyFields: ["createdAt"]
+    )
+    @index(
+      name: "ticketBatchesByUpdatedAt"
+      queryField: "ticketBatchesByUpdatedAt"
+      sortKeyFields: ["updatedAt"]
+    )
+    @index(
+      name: "ticketBatchesByTicketsBought"
+      queryField: "ticketBatchesByTicketsBought"
+      sortKeyFields: ["ticketsBought"]
+    )
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   raffleNonce: Int!
@@ -42,7 +76,14 @@ type TicketBatch @searchable @model @auth(rules: [{allow: public}]) {
   raffle: Raffle! @belongsTo
 }
 
-type Transaction @model @auth(rules: [{allow: public}]) {
+type Transaction
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: custom, operations: [read, create] }
+    ]
+  ) {
   id: ID!
   type: String!
   createdAt: AWSDateTime!
@@ -54,15 +95,47 @@ type Transaction @model @auth(rules: [{allow: public}]) {
   chainId: String!
 }
 
-type Raffle @model @searchable @auth(rules: [{allow: public}]) {
+type Raffle
+  @model
+  @searchable
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: custom, operations: [read, create] }
+    ]
+  ) {
   id: ID!
-  type: String! 
-  @index(name: "rafflesByCreatedAt", queryField: "rafflesByCreatedAt", sortKeyFields: ["createdAt"])
-  @index(name: "rafflesByUpdatedAt", queryField: "rafflesByUpdatedAt", sortKeyFields: ["updatedAt"])
-  @index(name: "rafflesByProgress", queryField: "rafflesByProgress", sortKeyFields: ["progress"])
-  @index(name: "rafflesByTicketsAvailable", queryField: "rafflesByTicketsAvailable", sortKeyFields: ["ticketsAvailable"])
-  @index(name: "rafflesByExpires", queryField: "rafflesByExpires", sortKeyFields: ["expires"])
-  @index(name: "rafflesByTicketsSold", queryField: "rafflesByTicketsSold", sortKeyFields: ["ticketsSold"])
+  type: String!
+    @index(
+      name: "rafflesByCreatedAt"
+      queryField: "rafflesByCreatedAt"
+      sortKeyFields: ["createdAt"]
+    )
+    @index(
+      name: "rafflesByUpdatedAt"
+      queryField: "rafflesByUpdatedAt"
+      sortKeyFields: ["updatedAt"]
+    )
+    @index(
+      name: "rafflesByProgress"
+      queryField: "rafflesByProgress"
+      sortKeyFields: ["progress"]
+    )
+    @index(
+      name: "rafflesByTicketsAvailable"
+      queryField: "rafflesByTicketsAvailable"
+      sortKeyFields: ["ticketsAvailable"]
+    )
+    @index(
+      name: "rafflesByExpires"
+      queryField: "rafflesByExpires"
+      sortKeyFields: ["expires"]
+    )
+    @index(
+      name: "rafflesByTicketsSold"
+      queryField: "rafflesByTicketsSold"
+      sortKeyFields: ["ticketsSold"]
+    )
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   raffleNonce: Int!
@@ -88,7 +161,14 @@ type Raffle @model @searchable @auth(rules: [{allow: public}]) {
   refundTx: Transaction @hasOne
 }
 
-type NFT @model @auth(rules: [{allow: public}]) {
+type NFT
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: custom, operations: [read, create] }
+    ]
+  ) {
   id: ID!
   type: String!
   createdAt: AWSDateTime!
@@ -107,7 +187,14 @@ type NFT @model @auth(rules: [{allow: public}]) {
   collection: Collection! @hasOne
 }
 
-type Collection @model @auth(rules: [{allow: public}]) {
+type Collection
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: custom, operations: [read, create] }
+    ]
+  ) {
   id: ID!
   type: String!
   contractAddress: String!
@@ -130,15 +217,47 @@ type Collection @model @auth(rules: [{allow: public}]) {
   floorPrice: Float
 }
 
-type Account @model @searchable @auth(rules: [{allow: public}]) {
+type Account
+  @model
+  @searchable
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: custom, operations: [read, create] }
+    ]
+  ) {
   id: ID!
-  type: String! 
-  @index(name: "accountsByTicketsBought", queryField: "accountsByTicketsBought", sortKeyFields: ["ticketsBought"])
-  @index(name: "accountsByRafflesEntered", queryField: "accountsByRafflesEntered", sortKeyFields: ["rafflesEntered"])
-  @index(name: "accountsByRafflesWon", queryField: "accountsByRafflesWon", sortKeyFields: ["rafflesWon"])
-  @index(name: "accountsByRafflesCreated", queryField: "accountsByRafflesCreated", sortKeyFields: ["rafflesCreated"])
-  @index(name: "accountsByUpdatedAt", queryField: "accountsByUpdatedAt", sortKeyFields: ["updatedAt"])
-  @index(name: "accountsByCreatedAt", queryField: "accountsByCreatedAt", sortKeyFields: ["createdAt"])
+  type: String!
+    @index(
+      name: "accountsByTicketsBought"
+      queryField: "accountsByTicketsBought"
+      sortKeyFields: ["ticketsBought"]
+    )
+    @index(
+      name: "accountsByRafflesEntered"
+      queryField: "accountsByRafflesEntered"
+      sortKeyFields: ["rafflesEntered"]
+    )
+    @index(
+      name: "accountsByRafflesWon"
+      queryField: "accountsByRafflesWon"
+      sortKeyFields: ["rafflesWon"]
+    )
+    @index(
+      name: "accountsByRafflesCreated"
+      queryField: "accountsByRafflesCreated"
+      sortKeyFields: ["rafflesCreated"]
+    )
+    @index(
+      name: "accountsByUpdatedAt"
+      queryField: "accountsByUpdatedAt"
+      sortKeyFields: ["updatedAt"]
+    )
+    @index(
+      name: "accountsByCreatedAt"
+      queryField: "accountsByCreatedAt"
+      sortKeyFields: ["createdAt"]
+    )
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   address: String!

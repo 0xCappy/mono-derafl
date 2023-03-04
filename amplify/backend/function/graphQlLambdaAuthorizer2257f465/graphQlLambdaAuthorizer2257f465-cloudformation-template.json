@@ -15,33 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "apideraflGraphQLAPIIdOutput": {
-      "Type": "String",
-      "Default": "apideraflGraphQLAPIIdOutput"
-    },
-    "apideraflGraphQLAPIEndpointOutput": {
-      "Type": "String",
-      "Default": "apideraflGraphQLAPIEndpointOutput"
-    },
-    "apideraflGraphQLAPIKeyOutput": {
-      "Type": "String",
-      "Default": "apideraflGraphQLAPIKeyOutput"
-    },
-    "alchemyKey": {
-      "Type": "String"
-    },
-    "traitSniperKey": {
-      "Type": "String"
-    },
-    "discordRaffleCreateWebhookUrl": {
-      "Type": "String"
-    },
-    "discordRaffleClosedWebhookUrl": {
-      "Type": "String"
-    },
-    "moralisApiKey": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -74,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "deraflstreamevent",
+            "graphQlLambdaAuthorizer2257f465",
             {
               "Fn::Join": [
                 "",
                 [
-                  "deraflstreamevent",
+                  "graphQlLambdaAuthorizer2257f465",
                   "-",
                   {
                     "Ref": "env"
@@ -96,30 +69,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "API_DERAFL_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apideraflGraphQLAPIIdOutput"
-            },
-            "API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apideraflGraphQLAPIEndpointOutput"
-            },
-            "API_DERAFL_GRAPHQLAPIKEYOUTPUT": {
-              "Ref": "apideraflGraphQLAPIKeyOutput"
-            },
-            "ALCHEMY_KEY": {
-              "Ref": "alchemyKey"
-            },
-            "TRAIT_SNIPER_KEY": {
-              "Ref": "traitSniperKey"
-            },
-            "DISCORD_RAFFLE_CREATE_WEBHOOK_URL": {
-              "Ref": "discordRaffleCreateWebhookUrl"
-            },
-            "DISCORD_RAFFLE_CLOSED_WEBHOOK_URL": {
-              "Ref": "discordRaffleClosedWebhookUrl"
-            },
-            "MORALIS_API_KEY": {
-              "Ref": "moralisApiKey"
             }
           }
         },
@@ -140,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "deraflLambdaRole223119c3",
+            "deraflLambdaRolec2650ee0",
             {
               "Fn::Join": [
                 "",
                 [
-                  "deraflLambdaRole223119c3",
+                  "deraflLambdaRolec2650ee0",
                   "-",
                   {
                     "Ref": "env"
@@ -211,73 +160,6 @@
                   }
                 ]
               }
-            }
-          ]
-        }
-      }
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "appsync:GraphQL"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apideraflGraphQLAPIIdOutput"
-                      },
-                      "/types/Query/*"
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apideraflGraphQLAPIIdOutput"
-                      },
-                      "/types/Mutation/*"
-                    ]
-                  ]
-                }
-              ]
             }
           ]
         }

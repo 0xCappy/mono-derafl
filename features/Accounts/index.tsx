@@ -37,7 +37,8 @@ export const Accounts = () => {
         const accountData = await API.graphql(graphqlOperation(searchAccounts, {
             sort:{field: nextFilter.sortKey, direction: nextFilter.asc ? 'asc' : 'desc'},
             limit: PAGE_LENGTH,
-            from: nextFilter.page * PAGE_LENGTH
+            from: nextFilter.page * PAGE_LENGTH,
+            filter: { _deleted: { eq: false } }
         })) as any
         const { items, total } = accountData.data.searchAccounts
         setAccounts(items)
