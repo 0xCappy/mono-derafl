@@ -19,6 +19,7 @@ export default function AccountsPage() {
         <meta name="twitter:card" content="summary_large_image"></meta>
         <meta name="robots" content="index,follow"></meta>
       </Head>
+      
       <main>
         <Container size="xl">
           <Accounts />
