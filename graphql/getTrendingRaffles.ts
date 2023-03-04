@@ -43,9 +43,6 @@ export const rafflesByUpdatedAt = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          _version
-          _deleted
-          _lastChangedAt
           nFTCollectionId
         }
       }

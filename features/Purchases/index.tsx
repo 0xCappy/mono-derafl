@@ -40,9 +40,6 @@ export const Purchases = () => {
                 field: nextFilter.sortKey,
                 direction: nextFilter.asc ? 'asc' : 'desc'
             },
-            filter: {
-                _deleted: { eq: false }
-            },
             limit: PAGE_LENGTH,
             from: nextFilter.page * PAGE_LENGTH
         })) as any

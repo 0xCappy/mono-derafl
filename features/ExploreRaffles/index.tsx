@@ -29,7 +29,6 @@ const Raffles = () => {
                 direction: nextFilter.sort.asc ? 'asc' : 'desc'
             },
             filter: {
-                _deleted: { eq: false },
                 state: nextFilter.filter.value === 'active' ?
                 { eq: 1}
                 :

@@ -163,8 +163,7 @@ const AccountTabs = ({ account }: AccountTabsProps) => {
                 direction: ticketBatchesProps.sort
             },
             filter: {
-                purchaser: { eq: account.address },
-                _deleted: { eq: false }
+                purchaser: { eq: account.address }
             },
             limit: PAGE_LENGTH,
             from: (ticketBatchesProps.page - 1) * PAGE_LENGTH
