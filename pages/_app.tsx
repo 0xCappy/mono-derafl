@@ -16,7 +16,7 @@ import defaultTheme from '@/theme/theme'
 import WalletContextProvider from '@/context/WalletContext';
 import './empty.css'
 import '@/styles/globals.css'
-import { Amplify, API, graphqlOperation } from 'aws-amplify'
+import { Amplify } from 'aws-amplify'
 import awsExports from "../src/aws-exports";
 Amplify.configure({
   ...awsExports,
