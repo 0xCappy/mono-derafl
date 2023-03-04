@@ -16,7 +16,6 @@ export const handleRaffleClose = async (
     const transaction = await createTransactionRecord(txId, timestamp, EventType.RaffleClose, chainId, raffle.raffleNonce)
     await updateRaffle({
         state: RaffleState.PENDING_DRAW,
-        raffleCloseTxId: transaction.id,
-        _version: raffle._version
+        raffleCloseTxId: transaction.id
     })
 };

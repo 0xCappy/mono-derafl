@@ -21,8 +21,7 @@ export const handleRaffleRelease = async (
   await updateRaffle({
     id: raffle.id,
     state: RaffleState.RELEASED,
-    raffleReleaseTxId: transaction.id,
-    _version: raffle._version    
+    raffleReleaseTxId: transaction.id  
   })
 
   await incrementRoyalties(parseFloat(formatEther(log.royaltiesPaid.toString())), chainId)

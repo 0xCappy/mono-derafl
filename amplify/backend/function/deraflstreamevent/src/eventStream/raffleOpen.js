@@ -24,8 +24,7 @@ exports.handleRaffleOpen = async (log, txId, timestamp, createdBy, chainId, cont
             const updatedAccount = await AccountService_1.updateAccount({
                 id: account.id,
                 rafflesCreated: account.rafflesCreated + 1,
-                updatedAt: new Date(),
-                _version: account._version
+                updatedAt: new Date()
             });
             await StatService_1.incrementRaffles(1, chainId);
             try {

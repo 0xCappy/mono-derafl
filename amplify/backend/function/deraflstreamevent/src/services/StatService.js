@@ -8,8 +8,7 @@ exports.incrementTickets = async (amount, chainId) => {
     const stat = await getOrCreateStatsByChainId(chainId);
     const updatedStat = await updateStats({
         id: stat.id,
-        ticketsBought: stat.ticketsBought + amount,
-        _version: stat._version
+        ticketsBought: stat.ticketsBought + amount
     });
     return updatedStat;
 };
@@ -17,8 +16,7 @@ exports.incrementRaffles = async (amount, chainId) => {
     const stat = await getOrCreateStatsByChainId(chainId);
     const updatedStat = await updateStats({
         id: stat.id,
-        rafflesCreated: stat.rafflesCreated + amount,
-        _version: stat._version
+        rafflesCreated: stat.rafflesCreated + amount
     });
     return updatedStat;
 };
@@ -26,8 +24,7 @@ exports.incrementRoyalties = async (amount, chainId) => {
     const stat = await getOrCreateStatsByChainId(chainId);
     const updatedStat = await updateStats({
         id: stat.id,
-        royaltiesPaid: stat.royaltiesPaid + amount,
-        _version: stat._version
+        royaltiesPaid: stat.royaltiesPaid + amount
     });
     return updatedStat;
 };
@@ -35,8 +32,7 @@ exports.incrementEth = async (amount, chainId) => {
     const stat = await getOrCreateStatsByChainId(chainId);
     const updatedStat = await updateStats({
         id: stat.id,
-        ethPaid: stat.ethPaid + amount,
-        _version: stat._version
+        ethPaid: stat.ethPaid + amount
     });
     return updatedStat;
 };

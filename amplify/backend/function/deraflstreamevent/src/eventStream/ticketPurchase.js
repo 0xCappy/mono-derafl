@@ -32,7 +32,6 @@ exports.handleTicketPurchase = async (log, txId, timestamp, chainId) => {
     await AccountService_1.updateAccount({
         id: account.id,
         ticketsBought: account.ticketsBought + ticketsBought,
-        _version: account._version,
         rafflesEntered: hasParticipated ? account.rafflesEntered : account.rafflesEntered + 1
     });
     await StatService_1.incrementTickets(ticketsBought, chainId);

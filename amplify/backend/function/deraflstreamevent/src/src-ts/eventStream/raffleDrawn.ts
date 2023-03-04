@@ -30,14 +30,12 @@ export const handleRaffleDrawn = async (
     winningTicket: winningTicket,
     raffleWinningBatchId: winningBatch.id,
     winningAccount: winningBatch.purchaser,
-    raffleDrawnTxId: transaction.id,
-    _version: raffle._version
+    raffleDrawnTxId: transaction.id
   })
 
   let account = await getOrCreateAccount(winningBatch.purchaser)
   updateAccount({
     id: account.id,
-    rafflesWon: account.rafflesWon + 1,
-    _version: account._version
+    rafflesWon: account.rafflesWon + 1
   })
 };

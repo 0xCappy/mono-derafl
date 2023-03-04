@@ -37,9 +37,6 @@ exports.createTicketRefund = `
           batchId
           firstTicket
           chainId
-          _version
-          _deleted
-          _lastChangedAt
           ticketBatchTransactionId
           ticketBatchRaffleId
         }
@@ -53,9 +50,6 @@ exports.createTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         progress
         openTx {
@@ -68,9 +62,6 @@ exports.createTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         drawnTx {
           id
@@ -82,9 +73,6 @@ exports.createTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         state
         tokenId
@@ -103,9 +91,6 @@ exports.createTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         chainId
         winningAccount
@@ -127,9 +112,6 @@ exports.createTicketRefund = `
           lastSales
           chainId
           rarityData
-          _version
-          _deleted
-          _lastChangedAt
           nFTCollectionId
         }
         refundTx {
@@ -142,13 +124,7 @@ exports.createTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         raffleWinningBatchId
         raffleReleaseTxId
         raffleOpenTxId
@@ -167,13 +143,7 @@ exports.createTicketRefund = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       ticketRefundRaffleId
       ticketRefundTxId
     }
@@ -212,9 +182,6 @@ exports.updateTicketRefund = `
           batchId
           firstTicket
           chainId
-          _version
-          _deleted
-          _lastChangedAt
           ticketBatchTransactionId
           ticketBatchRaffleId
         }
@@ -228,9 +195,6 @@ exports.updateTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         progress
         openTx {
@@ -243,9 +207,6 @@ exports.updateTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         drawnTx {
           id
@@ -257,9 +218,6 @@ exports.updateTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         state
         tokenId
@@ -278,9 +236,6 @@ exports.updateTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         chainId
         winningAccount
@@ -302,9 +257,6 @@ exports.updateTicketRefund = `
           lastSales
           chainId
           rarityData
-          _version
-          _deleted
-          _lastChangedAt
           nFTCollectionId
         }
         refundTx {
@@ -317,13 +269,7 @@ exports.updateTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         raffleWinningBatchId
         raffleReleaseTxId
         raffleOpenTxId
@@ -342,13 +288,7 @@ exports.updateTicketRefund = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       ticketRefundRaffleId
       ticketRefundTxId
     }
@@ -387,9 +327,6 @@ exports.deleteTicketRefund = `
           batchId
           firstTicket
           chainId
-          _version
-          _deleted
-          _lastChangedAt
           ticketBatchTransactionId
           ticketBatchRaffleId
         }
@@ -403,9 +340,6 @@ exports.deleteTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         progress
         openTx {
@@ -418,9 +352,6 @@ exports.deleteTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         drawnTx {
           id
@@ -432,9 +363,6 @@ exports.deleteTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         state
         tokenId
@@ -453,9 +381,6 @@ exports.deleteTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         chainId
         winningAccount
@@ -477,9 +402,6 @@ exports.deleteTicketRefund = `
           lastSales
           chainId
           rarityData
-          _version
-          _deleted
-          _lastChangedAt
           nFTCollectionId
         }
         refundTx {
@@ -492,13 +414,7 @@ exports.deleteTicketRefund = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         raffleWinningBatchId
         raffleReleaseTxId
         raffleOpenTxId
@@ -517,13 +433,7 @@ exports.deleteTicketRefund = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       ticketRefundRaffleId
       ticketRefundTxId
     }
@@ -544,9 +454,6 @@ exports.createStat = `
       royaltiesPaid
       chainId
       rafflesCreated
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -565,9 +472,6 @@ exports.updateStat = `
       royaltiesPaid
       chainId
       rafflesCreated
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -586,9 +490,6 @@ exports.deleteStat = `
       royaltiesPaid
       chainId
       rafflesCreated
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -614,9 +515,6 @@ exports.createTicketBatch = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       purchaser
       ticketsBought
@@ -642,9 +540,6 @@ exports.createTicketBatch = `
           batchId
           firstTicket
           chainId
-          _version
-          _deleted
-          _lastChangedAt
           ticketBatchTransactionId
           ticketBatchRaffleId
         }
@@ -658,9 +553,6 @@ exports.createTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         progress
         openTx {
@@ -673,9 +565,6 @@ exports.createTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         drawnTx {
           id
@@ -687,9 +576,6 @@ exports.createTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         state
         tokenId
@@ -708,9 +594,6 @@ exports.createTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         chainId
         winningAccount
@@ -732,9 +615,6 @@ exports.createTicketBatch = `
           lastSales
           chainId
           rarityData
-          _version
-          _deleted
-          _lastChangedAt
           nFTCollectionId
         }
         refundTx {
@@ -747,13 +627,7 @@ exports.createTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         raffleWinningBatchId
         raffleReleaseTxId
         raffleOpenTxId
@@ -762,9 +636,6 @@ exports.createTicketBatch = `
         raffleNftId
         raffleRefundTxId
       }
-      _version
-      _deleted
-      _lastChangedAt
       ticketBatchTransactionId
       ticketBatchRaffleId
     }
@@ -792,9 +663,6 @@ exports.updateTicketBatch = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       purchaser
       ticketsBought
@@ -820,9 +688,6 @@ exports.updateTicketBatch = `
           batchId
           firstTicket
           chainId
-          _version
-          _deleted
-          _lastChangedAt
           ticketBatchTransactionId
           ticketBatchRaffleId
         }
@@ -836,9 +701,6 @@ exports.updateTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         progress
         openTx {
@@ -851,9 +713,6 @@ exports.updateTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         drawnTx {
           id
@@ -865,9 +724,6 @@ exports.updateTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         state
         tokenId
@@ -886,9 +742,6 @@ exports.updateTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         chainId
         winningAccount
@@ -910,9 +763,6 @@ exports.updateTicketBatch = `
           lastSales
           chainId
           rarityData
-          _version
-          _deleted
-          _lastChangedAt
           nFTCollectionId
         }
         refundTx {
@@ -925,13 +775,7 @@ exports.updateTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         raffleWinningBatchId
         raffleReleaseTxId
         raffleOpenTxId
@@ -940,9 +784,6 @@ exports.updateTicketBatch = `
         raffleNftId
         raffleRefundTxId
       }
-      _version
-      _deleted
-      _lastChangedAt
       ticketBatchTransactionId
       ticketBatchRaffleId
     }
@@ -970,9 +811,6 @@ exports.deleteTicketBatch = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       purchaser
       ticketsBought
@@ -998,9 +836,6 @@ exports.deleteTicketBatch = `
           batchId
           firstTicket
           chainId
-          _version
-          _deleted
-          _lastChangedAt
           ticketBatchTransactionId
           ticketBatchRaffleId
         }
@@ -1014,9 +849,6 @@ exports.deleteTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         progress
         openTx {
@@ -1029,9 +861,6 @@ exports.deleteTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         drawnTx {
           id
@@ -1043,9 +872,6 @@ exports.deleteTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         state
         tokenId
@@ -1064,9 +890,6 @@ exports.deleteTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         chainId
         winningAccount
@@ -1088,9 +911,6 @@ exports.deleteTicketBatch = `
           lastSales
           chainId
           rarityData
-          _version
-          _deleted
-          _lastChangedAt
           nFTCollectionId
         }
         refundTx {
@@ -1103,13 +923,7 @@ exports.deleteTicketBatch = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         raffleWinningBatchId
         raffleReleaseTxId
         raffleOpenTxId
@@ -1118,9 +932,6 @@ exports.deleteTicketBatch = `
         raffleNftId
         raffleRefundTxId
       }
-      _version
-      _deleted
-      _lastChangedAt
       ticketBatchTransactionId
       ticketBatchRaffleId
     }
@@ -1141,9 +952,6 @@ exports.createTransaction = `
       eventType
       hash
       chainId
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1162,9 +970,6 @@ exports.updateTransaction = `
       eventType
       hash
       chainId
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1183,9 +988,6 @@ exports.deleteTransaction = `
       eventType
       hash
       chainId
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1218,9 +1020,6 @@ exports.createRaffle = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         purchaser
         ticketsBought
@@ -1246,9 +1045,6 @@ exports.createRaffle = `
           winningAccount
           owner
           contract
-          _version
-          _deleted
-          _lastChangedAt
           raffleWinningBatchId
           raffleReleaseTxId
           raffleOpenTxId
@@ -1257,9 +1053,6 @@ exports.createRaffle = `
           raffleNftId
           raffleRefundTxId
         }
-        _version
-        _deleted
-        _lastChangedAt
         ticketBatchTransactionId
         ticketBatchRaffleId
       }
@@ -1273,9 +1066,6 @@ exports.createRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       progress
       openTx {
@@ -1288,9 +1078,6 @@ exports.createRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       drawnTx {
         id
@@ -1302,9 +1089,6 @@ exports.createRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       state
       tokenId
@@ -1323,9 +1107,6 @@ exports.createRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       chainId
       winningAccount
@@ -1368,13 +1149,7 @@ exports.createRaffle = `
           twitterUsername
           description
           floorPrice
-          _version
-          _deleted
-          _lastChangedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         nFTCollectionId
       }
       refundTx {
@@ -1387,13 +1162,7 @@ exports.createRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       raffleWinningBatchId
       raffleReleaseTxId
       raffleOpenTxId
@@ -1433,9 +1202,6 @@ exports.updateRaffle = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         purchaser
         ticketsBought
@@ -1461,9 +1227,6 @@ exports.updateRaffle = `
           winningAccount
           owner
           contract
-          _version
-          _deleted
-          _lastChangedAt
           raffleWinningBatchId
           raffleReleaseTxId
           raffleOpenTxId
@@ -1472,9 +1235,6 @@ exports.updateRaffle = `
           raffleNftId
           raffleRefundTxId
         }
-        _version
-        _deleted
-        _lastChangedAt
         ticketBatchTransactionId
         ticketBatchRaffleId
       }
@@ -1488,9 +1248,6 @@ exports.updateRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       progress
       openTx {
@@ -1503,9 +1260,6 @@ exports.updateRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       drawnTx {
         id
@@ -1517,9 +1271,6 @@ exports.updateRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       state
       tokenId
@@ -1538,9 +1289,6 @@ exports.updateRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       chainId
       winningAccount
@@ -1583,13 +1331,7 @@ exports.updateRaffle = `
           twitterUsername
           description
           floorPrice
-          _version
-          _deleted
-          _lastChangedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         nFTCollectionId
       }
       refundTx {
@@ -1602,13 +1344,7 @@ exports.updateRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       raffleWinningBatchId
       raffleReleaseTxId
       raffleOpenTxId
@@ -1648,9 +1384,6 @@ exports.deleteRaffle = `
           eventType
           hash
           chainId
-          _version
-          _deleted
-          _lastChangedAt
         }
         purchaser
         ticketsBought
@@ -1676,9 +1409,6 @@ exports.deleteRaffle = `
           winningAccount
           owner
           contract
-          _version
-          _deleted
-          _lastChangedAt
           raffleWinningBatchId
           raffleReleaseTxId
           raffleOpenTxId
@@ -1687,9 +1417,6 @@ exports.deleteRaffle = `
           raffleNftId
           raffleRefundTxId
         }
-        _version
-        _deleted
-        _lastChangedAt
         ticketBatchTransactionId
         ticketBatchRaffleId
       }
@@ -1703,9 +1430,6 @@ exports.deleteRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       progress
       openTx {
@@ -1718,9 +1442,6 @@ exports.deleteRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       drawnTx {
         id
@@ -1732,9 +1453,6 @@ exports.deleteRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       state
       tokenId
@@ -1753,9 +1471,6 @@ exports.deleteRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
       chainId
       winningAccount
@@ -1798,13 +1513,7 @@ exports.deleteRaffle = `
           twitterUsername
           description
           floorPrice
-          _version
-          _deleted
-          _lastChangedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         nFTCollectionId
       }
       refundTx {
@@ -1817,13 +1526,7 @@ exports.deleteRaffle = `
         eventType
         hash
         chainId
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       raffleWinningBatchId
       raffleReleaseTxId
       raffleOpenTxId
@@ -1876,13 +1579,7 @@ exports.createNFT = `
         twitterUsername
         description
         floorPrice
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       nFTCollectionId
     }
   }
@@ -1929,13 +1626,7 @@ exports.updateNFT = `
         twitterUsername
         description
         floorPrice
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       nFTCollectionId
     }
   }
@@ -1982,13 +1673,7 @@ exports.deleteNFT = `
         twitterUsername
         description
         floorPrice
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       nFTCollectionId
     }
   }
@@ -2019,9 +1704,6 @@ exports.createCollection = `
       twitterUsername
       description
       floorPrice
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -2051,9 +1733,6 @@ exports.updateCollection = `
       twitterUsername
       description
       floorPrice
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -2083,9 +1762,6 @@ exports.deleteCollection = `
       twitterUsername
       description
       floorPrice
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -2104,9 +1780,6 @@ exports.createAccount = `
       rafflesWon
       rafflesEntered
       ticketsBought
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -2125,9 +1798,6 @@ exports.updateAccount = `
       rafflesWon
       rafflesEntered
       ticketsBought
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -2146,9 +1816,6 @@ exports.deleteAccount = `
       rafflesWon
       rafflesEntered
       ticketsBought
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

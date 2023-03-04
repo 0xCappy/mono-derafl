@@ -17,7 +17,6 @@ export const handleRaffleRefund = async (
   await updateRaffle({
     id: raffle.id,
     state: RaffleState.REFUNDED,
-    raffleRefundTxId: transaction.id,
-    _version: raffle._version
+    raffleRefundTxId: transaction.id
   })
 };

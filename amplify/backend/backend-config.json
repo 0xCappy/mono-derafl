@@ -46,11 +46,6 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "graphQlLambdaAuthorizer2257f465": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     }
   },
   "parameters": {
@@ -107,22 +102,6 @@
         {
           "category": "function",
           "resourceName": "deraflstreamevent"
-        }
-      ]
-    },
-    "AMPLIFY_function_graphQlLambdaAuthorizer2257f465_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "graphQlLambdaAuthorizer2257f465"
-        }
-      ]
-    },
-    "AMPLIFY_function_graphQlLambdaAuthorizer2257f465_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "graphQlLambdaAuthorizer2257f465"
         }
       ]
     }

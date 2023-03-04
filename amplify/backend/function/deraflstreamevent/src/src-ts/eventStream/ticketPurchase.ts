@@ -52,7 +52,6 @@ export const handleTicketPurchase = async (
   await updateAccount({
     id: account.id,
     ticketsBought: account.ticketsBought + ticketsBought,
-    _version: account._version,
     rafflesEntered: hasParticipated ? account.rafflesEntered : account.rafflesEntered + 1
   })
   await incrementTickets(ticketsBought, chainId)

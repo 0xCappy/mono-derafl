@@ -23,14 +23,12 @@ exports.handleRaffleDrawn = async (log, txId, timestamp, chainId) => {
         winningTicket: winningTicket,
         raffleWinningBatchId: winningBatch.id,
         winningAccount: winningBatch.purchaser,
-        raffleDrawnTxId: transaction.id,
-        _version: raffle._version
+        raffleDrawnTxId: transaction.id
     });
     let account = await AccountService_1.getOrCreateAccount(winningBatch.purchaser);
     AccountService_1.updateAccount({
         id: account.id,
-        rafflesWon: account.rafflesWon + 1,
-        _version: account._version
+        rafflesWon: account.rafflesWon + 1
     });
 };
 //# sourceMappingURL=raffleDrawn.js.map

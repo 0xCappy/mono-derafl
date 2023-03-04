@@ -16,8 +16,7 @@ exports.handleRaffleRelease = async (log, txId, timestamp, chainId) => {
     await RaffleService_1.updateRaffle({
         id: raffle.id,
         state: types_1.RaffleState.RELEASED,
-        raffleReleaseTxId: transaction.id,
-        _version: raffle._version
+        raffleReleaseTxId: transaction.id
     });
     await StatService_1.incrementRoyalties(parseFloat(ethers_1.formatEther(log.royaltiesPaid.toString())), chainId);
     await StatService_1.incrementEth(parseFloat(ethers_1.formatEther(log.ethPaid.toString())), chainId);

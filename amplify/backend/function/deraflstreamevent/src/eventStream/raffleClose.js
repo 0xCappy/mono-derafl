@@ -12,8 +12,7 @@ exports.handleRaffleClose = async (log, txId, timestamp, chainId) => {
     const transaction = await TransactionService_1.createTransactionRecord(txId, timestamp, types_1.EventType.RaffleClose, chainId, raffle.raffleNonce);
     await RaffleService_1.updateRaffle({
         state: types_1.RaffleState.PENDING_DRAW,
-        raffleCloseTxId: transaction.id,
-        _version: raffle._version
+        raffleCloseTxId: transaction.id
     });
 };
 //# sourceMappingURL=raffleClose.js.map

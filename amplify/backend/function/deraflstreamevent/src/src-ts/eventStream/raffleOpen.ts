@@ -42,8 +42,7 @@ export const handleRaffleOpen = async (
     const updatedAccount = await updateAccount({
       id: account.id,
       rafflesCreated: account.rafflesCreated + 1,
-      updatedAt: new Date(),
-      _version: account._version
+      updatedAt: new Date()
     })
 
     await incrementRaffles(1, chainId)

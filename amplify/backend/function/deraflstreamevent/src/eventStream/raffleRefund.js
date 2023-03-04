@@ -13,8 +13,7 @@ exports.handleRaffleRefund = async (log, txId, timestamp, chainId) => {
     await RaffleService_1.updateRaffle({
         id: raffle.id,
         state: types_1.RaffleState.REFUNDED,
-        raffleRefundTxId: transaction.id,
-        _version: raffle._version
+        raffleRefundTxId: transaction.id
     });
 };
 //# sourceMappingURL=raffleRefund.js.map
