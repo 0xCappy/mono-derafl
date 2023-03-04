@@ -1,5 +1,7 @@
-import axios from "axios";
+import { signRequest } from "../utils/signRequest";
+import fetch from 'node-fetch'
 import { createTicketRefund as createTicketRefundMutation } from "../graphql/mutations";
+const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT!)
 
 export const createTicketRefund = async (raffleId: string, transactionId: string, ethAmount: number, refundee: string) => {
     const variables = {
@@ -9,15 +11,9 @@ export const createTicketRefund = async (raffleId: string, transactionId: string
             updatedAt: new Date(),      
         }
     }
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
-
     const body = { query: createTicketRefund, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-    console.log("CREATE REFUND: ", JSON.stringify(response.data))
-
-    return response?.data?.data?.createTicketRefund
+    const request = await signRequest(body, endpoint)
+    let response = await fetch(request);
+    const json = await response.json()
+    return json?.data?.createTicketRefund
 }

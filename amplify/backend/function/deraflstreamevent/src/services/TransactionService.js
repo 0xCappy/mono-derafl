@@ -1,11 +1,11 @@
 "use strict";
-// import { EventType } from "../types";
-// import Transaction from "../types/Transaction";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createTransactionRecord = void 0;
 const mutations_1 = require("../graphql/mutations");
-const axios_1 = require("axios");
+const signRequest_1 = require("../utils/signRequest");
+const node_fetch_1 = require("node-fetch");
 exports.createTransactionRecord = async (txHash, timestamp, eventType, chainId, raffleNonce) => {
+    const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT);
     const variables = {
         input: {
             createdAt: new Date(),
@@ -18,19 +18,10 @@ exports.createTransactionRecord = async (txHash, timestamp, eventType, chainId, 
             raffleNonce
         }
     };
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: mutations_1.createTransaction, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    return response?.data?.data?.createTransaction;
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.createTransaction;
 };
-// export const mapTransaction = (tx: Parse.Object): Transaction => ({
-//     hash: tx.attributes.hash,
-//     date: tx.attributes.date,
-//     eventType: tx.attributes.eventType,
-//     chainId: tx.attributes.chainId
-// })
 //# sourceMappingURL=TransactionService.js.map

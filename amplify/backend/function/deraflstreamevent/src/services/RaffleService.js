@@ -1,18 +1,12 @@
 "use strict";
-// import { mergeAttributes } from "../../utils/mergeAttributes";
-// import { Raffle } from "../types";
-// import Collection from "../types/Collection";
-// import RaffleState from "../types/RaffleState";
-// import { mapCollection } from "./CollectionService";
-// import { mapNft } from "./NFTService";
-// import { mapTicketBatch } from "./TicketBatchService";
-// import { mapTransaction } from "./TransactionService";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateRaffle = exports.createRaffle = exports.getRaffleByRaffleId = void 0;
-const axios_1 = require("axios");
+const signRequest_1 = require("../utils/signRequest");
+const node_fetch_1 = require("node-fetch");
 const queries_1 = require("../graphql/queries");
 const mutations_1 = require("../graphql/mutations");
 const types_1 = require("../types");
+const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT);
 // import { Raffle } from '../../models';
 // export const getAccountRaffles = async (
 //     address: string,
@@ -167,15 +161,11 @@ const types_1 = require("../types");
 //   };
 // };
 exports.getRaffleByRaffleId = async (raffleNonce) => {
-    console.log("RAFF ID: ", raffleNonce);
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: queries_1.listRaffles, variables: { filter: { raffleNonce: { eq: raffleNonce } } } };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    return response?.data?.data?.listRaffles?.items?.[0];
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.listRaffles?.items?.[0];
 };
 exports.createRaffle = async (raffleNonce, chainId, nftID, owner, contract, ticketsAvailable, tokenId, nftAddress, expires, openTxId) => {
     const variables = {
@@ -199,26 +189,18 @@ exports.createRaffle = async (raffleNonce, chainId, nftID, owner, contract, tick
             type: 'Raffle'
         }
     };
-    console.log("Create VAR: ", variables);
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: mutations_1.createRaffle, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    console.log("RAFFLE CREATE: ", JSON.stringify(response.data));
-    return response?.data?.data?.createRaffle;
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.createRaffle;
 };
 exports.updateRaffle = async (input) => {
     const variables = { input };
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: mutations_1.updateRaffle, variables };
-    const response = await axios_1.default.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options);
-    return response?.data?.data?.updateRaffle;
+    const request = await signRequest_1.signRequest(body, endpoint);
+    let response = await node_fetch_1.default(request);
+    const json = await response.json();
+    return json?.data?.updateRaffle;
 };
 //# sourceMappingURL=RaffleService.js.map

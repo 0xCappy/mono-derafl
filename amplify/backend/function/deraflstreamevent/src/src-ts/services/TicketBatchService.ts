@@ -1,10 +1,8 @@
-// import { TicketBatch } from "../types";
-// import { mapRaffle, mapRaffleDetail } from "./RaffleService";
-// import { mapTransaction } from "./TransactionService";
-
-import axios from "axios";
+import { signRequest } from "../utils/signRequest";
+import fetch from 'node-fetch'
 import { createTicketBatch as createTicketBatchMutation } from "../graphql/mutations";
 import { listTicketBatches } from "../graphql/queries";
+const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT!)
 
 // export const getTicketBatches = async (
 //     asc: boolean,
@@ -92,15 +90,11 @@ import { listTicketBatches } from "../graphql/queries";
 // })
 
 export const getAccountParticipation = async (address: string, raffleNonce: number) => {
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const body = { query: listTicketBatches, variables: { filter: { purchaser: { eq: address }, raffleId: { eq: raffleNonce } } } }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-    console.log("GET ACCOUNT PARTICIPATION: ", JSON.stringify(response.data))
-    return response?.data?.data?.listTicketBatches?.items?.[0]
+    const request = await signRequest(body, endpoint)
+    let response = await fetch(request);
+    const json = await response.json()
+    return json?.data?.listTicketBatches?.items?.[0]
 }
 
 export const createTicketBatch = async (
@@ -130,26 +124,14 @@ export const createTicketBatch = async (
             chainId
         }
     }
-    console.log("TICKET BATCH INPUT: ", variables)
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
-
     const body = { query: createTicketBatchMutation, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-    console.log("CREATE Ticket batch: ", JSON.stringify(response.data))
-
-    return response?.data?.data?.createTicketBatch
+    const request = await signRequest(body, endpoint)
+    let response = await fetch(request);
+    const json = await response.json()
+    return json?.data?.createTicketBatch
 }
 
 export const getWinningBatch = async (raffleId: string, winningTicket: number) => {
-    const options = {
-        headers: {
-            'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-        }
-    };
     const variables = {
         filter: {
             raffleId: { eq: raffleId },
@@ -158,7 +140,8 @@ export const getWinningBatch = async (raffleId: string, winningTicket: number) =
         }
     }
     const body = { query: listTicketBatches, variables }
-    const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-    console.log("GET WINNING TICKET: ", JSON.stringify(response.data))
-    return response?.data?.data?.listTicketBatches?.items?.[0]
+    const request = await signRequest(body, endpoint)
+    let response = await fetch(request);
+    const json = await response.json()
+    return json?.data?.listTicketBatches?.items?.[0]
 }

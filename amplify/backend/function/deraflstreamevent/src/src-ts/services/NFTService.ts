@@ -1,11 +1,5 @@
-// // import { getAsset, getContract } from "../clients/OpenseaClient";
-// import { mapHexToAlchemyChain } from "../../utils/mapChain";
-// import { getNft, getNftLastSalePrice } from "../clients/AlchemyClient";
-// import { getNftRank } from "../clients/TraitSniperClient";
-// import NFT from "../types/NFT";
-// import { createOrUpdateCollection } from "./CollectionService";
-
-import axios from "axios";
+import { signRequest } from "../utils/signRequest";
+import fetch from 'node-fetch'
 import { getNft, getNftLastSalePrice } from "../clients/AlchemyClient";
 import { listCollections, listNFTS } from "../graphql/queries";
 import { createCollection as createCollectionMutation, createNFT as createNftMutation } from "../graphql/mutations";
@@ -14,6 +8,7 @@ import Collection from "../types/Collection";
 import { getNftRank } from "../clients/TraitSniperClient";
 import { NFT, NFTAttribute } from "../types";
 import { Nft as AlchemyNft } from 'alchemy-sdk'
+const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT!)
 
 // // called when raffle is created
 // // if no NFT exists, create one
@@ -113,25 +108,19 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
 }
 
 const getNftByContractAddress = async (address: string, tokenId: string) => {
-  const options = {
-    headers: {
-      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-    }
-  };
   const body = { query: listNFTS, variables: { filter: { contractAddress: { eq: address } }, tokenId: { eq: tokenId } } }
-  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-  return response?.data?.data?.listNFTS?.items?.[0]
+  const request = await signRequest(body, endpoint)
+  let response = await fetch(request);
+  const json = await response.json()
+  return json?.data?.listNFTS?.items?.[0]
 }
 
 const getCollectionByContractAddress = async (address: string) => {
-  const options = {
-    headers: {
-      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-    }
-  };
   const body = { query: listCollections, variables: { input: { filter: { contractAddress: { eq: address } } } } }
-  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-  return response?.data?.data?.listCollections?.items?.[0]
+  const request = await signRequest(body, endpoint)
+  let response = await fetch(request);
+  const json = await response.json()
+  return json?.data?.listCollections?.items?.[0]
 }
 
 const createCollection = async (alchemyNft: AlchemyNft, chainId: string) => {
@@ -156,17 +145,12 @@ const createCollection = async (alchemyNft: AlchemyNft, chainId: string) => {
     description: alchemyNft.contract.openSea?.description,
     floorPrice: alchemyNft.contract.openSea?.floorPrice,
   }
-
   const variables = { input }
-  const options = {
-    headers: {
-      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-    }
-  };
-
   const body = { query: createCollectionMutation, variables }
-  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-  return response?.data?.data?.createCollection
+  const request = await signRequest(body, endpoint)
+  let response = await fetch(request);
+  const json = await response.json()
+  return json?.data?.createCollection
 }
 
 const updateNft = (input: Collection) => {
@@ -175,13 +159,9 @@ const updateNft = (input: Collection) => {
 
 const createNft = async (input: any) => {
   const variables = { input }
-  const options = {
-    headers: {
-      'x-api-key': process.env.API_DERAFL_GRAPHQLAPIKEYOUTPUT || ''
-    }
-  };
-
   const body = { query: createNftMutation, variables }
-  const response = await axios.post(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT || '', body, options)
-  return response?.data?.data?.createNFT
+  const request = await signRequest(body, endpoint)
+  let response = await fetch(request);
+  const json = await response.json()
+  return json?.data?.createNFT
 }
