@@ -39,6 +39,7 @@ const getNftsForOwner = async (
       pageKey,
       // excludeFilters: [NftFilters.AIRDROPS, NftFilters.SPAM]
     });
+    console.log("NFT: ", alchemyResponse.ownedNfts)
     return {
       nfts: alchemyResponse.ownedNfts.map((nft) => mapOwnedNftResponse(nft)),
       pageKey: alchemyResponse.pageKey,
@@ -52,7 +53,7 @@ const getNftsForOwner = async (
 const mapOwnedNftResponse = (nft: AlchemyOwnedNft | Nft): OwnedNft => ({
   contractAddress: nft.contract.address,
   contractName: nft.contract.name  || nft.contract.openSea?.collectionName || 'Unknown contract',
-  tokenName: nft.title || nft.rawMetadata?.name || 'Unknown token',
+  tokenName: nft.title || nft.rawMetadata?.name || `${nft.contract.symbol || ''} #${nft.tokenId}` || 'Unknown token',
   symbol: nft.contract.symbol,
   tokenId: nft.tokenId,
   imageUri: nft.media?.[0]?.gateway || nft.rawMetadata?.image,
