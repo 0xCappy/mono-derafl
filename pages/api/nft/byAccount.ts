@@ -15,6 +15,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log("PROCESS: ", JSON.stringify(process.env))
   const { address, offset, pageSize, pageKey, chainId } = JSON.parse(req.body)
   const response = await getNftsForOwner(address, pageSize, mapHexToAlchemyChain(chainId), pageKey)
   res.status(200).json(response)
