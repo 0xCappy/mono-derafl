@@ -13,6 +13,7 @@ export const getOrCreateAccount = async (address: string) => {
     return account
 }
 
+
 const getAccountByAddress = async (address: string) => {
     const body = { query: listAccounts, variables: { filter: { address: { eq: address } } } }
     const request = await signRequest(body, endpoint)
