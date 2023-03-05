@@ -48,7 +48,7 @@
       "function": {
         "deraflstreamevent": {
           "deploymentBucketName": "amplify-derafl-dev-121800-deployment",
-          "s3Key": "amplify-builds/deraflstreamevent-79587033507a46315249-build.zip",
+          "s3Key": "amplify-builds/deraflstreamevent-43647052557030757165-build.zip",
           "alchemyKey": "Nyx7UtugHODwhjfxI0EkO-xQV9Seym5M",
           "traitSniperKey": "feb08daf-f3d0-40b5-bbaa-cc5f41c0153f",
           "discordRaffleCreateWebhookUrl": "https://discord.com/api/webhooks/1079377429744848957/fHbzIX7_r54QD8MddO2p0eI52EDoyTiYJhQrAHjP2tN9RvqSXEaUYZ05gZ_TSiqSBkYm",
