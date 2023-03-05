@@ -15,7 +15,6 @@ function useNftApproved(
     watch: true,
     chainId
   } ?? [])
-  
   if (isError) {
     console.error(isError);
     return undefined;
