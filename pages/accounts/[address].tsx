@@ -13,7 +13,6 @@ export const getServerSideProps = async (context: any) => {
     filter: { address: { eq: address } }
   })) as any
   const account = accountData.data.listAccounts[0]
-  console.log("ACOUNT: ", account)
   return {
     props: {
       account
