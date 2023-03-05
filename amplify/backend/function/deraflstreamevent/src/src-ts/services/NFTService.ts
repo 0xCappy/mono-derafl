@@ -136,7 +136,7 @@ const createCollection = async (alchemyNft: AlchemyNft, chainId: string) => {
     tokenType: alchemyNft.contract.tokenType,
     totalSupply: alchemyNft.contract.totalSupply,
     chainId,
-    name: alchemyNft.contract.name,
+    name: alchemyNft.contract.name  || alchemyNft.contract.openSea?.collectionName,
     openseaSlug: alchemyNft.contract.openSea?.collectionName,
     imageUrl: alchemyNft.contract.openSea?.imageUrl,
     externalUrl: alchemyNft.contract.openSea?.externalUrl,
@@ -145,6 +145,7 @@ const createCollection = async (alchemyNft: AlchemyNft, chainId: string) => {
     description: alchemyNft.contract.openSea?.description,
     floorPrice: alchemyNft.contract.openSea?.floorPrice,
   }
+
   const variables = { input }
   const body = { query: createCollectionMutation, variables }
   const request = await signRequest(body, endpoint)
