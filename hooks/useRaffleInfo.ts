@@ -19,6 +19,7 @@ function useRaffleInfo(
   if (isError) {
     return undefined;
   }
+  
   return data as RaffleInfo
 }
 
