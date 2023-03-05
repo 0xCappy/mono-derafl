@@ -58,5 +58,35 @@
         "derafl": {}
       }
     }
+  },
+  "mainnet": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-derafl-mainnet-135250-authRole",
+      "UnauthRoleArn": "arn:aws:iam::257702074159:role/amplify-derafl-mainnet-135250-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::257702074159:role/amplify-derafl-mainnet-135250-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-derafl-mainnet-135250-deployment",
+      "UnauthRoleName": "amplify-derafl-mainnet-135250-unauthRole",
+      "StackName": "amplify-derafl-mainnet-135250",
+      "StackId": "arn:aws:cloudformation:us-east-1:257702074159:stack/amplify-derafl-mainnet-135250/d3d10b40-bb00-11ed-bc98-122748dfbf1b",
+      "AmplifyAppId": "dijehjrlix2uo"
+    },
+    "categories": {
+      "api": {
+        "derafl": {}
+      },
+      "function": {
+        "deraflstreamevent": {
+          "deploymentBucketName": "amplify-derafl-mainnet-135250-deployment",
+          "s3Key": "amplify-builds/deraflstreamevent-43647052557030757165-build.zip",
+          "alchemyKey": "Nyx7UtugHODwhjfxI0EkO-xQV9Seym5M",
+          "traitSniperKey": "feb08daf-f3d0-40b5-bbaa-cc5f41c0153f",
+          "discordRaffleCreateWebhookUrl": "https://discord.com/api/webhooks/1079377429744848957/fHbzIX7_r54QD8MddO2p0eI52EDoyTiYJhQrAHjP2tN9RvqSXEaUYZ05gZ_TSiqSBkYm",
+          "discordRaffleClosedWebhookUrl": "https://discord.com/api/webhooks/1079377754325274634/JuJUozAzBMVXyOuD_4BMyr6-Ljnx6V12-z8wt-RRySN_Rjm62IR7TNshCswSVIHLTEhr",
+          "moralisApiKey": "aNnsQjMwzZZYLDzbXKaTRPpb1l88ipYyTF3xjNV6BbhDk5vp4Fsbd6WRHoTvguWo"
+        },
+        "derafl": {}
+      }
+    }
   }
 }
