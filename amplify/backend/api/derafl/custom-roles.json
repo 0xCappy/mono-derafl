@@ -1,3 +1,5 @@
 {
-    "adminRoleNames": ["deraflLambdaRole223119c3-dev"]
-  }
+    "adminRoleNames": [
+        "deraflLambdaRole223119c3-testnet"
+    ]
+}
