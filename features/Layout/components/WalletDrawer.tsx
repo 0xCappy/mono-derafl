@@ -9,6 +9,8 @@ import { formatEther, formatUnits } from "ethers/lib/utils.js";
 import { Account } from "@/types";
 import AccountDetail from "./AccountDetail";
 import WalletLoader from "./WalletLoader";
+import { listAccounts } from "@/src/graphql/queries";
+import { API, graphqlOperation } from "aws-amplify";
 
 interface WalletDrawerProps {
     open: boolean
@@ -52,12 +54,23 @@ const WalletDrawer = ({ open, onClose, address }: WalletDrawerProps) => {
 
     const getAccount = async () => {
         setLoading(true)
-        const data = await fetch("/api/account", {
-            method: "POST",
-            body: JSON.stringify({ address }),
-        });
-        const response = await data.json()
-        setAccount(response)
+        const accountData = await API.graphql(graphqlOperation(listAccounts, {
+            filter: { address: { eq: address } }
+        })) as any
+        const account = accountData?.data?.listAccounts?.[0]
+        if (!account) {
+            setAccount({
+                address: address?.toString() || '',
+                rafflesCreated: 0,
+                rafflesEntered: 0,
+                rafflesWon: 0,
+                ticketsBought: 0,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            })
+        } else {
+            setAccount(account)
+        }
         setLoading(false)
     }
 

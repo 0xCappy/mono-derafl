@@ -4,6 +4,7 @@ import {
   Network,
   OwnedNft as AlchemyOwnedNft,
   Nft,
+  NftFilters,
 } from "alchemy-sdk";
 import OwnedNftsResponse from '@/types/OwnedNftsResponse';
 import OwnedNft from '@/types/OwnedNft';
@@ -36,22 +37,25 @@ const getNftsForOwner = async (
     const alchemyResponse = await alchemy.nft.getNftsForOwner(address, {
       pageSize: pageSize,
       pageKey,
+      // excludeFilters: [NftFilters.AIRDROPS, NftFilters.SPAM]
     });
-
     return {
       nfts: alchemyResponse.ownedNfts.map((nft) => mapOwnedNftResponse(nft)),
       pageKey: alchemyResponse.pageKey,
     };
   } catch (error) {
+    console.log("ERROR: ", error)
     throw new Error("error");
   }
 };
 
 const mapOwnedNftResponse = (nft: AlchemyOwnedNft | Nft): OwnedNft => ({
   contractAddress: nft.contract.address,
-  name: nft.contract.name,
+  contractName: nft.contract.name  || nft.contract.openSea?.collectionName || 'Unknown contract',
+  tokenName: nft.title || nft.rawMetadata?.name || 'Unknown token',
   symbol: nft.contract.symbol,
   tokenId: nft.tokenId,
-  imageUri: nft.rawMetadata?.image,
+  imageUri: nft.media?.[0]?.gateway || nft.rawMetadata?.image,
+  thumbnailUri: nft.media?.[0]?.thumbnail,
   tokenType: nft.tokenType
 });

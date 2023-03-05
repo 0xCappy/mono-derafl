@@ -132,7 +132,7 @@ const ContactFormSection = () => {
             try {
                 const data = await fetch("/api/nft/byAccount", {
                     method: "POST",
-                    body: JSON.stringify({ chainId: '0x5', address, pageKey, pageSize: PAGE_SIZE, offset: (PAGE_SIZE * page).toString() }),
+                    body: JSON.stringify({ chainId: CHAIN_ID, address, pageKey, pageSize: PAGE_SIZE, offset: (PAGE_SIZE * page).toString() }),
                 });
                 const response = await data.json() as OwnedNftsResponse
                 const received = response.nfts
