@@ -34,24 +34,6 @@ const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }
         fetchTicketBatches(1)
     }, [])
 
-    // const fetchTicketBatches = async (_page: number) => {
-    //     setLoading(true)
-    //     const data = await fetch("/api/ticketBatches", {
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //             sortKey: 'createdAt',
-    //             asc: false,
-    //             skip: (_page - 1) * PAGE_LENGTH,
-    //             limit: PAGE_LENGTH,
-    //             raffleId
-    //         }),
-    //     });
-    //     const response = await data.json()
-    //     setBatches(response.ticketBatches)
-    //     setBatchCount(response.count)
-    //     setLoading(false)
-    // }
-
     const fetchTicketBatches = async (_page: number) => {
         setLoading(true)
 
@@ -60,7 +42,7 @@ const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }
             type: 'TicketBatch',
             sortDirection: 'DESC'
         })) as any
-        const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
+        const purchases = purchasesData.data.searchTicketBatches.items
         setBatches(purchases)
         setBatchCount(100)
         setLoading(false)

@@ -11,22 +11,6 @@ interface RaffleCarouselProps {
 }
 
 const RaffleCarousel = ({ raffles }: RaffleCarouselProps) => {
-    // const [raffles, setRaffles] = useState<Raffle[]>([])
-    // const [loading, setLoading] = useState(false)
-
-    // useEffect(() => {
-    //     fetchRaffles()
-    // }, [])
-
-    // const fetchRaffles = async () => {
-    //     setLoading(true)
-    //     const data = await fetch("/api/raffles/trending", {
-    //         method: "POST"
-    //     });
-    //     setRaffles(await data.json())
-    //     setLoading(false)
-    // }
-
     return (
         <Container size="xl" py="4rem">
             <Stack>

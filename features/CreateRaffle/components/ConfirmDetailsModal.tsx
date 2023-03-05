@@ -12,9 +12,13 @@ import { useEffect, useState } from "react"
 import { useContractEvent } from "wagmi"
 import raflAbi from '../../../abi/rafl.json'
 import useSWR from 'swr'
+import { getRaffle, listRaffles } from "@/src/graphql/queries"
+import { API, graphqlOperation } from "aws-amplify"
 const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID!
 const DERAFL_ADDRESS = process.env.NEXT_PUBLIC_DERAFL_ADDRESS!
-const fetcher = (api: string) => fetch(api).then(r => r.json())
+const fetcher = async (raffleNonce: string) => await API.graphql(graphqlOperation(listRaffles, {
+    filter: { raffleNonce: { eq: parseInt(raffleNonce) } }
+})) as any
 
 interface ConfirmDetailsModalProps {
     isOpen: boolean
@@ -28,11 +32,11 @@ interface ConfirmDetailsModalProps {
 const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, royalties, onClose }: ConfirmDetailsModalProps) => {
     const [contractActionState, setContractActionState] = useState(ContractActionState.NONE)
     const [raffleId, setRaffleId] = useState<string>()
-    const { data, error } = useSWR(raffleId ? `/api/raffles/${raffleId}` : null, fetcher, { refreshInterval: 5 })
+    const { data, error } = useSWR(raffleId ? raffleId : null, fetcher, { refreshInterval: 5 })
 
     useEffect(() => {
         console.log("DATA: ", data)
-        if (data && !data.error) {
+        if (data?.data?.listRaffles?.items?.[0] && !data.error) {
             router.push(`/raffles/${raffleId!}`)
         }
     }, [data])
