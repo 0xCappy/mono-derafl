@@ -1,7 +1,7 @@
 import { ImagePlaceholder } from "@/common/components"
 import { buildAddressUrl, formatIpfsUrl } from "@/common/utils"
 import OwnedNft from "@/types/OwnedNft"
-import { Card, Flex, Image, Stack, Text, Title, CloseButton } from "@mantine/core"
+import { Card, Flex, Image, Stack, Text, Title, CloseButton, Box } from "@mantine/core"
 import { IconExternalLink } from "@tabler/icons"
 import { NFT } from "types"
 
@@ -24,8 +24,12 @@ const NFTChip = ({ nft, onRemove, chainId }: NFTChipProps) => {
                         placeholder={<ImagePlaceholder iconSize={30} />}
                     />
                     <Stack justify="space-evenly" spacing={0} ml="1rem">
-                        <Title order={5}>{`${nft.name} #${nft.tokenId}`}</Title>
-                        <Text><a rel="noreferrer" target="_blank" href={buildAddressUrl(chainId, nft.contractAddress)}><IconExternalLink />View on etherscan</a></Text>
+                        {/* <Title order={5}>{`${nft.name} #${nft.tokenId}`}</Title> */}
+                        {/* <Box> */}
+                            <Title style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} order={4}>{nft.contractName}</Title>
+                            <Title style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} order={5}>{nft.tokenName}</Title>
+                        {/* </Box> */}
+                        {/* <Text><a rel="noreferrer" target="_blank" href={buildAddressUrl(chainId, nft.contractAddress)}><IconExternalLink />View on etherscan</a></Text> */}
                     </Stack>
                 </Flex>
                 <CloseButton size="lg" variant="light" ml="1rem" onClick={onRemove} />

@@ -73,7 +73,7 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
                         </ThemeIcon>
                     }
                 >
-                    <List.Item>You are about to raffle token <strong>#{nftToken.tokenId}</strong> from <strong>{nftToken.name}</strong></List.Item>
+                    <List.Item>You are about to raffle token <strong>#{nftToken.tokenId}</strong> from <strong>{nftToken.contractName}</strong></List.Item>
                     <List.Item><strong>{parseInt(parseFloat((parseFloat(ethAmount) / 0.001).toString()).toString()).toLocaleString()}</strong> tickets will be allocated to this raffle</List.Item>
                     <List.Item>Each ticket has a price of 0.001 Ether</List.Item>
                     <List.Item>The maximum amount of Ether that can be raised is {parseFloat(ethAmount).toLocaleString()}</List.Item>

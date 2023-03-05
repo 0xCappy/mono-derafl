@@ -9,31 +9,6 @@ interface PurchasesProps {
 }
 
 const Purchases = ({ticketBatches}: PurchasesProps) => {
-    // const [ticketBatches, setTicketBatches] = useState<TicketBatch[]>([])
-    // const [loading, setLoading] = useState(false)
-
-    // useEffect(() => {
-    //     fetchTicketBatches()
-    // }, [])
-
-    // const fetchTicketBatches = async () => {
-    //     setLoading(true)
-    //     const data = await fetch("/api/account/ticketBatches", {
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //             sortKey: 'createdAt',
-    //             asc: false,
-    //             skip: 0,
-    //             limit: 8,
-    //         }),
-    //     });
-    //     const response = await data.json()
-    //     setTimeout(() => {
-    //         setTicketBatches(response.ticketBatches)
-    //         setLoading(false)
-    //     }, 2000);
-    // }
-    
     return (
         <Container size="xl" py="4rem">
             <Stack>
