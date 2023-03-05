@@ -115,10 +115,10 @@ exports.createTicketBatch = async (ticketBatchRaffleId, ticketsBought, firstTick
     const json = await response.json();
     return json?.data?.createTicketBatch;
 };
-exports.getWinningBatch = async (raffleId, winningTicket) => {
+exports.getWinningBatch = async (raffleNonce, winningTicket) => {
     const variables = {
         filter: {
-            raffleId: { eq: raffleId },
+            raffleNonce: { eq: raffleNonce },
             lastTicket: { gte: winningTicket },
             firstTicket: { lte: winningTicket }
         }

@@ -25,6 +25,7 @@ export const handleTicketPurchase = async (
   const progress = (totalTicketsBought * 100) / ticketsAvailable;
 
   await updateRaffle({
+    id: raffle.id,
     ticketBatches: raffle.ticketBatches + 1,
     progress,
     ticketsSold: raffle.ticketsSold + ticketsBought,

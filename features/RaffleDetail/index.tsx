@@ -11,6 +11,8 @@ import { Container, Image, Stack, Title, Divider, Flex, Box, Avatar, Group, Medi
 import { RaffleCarousel } from '..';
 import { useWallet } from '@/context/WalletContext';
 import useTicketsOwned from '@/hooks/useTicketsOwned';
+import { getRaffle, listTicketBatches } from '@/src/graphql/queries';
+import { API, graphqlOperation } from 'aws-amplify'
 
 interface RaffleDetailProps {
     raffle: Raffle
@@ -58,28 +60,24 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
     }, [raffleInfo?.raffleState])
 
     const getWinningBatch = async () => {
-        if (raffleInfo) {
-            const data = await fetch("/api/raffles/winningBatch", {
-                method: "POST",
-                body: JSON.stringify({
-                    winningTicket: parseInt(raffleInfo.winningTicket.toString()),
-                    raffleId: updatedRaffle.id
-                }),
-            });
-            const response = await data.json()
-            setWinningBatch(response as TicketBatch)
+        const winningTicket = parseInt(raffleInfo?.winningTicket?.toString() || '0')
+        const variables = {
+            filter: {
+                raffleNonce: { eq: raffle.raffleNonce },
+                lastTicket: { gte: winningTicket },
+                firstTicket: { lte: winningTicket }
+            }
         }
+
+        const ticketData = await API.graphql(graphqlOperation(listTicketBatches, variables)) as any
+        const winningBatch = ticketData.data.listTicketBatches?.items?.[0]
+        setWinningBatch(winningBatch)
     }
 
     const refreshRaffle = async () => {
-        const data = await fetch("/api/raffles/detail", {
-            method: "POST",
-            body: JSON.stringify({
-                raffleId: updatedRaffle.raffleNonce
-            }),
-        });
-        const response = await data.json()
-        setUpdatedRaffle(response.raffle)
+        const raffleData = await API.graphql(graphqlOperation(getRaffle, { id: raffle.id })) as any
+        const _raffle = raffleData.data.getRaffle
+        setUpdatedRaffle(_raffle)
     }
 
     const raffleState: RaffleState | undefined = useMemo(() => {
