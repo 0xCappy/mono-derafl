@@ -29,8 +29,8 @@ const generateCreateTemplate = (raffle: any, nft: any) => {
         "avatar_url": "https://derafl.com/favicon.png",
         "embeds": [
             {
-                "title": `Raffle Created #${raffle.raffleId}`,
-                "url": `https://derafl.com/raffles/${raffle.raffleId}`,
+                "title": `Raffle Created #${raffle.raffleNonce}`,
+                "url": `https://derafl.com/raffles/${raffle.raffleNonce}`,
                 "description": `${nft.collectionName} #${nft.tokenId}`,
                 "fields": [
                     {
@@ -64,8 +64,8 @@ const generateCompleteTemplate = (raffle: any, nft: any) => {
         "avatar_url": "https://derafl.com/favicon.png",
         "embeds": [
             {
-                "title": `Raffle Complete #${raffle.raffleId}`,
-                "url": `https://derafl.com/raffles/${raffle.raffleId}`,
+                "title": `Raffle Complete #${raffle.raffleNonce}`,
+                "url": `https://derafl.com/raffles/${raffle.raffleNonce}`,
                 "description": `${nft.collectionName} #${nft.tokenId}`,
                 "fields": [
                     {
