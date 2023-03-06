@@ -169,7 +169,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                 </MediaQuery>
 
                 <Box>
-                    <PurchasesCard onPurchasesRefreshed={() => setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))} raffleId={raffle.id} unviewedPurchaseCount={parseInt(raffleInfo?.batchIndex.toString() || '0') - viewedBatch} />
+                    <PurchasesCard onPurchasesRefreshed={() => setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))} raffleNonce={raffle.raffleNonce} unviewedPurchaseCount={parseInt(raffleInfo?.batchIndex.toString() || '0') - viewedBatch} />
                 </Box>
 
                 <Box>
