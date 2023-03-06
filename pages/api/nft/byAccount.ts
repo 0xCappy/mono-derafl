@@ -16,7 +16,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { address, offset, pageSize, pageKey, chainId } = JSON.parse(req.body)
+  const { address, pageSize, pageKey, chainId } = JSON.parse(req.body)
   const response = await getNftsForOwner(address, pageSize, mapHexToAlchemyChain(chainId), pageKey)
   res.status(200).json(response)
 }
