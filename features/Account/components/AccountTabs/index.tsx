@@ -204,10 +204,10 @@ const AccountTabs = ({ account }: AccountTabsProps) => {
         <Card withBorder shadow="sm" radius="md">
             <Tabs defaultValue="bought" variant="pills" onTabChange={onTabChange} style={{ width: '100%' }}>
                 <Tabs.List style={{ width: '100%' }}>
-                    <Tabs.Tab icon={<IconTicket />} style={{ flex: 2 }} value="bought"><strong>Tickets Bought</strong></Tabs.Tab>
+                    <Tabs.Tab icon={<IconTicket />} style={{ flex: 2 }} value="bought"><strong style={{ color: selectedTab === 'bought' ? 'white' : 'inherit' }}>Tickets Bought</strong></Tabs.Tab>
                     {/* <Tabs.Tab style={{ flex: 2 }} value="entered"><strong>Raffles Entered</strong></Tabs.Tab> */}
-                    <Tabs.Tab icon={<IconTrophy />} style={{ flex: 2 }} value="winningAccount"><strong>Raffles Won</strong></Tabs.Tab>
-                    <Tabs.Tab icon={<IconSquarePlus />} style={{ flex: 2 }} value="owner"><strong>Raffles Created</strong></Tabs.Tab>
+                    <Tabs.Tab icon={<IconTrophy />} style={{ flex: 2 }} value="winningAccount"><strong style={{ color: selectedTab === 'winningAccount' ? 'white' : 'inherit' }}>Raffles Won</strong></Tabs.Tab>
+                    <Tabs.Tab icon={<IconSquarePlus />} style={{ flex: 2 }} value="owner"><strong style={{ color: selectedTab === 'owner' ? 'white' : 'inherit' }}>Raffles Created</strong></Tabs.Tab>
                 </Tabs.List>
 
 

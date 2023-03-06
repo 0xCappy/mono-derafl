@@ -55,9 +55,9 @@ const WalletDrawer = ({ open, onClose, address }: WalletDrawerProps) => {
     const getAccount = async () => {
         setLoading(true)
         const accountData = await API.graphql(graphqlOperation(listAccounts, {
-            filter: { address: { eq: address } }
+            filter: { address: { eq: address?.toLocaleLowerCase() } }
         })) as any
-        const account = accountData?.data?.listAccounts?.[0]
+        const account = accountData?.data?.listAccounts?.items?.[0]
         if (!account) {
             setAccount({
                 address: address?.toString() || '',
