@@ -1,4 +1,4 @@
-import { accountsByUpdatedAt, listAccounts, listTicketBatches, rafflesByCreatedAt, rafflesByUpdatedAt, ticketBatchesByCreatedAt } from '@/src/graphql/queries';
+import { accountsByUpdatedAt, listAccounts, listTicketBatches, rafflesByCreatedAt, rafflesByUpdatedAt, searchRaffles, ticketBatchesByCreatedAt } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify'
 import { Account, Raffle, TicketBatch } from '@/src/API';
 import axios from 'axios';
@@ -6,7 +6,6 @@ import Head from 'next/head';
 import React from 'react';
 import { Home } from '../features'
 
-// This gets called on every request
 export const getServerSideProps = async (context: any) => {
   const accountData = await API.graphql(graphqlOperation(accountsByUpdatedAt, {
     type: 'Account',
@@ -15,25 +14,30 @@ export const getServerSideProps = async (context: any) => {
   })) as any
   const accounts = accountData.data.accountsByUpdatedAt.items
 
-  const raffleData = await API.graphql(graphqlOperation(rafflesByUpdatedAt, {
-    type: 'Raffle',
-    limit: 10,
-    sortDirection: 'DESC'
+  const raffleData = await API.graphql(graphqlOperation(searchRaffles, {
+    sort: {
+      field: 'updatedAt',
+      direction: 'desc'
+    },
+    filter: {
+      and: [
+        { state: { eq: 1 } },
+        { expires: { gt: Date.now() } }
+      ]
+    },
+    limit: 10
   })) as any
-  const raffles = raffleData.data.rafflesByUpdatedAt.items
-  console.log("RAFFLES: ", raffles)
+  const { items } = raffleData.data.searchRaffles
 
   const purchasesData = await API.graphql(graphqlOperation(ticketBatchesByCreatedAt, {
-    // filter: { raffleId: { eq: raffleId } },
     type: 'TicketBatch',
     sortDirection: 'DESC'
   })) as any
   const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
-  console.log("PURCHASE: ", purchases)
 
   return {
     props: {
-      raffles,
+      raffles: items,
       purchases,
       accounts
     }

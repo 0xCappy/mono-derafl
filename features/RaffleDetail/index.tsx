@@ -64,8 +64,8 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
         const variables = {
             filter: {
                 raffleNonce: { eq: raffle.raffleNonce },
-                lastTicket: { gte: winningTicket },
-                firstTicket: { lte: winningTicket }
+                lastTicket: { ge: winningTicket },
+                firstTicket: { le: winningTicket }
             }
         }
 

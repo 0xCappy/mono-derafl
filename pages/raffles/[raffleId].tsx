@@ -7,7 +7,7 @@ import { Raffle, TicketBatch } from '@/src/API';
 import { Box } from '@mantine/core';
 import axios from 'axios';
 import { API, graphqlOperation } from 'aws-amplify';
-import { getRaffle, listRaffles, listTicketBatches } from '@/src/graphql/queries';
+import { getRaffle, listRaffles, listTicketBatches, searchRaffles } from '@/src/graphql/queries';
 import { formatIpfsUrl } from '@/common/utils';
 
 // This gets called on every request
@@ -20,10 +20,25 @@ export const getServerSideProps = async (context: any) => {
   const raffleData = await API.graphql(graphqlOperation(getRaffle, { id: raffleBasic.id })) as any
   const raffle = raffleData.data.getRaffle
 
+  const trendingData = await API.graphql(graphqlOperation(searchRaffles, {
+    sort: {
+      field: 'updatedAt',
+      direction: 'desc'
+    },
+    filter: {
+      and: [
+        { state: { eq: 1 } },
+        { expires: { gt: Date.now() } }
+      ]
+    },
+    limit: 10
+  })) as any
+  const { items } = trendingData.data.searchRaffles
+
   return {
     props: {
       raffle,
-      trending: []
+      trending: items
     }
   }
 }

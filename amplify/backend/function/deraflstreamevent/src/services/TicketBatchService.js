@@ -119,8 +119,8 @@ exports.getWinningBatch = async (raffleNonce, winningTicket) => {
     const variables = {
         filter: {
             raffleNonce: { eq: raffleNonce },
-            lastTicket: { gte: winningTicket },
-            firstTicket: { lte: winningTicket }
+            lastTicket: { ge: winningTicket },
+            firstTicket: { le: winningTicket }
         }
     };
     const body = { query: queries_1.listTicketBatches, variables };

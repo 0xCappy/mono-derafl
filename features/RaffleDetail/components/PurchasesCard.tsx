@@ -36,15 +36,18 @@ const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }
 
     const fetchTicketBatches = async (_page: number) => {
         setLoading(true)
-
-        const purchasesData = await API.graphql(graphqlOperation(searchTicketBatches, {
-            // filter: { raffleId: { eq: raffleId } },
-            type: 'TicketBatch',
-            sortDirection: 'DESC'
+        const ticketBatchData = await API.graphql(graphqlOperation(searchTicketBatches, {
+            sort:{
+                field: 'createdAt',
+                direction: 'desc'
+            },
+            limit: PAGE_LENGTH,
+            from: (page - 1) * PAGE_LENGTH
         })) as any
-        const purchases = purchasesData.data.searchTicketBatches.items
-        setBatches(purchases)
-        setBatchCount(100)
+        const { items, total } = ticketBatchData.data.searchTicketBatches
+
+        setBatches(items)
+        setBatchCount(total)
         setLoading(false)
     }
 
