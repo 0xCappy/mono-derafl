@@ -104,13 +104,4 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
     )
 }
 
-{/* <Group><IconCurrencyEthereum /><Text>Ξ{!ethAmount ? '...' : parseFloat(ethAmount).toLocaleString()} Eth cap ({!ethAmount ? '...' : parseInt(parseFloat((parseFloat(ethAmount) / 0.001).toString()).toString()).toLocaleString()} tickets)</Text></Group>
-<Group><IconClock /><Text>{`${expiryTimestamp.toLocaleString()} (local time)`}</Text></Group>
-<Group>
-    <IconCrown />
-    <Text>{!royalties ? '0' : (parseFloat(royalties.toString()) / 100).toFixed(2)}% creator royalties</Text>
-    <LooksRareBadge />
-</Group>
-<Group><IconTicket /><Text>2.5% + Ξ0.005 Eth DeRafl fees</Text></Group> */}
-
 export default ConfirmDetailsModal
