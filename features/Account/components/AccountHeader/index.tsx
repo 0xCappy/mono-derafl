@@ -3,6 +3,7 @@ import { Account } from "@/src/API"
 import { Avatar, Box, Group, Paper, Stack, Text, Title } from "@mantine/core"
 import { shortenAddress } from "@usedapp/core"
 import makeBlockie from "ethereum-blockies-base64"
+import { useEffect } from "react"
 import AccountStats from "./AccountStats"
 
 interface AccountHeaderProps {
