@@ -37,6 +37,7 @@ const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }
     const fetchTicketBatches = async (_page: number) => {
         setLoading(true)
         const ticketBatchData = await API.graphql(graphqlOperation(searchTicketBatches, {
+            filter: { raffleNonce: { eq: parseInt(raffleId) } },
             sort:{
                 field: 'createdAt',
                 direction: 'desc'
