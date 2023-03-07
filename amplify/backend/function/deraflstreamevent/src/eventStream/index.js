@@ -13,11 +13,18 @@ const ticketRefund_1 = require("./ticketRefund");
 exports.handleWebhookStream = async (webhook) => {
     if (!webhook.confirmed) {
         const decodedLogs = moralis_1.default.Streams.parsedLogs(webhook);
-        const log = decodedLogs[0];
-        const eventHash = webhook.logs[0]?.topic0 || "";
+        const promises = [];
+        decodedLogs.map(log => {
+            promises.push(handleLog(log));
+        });
+        await Promise.all(promises);
+    }
+    ;
+    const handleLog = async (log) => {
+        const eventHash = log.topic0 || "";
         const eventType = types_1.EventHash[eventHash];
-        const txId = webhook.logs[0].transactionHash;
-        const contract = webhook.logs[0].address;
+        const txId = log.transactionHash;
+        const contract = log.address;
         console.log("TYPE: ", eventType);
         switch (eventType) {
             case types_1.EventType.RaffleOpen:
@@ -44,6 +51,6 @@ exports.handleWebhookStream = async (webhook) => {
             default:
                 break;
         }
-    }
+    };
 };
 //# sourceMappingURL=index.js.map
