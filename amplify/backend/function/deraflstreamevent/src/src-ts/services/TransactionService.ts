@@ -27,5 +27,6 @@ export const createTransactionRecord = async (
     const request = await signRequest(body, endpoint)
     let response = await fetch(request);
     const json = await response.json()
+    console.log("Create TX JSON: ", json)
     return json?.data?.createTransaction
 };

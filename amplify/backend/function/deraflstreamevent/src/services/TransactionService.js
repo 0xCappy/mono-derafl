@@ -22,6 +22,7 @@ exports.createTransactionRecord = async (txHash, timestamp, eventType, chainId, 
     const request = await signRequest_1.signRequest(body, endpoint);
     let response = await node_fetch_1.default(request);
     const json = await response.json();
+    console.log("Create TX JSON: ", json);
     return json?.data?.createTransaction;
 };
 //# sourceMappingURL=TransactionService.js.map
