@@ -14,6 +14,8 @@ import raflAbi from '../../../abi/rafl.json'
 import useSWR from 'swr'
 import { getRaffle, listRaffles } from "@/src/graphql/queries"
 import { API, graphqlOperation } from "aws-amplify"
+import { chainsByChainId, ChainId } from "@/types"
+
 const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID!
 const DERAFL_ADDRESS = process.env.NEXT_PUBLIC_DERAFL_ADDRESS!
 const fetcher = async (raffleNonce: string) => await API.graphql(graphqlOperation(listRaffles, {
@@ -37,7 +39,7 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
     useEffect(() => {
         console.log("DATA: ", data)
         if (data?.data?.listRaffles?.items?.[0] && !data.error) {
-            router.push(`/raffles/${raffleId!}`)
+            router.push(`/raffles/${chainsByChainId[CHAIN_ID as ChainId].shortName}/${raffleId!}`)
         }
     }, [data])
 

@@ -6,6 +6,7 @@ import TimeAgo from 'react-timeago'
 import makeBlockie from "ethereum-blockies-base64"
 import { shortenAddress } from "@usedapp/core"
 import { buildTransactionUrl, formatIpfsUrl } from "@/common/utils"
+import { chainsByChainId, ChainId } from "@/types"
 
 interface MobileLayoutProps {
     loading: boolean
@@ -28,13 +29,12 @@ const MobileLayout = ({ loading, ticketBatches, pageSize }: MobileLayoutProps) =
                 <>
                     {
                         ticketBatches.map((batch, index) => (
-                            // <Anchor href={`/raffles/${batch.raffle!.raffleId}`} underline={false}>
                             <Paper withBorder p="xs" radius={16} h="fit-content">
                                 <Accordion mt={0}>
                                     <Accordion.Item value="customization">
                                         <Accordion.Control pt={6}>
                                             <Flex gap="sm" justify="space-between">
-                                                <Anchor href={`/raffles/${batch.raffle?.raffleNonce}`}>
+                                                <Anchor href={`/raffles/${chainsByChainId[batch.raffle!.chainId as ChainId].shortName}/${batch.raffle?.raffleNonce}`}>
                                                     <Flex gap={8}>
                                                         <Center>
                                                             <Avatar size={50} src={batch.raffle.nft.imageUri ? formatIpfsUrl(batch.raffle.nft.imageUri) : undefined}></Avatar>
