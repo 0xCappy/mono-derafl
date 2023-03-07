@@ -8,6 +8,7 @@ import { RaffleFilter, raffleFilterOptions, raffleSortOptions } from './types';
 import { Pagination } from '@mantine/core';
 import { searchRaffles } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify';
+import { chainsByChainId, ChainId } from "@/types"
 
 const PAGE_LENGTH = 24
 
@@ -82,7 +83,7 @@ const Raffles = () => {
                         :
                         <>
                             {raffles.map((raffle: Raffle, index) => (
-                                <Anchor transform='none' underline={false} key={index} href={`/raffles/${raffle.raffleNonce}`}>
+                                <Anchor transform='none' underline={false} key={index} href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
                                     <RaffleCard raffle={raffle} />
                                 </Anchor>
                             ))}

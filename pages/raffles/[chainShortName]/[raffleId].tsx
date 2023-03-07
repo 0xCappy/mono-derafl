@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 
-import { RaffleDetail } from '../../features'
+import { RaffleDetail } from '../../../features'
 import { EncodedParseQuery, encodeParseQuery } from '@parse/react-ssr';
 import { Raffle, TicketBatch } from '@/src/API';
 import { Box } from '@mantine/core';
@@ -9,12 +9,18 @@ import axios from 'axios';
 import { API, graphqlOperation } from 'aws-amplify';
 import { getRaffle, listRaffles, listTicketBatches, searchRaffles } from '@/src/graphql/queries';
 import { formatIpfsUrl } from '@/common/utils';
+import { chainsByShortName, ChainShortName } from '@/types';
 
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
-  const raffleId = context.query.raffleId
+  const { raffleId, chainShortName } = context.query
+  // console.log("SHORT: ")
+  const chainId = chainsByShortName[chainShortName as ChainShortName].chainId
   const listRaffleData = await API.graphql(graphqlOperation(listRaffles, {
-    filter: { raffleNonce: { eq: raffleId } }
+    filter: {
+      raffleNonce: { eq: raffleId },
+      chainId: { eq: chainId }
+    }
   })) as any
   const raffleBasic = listRaffleData.data.listRaffles.items[0]
   const raffleData = await API.graphql(graphqlOperation(getRaffle, { id: raffleBasic.id })) as any

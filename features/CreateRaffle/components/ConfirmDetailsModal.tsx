@@ -14,6 +14,8 @@ import raflAbi from '../../../abi/rafl.json'
 import useSWR from 'swr'
 import { getRaffle, listRaffles } from "@/src/graphql/queries"
 import { API, graphqlOperation } from "aws-amplify"
+import { chainsByChainId, ChainId } from "@/types"
+
 const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID!
 const DERAFL_ADDRESS = process.env.NEXT_PUBLIC_DERAFL_ADDRESS!
 const fetcher = async (raffleNonce: string) => await API.graphql(graphqlOperation(listRaffles, {
@@ -37,7 +39,7 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
     useEffect(() => {
         console.log("DATA: ", data)
         if (data?.data?.listRaffles?.items?.[0] && !data.error) {
-            router.push(`/raffles/${raffleId!}`)
+            router.push(`/raffles/${chainsByChainId[CHAIN_ID as ChainId].shortName}/${raffleId!}`)
         }
     }, [data])
 
@@ -103,14 +105,5 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
         </Modal>
     )
 }
-
-{/* <Group><IconCurrencyEthereum /><Text>Ξ{!ethAmount ? '...' : parseFloat(ethAmount).toLocaleString()} Eth cap ({!ethAmount ? '...' : parseInt(parseFloat((parseFloat(ethAmount) / 0.001).toString()).toString()).toLocaleString()} tickets)</Text></Group>
-<Group><IconClock /><Text>{`${expiryTimestamp.toLocaleString()} (local time)`}</Text></Group>
-<Group>
-    <IconCrown />
-    <Text>{!royalties ? '0' : (parseFloat(royalties.toString()) / 100).toFixed(2)}% creator royalties</Text>
-    <LooksRareBadge />
-</Group>
-<Group><IconTicket /><Text>2.5% + Ξ0.005 Eth DeRafl fees</Text></Group> */}
 
 export default ConfirmDetailsModal

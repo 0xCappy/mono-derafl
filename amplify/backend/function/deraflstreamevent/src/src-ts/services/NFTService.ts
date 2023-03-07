@@ -108,7 +108,7 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
 }
 
 const getNftByContractAddress = async (address: string, tokenId: string) => {
-  const body = { query: listNFTS, variables: { filter: { contractAddress: { eq: address } }, tokenId: { eq: tokenId } } }
+  const body = { query: listNFTS, variables: { filter: { contractAddress: { eq: address }, tokenId: { eq: tokenId } } } }
   const request = await signRequest(body, endpoint)
   let response = await fetch(request);
   const json = await response.json()
@@ -116,7 +116,7 @@ const getNftByContractAddress = async (address: string, tokenId: string) => {
 }
 
 const getCollectionByContractAddress = async (address: string) => {
-  const body = { query: listCollections, variables: { input: { filter: { contractAddress: { eq: address } } } } }
+  const body = { query: listCollections, variables: { filter: { contractAddress: { eq: address } } } }
   const request = await signRequest(body, endpoint)
   let response = await fetch(request);
   const json = await response.json()

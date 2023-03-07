@@ -23,7 +23,7 @@ const Overview = ({ ethAmount, royalties, expiryTimestamp }: OverviewProps) => {
                     <Text>{!royalties ? '0' : (parseFloat(royalties.toString()) / 100).toFixed(2)}% creator royalties</Text>
                     <LooksRareBadge />
                 </Group>
-                <Group><IconTicket /><Text>2.5% + Ξ0.005 Eth DeRafl fees</Text></Group>
+                <Group><IconTicket /><Text>5% + Ξ0.005 Eth DeRafl fees</Text></Group>
             </Stack>
         </Card>
     )

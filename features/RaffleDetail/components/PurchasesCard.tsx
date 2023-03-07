@@ -15,11 +15,11 @@ const PAGE_LENGTH = 10
 
 interface PurchasesCardProps {
     unviewedPurchaseCount: number
-    raffleId: string
+    raffleNonce: number
     onPurchasesRefreshed: () => void
 }
 
-const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }: PurchasesCardProps) => {
+const PurchasesCard = ({ unviewedPurchaseCount, raffleNonce, onPurchasesRefreshed }: PurchasesCardProps) => {
     const [batches, setBatches] = useState<TicketBatch[]>([])
     const [batchCount, setBatchCount] = useState(0)
     const [page, setPage] = useState(1)
@@ -37,7 +37,7 @@ const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }
     const fetchTicketBatches = async (_page: number) => {
         setLoading(true)
         const ticketBatchData = await API.graphql(graphqlOperation(searchTicketBatches, {
-            filter: { raffleNonce: { eq: parseInt(raffleId) } },
+            filter: { raffleNonce: { eq: raffleNonce } },
             sort:{
                 field: 'createdAt',
                 direction: 'desc'

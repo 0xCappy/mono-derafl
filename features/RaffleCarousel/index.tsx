@@ -5,6 +5,7 @@ import { Raffle } from "@/src/API";
 import { NFTCardSkeleton, RaffleCard } from "common/components";
 import { Anchor } from "react-bootstrap";
 import { Carousel } from '@mantine/carousel';
+import { chainsByChainId, ChainId } from "@/types"
 
 interface RaffleCarouselProps {
     raffles: Raffle[]
@@ -40,7 +41,7 @@ const RaffleCarousel = ({ raffles }: RaffleCarouselProps) => {
                         >
                             {raffles.map(raffle => (
                                 <Carousel.Slide>
-                                    <Anchor href={`/raffles/${raffle.raffleNonce}`}>
+                                    <Anchor href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
                                         <RaffleCard raffle={raffle} />
                                     </Anchor>
                                 </Carousel.Slide>

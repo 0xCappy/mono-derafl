@@ -90,14 +90,13 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
     }, [raffleInfo])
 
     const progress: number = useMemo(() => {
-        if (raffleInfo) {
-            const sold = raffleInfo.ticketsSold.toNumber()
-            const available = raffleInfo.ticketsAvailable.toNumber()
-
+        if (_raffleInfo) {
+            const sold = _raffleInfo.ticketsSold.toNumber()
+            const available = _raffleInfo.ticketsAvailable.toNumber()
             return (sold * 100) / available
         }
         return 0
-    }, [raffleInfo])
+    }, [_raffleInfo])
 
     const renderRaffleAction = () => (
         <>
@@ -169,7 +168,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                 </MediaQuery>
 
                 <Box>
-                    <PurchasesCard onPurchasesRefreshed={() => setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))} raffleId={raffle.id} unviewedPurchaseCount={parseInt(raffleInfo?.batchIndex.toString() || '0') - viewedBatch} />
+                    <PurchasesCard onPurchasesRefreshed={() => setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))} raffleNonce={raffle.raffleNonce} unviewedPurchaseCount={parseInt(raffleInfo?.batchIndex.toString() || '0') - viewedBatch} />
                 </Box>
 
                 <Box>

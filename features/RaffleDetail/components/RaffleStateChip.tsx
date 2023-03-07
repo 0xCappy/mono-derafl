@@ -19,16 +19,21 @@ const RaffleStateChip = ({ raffleState, progress }: RaffleStateCardProps) => {
         switch (raffleState) {
             case RaffleState.CLOSED:
                 stateString = 'Closed'
+                break
             case RaffleState.REFUNDED:
                 stateString = 'Refunded'
+                break
             case RaffleState.PENDING_DRAW:
                 stateString = 'Pending Draw'
+                break
             case RaffleState.DRAWN:
                 stateString = 'Drawn'
+                break
             case RaffleState.RELEASED:
                 stateString = 'Complete'
+                break
             default:
-                break;
+                return '...'
         }
 
         return `${stateString} (${progress >= 100 ? 'sold out' : 'expired'})`

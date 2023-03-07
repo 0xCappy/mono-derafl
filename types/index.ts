@@ -12,3 +12,4 @@ export type { default as Account } from './Account'
 export type { default as TableSort } from './TableSort'
 
 export * from './NFTMetadata'
+export * from './Chain'

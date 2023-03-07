@@ -8,6 +8,7 @@ import { MRT_ColumnDef, MantineReactTable } from "mantine-react-table"
 import { useMemo } from "react"
 import RaffleStateBadge from "../../RaffleStateBadge"
 import { buildTransactionUrl } from "@/common/utils"
+import { chainsByChainId, ChainId } from "@/types"
 
 interface DesktopLayoutProps {
     loading: boolean
@@ -30,7 +31,7 @@ const DesktopLayout = ({ loading, ticketBatches, includeAccount }: DesktopLayout
             {
                 header: 'Raffle',
                 size: 70,
-                accessorFn: (batch) => <Anchor size="md" href={`/raffles/${batch.raffle!.raffleId}`}><strong>#{batch.raffle!.raffleId}</strong></Anchor>
+                accessorFn: (batch) => <Anchor size="md" href={`/raffles/${chainsByChainId[batch.raffle!.chainId as ChainId].shortName}/${batch.raffle!.raffleId}`}><strong>#{batch.raffle!.raffleId}</strong></Anchor>
             },
             {
                 header: 'NFT',
