@@ -20,17 +20,17 @@ interface AccountsTableProps {
 const AccountsTable = ({ accounts, loading, count, showPagination, handlePageChange, pageLength }: AccountsTableProps) => {
     return (
         <Stack justify="space-between">
-            {/* <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
+            <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
                 <Box>
                     <DesktopLayout loading={loading} accounts={accounts} />
                 </Box>
             </MediaQuery>
 
             <MediaQuery largerThan="md" styles={{ display: 'none' }}>
-                <Box> */}
+                <Box>
                     <MobileLayout pageSize={pageLength} loading={loading} accounts={accounts} />
-                {/* </Box>
-            </MediaQuery> */}
+                </Box>
+            </MediaQuery>
 
             {showPagination && count &&
                 <Pagination mt="2rem" total={Math.ceil(count / pageLength)} siblings={2} initialPage={1} onChange={handlePageChange} />

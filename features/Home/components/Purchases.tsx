@@ -19,6 +19,7 @@ const Purchases = ({ticketBatches}: PurchasesProps) => {
                     includeAccount
                     pageSize={8}
                     count={ticketBatches.length}
+                    usePaging={false}
                 />
             </Stack>
             <Center mt="2rem">

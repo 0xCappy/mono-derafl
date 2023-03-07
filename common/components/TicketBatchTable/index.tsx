@@ -37,17 +37,17 @@ const TicketBatchTable = ({ ticketBatches, pageSize, sort, sortKey, count, loadi
     return (
         <Stack>
 
-            {/* <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
+            <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
                 <Box>
                     <DesktopLayout loading={loading} ticketBatches={ticketBatches} includeAccount={includeAccount} />
                 </Box>
             </MediaQuery>
 
             <MediaQuery largerThan="md" styles={{ display: 'none' }}>
-                <Box> */}
+                <Box>
                     <MobileLayout pageSize={pageSize} loading={loading} ticketBatches={ticketBatches} />
-                {/* </Box>
-            </MediaQuery> */}
+                </Box>
+            </MediaQuery>
 
             {usePaging &&
                 <Pagination mt="2rem" total={Math.ceil(count / pageSize)} siblings={2} initialPage={page} onChange={onPageChange} />

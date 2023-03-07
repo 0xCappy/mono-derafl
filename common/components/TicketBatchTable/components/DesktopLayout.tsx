@@ -1,4 +1,4 @@
-import { Account, TicketBatch } from "@/types"
+import { Account, TicketBatch } from "@/src/API"
 import { ActionIcon, Anchor, Avatar, Center, Flex, Group, Paper, SimpleGrid, Stack, Text } from "@mantine/core"
 import { IconBoxMultiple, IconCalendar, IconCalendarEvent, IconCalendarTime, IconDice5, IconExternalLink, IconEye, IconHash, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons"
 import AccountAnchor from "../../AccountAnchor"
@@ -7,7 +7,7 @@ import makeBlockie from "ethereum-blockies-base64"
 import { MRT_ColumnDef, MantineReactTable } from "mantine-react-table"
 import { useMemo } from "react"
 import RaffleStateBadge from "../../RaffleStateBadge"
-import { buildTransactionUrl } from "@/common/utils"
+import { buildTransactionUrl, formatIpfsUrl } from "@/common/utils"
 import { chainsByChainId, ChainId } from "@/types"
 
 interface DesktopLayoutProps {
@@ -31,7 +31,7 @@ const DesktopLayout = ({ loading, ticketBatches, includeAccount }: DesktopLayout
             {
                 header: 'Raffle',
                 size: 70,
-                accessorFn: (batch) => <Anchor size="md" href={`/raffles/${chainsByChainId[batch.raffle!.chainId as ChainId].shortName}/${batch.raffle!.raffleId}`}><strong>#{batch.raffle!.raffleId}</strong></Anchor>
+                accessorFn: (batch) => <Anchor size="md" href={`/raffles/${chainsByChainId[batch.raffle!.chainId as ChainId].shortName}/${batch.raffle!.raffleNonce}`}><strong>#{batch.raffle!.raffleNonce}</strong></Anchor>
             },
             {
                 header: 'NFT',
@@ -39,7 +39,7 @@ const DesktopLayout = ({ loading, ticketBatches, includeAccount }: DesktopLayout
                 accessorFn: (batch) => (
                     <Flex gap={8}>
                         <Center>
-                            <Avatar size="md" src={batch.raffle!.nft.openseaImage}></Avatar>
+                            <Avatar size="md" src={formatIpfsUrl(batch.raffle?.nft?.imageUri || '')}></Avatar>
                         </Center>
                         <Stack style={{ flex: 2 }} spacing={0}>
                             <Text><strong>#{batch.raffle!.nft.tokenId}</strong></Text>
@@ -56,7 +56,7 @@ const DesktopLayout = ({ loading, ticketBatches, includeAccount }: DesktopLayout
                 header: 'Date',
                 accessorFn: (batch) => (
                     <Group spacing={4}>
-                        <IconCalendarEvent /><Text>{new Date(batch.transaction.date).toLocaleDateString()}</Text>
+                        <IconCalendarEvent /><Text><TimeAgo date={new Date(batch.transaction.date)} /></Text>
                     </Group>
                 ),
             },

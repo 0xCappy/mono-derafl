@@ -1,7 +1,7 @@
 import { AccountAnchor, AccountsTable, RaffleStateBadge } from "@/common/components";
 import { Account } from "@/src/API";
 import { searchAccounts } from "@/src/graphql/queries";
-import { Title, Stack, Box, Avatar, Group, Center, Text, Card, Pagination, ActionIcon, Anchor } from "@mantine/core"
+import { Title, Stack, Box, Avatar, Group, Center, Text, Card, Pagination, ActionIcon, Anchor, SegmentedControl, SegmentedControlItem } from "@mantine/core"
 import { IconArrowDown, IconArrowsSort, IconArrowUp, IconBoxMultiple, IconCalendar, IconCalendarEvent, IconCalendarTime, IconDice5, IconExternalLink, IconHash, IconPlus, IconSortAscending, IconSortDescending, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons";
 import { shortenAddress } from "@usedapp/core";
 import { API, graphqlOperation } from "aws-amplify";
@@ -25,8 +25,8 @@ export const Accounts = () => {
     const [accountCount, setAccountCount] = useState(0)
     const [accountFilter, setAccountFilter] = useState<AccountFilter>({
         page: 0,
-        sortKey: 'createdAt',
-        asc: true
+        sortKey: 'updatedAt',
+        asc: false
     })
     useEffect(() => {
         fetchAccounts(accountFilter)
@@ -78,7 +78,10 @@ export const Accounts = () => {
     return (
         <Box mt="8rem" pb="8rem">
             <Stack justify="space-between">
+                <Group position="apart">
                 <Title>Explore Accounts</Title>
+                {/* <SegmentedControl><SegmentedControlItem><IconTicket /></SegmentedControlItem></SegmentedControl> */}
+                </Group>
                 {/* <Card withBorder shadow="sm" radius="md"> */}
 
                 <AccountsTable pageLength={PAGE_LENGTH} showPagination={true} accounts={accounts} count={accountCount} loading={loading} handlePageChange={handlePageChange} />
