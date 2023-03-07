@@ -14,43 +14,44 @@ exports.handleWebhookStream = async (webhook) => {
     if (!webhook.confirmed) {
         const decodedLogs = moralis_1.default.Streams.parsedLogs(webhook);
         const promises = [];
-        decodedLogs.map(log => {
-            promises.push(handleLog(log));
+        decodedLogs.map((log, index) => {
+            console.log(`Handling Log ${index}:`, JSON.stringify(log));
+            promises.push(handleLog(log, webhook));
         });
         await Promise.all(promises);
     }
     ;
-    const handleLog = async (log) => {
-        const eventHash = log.topic0 || "";
-        const eventType = types_1.EventHash[eventHash];
-        const txId = log.transactionHash;
-        const contract = log.address;
-        console.log("TYPE: ", eventType);
-        switch (eventType) {
-            case types_1.EventType.RaffleOpen:
-                await raffleOpen_1.handleRaffleOpen(log, txId, webhook.block.timestamp, webhook.txs[0].fromAddress.toLowerCase(), webhook.chainId, contract);
-                break;
-            case types_1.EventType.RaffleClose:
-                await raffleClose_1.handleRaffleClose(log, txId, webhook.block.timestamp, webhook.chainId);
-                break;
-            case types_1.EventType.RaffleDrawn:
-                await raffleDrawn_1.handleRaffleDrawn(log, txId, webhook.block.timestamp, webhook.chainId);
-                break;
-            case types_1.EventType.RaffleRelease:
-                await raffleRelease_1.handleRaffleRelease(log, txId, webhook.block.timestamp, webhook.chainId);
-                break;
-            case types_1.EventType.RaffleRefund:
-                await raffleRefund_1.handleRaffleRefund(log, txId, webhook.block.timestamp, webhook.chainId);
-                break;
-            case types_1.EventType.TicketPurchase:
-                await ticketPurchase_1.handleTicketPurchase(log, txId, webhook.block.timestamp, webhook.chainId);
-                break;
-            case types_1.EventType.TicketRefund:
-                await ticketRefund_1.handleTicketRefund(log, txId, webhook.block.timestamp, webhook.chainId);
-                break;
-            default:
-                break;
-        }
-    };
+};
+const handleLog = async (log, webhook) => {
+    const eventHash = log.topic0 || "";
+    const eventType = types_1.EventHash[eventHash];
+    const txId = log.transactionHash;
+    const contract = log.address;
+    console.log("TYPE: ", eventType);
+    switch (eventType) {
+        case types_1.EventType.RaffleOpen:
+            await raffleOpen_1.handleRaffleOpen(log, txId, webhook.block.timestamp, webhook.txs[0].fromAddress.toLowerCase(), webhook.chainId, contract);
+            break;
+        case types_1.EventType.RaffleClose:
+            await raffleClose_1.handleRaffleClose(log, txId, webhook.block.timestamp, webhook.chainId);
+            break;
+        case types_1.EventType.RaffleDrawn:
+            await raffleDrawn_1.handleRaffleDrawn(log, txId, webhook.block.timestamp, webhook.chainId);
+            break;
+        case types_1.EventType.RaffleRelease:
+            await raffleRelease_1.handleRaffleRelease(log, txId, webhook.block.timestamp, webhook.chainId);
+            break;
+        case types_1.EventType.RaffleRefund:
+            await raffleRefund_1.handleRaffleRefund(log, txId, webhook.block.timestamp, webhook.chainId);
+            break;
+        case types_1.EventType.TicketPurchase:
+            await ticketPurchase_1.handleTicketPurchase(log, txId, webhook.block.timestamp, webhook.chainId);
+            break;
+        case types_1.EventType.TicketRefund:
+            await ticketRefund_1.handleTicketRefund(log, txId, webhook.block.timestamp, webhook.chainId);
+            break;
+        default:
+            break;
+    }
 };
 //# sourceMappingURL=index.js.map

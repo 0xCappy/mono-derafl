@@ -13,13 +13,15 @@ export const handleWebhookStream = async (webhook: IWebhook): Promise<void> => {
   if (!webhook.confirmed) {
     const decodedLogs = Moralis.Streams.parsedLogs(webhook);
     const promises: Promise<any>[] = []
-    decodedLogs.map(log => {
-      promises.push(handleLog(log))
+    decodedLogs.map((log, index) => {
+      console.log(`Handling Log ${index}:`, JSON.stringify(log))
+      promises.push(handleLog(log, webhook))
     })
     await Promise.all(promises)
-};
+  };
+}
 
-const handleLog = async (log: any) => {
+const handleLog = async (log: any, webhook: IWebhook) => {
   const eventHash = log.topic0 || "";
   const eventType = EventHash[eventHash];
   const txId = log.transactionHash;
@@ -88,5 +90,4 @@ const handleLog = async (log: any) => {
     default:
       break;
   }
-}
 }
