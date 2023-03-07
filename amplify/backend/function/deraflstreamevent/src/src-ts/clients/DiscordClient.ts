@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Raffle } from "../types"
+import { ChainId, chainsByChainId } from "../types/Chain";
 import { getUtcDateString } from "../utils/date"
 import { formatIpfsUrl } from "../utils/image";
 
@@ -30,7 +31,7 @@ const generateCreateTemplate = (raffle: any, nft: any) => {
         "embeds": [
             {
                 "title": `Raffle Created #${raffle.raffleNonce}`,
-                "url": `https://derafl.com/raffles/${raffle.raffleNonce}`,
+                "url": `${process.env.APP_URL}/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`,
                 "description": `${nft.collectionName} #${nft.tokenId}`,
                 "fields": [
                     {
@@ -65,7 +66,7 @@ const generateCompleteTemplate = (raffle: any, nft: any) => {
         "embeds": [
             {
                 "title": `Raffle Complete #${raffle.raffleNonce}`,
-                "url": `https://derafl.com/raffles/${raffle.raffleNonce}`,
+                "url": `${process.env.APP_URL}/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`,
                 "description": `${nft.collectionName} #${nft.tokenId}`,
                 "fields": [
                     {

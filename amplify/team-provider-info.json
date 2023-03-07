@@ -23,7 +23,8 @@
           "traitSniperKey": "feb08daf-f3d0-40b5-bbaa-cc5f41c0153f",
           "discordRaffleCreateWebhookUrl": "https://discord.com/api/webhooks/1079377429744848957/fHbzIX7_r54QD8MddO2p0eI52EDoyTiYJhQrAHjP2tN9RvqSXEaUYZ05gZ_TSiqSBkYm",
           "discordRaffleClosedWebhookUrl": "https://discord.com/api/webhooks/1079377754325274634/JuJUozAzBMVXyOuD_4BMyr6-Ljnx6V12-z8wt-RRySN_Rjm62IR7TNshCswSVIHLTEhr",
-          "moralisApiKey": "aNnsQjMwzZZYLDzbXKaTRPpb1l88ipYyTF3xjNV6BbhDk5vp4Fsbd6WRHoTvguWo"
+          "moralisApiKey": "aNnsQjMwzZZYLDzbXKaTRPpb1l88ipYyTF3xjNV6BbhDk5vp4Fsbd6WRHoTvguWo",
+          "appUrl": "https://testnet.derafl.com"
         },
         "derafl": {}
       }
