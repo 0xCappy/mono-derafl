@@ -1,8 +1,9 @@
 import { AccountAnchor, AccountsTable, RaffleStateBadge } from "@/common/components";
 import { Account } from "@/src/API";
 import { searchAccounts } from "@/src/graphql/queries";
-import { Title, Stack, Box, Avatar, Group, Center, Text, Card, Pagination, ActionIcon, Anchor } from "@mantine/core"
-import { IconArrowDown, IconArrowsSort, IconArrowUp, IconBoxMultiple, IconCalendar, IconCalendarEvent, IconCalendarTime, IconDice5, IconExternalLink, IconHash, IconPlus, IconSortAscending, IconSortDescending, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons";
+import { DataDisplayType } from "@/types";
+import { Title, Stack, Box, Avatar, Group, Center, Text, Card, Pagination, ActionIcon, Anchor, SegmentedControl, SegmentedControlItem } from "@mantine/core"
+import { IconArrowDown, IconArrowsSort, IconArrowUp, IconBoxMultiple, IconCalendar, IconCalendarEvent, IconCalendarTime, IconDice5, IconExternalLink, IconGridPattern, IconHash, IconLayoutGrid, IconLayoutRows, IconPlus, IconSortAscending, IconSortDescending, IconSquarePlus, IconTable, IconTicket, IconTrophy } from "@tabler/icons";
 import { shortenAddress } from "@usedapp/core";
 import { API, graphqlOperation } from "aws-amplify";
 import makeBlockie from "ethereum-blockies-base64";
@@ -11,7 +12,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Table, Column, HeaderCell, Cell, SortType } from 'rsuite-table';
 import 'rsuite-table/dist/css/rsuite-table.css'
 
-const PAGE_LENGTH = 20
+const PAGE_LENGTH = 24
 
 interface AccountFilter {
     page: number
@@ -21,12 +22,13 @@ interface AccountFilter {
 
 export const Accounts = () => {
     const [accounts, setAccounts] = useState<Account[]>([])
+    const [displayType, setDisplayType] = useState<DataDisplayType>('table')
     const [loading, setLoading] = useState(false)
     const [accountCount, setAccountCount] = useState(0)
     const [accountFilter, setAccountFilter] = useState<AccountFilter>({
         page: 0,
-        sortKey: 'createdAt',
-        asc: true
+        sortKey: 'updatedAt',
+        asc: false
     })
     useEffect(() => {
         fetchAccounts(accountFilter)
@@ -35,7 +37,7 @@ export const Accounts = () => {
     const fetchAccounts = async (nextFilter: AccountFilter) => {
         setLoading(true)
         const accountData = await API.graphql(graphqlOperation(searchAccounts, {
-            sort:{field: nextFilter.sortKey, direction: nextFilter.asc ? 'asc' : 'desc'},
+            sort: { field: nextFilter.sortKey, direction: nextFilter.asc ? 'asc' : 'desc' },
             limit: PAGE_LENGTH,
             from: nextFilter.page * PAGE_LENGTH
         })) as any
@@ -78,10 +80,34 @@ export const Accounts = () => {
     return (
         <Box mt="8rem" pb="8rem">
             <Stack justify="space-between">
-                <Title>Explore Accounts</Title>
+                <Group position="apart">
+                    <Title>Accounts</Title>
+                    <SegmentedControl
+                        onChange={(type: DataDisplayType) => setDisplayType(type)}
+                        data={[
+                            {
+                                value: 'table',
+                                label: (
+                                    <Center>
+                                        <IconLayoutRows />
+                                    </Center>
+                                ),
+                            },
+                            {
+                                value: 'grid',
+                                label: (
+                                    <Center>
+                                        <IconLayoutGrid />
+                                    </Center>
+                                ),
+                            }
+                        ]}
+                    />
+
+                </Group>
                 {/* <Card withBorder shadow="sm" radius="md"> */}
 
-                <AccountsTable pageLength={PAGE_LENGTH} showPagination={true} accounts={accounts} count={accountCount} loading={loading} handlePageChange={handlePageChange} />
+                <AccountsTable displayType={displayType} pageLength={PAGE_LENGTH} showPagination={true} accounts={accounts} count={accountCount} loading={loading} handlePageChange={handlePageChange} />
             </Stack>
         </Box>
     )

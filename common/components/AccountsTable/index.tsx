@@ -1,5 +1,6 @@
 import accounts from "@/pages/accounts";
 import { Account } from "@/src/API";
+import { DataDisplayType } from "@/types";
 import { Group, Avatar, Box, Title, Stack, Pagination, Text, MediaQuery } from "@mantine/core";
 import { IconSquarePlus, IconTrophy, IconDice5, IconTicket, IconCalendar, IconCalendarTime } from "@tabler/icons";
 import makeBlockie from "ethereum-blockies-base64";
@@ -15,11 +16,19 @@ interface AccountsTableProps {
     count?: number
     showPagination?: boolean
     handlePageChange?: (page: number) => void
+    displayType: DataDisplayType
 }
 
-const AccountsTable = ({ accounts, loading, count, showPagination, handlePageChange, pageLength }: AccountsTableProps) => {
+const AccountsTable = ({ accounts, loading, count, showPagination, handlePageChange, pageLength, displayType }: AccountsTableProps) => {
     return (
         <Stack justify="space-between">
+            <Box>
+                {displayType === 'table' ?
+                    <DesktopLayout loading={loading} accounts={accounts} />
+                    :
+                    <MobileLayout pageSize={pageLength} loading={loading} accounts={accounts} />
+                }
+            </Box>
             {/* <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
                 <Box>
                     <DesktopLayout loading={loading} accounts={accounts} />
@@ -27,9 +36,9 @@ const AccountsTable = ({ accounts, loading, count, showPagination, handlePageCha
             </MediaQuery>
 
             <MediaQuery largerThan="md" styles={{ display: 'none' }}>
-                <Box> */}
+                <Box>
                     <MobileLayout pageSize={pageLength} loading={loading} accounts={accounts} />
-                {/* </Box>
+                </Box>
             </MediaQuery> */}
 
             {showPagination && count &&

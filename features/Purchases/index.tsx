@@ -1,17 +1,15 @@
-import { AccountAnchor, AccountsTable, RaffleStateBadge, TicketBatchTable } from "@/common/components";
+import { TicketBatchTable } from "@/common/components";
 import { searchTicketBatches } from "@/src/graphql/queries";
-import { Account, TicketBatch } from "@/src/API";
-import { Title, Stack, Box, Avatar, Group, Center, Text, Card, Pagination, ActionIcon, Anchor } from "@mantine/core"
-import { IconArrowDown, IconArrowsSort, IconArrowUp, IconBoxMultiple, IconCalendar, IconCalendarEvent, IconCalendarTime, IconDice5, IconExternalLink, IconHash, IconPlus, IconSortAscending, IconSortDescending, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons";
-import { shortenAddress } from "@usedapp/core";
+import { TicketBatch } from "@/src/API";
+import { Title, Stack, Box, Group, Center, SegmentedControl } from "@mantine/core"
+import { IconArrowsSort, IconLayoutGrid, IconLayoutRows, IconSortAscending, IconSortDescending } from "@tabler/icons";
 import { API, graphqlOperation } from "aws-amplify";
-import makeBlockie from "ethereum-blockies-base64";
-import { MantineReactTable, MRT_ColumnDef } from "mantine-react-table";
-import { useEffect, useMemo, useState } from "react";
-import { Table, Column, HeaderCell, Cell, SortType } from 'rsuite-table';
+import { useEffect, useState } from "react";
+import { SortType } from 'rsuite-table';
 import 'rsuite-table/dist/css/rsuite-table.css'
+import { DataDisplayType } from "@/types";
 
-const PAGE_LENGTH = 20
+const PAGE_LENGTH = 24
 
 interface Filter {
     page: number
@@ -21,6 +19,7 @@ interface Filter {
 
 export const Purchases = () => {
     const [purchases, setPurchases] = useState<TicketBatch[]>([])
+    const [displayType, setDisplayType] = useState<DataDisplayType>('table')
     const [loading, setLoading] = useState(false)
     const [count, setCount] = useState(0)
     const [filter, setFilter] = useState<Filter>({
@@ -36,7 +35,7 @@ export const Purchases = () => {
     const fetchPurchases = async (nextFilter: Filter) => {
         setLoading(true)
         const ticketBatchData = await API.graphql(graphqlOperation(searchTicketBatches, {
-            sort:{
+            sort: {
                 field: nextFilter.sortKey,
                 direction: nextFilter.asc ? 'asc' : 'desc'
             },
@@ -82,15 +81,39 @@ export const Purchases = () => {
     return (
         <Box mt="8rem" pb="8rem">
             <Stack justify="space-between">
-                <Title>Explore Purchases</Title>
+                <Group position="apart">
+                    <Title>Purchases</Title>
+                    <SegmentedControl
+                        onChange={(type: DataDisplayType) => setDisplayType(type)}
+                        data={[
+                            {
+                                value: 'table',
+                                label: (
+                                    <Center>
+                                        <IconLayoutRows />
+                                    </Center>
+                                ),
+                            },
+                            {
+                                value: 'grid',
+                                label: (
+                                    <Center>
+                                        <IconLayoutGrid />
+                                    </Center>
+                                ),
+                            }
+                        ]}
+                    />
+                </Group>
                 {/* <Card withBorder shadow="sm" radius="md"> */}
-                <TicketBatchTable 
+                <TicketBatchTable
                     pageSize={PAGE_LENGTH}
                     ticketBatches={purchases}
                     count={count}
                     onPageChange={handlePageChange}
                     onSort={handleSort}
                     loading={loading}
+                    displayType={displayType}
                 />
             </Stack>
         </Box>

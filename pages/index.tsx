@@ -31,7 +31,8 @@ export const getServerSideProps = async (context: any) => {
 
   const purchasesData = await API.graphql(graphqlOperation(ticketBatchesByCreatedAt, {
     type: 'TicketBatch',
-    sortDirection: 'DESC'
+    sortDirection: 'DESC',
+    limit: 10
   })) as any
   const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
 

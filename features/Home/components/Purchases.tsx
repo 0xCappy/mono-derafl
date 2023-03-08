@@ -1,5 +1,6 @@
 import { TicketBatchTable } from "@/common/components"
 import { TicketBatch } from "@/src/API"
+import { DataDisplayType } from "@/types"
 import { Center, Box, Container, Stack, Anchor, Button, Title } from "@mantine/core"
 import { IconCash, IconCompass } from "@tabler/icons"
 import { useEffect, useState } from "react"
@@ -19,6 +20,8 @@ const Purchases = ({ticketBatches}: PurchasesProps) => {
                     includeAccount
                     pageSize={8}
                     count={ticketBatches.length}
+                    usePaging={false}
+                    displayType="table"
                 />
             </Stack>
             <Center mt="2rem">
