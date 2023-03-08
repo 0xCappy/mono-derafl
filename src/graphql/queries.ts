@@ -254,6 +254,19 @@ export const getTicketRefund = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -461,6 +474,9 @@ export const listTicketRefunds = /* GraphQL */ `
               twitterUsername
               description
               floorPrice
+            }
+            traits {
+              nextToken
             }
             nFTCollectionId
           }
@@ -804,6 +820,19 @@ export const getTicketBatch = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -1014,6 +1043,9 @@ export const listTicketBatches = /* GraphQL */ `
               twitterUsername
               description
               floorPrice
+            }
+            traits {
+              nextToken
             }
             nFTCollectionId
           }
@@ -1237,6 +1269,9 @@ export const ticketBatchesByCreatedAt = /* GraphQL */ `
               description
               floorPrice
             }
+            traits {
+              nextToken
+            }
             nFTCollectionId
           }
           refundTx {
@@ -1458,6 +1493,9 @@ export const ticketBatchesByUpdatedAt = /* GraphQL */ `
               twitterUsername
               description
               floorPrice
+            }
+            traits {
+              nextToken
             }
             nFTCollectionId
           }
@@ -1681,6 +1719,9 @@ export const ticketBatchesByTicketsBought = /* GraphQL */ `
               description
               floorPrice
             }
+            traits {
+              nextToken
+            }
             nFTCollectionId
           }
           refundTx {
@@ -1902,6 +1943,9 @@ export const searchTicketBatches = /* GraphQL */ `
               twitterUsername
               description
               floorPrice
+            }
+            traits {
+              nextToken
             }
             nFTCollectionId
           }
@@ -2169,6 +2213,9 @@ export const getRaffle = /* GraphQL */ `
               description
               floorPrice
             }
+            traits {
+              nextToken
+            }
             nFTCollectionId
           }
           refundTx {
@@ -2286,6 +2333,61 @@ export const getRaffle = /* GraphQL */ `
           twitterUsername
           description
           floorPrice
+          traits {
+            items {
+              id
+              name
+              value
+              pool
+              score
+              floorPrice
+              count
+              createdAt
+              updatedAt
+              collectionTraitsId
+            }
+            nextToken
+          }
+        }
+        traits {
+          items {
+            id
+            nFTId
+            traitId
+            nFT {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              nFTCollectionId
+            }
+            trait {
+              id
+              name
+              value
+              pool
+              score
+              floorPrice
+              count
+              createdAt
+              updatedAt
+              collectionTraitsId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
         }
         nFTCollectionId
       }
@@ -2558,6 +2660,19 @@ export const listRaffles = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -2842,6 +2957,19 @@ export const rafflesByCreatedAt = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -3126,6 +3254,19 @@ export const rafflesByUpdatedAt = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -3410,6 +3551,19 @@ export const rafflesByProgress = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -3694,6 +3848,19 @@ export const rafflesByTicketsAvailable = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -3978,6 +4145,19 @@ export const rafflesByExpires = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -4262,6 +4442,19 @@ export const rafflesByTicketsSold = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -4546,6 +4739,19 @@ export const searchRaffles = /* GraphQL */ `
             twitterUsername
             description
             floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
           }
           nFTCollectionId
         }
@@ -4626,6 +4832,92 @@ export const getNFT = /* GraphQL */ `
         twitterUsername
         description
         floorPrice
+        traits {
+          items {
+            id
+            name
+            value
+            pool
+            score
+            floorPrice
+            count
+            nfts {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            collectionTraitsId
+          }
+          nextToken
+        }
+      }
+      traits {
+        items {
+          id
+          nFTId
+          traitId
+          nFT {
+            id
+            type
+            createdAt
+            updatedAt
+            contractAddress
+            metadata
+            tokenUri
+            tokenId
+            symbol
+            imageUri
+            tokenName
+            collectionName
+            lastSales
+            chainId
+            rarityData
+            collection {
+              id
+              type
+              contractAddress
+              createdAt
+              updatedAt
+              symbol
+              rafflesCreated
+              contractDeployer
+              deployedBlockNumber
+              tokenType
+              totalSupply
+              chainId
+              name
+              openseaSlug
+              imageUrl
+              externalUrl
+              discordUrl
+              twitterUsername
+              description
+              floorPrice
+            }
+            traits {
+              nextToken
+            }
+            nFTCollectionId
+          }
+          trait {
+            id
+            name
+            value
+            pool
+            score
+            floorPrice
+            count
+            nfts {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            collectionTraitsId
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       nFTCollectionId
     }
@@ -4675,6 +4967,61 @@ export const listNFTS = /* GraphQL */ `
           twitterUsername
           description
           floorPrice
+          traits {
+            items {
+              id
+              name
+              value
+              pool
+              score
+              floorPrice
+              count
+              createdAt
+              updatedAt
+              collectionTraitsId
+            }
+            nextToken
+          }
+        }
+        traits {
+          items {
+            id
+            nFTId
+            traitId
+            nFT {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              nFTCollectionId
+            }
+            trait {
+              id
+              name
+              value
+              pool
+              score
+              floorPrice
+              count
+              createdAt
+              updatedAt
+              collectionTraitsId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
         }
         nFTCollectionId
       }
@@ -4705,6 +5052,31 @@ export const getCollection = /* GraphQL */ `
       twitterUsername
       description
       floorPrice
+      traits {
+        items {
+          id
+          name
+          value
+          pool
+          score
+          floorPrice
+          count
+          nfts {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          collectionTraitsId
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -4736,6 +5108,24 @@ export const listCollections = /* GraphQL */ `
         twitterUsername
         description
         floorPrice
+        traits {
+          items {
+            id
+            name
+            value
+            pool
+            score
+            floorPrice
+            count
+            nfts {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            collectionTraitsId
+          }
+          nextToken
+        }
       }
       nextToken
     }
@@ -5014,6 +5404,606 @@ export const searchAccounts = /* GraphQL */ `
           }
         }
       }
+    }
+  }
+`;
+export const getTrait = /* GraphQL */ `
+  query GetTrait($id: ID!) {
+    getTrait(id: $id) {
+      id
+      name
+      value
+      pool
+      score
+      floorPrice
+      count
+      nfts {
+        items {
+          id
+          nFTId
+          traitId
+          nFT {
+            id
+            type
+            createdAt
+            updatedAt
+            contractAddress
+            metadata
+            tokenUri
+            tokenId
+            symbol
+            imageUri
+            tokenName
+            collectionName
+            lastSales
+            chainId
+            rarityData
+            collection {
+              id
+              type
+              contractAddress
+              createdAt
+              updatedAt
+              symbol
+              rafflesCreated
+              contractDeployer
+              deployedBlockNumber
+              tokenType
+              totalSupply
+              chainId
+              name
+              openseaSlug
+              imageUrl
+              externalUrl
+              discordUrl
+              twitterUsername
+              description
+              floorPrice
+            }
+            traits {
+              nextToken
+            }
+            nFTCollectionId
+          }
+          trait {
+            id
+            name
+            value
+            pool
+            score
+            floorPrice
+            count
+            nfts {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            collectionTraitsId
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      collectionTraitsId
+    }
+  }
+`;
+export const listTraits = /* GraphQL */ `
+  query ListTraits(
+    $filter: ModelTraitFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTraits(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        value
+        pool
+        score
+        floorPrice
+        count
+        nfts {
+          items {
+            id
+            nFTId
+            traitId
+            nFT {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              nFTCollectionId
+            }
+            trait {
+              id
+              name
+              value
+              pool
+              score
+              floorPrice
+              count
+              createdAt
+              updatedAt
+              collectionTraitsId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        collectionTraitsId
+      }
+      nextToken
+    }
+  }
+`;
+export const getNftTraits = /* GraphQL */ `
+  query GetNftTraits($id: ID!) {
+    getNftTraits(id: $id) {
+      id
+      nFTId
+      traitId
+      nFT {
+        id
+        type
+        createdAt
+        updatedAt
+        contractAddress
+        metadata
+        tokenUri
+        tokenId
+        symbol
+        imageUri
+        tokenName
+        collectionName
+        lastSales
+        chainId
+        rarityData
+        collection {
+          id
+          type
+          contractAddress
+          createdAt
+          updatedAt
+          symbol
+          rafflesCreated
+          contractDeployer
+          deployedBlockNumber
+          tokenType
+          totalSupply
+          chainId
+          name
+          openseaSlug
+          imageUrl
+          externalUrl
+          discordUrl
+          twitterUsername
+          description
+          floorPrice
+          traits {
+            items {
+              id
+              name
+              value
+              pool
+              score
+              floorPrice
+              count
+              createdAt
+              updatedAt
+              collectionTraitsId
+            }
+            nextToken
+          }
+        }
+        traits {
+          items {
+            id
+            nFTId
+            traitId
+            nFT {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              nFTCollectionId
+            }
+            trait {
+              id
+              name
+              value
+              pool
+              score
+              floorPrice
+              count
+              createdAt
+              updatedAt
+              collectionTraitsId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        nFTCollectionId
+      }
+      trait {
+        id
+        name
+        value
+        pool
+        score
+        floorPrice
+        count
+        nfts {
+          items {
+            id
+            nFTId
+            traitId
+            nFT {
+              id
+              type
+              createdAt
+              updatedAt
+              contractAddress
+              metadata
+              tokenUri
+              tokenId
+              symbol
+              imageUri
+              tokenName
+              collectionName
+              lastSales
+              chainId
+              rarityData
+              nFTCollectionId
+            }
+            trait {
+              id
+              name
+              value
+              pool
+              score
+              floorPrice
+              count
+              createdAt
+              updatedAt
+              collectionTraitsId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        collectionTraitsId
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listNftTraits = /* GraphQL */ `
+  query ListNftTraits(
+    $filter: ModelNftTraitsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNftTraits(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        nFTId
+        traitId
+        nFT {
+          id
+          type
+          createdAt
+          updatedAt
+          contractAddress
+          metadata
+          tokenUri
+          tokenId
+          symbol
+          imageUri
+          tokenName
+          collectionName
+          lastSales
+          chainId
+          rarityData
+          collection {
+            id
+            type
+            contractAddress
+            createdAt
+            updatedAt
+            symbol
+            rafflesCreated
+            contractDeployer
+            deployedBlockNumber
+            tokenType
+            totalSupply
+            chainId
+            name
+            openseaSlug
+            imageUrl
+            externalUrl
+            discordUrl
+            twitterUsername
+            description
+            floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          nFTCollectionId
+        }
+        trait {
+          id
+          name
+          value
+          pool
+          score
+          floorPrice
+          count
+          nfts {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          collectionTraitsId
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const nftTraitsByNFTId = /* GraphQL */ `
+  query NftTraitsByNFTId(
+    $nFTId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelNftTraitsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    nftTraitsByNFTId(
+      nFTId: $nFTId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        nFTId
+        traitId
+        nFT {
+          id
+          type
+          createdAt
+          updatedAt
+          contractAddress
+          metadata
+          tokenUri
+          tokenId
+          symbol
+          imageUri
+          tokenName
+          collectionName
+          lastSales
+          chainId
+          rarityData
+          collection {
+            id
+            type
+            contractAddress
+            createdAt
+            updatedAt
+            symbol
+            rafflesCreated
+            contractDeployer
+            deployedBlockNumber
+            tokenType
+            totalSupply
+            chainId
+            name
+            openseaSlug
+            imageUrl
+            externalUrl
+            discordUrl
+            twitterUsername
+            description
+            floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          nFTCollectionId
+        }
+        trait {
+          id
+          name
+          value
+          pool
+          score
+          floorPrice
+          count
+          nfts {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          collectionTraitsId
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const nftTraitsByTraitId = /* GraphQL */ `
+  query NftTraitsByTraitId(
+    $traitId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelNftTraitsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    nftTraitsByTraitId(
+      traitId: $traitId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        nFTId
+        traitId
+        nFT {
+          id
+          type
+          createdAt
+          updatedAt
+          contractAddress
+          metadata
+          tokenUri
+          tokenId
+          symbol
+          imageUri
+          tokenName
+          collectionName
+          lastSales
+          chainId
+          rarityData
+          collection {
+            id
+            type
+            contractAddress
+            createdAt
+            updatedAt
+            symbol
+            rafflesCreated
+            contractDeployer
+            deployedBlockNumber
+            tokenType
+            totalSupply
+            chainId
+            name
+            openseaSlug
+            imageUrl
+            externalUrl
+            discordUrl
+            twitterUsername
+            description
+            floorPrice
+            traits {
+              nextToken
+            }
+          }
+          traits {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          nFTCollectionId
+        }
+        trait {
+          id
+          name
+          value
+          pool
+          score
+          floorPrice
+          count
+          nfts {
+            items {
+              id
+              nFTId
+              traitId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          collectionTraitsId
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
   }
 `;

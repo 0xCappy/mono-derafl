@@ -8,6 +8,7 @@ import Collection from "../types/Collection";
 import { getNftRank } from "../clients/TraitSniperClient";
 import { NFT, NFTAttribute } from "../types";
 import { Nft as AlchemyNft } from 'alchemy-sdk'
+import { mergeAttributeRarity } from "./AttributeSummaryService";
 const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT!)
 
 // // called when raffle is created
@@ -83,6 +84,11 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
   }
 
   if (!nft) {
+    let attributes = alchemyNft.rawMetadata.attributes as NFTAttribute[]
+    if (attributes && attributes.length) {
+      attributes = await mergeAttributeRarity(alchemyNft.contract.address, chainId, attributes)
+    }
+
     nft = await createNft({
       type: 'NFT',
       contractAddress: alchemyNft.contract.address,

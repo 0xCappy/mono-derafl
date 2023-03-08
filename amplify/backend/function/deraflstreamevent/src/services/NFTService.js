@@ -8,6 +8,7 @@ const queries_1 = require("../graphql/queries");
 const mutations_1 = require("../graphql/mutations");
 const mapHexToAlchemyChain_1 = require("../utils/mapHexToAlchemyChain");
 const TraitSniperClient_1 = require("../clients/TraitSniperClient");
+const AttributeSummaryService_1 = require("./AttributeSummaryService");
 const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT);
 // // called when raffle is created
 // // if no NFT exists, create one
@@ -70,6 +71,10 @@ exports.getOrCreateNft = async (address, tokenId, chainId) => {
         collection = await createCollection(alchemyNft, chainId);
     }
     if (!nft) {
+        let attributes = alchemyNft.rawMetadata.attributes;
+        if (attributes && attributes.length) {
+            attributes = await AttributeSummaryService_1.mergeAttributeRarity(alchemyNft.contract.address, chainId, attributes);
+        }
         nft = await createNft({
             type: 'NFT',
             contractAddress: alchemyNft.contract.address,
