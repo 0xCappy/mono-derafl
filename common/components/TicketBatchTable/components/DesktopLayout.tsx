@@ -37,15 +37,17 @@ const DesktopLayout = ({ loading, ticketBatches, includeAccount }: DesktopLayout
                 header: 'NFT',
                 size: 200,
                 accessorFn: (batch) => (
-                    <Flex gap={8}>
-                        <Center>
-                            <Avatar size="md" src={formatIpfsUrl(batch.raffle?.nft?.imageUri || '')}></Avatar>
-                        </Center>
-                        <Stack style={{ flex: 2 }} spacing={0}>
-                            <Text><strong>#{batch.raffle!.nft.tokenId}</strong></Text>
-                            <Text lineClamp={1} size="md">{batch.raffle!.nft.collectionName}</Text>
-                        </Stack>
-                    </Flex>
+                    <Anchor size="md" href={`/raffles/${chainsByChainId[batch.raffle!.chainId as ChainId].shortName}/${batch.raffle!.raffleNonce}`}>
+                        <Flex gap={8}>
+                            <Center>
+                                <Avatar size="md" src={formatIpfsUrl(batch.raffle?.nft?.imageUri || '')}></Avatar>
+                            </Center>
+                            <Stack style={{ flex: 2 }} spacing={0}>
+                                <Text><strong>#{batch.raffle!.nft.tokenId}</strong></Text>
+                                <Text lineClamp={1} size="md">{batch.raffle!.nft.collectionName}</Text>
+                            </Stack>
+                        </Flex>
+                    </Anchor>
                 )
             },
             {
@@ -53,7 +55,7 @@ const DesktopLayout = ({ loading, ticketBatches, includeAccount }: DesktopLayout
                 accessorFn: (batch) => <RaffleStateBadge progress={batch.raffle!.progress} raffleState={batch.raffle!.state} />
             },
             {
-                header: 'Date',
+                header: 'Created',
                 accessorFn: (batch) => (
                     <Group spacing={4}>
                         <IconCalendarEvent /><Text><TimeAgo date={new Date(batch.transaction.date)} /></Text>

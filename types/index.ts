@@ -10,6 +10,7 @@ export { default as RaffleState } from './RaffleState'
 export { default as RaffleEventTitleMap } from './RaffleEventTitleMap'
 export type { default as Account } from './Account'
 export type { default as TableSort } from './TableSort'
+export type { default as DataDisplayType } from './DataDisplayType'
 
 export * from './NFTMetadata'
 export * from './Chain'

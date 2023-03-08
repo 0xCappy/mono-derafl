@@ -1,22 +1,8 @@
-import { renderSortIcon } from "@/common/utils"
 import { TicketBatch } from "@/src/API"
-import { Group, Avatar, Stack, Pagination, Text, Image, Table, Anchor, ActionIcon, Box, MediaQuery } from "@mantine/core"
-import { IconBoxMultiple, IconCalendarEvent, IconExternalLink, IconHash, IconTicket } from "@tabler/icons"
-import { Column, HeaderCell, Cell, Table as OldTable, SortType } from "rsuite-table"
-import TableHeader from "../TableHeader"
-import TableLoader from "../TableLoader"
-import { MantineReactTable, MRT_ColumnDef } from 'mantine-react-table';
-import type {
-    ColumnFiltersState,
-    PaginationState,
-    SortingState,
-} from '@tanstack/react-table';
-import { useMemo } from "react"
-import RaffleStateBadge from "../RaffleStateBadge"
-import makeBlockie from "ethereum-blockies-base64"
-import AccountAnchor from "../AccountAnchor"
-import accounts from "@/pages/accounts"
+import { Stack, Pagination, Box } from "@mantine/core"
+import { SortType } from "rsuite-table"
 import { DesktopLayout, MobileLayout } from "./components"
+import { DataDisplayType } from "@/types"
 
 interface TicketBatchTableProps {
     ticketBatches: TicketBatch[]
@@ -30,14 +16,20 @@ interface TicketBatchTableProps {
     includeAccount?: boolean
     onSort?: (sortKey: string, sortType?: SortType) => void
     onPageChange?: (page: number) => void
+    displayType: DataDisplayType
 }
 
-const TicketBatchTable = ({ ticketBatches, pageSize, sort, sortKey, count, loading, page, includeAccount = false, onSort, onPageChange, usePaging = true }: TicketBatchTableProps) => {
-
+const TicketBatchTable = ({ ticketBatches, pageSize, sort, sortKey, count, loading, page, includeAccount = false, onSort, onPageChange, usePaging = true, displayType }: TicketBatchTableProps) => {
     return (
         <Stack>
-
-            <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
+            <Box>
+                {displayType === 'grid' ?
+                    <MobileLayout pageSize={pageSize} loading={loading} ticketBatches={ticketBatches} />
+                    :
+                    <DesktopLayout loading={loading} ticketBatches={ticketBatches} includeAccount={includeAccount} />
+                }
+            </Box>
+            {/* <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
                 <Box>
                     <DesktopLayout loading={loading} ticketBatches={ticketBatches} includeAccount={includeAccount} />
                 </Box>
@@ -47,7 +39,7 @@ const TicketBatchTable = ({ ticketBatches, pageSize, sort, sortKey, count, loadi
                 <Box>
                     <MobileLayout pageSize={pageSize} loading={loading} ticketBatches={ticketBatches} />
                 </Box>
-            </MediaQuery>
+            </MediaQuery> */}
 
             {usePaging &&
                 <Pagination mt="2rem" total={Math.ceil(count / pageSize)} siblings={2} initialPage={page} onChange={onPageChange} />
