@@ -1,14 +1,14 @@
 import { formatIpfsUrl, renderSortIcon } from "@/common/utils"
 import { Raffle, TicketBatch } from "@/src/API"
 import { ChainId, chainsByChainId } from "@/types"
-import { Group, Avatar, Stack, Pagination, Text, Image, Anchor, ActionIcon } from "@mantine/core"
+import { Group, Avatar, Stack, Pagination, Text, Image, Anchor, ActionIcon, Box, MediaQuery } from "@mantine/core"
 import { IconTicket, IconBoxMultiple, IconHash, IconCalendarEvent, IconExternalLink, IconCalendarPlus, IconCircleDotted } from "@tabler/icons"
 import { MRT_ColumnDef, MantineReactTable } from "mantine-react-table"
 import { useMemo } from "react"
 import { Column, HeaderCell, Cell, Table, SortType } from "rsuite-table"
 import RaffleStateBadge from "../RaffleStateBadge"
 import TableLoader from "../TableLoader"
-import { MobileLayout } from "./components"
+import { DesktopLayout, MobileLayout } from "./components"
 
 interface RaffleTableProps {
     raffles: Raffle[]
@@ -102,17 +102,17 @@ const RaffleTable = ({ raffles, sort, sortKey, raffleCount, loading, page, onSor
     return (
         <Stack>
 
-            {/* <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
-                    <Box>
-                        <DesktopLayout loading={loading} ticketBatches={ticketBatches} includeAccount={includeAccount} />
-                    </Box>
-                </MediaQuery>
-    
-                <MediaQuery largerThan="md" styles={{ display: 'none' }}>
-                    <Box> */}
-            <MobileLayout pageSize={PAGE_LENGTH} loading={loading} raffles={raffles} />
-            {/* </Box>
-                </MediaQuery> */}
+            <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
+                <Box>
+                    <DesktopLayout loading={loading} raffles={raffles} />
+                </Box>
+            </MediaQuery>
+
+            <MediaQuery largerThan="md" styles={{ display: 'none' }}>
+                <Box>
+                    <MobileLayout pageSize={PAGE_LENGTH} loading={loading} raffles={raffles} />
+                </Box>
+            </MediaQuery>
 
             <Pagination mt="2rem" total={Math.ceil(raffleCount / PAGE_LENGTH)} siblings={2} initialPage={page} onChange={onPageChange} />
         </Stack>

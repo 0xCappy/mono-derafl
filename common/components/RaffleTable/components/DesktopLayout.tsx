@@ -1,4 +1,4 @@
-import { Account, Raffle, TicketBatch } from "@/types"
+import { Account, Raffle, TicketBatch } from "@/src/API"
 import { ActionIcon, Anchor, Avatar, Center, Flex, Group, Paper, SimpleGrid, Stack, Text } from "@mantine/core"
 import { IconBoxMultiple, IconCalendar, IconCalendarEvent, IconCalendarPlus, IconCalendarTime, IconCircleDotted, IconDice5, IconExternalLink, IconEye, IconHash, IconSquarePlus, IconTicket, IconTrophy } from "@tabler/icons"
 import AccountAnchor from "../../AccountAnchor"
@@ -7,6 +7,8 @@ import makeBlockie from "ethereum-blockies-base64"
 import { MRT_ColumnDef, MantineReactTable } from "mantine-react-table"
 import { useMemo } from "react"
 import RaffleStateBadge from "../../RaffleStateBadge"
+import { formatIpfsUrl } from "@/common/utils"
+import { ChainId, chainsByChainId } from "@/types"
 
 interface DesktopLayoutProps {
     loading: boolean
@@ -19,33 +21,24 @@ const DesktopLayout = ({ loading, raffles }: DesktopLayoutProps) => {
             {
                 header: 'Raffle',
                 size: 70,
-                accessorFn: (raffle) => <Anchor href={`/raffles/${raffle.raffleId}`}><strong>#{raffle.raffleId}</strong></Anchor>
+                accessorFn: (raffle) => <Anchor href={`/raffles/${raffle.raffleNonce}`}><strong>#{raffle.raffleNonce}</strong></Anchor>
             },
             {
                 header: 'NFT',
-                size: 80,
+                size: 200,
                 accessorFn: (raffle) => (
-                    <Group>
-                        <Avatar size="sm" src={raffle.nft.openseaImage}></Avatar>
-                    </Group>
+                    <Anchor size="md" href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
+                        <Flex gap={8}>
+                            <Center>
+                                <Avatar size="md" src={formatIpfsUrl(raffle.nft.imageUri || '')}></Avatar>
+                            </Center>
+                            <Stack style={{ flex: 2 }} spacing={0}>
+                                <Text><strong>#{raffle.nft.tokenId}</strong></Text>
+                                <Text lineClamp={1} size="md">{raffle.nft.collectionName}</Text>
+                            </Stack>
+                        </Flex>
+                    </Anchor>
                 )
-            },
-            {
-                header: 'Collection',
-                accessorFn: (raffle) => (
-                    <Group spacing={4}>
-                        <IconBoxMultiple /><Text>{raffle.nft.collectionName}</Text>
-                    </Group>
-                )
-            },
-            {
-                header: 'Token ID',
-                accessorFn: (raffle) => (
-                    <Group spacing={4}>
-                        <IconHash /><Text>{raffle.nft.tokenId}</Text>
-                    </Group>
-                ),
-                size: 100,
             },
             {
                 header: 'Raffle State',
