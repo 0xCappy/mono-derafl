@@ -18,7 +18,7 @@
       "function": {
         "deraflstreamevent": {
           "deploymentBucketName": "amplify-derafl-testnet-164840-deployment",
-          "s3Key": "amplify-builds/deraflstreamevent-4a392b5a774f6b6b3566-build.zip",
+          "s3Key": "amplify-builds/deraflstreamevent-56536c46744d556e316b-build.zip",
           "alchemyKey": "Nyx7UtugHODwhjfxI0EkO-xQV9Seym5M",
           "traitSniperKey": "feb08daf-f3d0-40b5-bbaa-cc5f41c0153f",
           "discordRaffleCreateWebhookUrl": "https://discord.com/api/webhooks/1079377429744848957/fHbzIX7_r54QD8MddO2p0eI52EDoyTiYJhQrAHjP2tN9RvqSXEaUYZ05gZ_TSiqSBkYm",
@@ -26,7 +26,11 @@
           "moralisApiKey": "aNnsQjMwzZZYLDzbXKaTRPpb1l88ipYyTF3xjNV6BbhDk5vp4Fsbd6WRHoTvguWo",
           "appUrl": "https://testnet.derafl.com"
         },
-        "derafl": {}
+        "derafl": {},
+        "deraflrafflesavetrigger": {
+          "deploymentBucketName": "amplify-derafl-testnet-164840-deployment",
+          "s3Key": "amplify-builds/deraflrafflesavetrigger-667179466a566b794d50-build.zip"
+        }
       }
     }
   },

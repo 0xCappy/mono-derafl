@@ -98,15 +98,15 @@ export const getNftLastSalePrice = async (
   }
 };
 
-// export const getAttributeSummary = async (address: string, alchemyNetwork: Network) => {
-//   const alchemyConfig = {
-//     apiKey: config.ALCHEMY_KEY,
-//     network: alchemyNetwork
-//   };
-//   const alchemy = new Alchemy(alchemyConfig);
-//   const attributes = await alchemy.nft.summarizeNftAttributes(address);
-//   return attributes.summary;
-// };
+export const getAttributeSummary = async (address: string, alchemyNetwork: Network) => {
+  const alchemyConfig = {
+    apiKey: process.env.ALCHEMY_KEY,
+    network: alchemyNetwork
+  };
+  const alchemy = new Alchemy(alchemyConfig);
+  const attributes = await alchemy.nft.summarizeNftAttributes(address);
+  return attributes.summary;
+};
 // // fetch('https://eth-mainnet.g.alchemy.com/nft/v2/docs-demo/getNFTSales?fromBlock=0&toBlock=latest&order=asc&contractAddress=0xe785E82358879F061BC3dcAC6f0444462D4b5330&tokenId=44', options)
 
 // const mapOwnedNftResponse = (nft: AlchemyOwnedNft | Nft): OwnedNft => ({

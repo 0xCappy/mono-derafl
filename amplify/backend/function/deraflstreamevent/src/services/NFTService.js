@@ -88,7 +88,7 @@ exports.getOrCreateNft = async (address, tokenId, chainId) => {
             lastSales: JSON.stringify(lastSale),
             nFTCollectionId: collection.id,
             chainId,
-            rarityData: rank
+            rarityData: JSON.stringify(rank)
         });
     }
     return nft;

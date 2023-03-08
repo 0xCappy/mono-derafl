@@ -185,6 +185,7 @@ type NFT
   chainId: String!
   rarityData: AWSJSON
   collection: Collection! @hasOne
+  traits: [Trait] @hasMany
 }
 
 type Collection
@@ -265,4 +266,21 @@ type Account
   rafflesWon: Int!
   rafflesEntered: Int!
   ticketsBought: Int!
+}
+
+type Trait
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: public, provider: iam, operations: [read, create, update] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  value: String
+  pool: Float
+  score: Float
+  floorPrice: Float
+  count: Float
 }

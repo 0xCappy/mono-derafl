@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getNftLastSalePrice = exports.getNft = void 0;
+exports.getAttributeSummary = exports.getNftLastSalePrice = exports.getNft = void 0;
 const alchemy_sdk_1 = require("alchemy-sdk");
 const axios_1 = require("axios");
 exports.getNft = async (address, tokenId, alchemyNetwork) => {
@@ -71,15 +71,15 @@ exports.getNftLastSalePrice = async (address, tokenId, alchemyNetwork) => {
         return [];
     }
 };
-// export const getAttributeSummary = async (address: string, alchemyNetwork: Network) => {
-//   const alchemyConfig = {
-//     apiKey: config.ALCHEMY_KEY,
-//     network: alchemyNetwork
-//   };
-//   const alchemy = new Alchemy(alchemyConfig);
-//   const attributes = await alchemy.nft.summarizeNftAttributes(address);
-//   return attributes.summary;
-// };
+exports.getAttributeSummary = async (address, alchemyNetwork) => {
+    const alchemyConfig = {
+        apiKey: process.env.ALCHEMY_KEY,
+        network: alchemyNetwork
+    };
+    const alchemy = new alchemy_sdk_1.Alchemy(alchemyConfig);
+    const attributes = await alchemy.nft.summarizeNftAttributes(address);
+    return attributes.summary;
+};
 // // fetch('https://eth-mainnet.g.alchemy.com/nft/v2/docs-demo/getNFTSales?fromBlock=0&toBlock=latest&order=asc&contractAddress=0xe785E82358879F061BC3dcAC6f0444462D4b5330&tokenId=44', options)
 // const mapOwnedNftResponse = (nft: AlchemyOwnedNft | Nft): OwnedNft => ({
 //   contractAddress: nft.contract.address,
