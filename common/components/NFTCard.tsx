@@ -19,19 +19,22 @@ const NFTCard = ({ nft }: NFTCardProps) => {
             <Stack w="100%">
                 <Box w="100%" style={{ borderRadius: '16px', overflow: 'hidden' }}>
                     <AspectRatio w="100%" ratio={1}>
-                    <Image
-                        src={nft.imageUri ? formatIpfsUrl(nft?.imageUri) : undefined}
-                        withPlaceholder
-                        placeholder={<ImagePlaceholder iconSize={50} />}
-                        fit="cover"
-                        w="100%"
-                        h="100%"
-                        style={{ transition: '0.6s', transform: hovered ? 'scale(1.1)' : 'inherit' }}
-                    />
+                        <Image
+                            src={nft.imageUri ? formatIpfsUrl(nft?.imageUri) : undefined}
+                            withPlaceholder
+                            placeholder={<ImagePlaceholder iconSize={50} />}
+                            fit="cover"
+                            w="100%"
+                            h="100%"
+                            style={{ transition: '0.6s', transform: hovered ? 'scale(1.1)' : 'inherit' }}
+                        />
                     </AspectRatio>
                 </Box>
                 <Badge left="#" py="10px" bg="white" size="lg" style={{ border: '2px solid #25262b', color: '#25262b', fontWeight: 'bold', fontSize: '12px', position: 'absolute', left: '24px', top: '24px' }}>{'#' + nft.tokenId}</Badge>
-                <Title style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} order={5}>{nft.name}</Title>
+                <Box>
+                    <Title style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} order={5}>{nft.contractName}</Title>
+                    <Title style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} order={6}>{nft.tokenName}</Title>
+                </Box>
             </Stack>
         </Card>
     );

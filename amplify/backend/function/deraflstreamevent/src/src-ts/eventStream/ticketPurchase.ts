@@ -11,8 +11,14 @@ export const handleTicketPurchase = async (
   timestamp: string,
   chainId: string
 ) => {
+  console.log("TXID: ", txId)
+  console.log("chainId: ", chainId)
+  console.log("handling ticket purchase: ", JSON.stringify(log))
   var raffle = await getRaffleByRaffleId(parseInt(log.raffleId.toString()));
+  console.log("Found Raffle: ", raffle)
+
   if (!raffle) {
+    console.log("Raffle undefined")
     throw new Error("Invalid raffle Id");
   }
 
@@ -25,13 +31,15 @@ export const handleTicketPurchase = async (
   const progress = (totalTicketsBought * 100) / ticketsAvailable;
 
   await updateRaffle({
+    id: raffle.id,
     ticketBatches: raffle.ticketBatches + 1,
     progress,
     ticketsSold: raffle.ticketsSold + ticketsBought,
     state: totalTicketsBought === ticketsAvailable ? RaffleState.CLOSED : RaffleState.ACTIVE
   })
-
+  console.log("UPDATED RAFFLE")
   const transaction = await createTransactionRecord(txId, timestamp, EventType.TicketPurchase, chainId, raffle.raffleNonce);
+  console.log("GOT TX: ", transaction)
   const ticketBatch = await createTicketBatch(
     raffle.id,
     ticketsBought,

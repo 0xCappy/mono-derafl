@@ -42,6 +42,9 @@
     },
     "moralisApiKey": {
       "Type": "String"
+    },
+    "appUrl": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -120,6 +123,9 @@
             },
             "MORALIS_API_KEY": {
               "Ref": "moralisApiKey"
+            },
+            "APP_URL": {
+              "Ref": "appUrl"
             }
           }
         },

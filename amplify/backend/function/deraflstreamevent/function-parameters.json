@@ -28,6 +28,10 @@
     {
       "cloudFormationParameterName": "moralisApiKey",
       "environmentVariableName": "MORALIS_API_KEY"
+    },
+    {
+      "cloudFormationParameterName": "appUrl",
+      "environmentVariableName": "APP_URL"
     }
   ]
 }

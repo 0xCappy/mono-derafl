@@ -37,9 +37,12 @@ export const getNft = async (
 
 const mapOwnedNftResponse = (nft: AlchemyOwnedNft | Nft): OwnedNft => ({
     contractAddress: nft.contract.address,
-    name: nft.contract.name,
+    contractName: nft.contract.name  || nft.contract.openSea?.collectionName || 'Unknown contract',
+    tokenName: nft.title || nft.rawMetadata?.name || `${nft.contract.symbol || ''} #${nft.tokenId}` || 'Unknown token',
     symbol: nft.contract.symbol,
     tokenId: nft.tokenId,
-    imageUri: nft.rawMetadata?.image,
+    imageUri: nft.media?.[0]?.gateway || nft.rawMetadata?.image,
+    thumbnailUri: nft.media?.[0]?.thumbnail,
     tokenType: nft.tokenType
-});
+  });
+  

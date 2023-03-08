@@ -108,7 +108,7 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
 }
 
 const getNftByContractAddress = async (address: string, tokenId: string) => {
-  const body = { query: listNFTS, variables: { filter: { contractAddress: { eq: address } }, tokenId: { eq: tokenId } } }
+  const body = { query: listNFTS, variables: { filter: { contractAddress: { eq: address }, tokenId: { eq: tokenId } } } }
   const request = await signRequest(body, endpoint)
   let response = await fetch(request);
   const json = await response.json()
@@ -116,7 +116,7 @@ const getNftByContractAddress = async (address: string, tokenId: string) => {
 }
 
 const getCollectionByContractAddress = async (address: string) => {
-  const body = { query: listCollections, variables: { input: { filter: { contractAddress: { eq: address } } } } }
+  const body = { query: listCollections, variables: { filter: { contractAddress: { eq: address } } } }
   const request = await signRequest(body, endpoint)
   let response = await fetch(request);
   const json = await response.json()
@@ -136,7 +136,7 @@ const createCollection = async (alchemyNft: AlchemyNft, chainId: string) => {
     tokenType: alchemyNft.contract.tokenType,
     totalSupply: alchemyNft.contract.totalSupply,
     chainId,
-    name: alchemyNft.contract.name,
+    name: alchemyNft.contract.name  || alchemyNft.contract.openSea?.collectionName,
     openseaSlug: alchemyNft.contract.openSea?.collectionName,
     imageUrl: alchemyNft.contract.openSea?.imageUrl,
     externalUrl: alchemyNft.contract.openSea?.externalUrl,
@@ -145,6 +145,7 @@ const createCollection = async (alchemyNft: AlchemyNft, chainId: string) => {
     description: alchemyNft.contract.openSea?.description,
     floorPrice: alchemyNft.contract.openSea?.floorPrice,
   }
+
   const variables = { input }
   const body = { query: createCollectionMutation, variables }
   const request = await signRequest(body, endpoint)

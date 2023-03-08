@@ -30,6 +30,13 @@ export interface CreateForm {
     expiryTime: Date
 }
 
+interface NftSearchState {
+    nfts: OwnedNft[],
+    loading: boolean,
+    pageKey?: string,
+    hasMore: boolean
+}
+
 const validateEthAmount = (value: string) => {
     if (!value) {
         return 'required'
@@ -62,13 +69,13 @@ const validateExpiryDate = (value?: Date) => {
 const ContactFormSection = () => {
     const [confirmModalOpen, setConfirmModalOpen] = useState(false)
     const scrolledRef = useRef();
-    const [nfts, setNfts] = useState<OwnedNft[]>([])
-    const [page, setPage] = useState(0)
-    const [hasMore, setHasMore] = useState(true)
-    const [nftsLoading, setNftsLoading] = useState(false)
-    const [selectedNFT, setSelectedNFT] = useState<OwnedNft>()
-    const [pageKey, setPageKey] = useState<string | undefined>('')
     const { toggleWalletOpen, address } = useWallet()
+    const [nftSearchState, setNftSearchState] = useState<NftSearchState>({
+        nfts: [],
+        loading: false,
+        hasMore: false
+    })
+    const [selectedNFT, setSelectedNFT] = useState<OwnedNft>()
 
     const approved = useNftApprovedForAll(selectedNFT?.contractAddress, address, DERAFL_ADDRESS)
     // const approved = useNftApproved(selectedNFT?.contractAddress, selectedNFT?.tokenId, DERAFL_ADDRESS, parseInt(CHAIN_ID))
@@ -107,15 +114,24 @@ const ContactFormSection = () => {
     }, [form.values])
 
     useEffect(() => {
+        console.log("ADDRESS: ", address)
         if (address) {
-            setHasMore(true)
-            setPage(0)
-            setNfts([])
-            fetchNFTS()
+            setNftSearchState({
+                hasMore: true,
+                nfts: [],
+                loading: false
+            })
+            // fetchNFTS()
         } else {
             onCancel()
         }
     }, [address])
+
+    useEffect(() => {
+        if (nftSearchState.hasMore === true && nftSearchState.nfts.length === 0 && !nftSearchState.loading) {
+            fetchNFTS()
+        }
+    }, [nftSearchState])
 
     const stepValue: number = useMemo(() => {
         if (!selectedNFT) {
@@ -127,22 +143,30 @@ const ContactFormSection = () => {
     }, [selectedNFT, form, hasConfirmed])
 
     const fetchNFTS = async () => {
-        if (!nftsLoading && hasMore) {
-            setNftsLoading(true)
+        if (!nftSearchState.loading && nftSearchState.hasMore) {
+            setNftSearchState({
+                ...nftSearchState,
+                loading: true
+            })
             try {
                 const data = await fetch("/api/nft/byAccount", {
                     method: "POST",
-                    body: JSON.stringify({ chainId: '0x5', address, pageKey, pageSize: PAGE_SIZE, offset: (PAGE_SIZE * page).toString() }),
+                    body: JSON.stringify({ chainId: CHAIN_ID, address, pageKey: nftSearchState.pageKey, pageSize: PAGE_SIZE }),
                 });
                 const response = await data.json() as OwnedNftsResponse
                 const received = response.nfts
-                setNfts([...nfts, ...received])
-                setPageKey(response.pageKey)
-                setPage(page + 1)
-                setHasMore(received.length === PAGE_SIZE)
-                setNftsLoading(false)
+                setNftSearchState({
+                    nfts: [...nftSearchState.nfts, ...received],
+                    pageKey: response.pageKey,
+                    hasMore: received.length === PAGE_SIZE,
+                    loading: false
+                })
             } catch (err) {
-                setNftsLoading(false)
+                setNftSearchState({
+                    ...nftSearchState,
+                    loading: false,
+                    hasMore: false
+                })
             }
         }
     }
@@ -190,7 +214,7 @@ const ContactFormSection = () => {
 
                 {stepValue === 0 && address &&
                     <>
-                        <NFTSelector hasMore={hasMore} account={address!} loading={nftsLoading} nfts={nfts} onSelectNFT={(nft) => { setSelectedNFT(nft) }} />
+                        <NFTSelector hasMore={nftSearchState.hasMore} account={address!} loading={nftSearchState.loading} nfts={nftSearchState.nfts} onSelectNFT={(nft) => { setSelectedNFT(nft) }} />
                         <Box ref={ref}></Box>
                     </>
                 }

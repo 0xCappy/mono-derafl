@@ -115,12 +115,12 @@ exports.createTicketBatch = async (ticketBatchRaffleId, ticketsBought, firstTick
     const json = await response.json();
     return json?.data?.createTicketBatch;
 };
-exports.getWinningBatch = async (raffleId, winningTicket) => {
+exports.getWinningBatch = async (raffleNonce, winningTicket) => {
     const variables = {
         filter: {
-            raffleId: { eq: raffleId },
-            lastTicket: { gte: winningTicket },
-            firstTicket: { lte: winningTicket }
+            raffleNonce: { eq: raffleNonce },
+            lastTicket: { ge: winningTicket },
+            firstTicket: { le: winningTicket }
         }
     };
     const body = { query: queries_1.listTicketBatches, variables };

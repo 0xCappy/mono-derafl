@@ -12,9 +12,15 @@ import { useEffect, useState } from "react"
 import { useContractEvent } from "wagmi"
 import raflAbi from '../../../abi/rafl.json'
 import useSWR from 'swr'
+import { getRaffle, listRaffles } from "@/src/graphql/queries"
+import { API, graphqlOperation } from "aws-amplify"
+import { chainsByChainId, ChainId } from "@/types"
+
 const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID!
 const DERAFL_ADDRESS = process.env.NEXT_PUBLIC_DERAFL_ADDRESS!
-const fetcher = (api: string) => fetch(api).then(r => r.json())
+const fetcher = async (raffleNonce: string) => await API.graphql(graphqlOperation(listRaffles, {
+    filter: { raffleNonce: { eq: parseInt(raffleNonce) } }
+})) as any
 
 interface ConfirmDetailsModalProps {
     isOpen: boolean
@@ -28,12 +34,12 @@ interface ConfirmDetailsModalProps {
 const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, royalties, onClose }: ConfirmDetailsModalProps) => {
     const [contractActionState, setContractActionState] = useState(ContractActionState.NONE)
     const [raffleId, setRaffleId] = useState<string>()
-    const { data, error } = useSWR(raffleId ? `/api/raffles/${raffleId}` : null, fetcher, { refreshInterval: 5 })
+    const { data, error } = useSWR(raffleId ? raffleId : null, fetcher, { refreshInterval: 5 })
 
     useEffect(() => {
         console.log("DATA: ", data)
-        if (data && !data.error) {
-            router.push(`/raffles/${raffleId!}`)
+        if (data?.data?.listRaffles?.items?.[0] && !data.error) {
+            router.push(`/raffles/${chainsByChainId[CHAIN_ID as ChainId].shortName}/${raffleId!}`)
         }
     }, [data])
 
@@ -73,7 +79,7 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
                         </ThemeIcon>
                     }
                 >
-                    <List.Item>You are about to raffle token <strong>#{nftToken.tokenId}</strong> from <strong>{nftToken.name}</strong></List.Item>
+                    <List.Item>You are about to raffle token <strong>#{nftToken.tokenId}</strong> from <strong>{nftToken.contractName}</strong></List.Item>
                     <List.Item><strong>{parseInt(parseFloat((parseFloat(ethAmount) / 0.001).toString()).toString()).toLocaleString()}</strong> tickets will be allocated to this raffle</List.Item>
                     <List.Item>Each ticket has a price of 0.001 Ether</List.Item>
                     <List.Item>The maximum amount of Ether that can be raised is {parseFloat(ethAmount).toLocaleString()}</List.Item>
@@ -99,14 +105,5 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
         </Modal>
     )
 }
-
-{/* <Group><IconCurrencyEthereum /><Text>Ξ{!ethAmount ? '...' : parseFloat(ethAmount).toLocaleString()} Eth cap ({!ethAmount ? '...' : parseInt(parseFloat((parseFloat(ethAmount) / 0.001).toString()).toString()).toLocaleString()} tickets)</Text></Group>
-<Group><IconClock /><Text>{`${expiryTimestamp.toLocaleString()} (local time)`}</Text></Group>
-<Group>
-    <IconCrown />
-    <Text>{!royalties ? '0' : (parseFloat(royalties.toString()) / 100).toFixed(2)}% creator royalties</Text>
-    <LooksRareBadge />
-</Group>
-<Group><IconTicket /><Text>2.5% + Ξ0.005 Eth DeRafl fees</Text></Group> */}
 
 export default ConfirmDetailsModal

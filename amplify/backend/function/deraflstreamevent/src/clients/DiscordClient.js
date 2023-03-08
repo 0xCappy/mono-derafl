@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendRaffleCompleteWebhook = exports.sendRaffleCreateWebhook = void 0;
 const axios_1 = require("axios");
+const Chain_1 = require("../types/Chain");
 const date_1 = require("../utils/date");
 const image_1 = require("../utils/image");
 exports.sendRaffleCreateWebhook = async (raffle, nft) => {
@@ -28,8 +29,8 @@ const generateCreateTemplate = (raffle, nft) => {
         "avatar_url": "https://derafl.com/favicon.png",
         "embeds": [
             {
-                "title": `Raffle Created #${raffle.raffleId}`,
-                "url": `https://derafl.com/raffles/${raffle.raffleId}`,
+                "title": `Raffle Created #${raffle.raffleNonce}`,
+                "url": `${process.env.APP_URL}/raffles/${Chain_1.chainsByChainId[raffle.chainId].shortName}/${raffle.raffleNonce}`,
                 "description": `${nft.collectionName} #${nft.tokenId}`,
                 "fields": [
                     {
@@ -62,8 +63,8 @@ const generateCompleteTemplate = (raffle, nft) => {
         "avatar_url": "https://derafl.com/favicon.png",
         "embeds": [
             {
-                "title": `Raffle Complete #${raffle.raffleId}`,
-                "url": `https://derafl.com/raffles/${raffle.raffleId}`,
+                "title": `Raffle Complete #${raffle.raffleNonce}`,
+                "url": `${process.env.APP_URL}/raffles/${Chain_1.chainsByChainId[raffle.chainId].shortName}/${raffle.raffleNonce}`,
                 "description": `${nft.collectionName} #${nft.tokenId}`,
                 "fields": [
                     {

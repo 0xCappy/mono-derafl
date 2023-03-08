@@ -15,11 +15,11 @@ const PAGE_LENGTH = 10
 
 interface PurchasesCardProps {
     unviewedPurchaseCount: number
-    raffleId: string
+    raffleNonce: number
     onPurchasesRefreshed: () => void
 }
 
-const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }: PurchasesCardProps) => {
+const PurchasesCard = ({ unviewedPurchaseCount, raffleNonce, onPurchasesRefreshed }: PurchasesCardProps) => {
     const [batches, setBatches] = useState<TicketBatch[]>([])
     const [batchCount, setBatchCount] = useState(0)
     const [page, setPage] = useState(1)
@@ -34,35 +34,21 @@ const PurchasesCard = ({ unviewedPurchaseCount, raffleId, onPurchasesRefreshed }
         fetchTicketBatches(1)
     }, [])
 
-    // const fetchTicketBatches = async (_page: number) => {
-    //     setLoading(true)
-    //     const data = await fetch("/api/ticketBatches", {
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //             sortKey: 'createdAt',
-    //             asc: false,
-    //             skip: (_page - 1) * PAGE_LENGTH,
-    //             limit: PAGE_LENGTH,
-    //             raffleId
-    //         }),
-    //     });
-    //     const response = await data.json()
-    //     setBatches(response.ticketBatches)
-    //     setBatchCount(response.count)
-    //     setLoading(false)
-    // }
-
     const fetchTicketBatches = async (_page: number) => {
         setLoading(true)
-
-        const purchasesData = await API.graphql(graphqlOperation(searchTicketBatches, {
-            // filter: { raffleId: { eq: raffleId } },
-            type: 'TicketBatch',
-            sortDirection: 'DESC'
+        const ticketBatchData = await API.graphql(graphqlOperation(searchTicketBatches, {
+            filter: { raffleNonce: { eq: raffleNonce } },
+            sort:{
+                field: 'createdAt',
+                direction: 'desc'
+            },
+            limit: PAGE_LENGTH,
+            from: (page - 1) * PAGE_LENGTH
         })) as any
-        const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
-        setBatches(purchases)
-        setBatchCount(100)
+        const { items, total } = ticketBatchData.data.searchTicketBatches
+
+        setBatches(items)
+        setBatchCount(total)
         setLoading(false)
     }
 

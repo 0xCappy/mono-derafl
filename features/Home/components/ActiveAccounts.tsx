@@ -8,31 +8,7 @@ interface AccountsProps {
     accounts: Account[]
 }
 
-const Accounts = ({accounts}: AccountsProps) => {
-    // const [accounts, setAccounts] = useState<Account[]>([])
-    // const [loading, setLoading] = useState(false)
-
-    // useEffect(() => {
-    //     fetchAccounts()
-    // }, [])
-
-    // const fetchAccounts = async () => {
-    //     setLoading(true)
-    //     const data = await fetch("/api/accounts", {
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //             sortKey: 'updatedAt',
-    //             asc: false,
-    //             skip: 0,
-    //             limit: 8
-    //         }),
-    //     });
-    //     const response = await data.json()
-    //     setAccounts(response.accounts)
-    //     setLoading(false)
-    // }
-
-    
+const Accounts = ({accounts}: AccountsProps) => {    
     return (
         <Container size="xl" pt="4rem">
             <Stack>

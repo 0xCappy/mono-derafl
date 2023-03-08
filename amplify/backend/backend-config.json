@@ -57,6 +57,14 @@
         }
       ]
     },
+    "AMPLIFY_function_deraflstreamevent_appUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflstreamevent"
+        }
+      ]
+    },
     "AMPLIFY_function_deraflstreamevent_deploymentBucketName": {
       "usedBy": [
         {

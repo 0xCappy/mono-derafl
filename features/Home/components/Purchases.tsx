@@ -1,5 +1,6 @@
 import { TicketBatchTable } from "@/common/components"
 import { TicketBatch } from "@/src/API"
+import { DataDisplayType } from "@/types"
 import { Center, Box, Container, Stack, Anchor, Button, Title } from "@mantine/core"
 import { IconCash, IconCompass } from "@tabler/icons"
 import { useEffect, useState } from "react"
@@ -9,31 +10,6 @@ interface PurchasesProps {
 }
 
 const Purchases = ({ticketBatches}: PurchasesProps) => {
-    // const [ticketBatches, setTicketBatches] = useState<TicketBatch[]>([])
-    // const [loading, setLoading] = useState(false)
-
-    // useEffect(() => {
-    //     fetchTicketBatches()
-    // }, [])
-
-    // const fetchTicketBatches = async () => {
-    //     setLoading(true)
-    //     const data = await fetch("/api/account/ticketBatches", {
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //             sortKey: 'createdAt',
-    //             asc: false,
-    //             skip: 0,
-    //             limit: 8,
-    //         }),
-    //     });
-    //     const response = await data.json()
-    //     setTimeout(() => {
-    //         setTicketBatches(response.ticketBatches)
-    //         setLoading(false)
-    //     }, 2000);
-    // }
-    
     return (
         <Container size="xl" py="4rem">
             <Stack>
@@ -44,6 +20,8 @@ const Purchases = ({ticketBatches}: PurchasesProps) => {
                     includeAccount
                     pageSize={8}
                     count={ticketBatches.length}
+                    usePaging={false}
+                    displayType="table"
                 />
             </Stack>
             <Center mt="2rem">

@@ -102,7 +102,7 @@ const ContractActionButton = ({ buttonTitle, chainId, contractAddress, abi, func
                 <Button fullWidth onClick={() => switchNetwork?.(parseInt(chainId))}>Switch Network</Button>
             }
             {address && isCorrectChain &&
-                <Button fullWidth disabled={disabled} onClick={performAction}>
+                <Button fullWidth disabled={disabled || loading} onClick={performAction}>
                     {loading ?
                         <ProgressBar
                             height="50"

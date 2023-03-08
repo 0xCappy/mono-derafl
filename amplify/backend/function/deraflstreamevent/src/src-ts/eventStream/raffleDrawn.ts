@@ -16,7 +16,7 @@ export const handleRaffleDrawn = async (
   }
 
   const winningTicket = parseInt(log.winningTicket.toString());
-  const winningBatch = await getWinningBatch(raffle.raffleId, winningTicket)
+  const winningBatch = await getWinningBatch(raffle.raffleNonce, winningTicket)
 
   if (!winningBatch) {
     // shit

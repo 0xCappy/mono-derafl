@@ -11,6 +11,8 @@ import { Container, Image, Stack, Title, Divider, Flex, Box, Avatar, Group, Medi
 import { RaffleCarousel } from '..';
 import { useWallet } from '@/context/WalletContext';
 import useTicketsOwned from '@/hooks/useTicketsOwned';
+import { getRaffle, listTicketBatches } from '@/src/graphql/queries';
+import { API, graphqlOperation } from 'aws-amplify'
 
 interface RaffleDetailProps {
     raffle: Raffle
@@ -58,28 +60,24 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
     }, [raffleInfo?.raffleState])
 
     const getWinningBatch = async () => {
-        if (raffleInfo) {
-            const data = await fetch("/api/raffles/winningBatch", {
-                method: "POST",
-                body: JSON.stringify({
-                    winningTicket: parseInt(raffleInfo.winningTicket.toString()),
-                    raffleId: updatedRaffle.id
-                }),
-            });
-            const response = await data.json()
-            setWinningBatch(response as TicketBatch)
+        const winningTicket = parseInt(raffleInfo?.winningTicket?.toString() || '0')
+        const variables = {
+            filter: {
+                raffleNonce: { eq: raffle.raffleNonce },
+                lastTicket: { ge: winningTicket },
+                firstTicket: { le: winningTicket }
+            }
         }
+
+        const ticketData = await API.graphql(graphqlOperation(listTicketBatches, variables)) as any
+        const winningBatch = ticketData.data.listTicketBatches?.items?.[0]
+        setWinningBatch(winningBatch)
     }
 
     const refreshRaffle = async () => {
-        const data = await fetch("/api/raffles/detail", {
-            method: "POST",
-            body: JSON.stringify({
-                raffleId: updatedRaffle.raffleNonce
-            }),
-        });
-        const response = await data.json()
-        setUpdatedRaffle(response.raffle)
+        const raffleData = await API.graphql(graphqlOperation(getRaffle, { id: raffle.id })) as any
+        const _raffle = raffleData.data.getRaffle
+        setUpdatedRaffle(_raffle)
     }
 
     const raffleState: RaffleState | undefined = useMemo(() => {
@@ -92,14 +90,13 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
     }, [raffleInfo])
 
     const progress: number = useMemo(() => {
-        if (raffleInfo) {
-            const sold = raffleInfo.ticketsSold.toNumber()
-            const available = raffleInfo.ticketsAvailable.toNumber()
-
+        if (_raffleInfo) {
+            const sold = _raffleInfo.ticketsSold.toNumber()
+            const available = _raffleInfo.ticketsAvailable.toNumber()
             return (sold * 100) / available
         }
         return 0
-    }, [raffleInfo])
+    }, [_raffleInfo])
 
     const renderRaffleAction = () => (
         <>
@@ -171,7 +168,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                 </MediaQuery>
 
                 <Box>
-                    <PurchasesCard onPurchasesRefreshed={() => setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))} raffleId={raffle.id} unviewedPurchaseCount={parseInt(raffleInfo?.batchIndex.toString() || '0') - viewedBatch} />
+                    <PurchasesCard onPurchasesRefreshed={() => setViewedBatch(parseInt(raffleInfo?.batchIndex.toString() || '0'))} raffleNonce={raffle.raffleNonce} unviewedPurchaseCount={parseInt(raffleInfo?.batchIndex.toString() || '0') - viewedBatch} />
                 </Box>
 
                 <Box>

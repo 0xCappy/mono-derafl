@@ -5,28 +5,13 @@ import { Raffle } from "@/src/API";
 import { NFTCardSkeleton, RaffleCard } from "common/components";
 import { Anchor } from "react-bootstrap";
 import { Carousel } from '@mantine/carousel';
+import { chainsByChainId, ChainId } from "@/types"
 
 interface RaffleCarouselProps {
     raffles: Raffle[]
 }
 
 const RaffleCarousel = ({ raffles }: RaffleCarouselProps) => {
-    // const [raffles, setRaffles] = useState<Raffle[]>([])
-    // const [loading, setLoading] = useState(false)
-
-    // useEffect(() => {
-    //     fetchRaffles()
-    // }, [])
-
-    // const fetchRaffles = async () => {
-    //     setLoading(true)
-    //     const data = await fetch("/api/raffles/trending", {
-    //         method: "POST"
-    //     });
-    //     setRaffles(await data.json())
-    //     setLoading(false)
-    // }
-
     return (
         <Container size="xl" py="4rem">
             <Stack>
@@ -56,7 +41,7 @@ const RaffleCarousel = ({ raffles }: RaffleCarouselProps) => {
                         >
                             {raffles.map(raffle => (
                                 <Carousel.Slide>
-                                    <Anchor href={`/raffles/${raffle.raffleNonce}`}>
+                                    <Anchor href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
                                         <RaffleCard raffle={raffle} />
                                     </Anchor>
                                 </Carousel.Slide>

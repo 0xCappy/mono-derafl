@@ -8,11 +8,20 @@ import { API, graphqlOperation } from 'aws-amplify';
 
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
-  const address = context.query.address
+  const address: string = context.query.address
   const accountData = await API.graphql(graphqlOperation(listAccounts, {
-    filter: { address: { eq: address } }
+    filter: { address: { eq: address.toLowerCase() } }
   })) as any
-  const account = accountData.data.listAccounts[0]
+  const account = accountData?.data?.listAccounts?.items?.[0] || {
+    address,
+    rafflesCreated: 0,
+    rafflesEntered: 0,
+    rafflesWon: 0,
+    ticketsBought: 0,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }
+
   return {
     props: {
       account

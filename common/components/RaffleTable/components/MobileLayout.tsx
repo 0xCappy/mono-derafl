@@ -7,6 +7,7 @@ import makeBlockie from "ethereum-blockies-base64"
 import { shortenAddress } from "@usedapp/core"
 import { formatIpfsUrl } from "@/common/utils"
 import RaffleStateBadge from "../../RaffleStateBadge"
+import { chainsByChainId, ChainId } from "@/types"
 
 interface MobileLayoutProps {
     loading: boolean
@@ -35,7 +36,7 @@ const MobileLayout = ({ loading, raffles, pageSize }: MobileLayoutProps) => {
                                     <Accordion.Item value="customization">
                                         <Accordion.Control pt={6}>
                                             <Flex gap="sm" justify="space-between">
-                                                <Anchor href={`/raffles/${raffle.raffleNonce}`}>
+                                                <Anchor href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
                                                     <Flex gap={8}>
                                                         <Center>
                                                             <Avatar size={50} src={raffle!.nft.imageUri ? formatIpfsUrl(raffle!.nft.imageUri) : undefined}></Avatar>

@@ -21,11 +21,11 @@ const MarketPlaceLinks = ({ contractAddress, tokenId }: MarketPlaceLinksProps) =
             link: `https://x2y2.io/eth/${contractAddress}/${tokenId}`,
             name: 'X2Y2'
         },
-        {
-            image: opensea.src,
-            link: `https://blur.io/collection/${contractAddress}/${tokenId}`,
-            name: 'Blur'
-        },
+        // {
+        //     image: opensea.src,
+        //     link: `https://blur.io/collection/${contractAddress}/${tokenId}`,
+        //     name: 'Blur'
+        // },
         {
             image: looks.src,
             link: `https://looksrare.org/collections/${contractAddress}/${tokenId}`,

@@ -3,6 +3,7 @@ import { Account } from "@/src/API"
 import { Avatar, Box, Group, Paper, Stack, Text, Title } from "@mantine/core"
 import { shortenAddress } from "@usedapp/core"
 import makeBlockie from "ethereum-blockies-base64"
+import { useEffect } from "react"
 import AccountStats from "./AccountStats"
 
 interface AccountHeaderProps {
@@ -10,6 +11,7 @@ interface AccountHeaderProps {
 }
 
 const AccountHeader = ({ account }: AccountHeaderProps) => {
+    const isActive = account.rafflesCreated > 0 || account.rafflesEntered > 0 || account.rafflesWon > 0 || account.ticketsBought > 0
     return (
         <Box>
             <Stack justify="center" h="100%">
@@ -19,8 +21,8 @@ const AccountHeader = ({ account }: AccountHeaderProps) => {
                     </Paper>
                     <Stack h="100%" spacing={0} justify="space-between">
                         <Title order={5}>{shortenAddress(account.address)}</Title>
-                        <Group><Text><strong>First seen: </strong>{new Date(account.createdAt).toLocaleDateString()}</Text></Group>
-                        <Group><Text><strong>Last seen: </strong>{new Date(account.updatedAt).toLocaleDateString()}</Text></Group>
+                        <Group><Text><strong>First seen: </strong>{isActive ? new Date(account.createdAt).toLocaleDateString() : 'Never'}</Text></Group>
+                        <Group><Text><strong>Last seen: </strong>{isActive ? new Date(account.updatedAt).toLocaleDateString() : 'Never'}</Text></Group>
                     </Stack>
                 </Group>
 

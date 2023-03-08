@@ -12,7 +12,7 @@ exports.handleRaffleDrawn = async (log, txId, timestamp, chainId) => {
         throw new Error("Invalid raffle Id");
     }
     const winningTicket = parseInt(log.winningTicket.toString());
-    const winningBatch = await TicketBatchService_1.getWinningBatch(raffle.raffleId, winningTicket);
+    const winningBatch = await TicketBatchService_1.getWinningBatch(raffle.raffleNonce, winningTicket);
     if (!winningBatch) {
         // shit
     }

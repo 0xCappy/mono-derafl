@@ -8,8 +8,13 @@ const TicketBatchService_1 = require("../services/TicketBatchService");
 const TransactionService_1 = require("../services/TransactionService");
 const types_1 = require("../types");
 exports.handleTicketPurchase = async (log, txId, timestamp, chainId) => {
+    console.log("TXID: ", txId);
+    console.log("chainId: ", chainId);
+    console.log("handling ticket purchase: ", JSON.stringify(log));
     var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()));
+    console.log("Found Raffle: ", raffle);
     if (!raffle) {
+        console.log("Raffle undefined");
         throw new Error("Invalid raffle Id");
     }
     const ticketsBought = parseInt(log.ticketAmount.toString());
@@ -19,12 +24,15 @@ exports.handleTicketPurchase = async (log, txId, timestamp, chainId) => {
     const ticketsAvailable = raffle.ticketsAvailable;
     const progress = (totalTicketsBought * 100) / ticketsAvailable;
     await RaffleService_1.updateRaffle({
+        id: raffle.id,
         ticketBatches: raffle.ticketBatches + 1,
         progress,
         ticketsSold: raffle.ticketsSold + ticketsBought,
         state: totalTicketsBought === ticketsAvailable ? types_1.RaffleState.CLOSED : types_1.RaffleState.ACTIVE
     });
+    console.log("UPDATED RAFFLE");
     const transaction = await TransactionService_1.createTransactionRecord(txId, timestamp, types_1.EventType.TicketPurchase, chainId, raffle.raffleNonce);
+    console.log("GOT TX: ", transaction);
     const ticketBatch = await TicketBatchService_1.createTicketBatch(raffle.id, ticketsBought, firstTicket, lastTicket, parseInt(log.batchId.toString()), log.purchaser.toLowerCase(), transaction.id, raffle.raffleNonce, chainId);
     // increment tickets bought on account
     const hasParticipated = await TicketBatchService_1.getAccountParticipation(log.purchaser.toLowerCase(), raffle.raffleNonce);

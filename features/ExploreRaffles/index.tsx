@@ -8,6 +8,7 @@ import { RaffleFilter, raffleFilterOptions, raffleSortOptions } from './types';
 import { Pagination } from '@mantine/core';
 import { searchRaffles } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify';
+import { chainsByChainId, ChainId } from "@/types"
 
 const PAGE_LENGTH = 24
 
@@ -24,16 +25,27 @@ const Raffles = () => {
     const fetchRaffles = async (nextFilter: RaffleFilter) => {
         setLoading(true)
         const raffleData = await API.graphql(graphqlOperation(searchRaffles, {
-            sort:{
+            sort: {
                 field: nextFilter.sort.key,
                 direction: nextFilter.sort.asc ? 'asc' : 'desc'
             },
-            filter: {
-                state: nextFilter.filter.value === 'active' ?
-                { eq: 1}
+            filter: nextFilter.filter.value === 'active' ?
+                {
+                    and: [
+                        { state: { eq: 1 }},
+                        { expires: { gt: Date.now() } }
+                    ]
+                }
                 :
-                { gt: 1}
-            },
+                {
+                    or: [
+                        { state: { gt: 1 } },
+                        { and: [
+                            { state: { eq: 1 }},
+                            { expires: { lt: Date.now() } }
+                        ]}
+                    ]
+                },
             limit: PAGE_LENGTH,
             from: nextFilter.page * PAGE_LENGTH
         })) as any
@@ -71,8 +83,8 @@ const Raffles = () => {
                         :
                         <>
                             {raffles.map((raffle: Raffle, index) => (
-                                <Anchor transform='none' underline={false} key={index} href={`/raffles/${raffle.raffleNonce}`}>
-                                        <RaffleCard raffle={raffle} />
+                                <Anchor transform='none' underline={false} key={index} href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
+                                    <RaffleCard raffle={raffle} />
                                 </Anchor>
                             ))}
                         </>

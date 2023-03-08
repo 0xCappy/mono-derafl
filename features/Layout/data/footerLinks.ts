@@ -1,3 +1,4 @@
+import { buildAddressUrl } from "@/common/utils";
 import { FooterLinksProps } from "../components/Footer";
 
 const footerLinks: FooterLinksProps = {
@@ -7,15 +8,15 @@ const footerLinks: FooterLinksProps = {
       "links": [
         {
           "label": "Raffles",
-          "link": "raffles"
+          "link": "/raffles"
         },
         {
           "label": "Accounts",
-          "link": "accounts"
+          "link": "/accounts"
         },
         {
           "label": "Purchases",
-          "link": "purchases"
+          "link": "/purchases"
         },
       ]
     },
@@ -54,13 +55,12 @@ const footerLinks: FooterLinksProps = {
         },
         {
           "label": "Etherscan",
-          "link": "https://goerli.etherscan.io/address/0xE109e34C8a1DCA47822e1D8b5eaF9f47e9b81A3C",
+          "link": buildAddressUrl(process.env.NEXT_PUBLIC_CHAIN_ID!, process.env.NEXT_PUBLIC_DERAFL_ADDRESS!),
           newTab: true
         },
       ]
     }
   ]
 }
-
 
 export default footerLinks
