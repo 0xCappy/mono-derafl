@@ -25,7 +25,7 @@ const footerLinks: FooterLinksProps = {
       "links": [
         {
           "label": "Discord",
-          "link": "https://discord.gg/Fr9Dau9C",
+          "link": "https://discord.com/invite/XcaNs5c7c7",
           newTab: true
         },
         {
@@ -33,11 +33,11 @@ const footerLinks: FooterLinksProps = {
           "link": "https://twitter.com/derafl_",
           newTab: true
         },
-        {
-          "label": "Medium",
-          "link": "https://hellfirelabs.medium.com",
-          newTab: true
-        },
+        // {
+        //   "label": "Medium",
+        //   "link": "https://hellfirelabs.medium.com",
+        //   newTab: true
+        // },
       ]
     },
     {
@@ -48,11 +48,11 @@ const footerLinks: FooterLinksProps = {
           "link": "https://docs.derafl.com",
           newTab: true
         },
-        {
-          "label": "FAQ",
-          "link": "#",
-          newTab: false
-        },
+        // {
+        //   "label": "FAQ",
+        //   "link": "#",
+        //   newTab: false
+        // },
         {
           "label": "Etherscan",
           "link": buildAddressUrl(process.env.NEXT_PUBLIC_CHAIN_ID!, process.env.NEXT_PUBLIC_DERAFL_ADDRESS!),
