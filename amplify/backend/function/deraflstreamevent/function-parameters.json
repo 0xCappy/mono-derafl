@@ -18,20 +18,20 @@
       "environmentVariableName": "TRAIT_SNIPER_KEY"
     },
     {
-      "cloudFormationParameterName": "discordRaffleCreateWebhookUrl",
-      "environmentVariableName": "DISCORD_RAFFLE_CREATE_WEBHOOK_URL"
-    },
-    {
-      "cloudFormationParameterName": "discordRaffleClosedWebhookUrl",
-      "environmentVariableName": "DISCORD_RAFFLE_CLOSED_WEBHOOK_URL"
-    },
-    {
       "cloudFormationParameterName": "moralisApiKey",
       "environmentVariableName": "MORALIS_API_KEY"
     },
     {
       "cloudFormationParameterName": "appUrl",
       "environmentVariableName": "APP_URL"
+    },
+    {
+      "cloudFormationParameterName": "discordRaffleCreateWebhookUrl",
+      "environmentVariableName": "DISCORD_RAFFLE_CREATE_WEBHOOK_URL"
+    },
+    {
+      "cloudFormationParameterName": "discordRaffleClosedWebhookUrl",
+      "environmentVariableName": "DISCORD_RAFFLE_CLOSED_WEBHOOK_URL"
     }
   ]
 }

@@ -34,16 +34,16 @@
     "traitSniperKey": {
       "Type": "String"
     },
-    "discordRaffleCreateWebhookUrl": {
-      "Type": "String"
-    },
-    "discordRaffleClosedWebhookUrl": {
-      "Type": "String"
-    },
     "moralisApiKey": {
       "Type": "String"
     },
     "appUrl": {
+      "Type": "String"
+    },
+    "discordRaffleCreateWebhookUrl": {
+      "Type": "String"
+    },
+    "discordRaffleClosedWebhookUrl": {
       "Type": "String"
     }
   },
@@ -115,17 +115,17 @@
             "TRAIT_SNIPER_KEY": {
               "Ref": "traitSniperKey"
             },
-            "DISCORD_RAFFLE_CREATE_WEBHOOK_URL": {
-              "Ref": "discordRaffleCreateWebhookUrl"
-            },
-            "DISCORD_RAFFLE_CLOSED_WEBHOOK_URL": {
-              "Ref": "discordRaffleClosedWebhookUrl"
-            },
             "MORALIS_API_KEY": {
               "Ref": "moralisApiKey"
             },
             "APP_URL": {
               "Ref": "appUrl"
+            },
+            "DISCORD_RAFFLE_CREATE_WEBHOOK_URL": {
+              "Ref": "discordRaffleCreateWebhookUrl"
+            },
+            "DISCORD_RAFFLE_CLOSED_WEBHOOK_URL": {
+              "Ref": "discordRaffleClosedWebhookUrl"
             }
           }
         },

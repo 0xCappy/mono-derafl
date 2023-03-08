@@ -19,11 +19,14 @@ export const handleWebhookStream = async (webhook: IWebhook): Promise<void> => {
     decodedLogs.map((log, index) => {
       const eventHash = webhook.logs[index]?.topic0 || ""
       const eventType = EventHash[eventHash]
-      const fromAddress = webhook.txs[index].fromAddress
-      const txId = webhook.logs[0].transactionHash
       console.log("Event Type: ", eventType)
-      console.log(`Handling Log ${index}:`, JSON.stringify(log))
-      promises.push(handleLog(log, eventType, chainId, fromAddress, blockTimestamp, txId))
+      console.log(`Handling Decoded Log ${index}:`, JSON.stringify(log))
+      console.log(`As Log:`, JSON.stringify(webhook.logs[index]))
+      console.log(`TX:`, JSON.stringify(webhook.txs))
+      const fromAddress = webhook.txs?.[index]?.fromAddress
+      const txId = webhook.logs[index].transactionHash
+      const contract = webhook.logs[index].address
+      promises.push(handleLog(log, eventType, chainId, fromAddress, blockTimestamp, txId, contract))
     })
     await Promise.all(promises)
   };
@@ -35,9 +38,9 @@ const handleLog = async (
   chainId: string,
   fromAddress: string,
   blockTimestamp: string,
-  txId: string
+  txId: string,
+  contract: string
 ) => {
-  const contract = log.address
 
   switch (eventType) {
     case EventType.RaffleOpen:

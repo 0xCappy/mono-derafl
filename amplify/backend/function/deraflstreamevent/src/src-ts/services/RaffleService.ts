@@ -216,6 +216,8 @@ export const createRaffle = async (
     }
   }
   const body = { query: createRaffleMutation, variables }
+  console.log("RAFFLE INPUT JSON: ", JSON.stringify(body))
+
   const request = await signRequest(body, endpoint)
   let response = await fetch(request);
   const json = await response.json()
