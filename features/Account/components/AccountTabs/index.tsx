@@ -219,6 +219,7 @@ const AccountTabs = ({ account }: AccountTabsProps) => {
                                     pageSize={PAGE_LENGTH}
                                     onSort={(sortKey: string, sortType?: SortType) => handleSort(sortKey, 'bought', sortType)}
                                     onPageChange={(page: number) => handlePage(page, 'bought')}
+                                    displayType="table"
                                     {...ticketBatchesProps}
                                 />
                             </div>
