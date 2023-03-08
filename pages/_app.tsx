@@ -18,9 +18,11 @@ import './empty.css'
 import '@/styles/globals.css'
 import { Amplify } from 'aws-amplify'
 import awsExports from "../src/aws-exports";
+
 Amplify.configure({
   ...awsExports,
   aws_appsync_authenticationType: "API_KEY",
+  aws_appsync_graphqlEndpoint: process.env.NEXT_PUBLIC_API_URL
 });
 
 const { chains, provider, webSocketProvider } = configureChains(

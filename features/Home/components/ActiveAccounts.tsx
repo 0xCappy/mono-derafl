@@ -14,7 +14,7 @@ const Accounts = ({accounts}: AccountsProps) => {
             <Stack>
                 <Title>Active Accounts</Title>
 
-                <AccountsTable pageLength={1} accounts={accounts} loading={false} />
+                <AccountsTable displayType="table" pageLength={1} accounts={accounts} loading={false} />
             </Stack>
             <Center mt="2rem">
                 <Box w="300px">
