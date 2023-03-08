@@ -193,6 +193,7 @@ exports.createRaffle = async (raffleNonce, chainId, nftID, owner, contract, tick
     const request = await signRequest_1.signRequest(body, endpoint);
     let response = await node_fetch_1.default(request);
     const json = await response.json();
+    console.log("RAFFLE CREATE JSON: ", JSON.stringify(json));
     return json?.data?.createRaffle;
 };
 exports.updateRaffle = async (input) => {

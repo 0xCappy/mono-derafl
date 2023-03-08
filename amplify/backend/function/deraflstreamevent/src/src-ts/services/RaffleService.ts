@@ -219,6 +219,7 @@ export const createRaffle = async (
   const request = await signRequest(body, endpoint)
   let response = await fetch(request);
   const json = await response.json()
+  console.log("RAFFLE CREATE JSON: ", JSON.stringify(json))
   return json?.data?.createRaffle
 }
 
