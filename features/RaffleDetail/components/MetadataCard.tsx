@@ -33,19 +33,20 @@ const MetadataCard = ({ nft }: MetadataCardProps) => {
                                             <Text align="center" size="xs">{getAttributeValue(attribute)}</Text>
                                         </Stack>
 
-                                        {attribute.count && attribute.floor &&
+                                        {attribute.count &&
                                             <Box>
                                                 <Divider mb="1rem" />
                                                 <Group position="center">
                                                     <Text size="sm">{attribute.count.toLocaleString()}</Text>
                                                     <Text size="sm"><strong>{(attribute.count / parseInt(nft.collection.totalSupply || '0') * 100).toFixed(2)}%</strong></Text>
                                                 </Group>
-                                                <Center>
-                                                    <Group mt="0.5rem" spacing={0}><IconCurrencyEthereum size={24} />{attribute.floor}</Group>
-
-                                                </Center>
-
                                             </Box>
+                                        }
+
+                                        {attribute.floor &&
+                                            <Center>
+                                                <Group mt="0.5rem" spacing={0}><IconCurrencyEthereum size={24} />{attribute.floor}</Group>
+                                            </Center>
                                         }
                                     </SimpleGrid>
                                 </Paper>

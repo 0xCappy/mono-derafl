@@ -23,6 +23,7 @@ const TokenInfoCard = ({ nft }: TokenInfoCardProps) => {
                             {/* <Flex gap="xs" justify="start"><OpenSeaBadge /><Text>Sourced from <strong><Anchor href="https://opensea.io/" target="_blank">OpenSea</Anchor></strong></Text></Flex>
                             <Divider /> */}
                             <Flex justify="space-between"><Text>Collection</Text> <Text><strong>{nft.collection.name}</strong></Text></Flex>
+                            <Flex justify="space-between"><Text>Token ID</Text> <Text><strong>{nft.tokenId}</strong></Text></Flex>
                             <Flex justify="space-between"><Text>Symbol</Text> <Text><strong>({nft.collection.symbol})</strong></Text></Flex>
                             <Flex justify="space-between"><Text>Total Supply</Text> <Text><strong>{!nft.collection.totalSupply ? 'unknown' : nft.collection.totalSupply.toLocaleString()}</strong></Text></Flex>
                             <Flex justify="space-between"><Text>Contract</Text>
