@@ -10,29 +10,30 @@ const ticketPurchase_1 = require("./ticketPurchase");
 const raffleRelease_1 = require("./raffleRelease");
 const raffleRefund_1 = require("./raffleRefund");
 const ticketRefund_1 = require("./ticketRefund");
+const TransactionService_1 = require("../services/TransactionService");
 exports.handleWebhookStream = async (webhook) => {
-    if (!webhook.confirmed) {
-        const decodedLogs = moralis_1.default.Streams.parsedLogs(webhook);
-        const blockTimestamp = webhook.block.timestamp;
-        const chainId = webhook.chainId;
-        const promises = [];
-        decodedLogs.map((log, index) => {
-            const eventHash = webhook.logs[index]?.topic0 || "";
-            const eventType = types_1.EventHash[eventHash];
-            console.log("Event Type: ", eventType);
-            console.log(`Handling Decoded Log ${index}:`, JSON.stringify(log));
-            console.log(`As Log:`, JSON.stringify(webhook.logs[index]));
-            console.log(`TX:`, JSON.stringify(webhook.txs));
-            const fromAddress = webhook.txs?.[index]?.fromAddress;
-            const txId = webhook.logs[index].transactionHash;
-            const contract = webhook.logs[index].address;
-            promises.push(handleLog(log, eventType, chainId, fromAddress, blockTimestamp, txId, contract));
-        });
-        await Promise.all(promises);
-    }
-    ;
+    const decodedLogs = moralis_1.default.Streams.parsedLogs(webhook);
+    const blockTimestamp = webhook.block.timestamp;
+    const chainId = webhook.chainId;
+    const promises = [];
+    decodedLogs.map((log, index) => {
+        const eventHash = webhook.logs[index]?.topic0 || "";
+        const eventType = types_1.EventHash[eventHash];
+        console.log("Event Type: ", eventType);
+        console.log(`Handling Decoded Log ${index}:`, JSON.stringify(log));
+        console.log(`As Log:`, JSON.stringify(webhook.logs[index]));
+        console.log(`TX:`, JSON.stringify(webhook.txs));
+        const fromAddress = webhook.txs?.[index]?.fromAddress;
+        const txId = webhook.logs[index].transactionHash;
+        const contract = webhook.logs[index].address;
+        promises.push(handleLog(log, eventType, chainId, fromAddress, blockTimestamp, txId, contract));
+    });
+    await Promise.all(promises);
 };
 const handleLog = async (log, eventType, chainId, fromAddress, blockTimestamp, txId, contract) => {
+    const existingTransaction = await TransactionService_1.getTransaction(txId, chainId);
+    if (existingTransaction)
+        return;
     switch (eventType) {
         case types_1.EventType.RaffleOpen:
             await raffleOpen_1.handleRaffleOpen(log, txId, blockTimestamp, fromAddress, chainId, contract);

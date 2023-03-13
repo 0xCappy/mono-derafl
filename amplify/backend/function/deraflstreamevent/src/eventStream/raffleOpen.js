@@ -10,7 +10,7 @@ const TransactionService_1 = require("../services/TransactionService");
 const types_1 = require("../types");
 exports.handleRaffleOpen = async (log, txId, timestamp, createdBy, chainId, contract) => {
     console.log("IN OPEN");
-    var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()));
+    var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()), chainId);
     console.log("GOT RAFF: ", raffle);
     if (!raffle) {
         try {

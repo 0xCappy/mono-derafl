@@ -160,8 +160,14 @@ const endpoint = new URL(process.env.API_DERAFL_GRAPHQLAPIENDPOINTOUTPUT);
 //     },
 //   };
 // };
-exports.getRaffleByRaffleId = async (raffleNonce) => {
-    const body = { query: queries_1.listRaffles, variables: { filter: { raffleNonce: { eq: raffleNonce } } } };
+exports.getRaffleByRaffleId = async (raffleNonce, chainId) => {
+    const body = { query: queries_1.listRaffles, variables: {
+            filter: {
+                raffleNonce: { eq: raffleNonce },
+                chainId: { eq: chainId },
+            }
+        }
+    };
     const request = await signRequest_1.signRequest(body, endpoint);
     let response = await node_fetch_1.default(request);
     const json = await response.json();

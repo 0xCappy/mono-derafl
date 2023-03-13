@@ -11,7 +11,7 @@ exports.handleTicketPurchase = async (log, txId, timestamp, chainId) => {
     console.log("TXID: ", txId);
     console.log("chainId: ", chainId);
     console.log("handling ticket purchase: ", JSON.stringify(log));
-    var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()));
+    var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()), chainId);
     console.log("Found Raffle: ", raffle);
     if (!raffle) {
         console.log("Raffle undefined");

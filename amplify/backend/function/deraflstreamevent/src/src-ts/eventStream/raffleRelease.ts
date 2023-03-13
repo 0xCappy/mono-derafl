@@ -17,18 +17,24 @@ export const handleRaffleRelease = async (
   }
 
   const transaction = await createTransactionRecord(txId, timestamp, EventType.RaffleRelease, chainId, raffle.raffleNonce);
+  console.log("TX CREATED: ", transaction)
 
   await updateRaffle({
     id: raffle.id,
     state: RaffleState.RELEASED,
     raffleReleaseTxId: transaction.id  
   })
+console.log("Raffle updated: ", raffle)
 
   await incrementRoyalties(parseFloat(formatEther(log.royaltiesPaid.toString())), chainId)
   await incrementEth(parseFloat(formatEther(log.ethPaid.toString())), chainId)
 
+  console.log("STATWS UPDATED")
+
   try {
     await sendRaffleCompleteWebhook(raffle, raffle.nft)
+    console.log("DISCORD SENT")
+
   } catch (error) {
     console.error("Discord Err: ", error)
   }

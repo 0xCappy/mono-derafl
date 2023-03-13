@@ -8,28 +8,27 @@ import { handleTicketPurchase } from "./ticketPurchase";
 import { handleRaffleRelease } from "./raffleRelease";
 import { handleRaffleRefund } from "./raffleRefund";
 import { handleTicketRefund } from "./ticketRefund";
+import { getTransaction } from "../services/TransactionService";
 
 export const handleWebhookStream = async (webhook: IWebhook): Promise<void> => {
-  if (!webhook.confirmed) {
-    const decodedLogs = Moralis.Streams.parsedLogs(webhook);
-    const blockTimestamp = webhook.block.timestamp
-    const chainId = webhook.chainId
+  const decodedLogs = Moralis.Streams.parsedLogs(webhook);
+  const blockTimestamp = webhook.block.timestamp
+  const chainId = webhook.chainId
 
-    const promises: Promise<any>[] = []
-    decodedLogs.map((log, index) => {
-      const eventHash = webhook.logs[index]?.topic0 || ""
-      const eventType = EventHash[eventHash]
-      console.log("Event Type: ", eventType)
-      console.log(`Handling Decoded Log ${index}:`, JSON.stringify(log))
-      console.log(`As Log:`, JSON.stringify(webhook.logs[index]))
-      console.log(`TX:`, JSON.stringify(webhook.txs))
-      const fromAddress = webhook.txs?.[index]?.fromAddress
-      const txId = webhook.logs[index].transactionHash
-      const contract = webhook.logs[index].address
-      promises.push(handleLog(log, eventType, chainId, fromAddress, blockTimestamp, txId, contract))
-    })
-    await Promise.all(promises)
-  };
+  const promises: Promise<any>[] = []
+  decodedLogs.map((log, index) => {
+    const eventHash = webhook.logs[index]?.topic0 || ""
+    const eventType = EventHash[eventHash]
+    console.log("Event Type: ", eventType)
+    console.log(`Handling Decoded Log ${index}:`, JSON.stringify(log))
+    console.log(`As Log:`, JSON.stringify(webhook.logs[index]))
+    console.log(`TX:`, JSON.stringify(webhook.txs))
+    const fromAddress = webhook.txs?.[index]?.fromAddress
+    const txId = webhook.logs[index].transactionHash
+    const contract = webhook.logs[index].address
+    promises.push(handleLog(log, eventType, chainId, fromAddress, blockTimestamp, txId, contract))
+  })
+  await Promise.all(promises)
 }
 
 const handleLog = async (
@@ -41,6 +40,9 @@ const handleLog = async (
   txId: string,
   contract: string
 ) => {
+
+  const existingTransaction = await getTransaction(txId, chainId)
+  if (existingTransaction) return;
 
   switch (eventType) {
     case EventType.RaffleOpen:

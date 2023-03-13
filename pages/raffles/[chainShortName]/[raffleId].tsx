@@ -25,6 +25,7 @@ export const getServerSideProps = async (context: any) => {
   const raffleBasic = listRaffleData.data.listRaffles.items[0]
   const raffleData = await API.graphql(graphqlOperation(getRaffle, { id: raffleBasic.id })) as any
   const raffle = raffleData.data.getRaffle
+  console.log("RAFFLE: ", raffle)
 
   const trendingData = await API.graphql(graphqlOperation(searchRaffles, {
     sort: {

@@ -35,6 +35,7 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
     const [contractActionState, setContractActionState] = useState(ContractActionState.NONE)
     const [raffleId, setRaffleId] = useState<string>()
     const { data, error } = useSWR(raffleId ? raffleId : null, fetcher, { refreshInterval: 5 })
+    const chain = chainsByChainId[CHAIN_ID as ChainId]
 
     useEffect(() => {
         console.log("DATA: ", data)
@@ -80,13 +81,13 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
                     }
                 >
                     <List.Item>You are about to raffle token <strong>#{nftToken.tokenId}</strong> from <strong>{nftToken.contractName}</strong></List.Item>
-                    <List.Item><strong>{parseInt(parseFloat((parseFloat(ethAmount) / 0.001).toString()).toString()).toLocaleString()}</strong> tickets will be allocated to this raffle</List.Item>
-                    <List.Item>Each ticket has a price of 0.001 Ether</List.Item>
-                    <List.Item>The maximum amount of Ether that can be raised is {parseFloat(ethAmount).toLocaleString()}</List.Item>
+                    <List.Item><strong>{parseInt(parseFloat((parseFloat(ethAmount) / chain.ticketPrice).toString()).toString()).toLocaleString()}</strong> tickets will be allocated to this raffle</List.Item>
+                    <List.Item>Each ticket has a price of {chain.ticketDisplayPrice} {chain.currencyNameShort}</List.Item>
+                    <List.Item>The maximum amount of {chain.currencyNameShort} that can be raised is {parseFloat(ethAmount).toLocaleString()}</List.Item>
                     <List.Item>The raffle will expire at {expiryTimestamp.toLocaleString()} local time / {new Date(expiryTimestamp.getTime() + expiryTimestamp.getTimezoneOffset() * 60000).toLocaleString()} UTC</List.Item>
                     <List.Item>The raffle will be closed at this time even if tickets are not sold out</List.Item>
-                    <List.Item>{!royalties ? '0' : (parseFloat(royalties.toString()) / 100).toFixed(2)}% of the Ether raised will be sent to the collection owner as royalties</List.Item>
-                    <List.Item>5% of the Ether raised + 0.005 ether will be sent to DeRafl as a protocol fee</List.Item>
+                    <List.Item>{!royalties ? '0' : (parseFloat(royalties.toString()) / 100).toFixed(2)}% of the {chain.currencyNameShort} raised will be sent to the collection owner as royalties</List.Item>
+                    <List.Item>5% of the {chain.currencyNameShort} raised + {chain.chainLinkFee} ether will be sent to DeRafl as a protocol fee</List.Item>
                 </List>
 
                 {contractActionState !== ContractActionState.COMPLETE &&

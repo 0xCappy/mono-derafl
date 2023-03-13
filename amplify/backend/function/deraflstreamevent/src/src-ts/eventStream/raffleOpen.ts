@@ -15,7 +15,7 @@ export const handleRaffleOpen = async (
   contract: string
 ) => {
   console.log("IN OPEN")
-  var raffle = await getRaffleByRaffleId(parseInt(log.raffleId.toString()))
+  var raffle = await getRaffleByRaffleId(parseInt(log.raffleId.toString()), chainId)
   console.log("GOT RAFF: ", raffle)
 
   if (!raffle) {

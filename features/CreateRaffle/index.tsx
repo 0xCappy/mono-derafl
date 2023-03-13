@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { NFT } from 'types';
+import { ChainId, chainsByChainId, NFT } from 'types';
 import { ConfirmDetailsModal, NFTChip, NFTSelector, Overview } from './components';
 import raflAbi from '../../abi/rafl.json'
 import Steps from 'rc-steps';
@@ -67,6 +67,7 @@ const validateExpiryDate = (value?: Date) => {
 }
 
 const ContactFormSection = () => {
+    const chain = chainsByChainId[CHAIN_ID as ChainId]
     const [confirmModalOpen, setConfirmModalOpen] = useState(false)
     const scrolledRef = useRef();
     const { toggleWalletOpen, address } = useWallet()
@@ -258,7 +259,7 @@ const ContactFormSection = () => {
                         </Stack>
 
                         <Stack justify="space-between">
-                            <Overview royalties={royalties} ethAmount={form.values.ethAmount} expiryTimestamp={expiryTimestamp} />
+                            <Overview chain={chain} royalties={royalties} ethAmount={form.values.ethAmount} expiryTimestamp={expiryTimestamp} />
 
                             {!approved && selectedNFT && !Object.keys(form.errors).length ?
                                 (<ContractActionButton
