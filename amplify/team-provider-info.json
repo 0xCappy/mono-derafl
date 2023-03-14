@@ -83,7 +83,7 @@
       "function": {
         "deraflstreamevent": {
           "deploymentBucketName": "amplify-derafl-mainnet-135250-deployment",
-          "s3Key": "amplify-builds/deraflstreamevent-6330474b4f636f2b496b-build.zip",
+          "s3Key": "amplify-builds/deraflstreamevent-53717541452b61577751-build.zip",
           "alchemyKey": "Nyx7UtugHODwhjfxI0EkO-xQV9Seym5M",
           "traitSniperKey": "feb08daf-f3d0-40b5-bbaa-cc5f41c0153f",
           "moralisApiKey": "aNnsQjMwzZZYLDzbXKaTRPpb1l88ipYyTF3xjNV6BbhDk5vp4Fsbd6WRHoTvguWo",
