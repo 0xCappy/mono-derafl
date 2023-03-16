@@ -48,11 +48,11 @@ const footerLinks: FooterLinksProps = {
           "link": "https://docs.derafl.com",
           newTab: true
         },
-        // {
-        //   "label": "FAQ",
-        //   "link": "#",
-        //   newTab: false
-        // },
+        {
+          "label": "Terms of service",
+          "link": "/terms",
+          newTab: false
+        },
         {
           "label": "Etherscan",
           "link": buildAddressUrl(process.env.NEXT_PUBLIC_CHAIN_ID!, process.env.NEXT_PUBLIC_DERAFL_ADDRESS!),
