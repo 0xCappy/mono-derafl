@@ -1,13 +1,14 @@
-import { Card, Divider, Flex, Group, Input, Stack, Title, Text, createStyles, ThemeIcon } from '@mantine/core';
+import { Card, Divider, Flex, Group, Input, Stack, Title, Text, createStyles, ThemeIcon, Box, Switch, Checkbox, Anchor, Center } from '@mantine/core';
 import { IconArrowsHorizontal, IconArrowsVertical, IconCurrencyEthereum, IconTicket } from '@tabler/icons';
 import { Raffle } from '@/src/API';
 import { parseEther } from 'ethers/lib/utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ContractActionButton from '@/features/ContractActionButton';
 import Abi from '@/types/Abi';
 
 interface BuyTicketsCardProps {
     raffle: Raffle
+    ticketsRemaining: number
 }
 
 const useStyles = createStyles((theme) => ({
@@ -36,10 +37,25 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-const BuyTicketsCard = ({ raffle }: BuyTicketsCardProps) => {
+const BuyTicketsCard = ({ raffle, ticketsRemaining }: BuyTicketsCardProps) => {
     const { classes } = useStyles();
     const [ticketAmount, setTicketAmount] = useState('')
     const [ethAmount, setEthAmount] = useState('')
+    const [useMax, setUseMax] = useState(false)
+    const [hasAgreed, setHasAgreed] = useState(false)
+
+    useEffect(() => {
+        if (useMax) {
+            onTicketInputChange(ticketsRemaining.toString())
+        }
+    }, [ticketsRemaining])
+
+    useEffect(() => {
+        if (useMax) {
+            setTicketAmount(ticketsRemaining.toString())
+            setEthAmount((ticketsRemaining * 0.001).toFixed(3))
+        }
+    }, [useMax])
 
     const onEthInputChange = (amount: string) => {
         if (amount.includes('.')) {
@@ -54,6 +70,9 @@ const BuyTicketsCard = ({ raffle }: BuyTicketsCardProps) => {
         } else {
             setEthAmount(amount)
             setTicketAmount(parseEther(amount).div(parseEther('0.001')).toString())
+            if (useMax) {
+                setUseMax(false)
+            }
         }
     }
 
@@ -65,26 +84,34 @@ const BuyTicketsCard = ({ raffle }: BuyTicketsCardProps) => {
         } else {
             setTicketAmount(amount)
             setEthAmount(parseFloat((parseInt(amount) * 0.001).toString()).toFixed(3))
+            if (useMax) {
+                setUseMax(false)
+            }
         }
     }
 
     return (
         <Card withBorder shadow="sm" radius="md" className={classes.card}>
-            <Group>
-                <ThemeIcon
-                    size="xl"
-                    radius="md"
-                    variant="gradient"
-                    gradient={{ deg: 0, from: '#74C0FC', to: '#1971C2' }}
-                >
-                    <IconTicket size={28} />
-                </ThemeIcon>
-                <Title order={3}>Buy tickets</Title>
+            <Group w="100%" position="apart">
+                <Group>
+                    <ThemeIcon
+                        size="xl"
+                        radius="md"
+                        variant="gradient"
+                        gradient={{ deg: 0, from: '#74C0FC', to: '#1971C2' }}
+                    >
+                        <IconTicket size={28} />
+                    </ThemeIcon>
+                    <Title order={3}>Buy tickets</Title>
+                </Group>
+                {/* <Stack> */}
+                    <Switch checked={useMax} onChange={() => setUseMax(!useMax)} label="Max"/>
+                {/* </Stack> */}
             </Group>
             <Stack my="1rem">
 
                 <Flex w="100%" direction={{ base: 'column', sm: 'row' }}>
-                    <Input.Wrapper label="Ticket amount" style={{ flex: 2 }}>
+                    <Input.Wrapper label={`Ticket amount (0.001 Eth)`} style={{ flex: 2 }}>
                         <Input
                             style={{ flex: 2 }}
                             value={ticketAmount}
@@ -92,6 +119,7 @@ const BuyTicketsCard = ({ raffle }: BuyTicketsCardProps) => {
                             placeholder="Ticket Amount"
                             icon={<IconTicket />}
                         />
+                        <Text size="xs" weight="bold">*{ticketsRemaining.toLocaleString()} tickets remaining</Text>
                     </Input.Wrapper>
 
                     <Group mx="1rem" mt="24px" display={{ base: 'none', sm: 'inherit' }}>
@@ -113,9 +141,10 @@ const BuyTicketsCard = ({ raffle }: BuyTicketsCardProps) => {
                         />
                     </Input.Wrapper>
                 </Flex>
+                {/* <Divider /> */}
 
-                <Text size="xs"><strong>*1 ticket = Ξ0.001 Eth</strong></Text>
-                <Divider />
+                {/* <Text size="xs"><strong>*1 ticket = Ξ0.001 Eth</strong></Text> */}
+                <Checkbox checked={hasAgreed} onChange={() => setHasAgreed(!hasAgreed)} label={<Box>I agree to the DeRafl <Anchor weight="bold" underline={true} color="primary" target="_blank" href="/terms">Terms of service</Anchor></Box>}/>
             </Stack>
 
             <ContractActionButton
@@ -125,7 +154,7 @@ const BuyTicketsCard = ({ raffle }: BuyTicketsCardProps) => {
                 abi={Abi.DERAFL}
                 functionName="buyTickets"
                 args={[raffle.raffleNonce, ticketAmount, { value: parseEther('0' + ethAmount.toString()) }]}
-                disabled={!parseInt(ticketAmount)}
+                disabled={!parseInt(ticketAmount) || !hasAgreed}
             />
         </Card>
     )

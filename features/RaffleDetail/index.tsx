@@ -108,7 +108,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                         </Grid.Col>
                         <Grid.Col span={12} sm={8}>
                             {raffleState === RaffleState.ACTIVE &&
-                                <ButTicketsCard raffle={updatedRaffle} />
+                                <ButTicketsCard ticketsRemaining={parseInt(raffleInfo.ticketsAvailable.toString()) - parseInt(raffleInfo.ticketsSold.toString())} raffle={updatedRaffle} />
                             }
                             {raffleState === RaffleState.CLOSED && <RaffleClosedCard address={address} raffle={updatedRaffle} />}
                             {raffleState === RaffleState.PENDING_DRAW && <PendingDrawCard />}
