@@ -6,7 +6,7 @@ const TicketRefundService_1 = require("../services/TicketRefundService");
 const TransactionService_1 = require("../services/TransactionService");
 const types_1 = require("../types");
 exports.handleTicketRefund = async (log, txId, timestamp, chainId) => {
-    var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()));
+    var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()), chainId);
     if (!raffle) {
         throw new Error("Invalid raffle Id");
     }
