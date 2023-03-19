@@ -7,12 +7,12 @@ const TicketBatchService_1 = require("../services/TicketBatchService");
 const TransactionService_1 = require("../services/TransactionService");
 const types_1 = require("../types");
 exports.handleRaffleDrawn = async (log, txId, timestamp, chainId) => {
-    var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()));
+    var raffle = await RaffleService_1.getRaffleByRaffleId(parseInt(log.raffleId.toString()), chainId);
     if (!raffle) {
         throw new Error("Invalid raffle Id");
     }
     const winningTicket = parseInt(log.winningTicket.toString());
-    const winningBatch = await TicketBatchService_1.getWinningBatch(raffle.raffleNonce, winningTicket);
+    const winningBatch = await TicketBatchService_1.getWinningBatch(raffle.raffleNonce, winningTicket, chainId);
     if (!winningBatch) {
         // shit
     }

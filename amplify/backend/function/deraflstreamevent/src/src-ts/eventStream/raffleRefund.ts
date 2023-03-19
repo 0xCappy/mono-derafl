@@ -8,7 +8,7 @@ export const handleRaffleRefund = async (
   timestamp: string,
   chainId: string
 ) => {
-  var raffle = await getRaffleByRaffleId(parseInt(log.raffleId.toString()));
+  var raffle = await getRaffleByRaffleId(parseInt(log.raffleId.toString()), chainId);
   if (!raffle) {
     throw new Error("Invalid raffle Id");
   }
