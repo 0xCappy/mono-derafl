@@ -54,7 +54,7 @@ const AppHeader = ({ onNavOpenChange, links, open }: AppHeaderProps) => {
 
                 <MobileNav open={navOpen} onClose={() => setNavOpen(false)} />
 
-                <WalletDrawer address={address} open={walletOpen} onClose={toggleWalletOpen} />
+                <WalletDrawer address={address} open={walletOpen} onClose={toggleWalletOpen} />                
 
             </Container>
         </Header>
