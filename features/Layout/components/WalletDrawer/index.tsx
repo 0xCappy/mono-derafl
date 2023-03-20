@@ -23,22 +23,6 @@ const WalletDrawer = ({ open, onClose, address }: WalletDrawerProps) => {
     const [account, setAccount] = useState<Account | undefined>()
     const { connect, connectors, error, isLoading, pendingConnector } = useConnect()
     const { disconnect } = useDisconnect()
-    const ethBalanceData = useBalance({ address })
-    const gasPriceData = useFeeData()
-
-    const gasPrice = useMemo(() => {
-        if (gasPriceData.data) {
-            return parseFloat(formatUnits(gasPriceData.data.gasPrice || '0', '9')).toFixed(1)
-        }
-        return '...'
-    }, [gasPriceData])
-
-    const ethBalance = useMemo(() => {
-        if (ethBalanceData.data) {
-            return parseFloat(formatEther(ethBalanceData.data?.value || '0')).toFixed(3)
-        }
-        return '...'
-    }, [ethBalanceData])
 
     useEffect(() => {
         if (address) {
@@ -93,7 +77,7 @@ const WalletDrawer = ({ open, onClose, address }: WalletDrawerProps) => {
                         :
                         <>
                             {address && account ?
-                                <AccountDetail account={account} address={address} gasPrice={gasPrice} ethBalance={ethBalance} />
+                                <AccountDetail account={account} address={address} />
                                 :
                                 <Stack>
                                     {connectors.filter((connector) => connector.ready).map((connector) => (
