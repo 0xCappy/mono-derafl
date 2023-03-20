@@ -87,7 +87,7 @@ exports.getOrCreateNft = async (address, tokenId, chainId) => {
             tokenUri: alchemyNft.tokenUri?.raw,
             tokenId: alchemyNft.tokenId,
             symbol: alchemyNft.contract.symbol,
-            imageUri: alchemyNft.media[0]?.raw || alchemyNft.rawMetadata?.image,
+            imageUri: alchemyNft.media?.[0]?.gateway || alchemyNft.rawMetadata?.image || alchemyNft.media[0]?.raw,
             tokenName: alchemyNft.rawMetadata?.name || `${alchemyNft.contract.symbol || alchemyNft.contract.name} #${alchemyNft.tokenId}`,
             collectionName: alchemyNft.contract.name,
             lastSales: JSON.stringify(lastSale),
