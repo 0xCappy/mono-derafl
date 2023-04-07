@@ -2,7 +2,7 @@ import { useState } from 'react';
 import NextApp, { AppProps, AppContext } from 'next/app';
 import { getCookie, setCookie } from 'cookies-next';
 import Head from 'next/head';
-import { MantineProvider, ColorScheme, ColorSchemeProvider, Box } from '@mantine/core';
+import { MantineProvider, ColorScheme, ColorSchemeProvider, Box, Anchor } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { Layout } from '../features';
 import { initializeParse } from "@parse/react-ssr";
@@ -105,7 +105,21 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
         <MantineProvider theme={{ ...defaultTheme, colorScheme }} withGlobalStyles withNormalizeCSS>
           <NotificationsProvider>
             <WagmiConfig client={client}>
-              <ConnectKitProvider>
+              <ConnectKitProvider
+                options={{
+                  overlayBlur: 3,
+                  disclaimer: (
+                    <>
+                      By connecting your wallet you agree to the{" "}
+                      <Anchor weight="bold" underline={true} color="primary" target="_blank" href="/terms">Terms of service</Anchor>
+                    </>
+                  ),        
+                }}
+                theme={colorScheme === 'dark' ? 'midnight' : 'soft'}
+                customTheme={{
+                  "--ck-overlay-background": "black",
+                }}
+              >
                 <WalletContextProvider>
                   <Box sx={(theme) => ({
                     strong: {
