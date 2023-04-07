@@ -10,7 +10,7 @@ function useTicketsOwned(
 ): BigNumber | undefined {
 
   const { data, isError, isLoading } = useContractRead({
-    address: deraflAddress,
+    address: deraflAddress as `0x${string}`,
     abi: raflAbi,
     functionName: 'getUserInfo',
     args: [raffleId, ticketOwner],

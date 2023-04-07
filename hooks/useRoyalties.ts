@@ -9,7 +9,7 @@ function useRoyalties(
   deraflAddress: string
 ): BigNumber | undefined {
   const contractRead = useContractRead({
-    address: deraflAddress,
+    address: deraflAddress as `0x${string}`,
     abi: raflAbi,
     functionName: 'getRoyaltyInfo',
     args: [tokenAddress, tokenId],

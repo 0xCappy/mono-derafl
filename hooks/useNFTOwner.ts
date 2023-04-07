@@ -8,7 +8,7 @@ function useNFTOwner(
 ): string | undefined {
 
   const { data, isError, isLoading } = useContractRead({
-    address: tokenAddress,
+    address: tokenAddress as `0x${string}`,
     abi: nftAbi,
     functionName: 'ownerOf',
     args: [tokenId],

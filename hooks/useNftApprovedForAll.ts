@@ -7,7 +7,7 @@ function useNftApprovedForAll(
   spenderAddress: string
 ) {
   const { data, isError, isLoading, error } = useContractRead({
-    address: tokenAddress,
+    address: tokenAddress as `0x${string}`,
     abi: nftAbi,
     functionName: 'isApprovedForAll',
     args: [ownerAddress, spenderAddress],

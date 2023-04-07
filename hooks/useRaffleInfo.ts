@@ -8,7 +8,7 @@ function useRaffleInfo(
   deraflAddress: string
   ): RaffleInfo | undefined {
   const { data, isError, isLoading } = useContractRead({
-    address: deraflAddress,
+    address: deraflAddress as `0x${string}`,
     abi: raflAbi,
     functionName: 'getRaffle',
     args: [raffleId],
