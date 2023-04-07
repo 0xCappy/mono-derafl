@@ -8,12 +8,12 @@ import { Layout } from '../features';
 import { initializeParse } from "@parse/react-ssr";
 import { WagmiConfig, createClient, configureChains, goerli, mainnet } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
-import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+// import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
+// import { InjectedConnector } from 'wagmi/connectors/injected'
+// import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import defaultTheme from '@/theme/theme'
 import WalletContextProvider from '@/context/WalletContext';
+import { ConnectKitProvider, ConnectKitButton, getDefaultClient } from "connectkit";
 import './empty.css'
 import '@/styles/globals.css'
 import { Amplify } from 'aws-amplify'
@@ -34,33 +34,43 @@ if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
 }
 
-const client = createClient({
-  autoConnect: true,
-  connectors: [
-    new MetaMaskConnector({ chains }),
-    new CoinbaseWalletConnector({
-      chains,
-      options: {
-        appName: 'wagmi',
-      },
-    }),
-    new WalletConnectConnector({
-      chains,
-      options: {
-        qrcode: true,
-      },
-    }),
-    new InjectedConnector({
-      chains,
-      options: {
-        name: 'Injected',
-        shimDisconnect: true,
-      },
-    }),
-  ],
-  provider,
-  webSocketProvider,
-})
+const client = createClient(
+  getDefaultClient({
+    appName: "DeRafl",
+    alchemyId: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
+    chains,
+    webSocketProvider,
+    provider
+  }),
+
+  // {
+  // autoConnect: true,
+  // connectors: [
+  //   new MetaMaskConnector({ chains }),
+  //   new CoinbaseWalletConnector({
+  //     chains,
+  //     options: {
+  //       appName: 'wagmi',
+  //     },
+  //   }),
+  //   new WalletConnectConnector({
+  //     chains,
+  //     options: {
+  //       qrcode: true,
+  //     },
+  //   }),
+  //   new InjectedConnector({
+  //     chains,
+  //     options: {
+  //       name: 'Injected',
+  //       shimDisconnect: true,
+  //     },
+  //   }),
+  // ],
+  // provider,
+  // webSocketProvider,
+  // }
+)
 
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   const { Component, pageProps } = props;
@@ -81,11 +91,11 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
         <link rel="shortcut icon" href="/favicon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600&display=swap" rel="stylesheet" />      
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600&display=swap" rel="stylesheet" />
         <script type="text/javascript" async src="//platform.twitter.com/widgets.js"></script>
-        <meta property="og:title" content="DeRafl - Decentralized NFT Raffles"/>
-        <meta property="og:description" content="DeRafl brings you the opportunity to win unique digital assets with our revolutionary decentrailized raffle protocol"/>
-        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="DeRafl - Decentralized NFT Raffles" />
+        <meta property="og:description" content="DeRafl brings you the opportunity to win unique digital assets with our revolutionary decentrailized raffle protocol" />
+        <meta property="og:type" content="website" />
         <meta property="og:image" content="https://derafl.com/meta.png"></meta>
         <meta name="twitter:site" content="@derafl_"></meta>
         <meta name="twitter:card" content="summary_large_image"></meta>
@@ -95,19 +105,21 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
         <MantineProvider theme={{ ...defaultTheme, colorScheme }} withGlobalStyles withNormalizeCSS>
           <NotificationsProvider>
             <WagmiConfig client={client}>
-              <WalletContextProvider>
-                <Box sx={(theme) => ({
-                  strong: {
-                    color: theme.colorScheme === 'dark' ? 'white' : 'black'
-                  }
-                })}>
-                <Layout>
-                  <Box mt="5rem">
-                    <Component {...pageProps} />
+              <ConnectKitProvider>
+                <WalletContextProvider>
+                  <Box sx={(theme) => ({
+                    strong: {
+                      color: theme.colorScheme === 'dark' ? 'white' : 'black'
+                    }
+                  })}>
+                    <Layout>
+                      <Box mt="5rem">
+                        <Component {...pageProps} />
+                      </Box>
+                    </Layout>
                   </Box>
-                </Layout>
-                </Box>
-              </WalletContextProvider>
+                </WalletContextProvider>
+              </ConnectKitProvider>
             </WagmiConfig>
           </NotificationsProvider>
         </MantineProvider>

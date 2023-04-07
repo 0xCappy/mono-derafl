@@ -23,7 +23,7 @@ const walletTransition: MantineTransition = {
   
 const AppHeader = ({ onNavOpenChange, links, open }: AppHeaderProps) => {
     const [navOpen, setNavOpen] = useState(false)
-    const { walletOpen, toggleWalletOpen, address } = useWallet()
+    const { walletOpen, setWalletOpen, address } = useWallet()
     const router = useRouter();
 
     return (
@@ -47,14 +47,14 @@ const AppHeader = ({ onNavOpenChange, links, open }: AppHeaderProps) => {
 
                         <Group>
                             <ColorSchemeToggle />
-                            <ActionIcon size="lg" onClick={toggleWalletOpen}><IconWallet size="32px" /></ActionIcon>
+                            <ActionIcon size="lg" onClick={() => setWalletOpen(true)}><IconWallet size="32px" /></ActionIcon>
                         </Group>
                     </Flex>
                 </Stack>
 
                 <MobileNav open={navOpen} onClose={() => setNavOpen(false)} />
 
-                <WalletDrawer address={address} open={walletOpen} onClose={toggleWalletOpen} />                
+                <WalletDrawer address={address} open={walletOpen} onClose={() => setWalletOpen(false)} />                
 
             </Container>
         </Header>

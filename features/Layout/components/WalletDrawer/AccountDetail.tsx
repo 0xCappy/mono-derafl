@@ -7,6 +7,7 @@ import { useAccount, useBalance, useFeeData } from "wagmi"
 import { disconnect } from '@wagmi/core'
 import { formatUnits, formatEther } from "ethers/lib/utils.js"
 import { useMemo } from "react"
+import { useWallet } from "@/context/WalletContext"
 
 
 interface AccountDetailProps {
@@ -17,6 +18,7 @@ interface AccountDetailProps {
 const AccountDetail = ({ account, address }: AccountDetailProps) => {
     const ethBalanceData = useBalance({ address })
     const gasPriceData = useFeeData()
+    const { setWalletOpen } = useWallet()
 
     const gasPrice = useMemo(() => {
         if (gasPriceData.data) {
@@ -31,6 +33,11 @@ const AccountDetail = ({ account, address }: AccountDetailProps) => {
         }
         return '...'
     }, [ethBalanceData])
+
+    const onDisconnect = () => {
+        setWalletOpen(false)
+        disconnect()
+    }
 
     return (
         <>
@@ -94,7 +101,7 @@ const AccountDetail = ({ account, address }: AccountDetailProps) => {
 
                     <Anchor href={`/accounts/${address}`} underline={false}><Button w="100%">View More</Button></Anchor>
 
-                    <Button variant="outline" color="red" w="100%" onClick={() => disconnect()}>Disconnect</Button>
+                    <Button variant="outline" color="red" w="100%" onClick={() => onDisconnect()}>Disconnect</Button>
                 </Stack>
             }
         </>

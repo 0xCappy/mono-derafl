@@ -12,7 +12,7 @@ interface PositionCardProps {
 }
 
 const PositionCard = ({ raffle, chainId, contract }: PositionCardProps) => {
-    const { address, toggleWalletOpen } = useWallet()
+    const { address, setWalletOpen } = useWallet()
     const ticketsOwned = useTicketsOwned(raffle.raffleId.toString(), address, parseInt(chainId), contract)
 
     const odds = useMemo(() => {
@@ -37,7 +37,7 @@ const PositionCard = ({ raffle, chainId, contract }: PositionCardProps) => {
                 :
                 <Stack justify="end" align="center">
                     <Text align="center">Connect your wallet for more information about your position in this raffle</Text>
-                    <Button fullWidth onClick={toggleWalletOpen}>Connect Wallet</Button>
+                    <Button fullWidth onClick={() => setWalletOpen(true)}>Connect Wallet</Button>
                 </Stack>
             }
         </Card>

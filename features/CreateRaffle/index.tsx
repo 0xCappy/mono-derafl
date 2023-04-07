@@ -70,7 +70,7 @@ const ContactFormSection = () => {
     const chain = chainsByChainId[CHAIN_ID as ChainId]
     const [confirmModalOpen, setConfirmModalOpen] = useState(false)
     const scrolledRef = useRef();
-    const { toggleWalletOpen, address } = useWallet()
+    const { setWalletOpen, address } = useWallet()
     const [nftSearchState, setNftSearchState] = useState<NftSearchState>({
         nfts: [],
         loading: false,
@@ -207,7 +207,7 @@ const ContactFormSection = () => {
                         <Center>
                             <Stack>
                                 <Text>Connect your wallet to get started</Text>
-                                <Button onClick={toggleWalletOpen}>Connect Wallet</Button>
+                                <Button onClick={() => setWalletOpen(true)}>Connect Wallet</Button>
                             </Stack>
                         </Center>
                     </>
