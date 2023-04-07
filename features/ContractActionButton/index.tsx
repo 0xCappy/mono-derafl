@@ -51,7 +51,7 @@ const ContractActionButton = ({ buttonTitle, chainId, contractAddress, abi, func
 
         try {
             const config = await prepareWriteContract({
-                address: contractAddress,
+                address: contractAddress as `0x${string}`,
                 abi: mapAbi(abi),
                 functionName,
                 args
