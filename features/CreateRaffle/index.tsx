@@ -215,7 +215,7 @@ const ContactFormSection = () => {
 
                 {stepValue === 0 && address &&
                     <>
-                        <NFTSelector hasMore={nftSearchState.hasMore} account={address!} loading={nftSearchState.loading} nfts={nftSearchState.nfts} onSelectNFT={(nft) => { setSelectedNFT(nft) }} />
+                        <NFTSelector chainId={CHAIN_ID} hasMore={nftSearchState.hasMore} account={address!} loading={nftSearchState.loading} nfts={nftSearchState.nfts} onSelectNFT={(nft) => { setSelectedNFT(nft) }} />
                         <Box ref={ref}></Box>
                     </>
                 }
@@ -259,7 +259,7 @@ const ContactFormSection = () => {
                         </Stack>
 
                         <Stack justify="space-between">
-                            <Overview chain={chain} royalties={royalties} ethAmount={form.values.ethAmount} expiryTimestamp={expiryTimestamp} />
+                            <Overview chain={chain} royalties={royalties?.fee || 0} ethAmount={form.values.ethAmount} expiryTimestamp={expiryTimestamp} />
 
                             {!approved && selectedNFT && !Object.keys(form.errors).length ?
                                 (<ContractActionButton
@@ -290,7 +290,7 @@ const ContactFormSection = () => {
                     nftToken={selectedNFT!}
                     ethAmount={form.values.ethAmount}
                     expiryTimestamp={expiryTimestamp}
-                    royalties={royalties}
+                    royalties={royalties?.fee || 0}
                 />
             }
         </>

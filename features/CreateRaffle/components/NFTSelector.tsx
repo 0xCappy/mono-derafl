@@ -13,6 +13,7 @@ interface NFTSelectorProps {
     loading: boolean
     account: string
     hasMore: boolean
+    chainId: string
 }
 
 interface NFTForm {
@@ -22,7 +23,7 @@ interface NFTForm {
 
 const emptyForm = { tokenId: '', contractAddress: '' }
 
-const NFTSelector = ({ nfts, onSelectNFT, loading, account, hasMore }: NFTSelectorProps) => {
+const NFTSelector = ({ nfts, onSelectNFT, loading, account, hasMore, chainId }: NFTSelectorProps) => {
     const [searching, setSearching] = useState(false)
     const [error, setError] = useState<string>()
 
@@ -44,7 +45,7 @@ const NFTSelector = ({ nfts, onSelectNFT, loading, account, hasMore }: NFTSelect
 
             const response = await fetch("/api/nft", {
                 method: "POST",
-                body: JSON.stringify(value),
+                body: JSON.stringify({...value, chainId }),
             });
             form.setValues({
                 contractAddress: '',

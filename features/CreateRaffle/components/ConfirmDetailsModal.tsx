@@ -27,7 +27,7 @@ interface ConfirmDetailsModalProps {
     expiryTimestamp: Date
     ethAmount: string
     nftToken: OwnedNft
-    royalties?: BigNumber
+    royalties?: number
     onClose: () => void
 }
 

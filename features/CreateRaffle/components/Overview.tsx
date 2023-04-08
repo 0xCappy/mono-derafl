@@ -9,7 +9,7 @@ import { Chain } from "@/types"
 
 interface OverviewProps {
     ethAmount: string
-    royalties?: BigNumber
+    royalties?: number
     expiryTimestamp: Date
     chain: Chain
 }
