@@ -116,9 +116,6 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
                   ),        
                 }}
                 theme={colorScheme === 'dark' ? 'midnight' : 'soft'}
-                customTheme={{
-                  "--ck-overlay-background": "black",
-                }}
               >
                 <WalletContextProvider>
                   <Box sx={(theme) => ({
