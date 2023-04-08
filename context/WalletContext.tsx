@@ -29,7 +29,6 @@ const WalletContextProvider: React.FC<AuthProviderProps> = ({ children }: AuthPr
     const { setOpen: openConnectKit, open: connectKitOpen } = useModal()
 
     useEffect(() => {
-        console.log("ACCOUNT: ", account)
         if (account.address) {
             setAddress(account.address)
             openConnectKit(false)

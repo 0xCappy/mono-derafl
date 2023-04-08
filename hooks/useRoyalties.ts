@@ -7,8 +7,7 @@ function useRoyalties(
   tokenId: string | undefined,
   chainId: number,
   deraflAddress: string
-): { fee: number, recipient: string} {
-  console.log("ROY< ROY")
+): { fee: number, recipient: string } {
   const contractRead = useContractRead({
     address: deraflAddress as `0x${string}`,
     abi: raflAbi,
@@ -16,8 +15,7 @@ function useRoyalties(
     args: [tokenAddress, tokenId],
     chainId
   })
-  console.log("CRL: ")
-    if (contractRead.isError) {
+  if (contractRead.isError) {
     return {
       fee: 0,
       recipient: ''
@@ -30,7 +28,7 @@ function useRoyalties(
     };
   }
   const [recipient, fee] = contractRead.data as [string, BigNumber]
-  return {recipient, fee: parseFloat(fee.toString())}
+  return { recipient, fee: parseFloat(fee.toString()) }
 }
 
 export default useRoyalties;

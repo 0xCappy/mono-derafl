@@ -14,7 +14,6 @@ import { chainsByShortName, ChainShortName } from '@/types';
 // This gets called on every request
 export const getServerSideProps = async (context: any) => {
   const { raffleId, chainShortName } = context.query
-  // console.log("SHORT: ")
   const chainId = chainsByShortName[chainShortName as ChainShortName].chainId
   const listRaffleData = await API.graphql(graphqlOperation(listRaffles, {
     filter: {
@@ -25,8 +24,6 @@ export const getServerSideProps = async (context: any) => {
   const raffleBasic = listRaffleData.data.listRaffles.items[0]
   const raffleData = await API.graphql(graphqlOperation(getRaffle, { id: raffleBasic.id })) as any
   const raffle = raffleData.data.getRaffle
-  console.log("RAFFLE: ", raffle)
-
   const trendingData = await API.graphql(graphqlOperation(searchRaffles, {
     sort: {
       field: 'updatedAt',

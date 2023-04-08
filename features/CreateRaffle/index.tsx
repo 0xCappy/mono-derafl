@@ -111,11 +111,6 @@ const ContactFormSection = () => {
     }, [form.values])
 
     useEffect(() => {
-        console.log("FORM VAL: ", form.values)
-    }, [form.values])
-
-    useEffect(() => {
-        console.log("ADDRESS: ", address)
         if (address) {
             setNftSearchState({
                 hasMore: true,

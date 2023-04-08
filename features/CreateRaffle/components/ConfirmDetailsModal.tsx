@@ -39,15 +39,10 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
     const chain = chainsByChainId[CHAIN_ID as ChainId]
 
     useEffect(() => {
-        console.log("DATA: ", data)
         if (data?.data?.listRaffles?.items?.[0] && !data.error) {
             router.push(`/raffles/${chainsByChainId[CHAIN_ID as ChainId].shortName}/${raffleId!}`)
         }
     }, [data])
-
-    useEffect(() => {
-        console.log("error: ", error)
-    }, [error])
 
     useContractEvent({
         address: DERAFL_ADDRESS as `0x${string}`,

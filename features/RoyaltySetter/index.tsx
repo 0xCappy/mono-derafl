@@ -59,7 +59,6 @@ export const RoyaltySetter = () => {
     }, [setterInfo?.setterStatus])
 
     useEffect(() => {
-        console.log("REC: ", royalties.recipient)
         form.setValues({
             ...form,
             fee: royalties.fee ? royalties.fee / 100 : 0,
