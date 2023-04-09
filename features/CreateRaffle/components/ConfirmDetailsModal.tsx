@@ -27,7 +27,7 @@ interface ConfirmDetailsModalProps {
     expiryTimestamp: Date
     ethAmount: string
     nftToken: OwnedNft
-    royalties?: BigNumber
+    royalties?: number
     onClose: () => void
 }
 
@@ -39,26 +39,25 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
     const chain = chainsByChainId[CHAIN_ID as ChainId]
 
     useEffect(() => {
-        console.log("DATA: ", data)
         if (data?.data?.listRaffles?.items?.[0] && !data.error) {
             router.push(`/raffles/${chainsByChainId[CHAIN_ID as ChainId].shortName}/${raffleId!}`)
         }
     }, [data])
 
-    useEffect(() => {
-        console.log("error: ", error)
-    }, [error])
-
     useContractEvent({
-        address: DERAFL_ADDRESS,
+        address: DERAFL_ADDRESS as `0x${string}`,
         abi: raflAbi,
         eventName: 'RaffleOpened',
-        listener(raffleId: BigNumber, nftAddress: string, tokenId: BigNumber, tickets: BigNumber, expires: BigNumber) {
-            if (nftAddress.toString().toLowerCase() === nftToken?.contractAddress.toLowerCase() && tokenId.toString().toLowerCase() === nftToken?.tokenId) {
-                setRaffleId(raffleId.toString())
+        listener: ((raffleId: BigNumber, nftAddress: string, tokenId: BigNumber, tickets: BigNumber, expires: BigNumber) => {
+            if (
+                nftToken &&
+                nftAddress.toString().toLowerCase() === nftToken.contractAddress.toLowerCase() &&
+                tokenId.toString() === nftToken.tokenId
+            ) {
+                setRaffleId(raffleId.toString());
             }
-        },
-    })
+        }) as (...args: unknown[]) => void,
+    });
 
     return (
         <Modal
@@ -92,7 +91,7 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
                 </List>
 
                 <Divider my="1rem" />
-                <Checkbox checked={hasAgreed} onChange={() => setHasAgreed(!hasAgreed)} mb="1rem" label={<Box>By checking this box you are agreeing to the DeRafl <Anchor weight="bold" underline={true} color="primary" target="_blank" href="/terms">Terms of service</Anchor></Box>}/>
+                <Checkbox checked={hasAgreed} onChange={() => setHasAgreed(!hasAgreed)} mb="1rem" label={<Box>By checking this box you are agreeing to the DeRafl <Anchor weight="bold" underline={true} color="primary" target="_blank" href="/terms">Terms of service</Anchor></Box>} />
 
                 {contractActionState !== ContractActionState.COMPLETE &&
                     <ContractActionButton

@@ -7,10 +7,10 @@ function useTicketsOwned(
   ticketOwner: string | undefined,
   chainId: number,
   deraflAddress: string
-): BigNumber | undefined {
+): { ticketsOwned: number, isRefunded: boolean} {
 
   const { data, isError, isLoading } = useContractRead({
-    address: deraflAddress,
+    address: deraflAddress as `0x${string}`,
     abi: raflAbi,
     functionName: 'getUserInfo',
     args: [raffleId, ticketOwner],
@@ -18,10 +18,12 @@ function useTicketsOwned(
     chainId
   } ?? [])
 
-  if (isError) {
-    return undefined;
+  const _data = data as [BigNumber, boolean]
+  console.log("TICKETS: ", data)
+  return {
+    ticketsOwned: parseInt(_data?.[0]?.toString() || '0'),
+    isRefunded: _data?.[1] || false,
   }
-  return data as BigNumber
 }
 
 export default useTicketsOwned;

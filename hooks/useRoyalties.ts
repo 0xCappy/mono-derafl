@@ -7,23 +7,28 @@ function useRoyalties(
   tokenId: string | undefined,
   chainId: number,
   deraflAddress: string
-): BigNumber | undefined {
+): { fee: number, recipient: string } {
   const contractRead = useContractRead({
-    address: deraflAddress,
+    address: deraflAddress as `0x${string}`,
     abi: raflAbi,
     functionName: 'getRoyaltyInfo',
     args: [tokenAddress, tokenId],
-    watch: true,
     chainId
   })
-    if (contractRead.isError) {
-    return undefined;
+  if (contractRead.isError) {
+    return {
+      fee: 0,
+      recipient: ''
+    };
   }
   if (!contractRead.data) {
-    return undefined
+    return {
+      fee: 0,
+      recipient: ''
+    };
   }
-  const royaltyInfo = contractRead.data as [string, BigNumber]
-  return royaltyInfo[1]
+  const [recipient, fee] = contractRead.data as [string, BigNumber]
+  return { recipient, fee: parseFloat(fee.toString()) }
 }
 
 export default useRoyalties;

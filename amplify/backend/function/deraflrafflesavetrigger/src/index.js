@@ -12,10 +12,7 @@ Amplify Params - DO NOT EDIT */
 
 exports.handler = async event => {
   const promises = []
-
-  console.log("EVENT: ", JSON.stringify(event))
   for (const record of event.Records) {
-    console.log("RECORD: ", JSON.stringify(record))
     if (record.eventName === 'INSERT') {
       // promises.push(handleWalletCreate(record.dynamodb.NewImage))
     }

@@ -12,15 +12,14 @@ interface PositionCardProps {
 }
 
 const PositionCard = ({ raffle, chainId, contract }: PositionCardProps) => {
-    const { address, toggleWalletOpen } = useWallet()
-    const ticketsOwned = useTicketsOwned(raffle.raffleId.toString(), address, parseInt(chainId), contract)
+    const { address, setWalletOpen } = useWallet()
+    const { ticketsOwned } = useTicketsOwned(raffle.raffleId.toString(), address, parseInt(chainId), contract)
 
     const odds = useMemo(() => {
-        const ticketsOwnedInt = parseInt(ticketsOwned?.toString() || '0')
-        if (ticketsOwnedInt === 0) {
+        if (ticketsOwned === 0) {
             return '0%'
         }
-        return `${(ticketsOwnedInt / parseInt(raffle.ticketsSold.toString()) * 100).toFixed(2)}%` 
+        return `${(ticketsOwned / parseInt(raffle.ticketsSold.toString()) * 100).toFixed(2)}%` 
     }, [ticketsOwned, raffle.ticketsSold])
 
     return (
@@ -28,7 +27,7 @@ const PositionCard = ({ raffle, chainId, contract }: PositionCardProps) => {
                 <Title order={3} mb="0.5rem">Position</Title>
             {address ?
                 <Stack justify="center" spacing={5}>
-                    <Group spacing="xs"><IconTicket size={24} /><Text>Owned: <strong>{parseInt(ticketsOwned?.toString() || '0').toLocaleString()}</strong></Text></Group>
+                    <Group spacing="xs"><IconTicket size={24} /><Text>Owned: <strong>{ticketsOwned.toLocaleString()}</strong></Text></Group>
                     <Group spacing="xs"><IconDice5 size={24} /><Text>Chance: <strong>{odds}</strong></Text></Group>
                     <Text size="xs">
                         ** Note that your chance of winning will go down as more tickets are sold to other participants
@@ -37,7 +36,7 @@ const PositionCard = ({ raffle, chainId, contract }: PositionCardProps) => {
                 :
                 <Stack justify="end" align="center">
                     <Text align="center">Connect your wallet for more information about your position in this raffle</Text>
-                    <Button fullWidth onClick={toggleWalletOpen}>Connect Wallet</Button>
+                    <Button fullWidth onClick={() => setWalletOpen(true)}>Connect Wallet</Button>
                 </Stack>
             }
         </Card>

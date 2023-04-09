@@ -144,7 +144,7 @@ const FooterLinks = ({ data }: FooterLinksProps) => {
         <div className={classes.groups}>
           <SimpleGrid cols={2} breakpoints={[
             { minWidth: 'sm', cols: 2 },
-            { minWidth: 'md', cols: 3 }
+            { minWidth: 'md', cols: 4 }
         ]}>
             {groups}
           </SimpleGrid>

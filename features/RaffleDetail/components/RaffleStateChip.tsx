@@ -9,7 +9,6 @@ interface RaffleStateCardProps {
 
 const RaffleStateChip = ({ raffleState, progress }: RaffleStateCardProps) => {
     const title: string = useMemo(() => {
-        console.log("PROG: ", progress)
         if (raffleState === RaffleState.ACTIVE) {
             return 'Active'
         }

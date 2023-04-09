@@ -21,6 +21,15 @@ const footerLinks: FooterLinksProps = {
       ]
     },
     {
+      "title": "Collections",
+      "links": [
+        {
+          "label": "Royalty Setter",
+          "link": "/royalty"
+        }
+      ]
+    },
+    {
       "title": "Socials",
       "links": [
         {

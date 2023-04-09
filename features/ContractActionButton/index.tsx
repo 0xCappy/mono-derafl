@@ -28,7 +28,7 @@ interface ContractActionButtonProps {
 }
 
 const ContractActionButton = ({ buttonTitle, chainId, contractAddress, abi, functionName, args, disabled, onContractActionStateChange }: ContractActionButtonProps) => {
-    const { address, toggleWalletOpen } = useWallet()
+    const { address, setWalletOpen } = useWallet()
     const { chain } = useNetwork()
     const { chains, error, isLoading, pendingChainId, switchNetwork } = useSwitchNetwork()
     const id = randomId()
@@ -51,7 +51,7 @@ const ContractActionButton = ({ buttonTitle, chainId, contractAddress, abi, func
 
         try {
             const config = await prepareWriteContract({
-                address: contractAddress,
+                address: contractAddress as `0x${string}`,
                 abi: mapAbi(abi),
                 functionName,
                 args
@@ -96,7 +96,7 @@ const ContractActionButton = ({ buttonTitle, chainId, contractAddress, abi, func
     return (
         <>
             {!address &&
-                <Button fullWidth onClick={toggleWalletOpen}>Connect Wallet</Button>
+                <Button fullWidth onClick={() => setWalletOpen(true)}>Connect Wallet</Button>
             }
             {address && !isCorrectChain &&
                 <Button fullWidth onClick={() => switchNetwork?.(parseInt(chainId))}>Switch Network</Button>

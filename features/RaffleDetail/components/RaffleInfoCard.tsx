@@ -1,8 +1,8 @@
 import { AccountAnchor, OpenSeaBadge } from "@/common/components"
-import { RaffleInfo, RaffleState } from "@/types"
+import { ChainId, chainsByChainId, RaffleInfo, RaffleState } from "@/types"
 import { Raffle } from '@/src/API'
 import { Title, Divider, Flex, Center, SimpleGrid, Group, Avatar, Box, Stack, ActionIcon } from "@mantine/core"
-import { IconHourglass, IconTicket, IconCurrencyEthereum, IconChartArrowsVertical, IconSearch, IconUser, IconShare } from "@tabler/icons"
+import { IconHourglass, IconTicket, IconCurrencyEthereum, IconChartArrowsVertical, IconSearch, IconUser, IconShare, IconLink } from "@tabler/icons"
 import MarketPlaceLinks from "./MarketPlaceLinks"
 import RaffleStateChip from "./RaffleStateChip"
 import ShareRaffleButton from "./ShareRaffleButton"
@@ -54,7 +54,7 @@ const RaffleInfoCard = ({ raffle, raffleState, progress }: RaffleInfoProps) => {
                 </Group> */}
                 <Flex gap="sm"><Center><IconUser /></Center>Raffle Creator: <AccountAnchor address={raffle.owner} /></Flex>
 
-                <Flex gap="sm"><Center><IconCurrencyEthereum /></Center>Last Sale: <strong>{`${lastSales.length > 0 ? 'Ξ' + lastSales[0].amount : 'Unknown'}`}</strong></Flex>
+                <Flex gap="sm"><Center><IconLink /></Center>Chain: <strong>{chainsByChainId[raffle.chainId as ChainId].name}</strong></Flex>
                 <Flex gap="sm"><Center><IconChartArrowsVertical /></Center>Rarity Ranking: {!rarityData && <strong>Unknown</strong>} {rarityData && <span> <strong>{rarityData.rank}</strong> / {rarityData.maxRank} </span>}</Flex>
             </SimpleGrid>
         </Stack>
