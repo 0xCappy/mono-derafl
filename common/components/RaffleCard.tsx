@@ -30,6 +30,12 @@ const RaffleCard = ({ raffle }: RaffleCardProps) => {
                     <Group spacing="sm"><IconActivityHeartbeat size={24} />Active</Group>
                 </Avatar>
             )
+        } else if (raffle.state === RaffleState.REFUNDED) {
+            return (
+                <Avatar variant='filled' color="orange" radius="xl" w="100%">
+                    <Group spacing="sm"><IconTicketOff size={24} />Refunded</Group>
+                </Avatar>
+            )
         } else if (raffle.winningAccount) {
             return (
                 <Avatar variant='filled' color="blue" radius="xl" w="100%">

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Line } from 'rc-progress';
 import React, { useEffect, useMemo, useState } from 'react';
 import Countdown from 'react-countdown';
-import { ButTicketsCard, LoadingSkeleton, MetadataCard, PendingDrawCard, PositionCard, PurchasesCard, RaffleClosedCard, RaffleCompleteCard, RaffleDrawnCard, RaffleInfoCard, RaffleStats, TokenInfoCard, TransactionsCard } from './components';
+import { ButTicketsCard, LoadingSkeleton, MetadataCard, PendingDrawCard, PositionCard, PurchasesCard, RaffleClosedCard, RaffleCompleteCard, RaffleDrawnCard, RaffleInfoCard, RaffleStats, RefundRaffleCard, RefundTicketsCard, TokenInfoCard, TransactionsCard } from './components';
 import { Container, Image, Stack, Title, Divider, Flex, Box, Avatar, Group, MediaQuery, Grid } from '@mantine/core';
 import { RaffleCarousel } from '..';
 import { useWallet } from '@/context/WalletContext';
@@ -24,7 +24,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
     const [viewedBatch, setViewedBatch] = useState(0)
     const [hasSetViewed, setHasSetViewed] = useState(false)
     const _raffleInfo = useRaffleInfo(raffle.raffleNonce.toString(), parseInt(raffle.chainId), raffle.contract)
-    const ticketsOwned = useTicketsOwned(raffle.raffleNonce.toString(), address, parseInt(raffle.chainId), raffle.contract)
+    const { ticketsOwned, isRefunded} = useTicketsOwned(raffle.raffleNonce.toString(), address, parseInt(raffle.chainId), raffle.contract)
     const [raffleInfo, setRaffleInfo] = useState<RaffleInfo | undefined>()
     const [winningBatch, setWinningBatch] = useState<TicketBatch>()
     const [updatedRaffle, setUpdatedRaffle] = useState<Raffle>(raffle)
@@ -111,12 +111,20 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                                 <ButTicketsCard ticketsRemaining={parseInt(raffleInfo.ticketsAvailable.toString()) - parseInt(raffleInfo.ticketsSold.toString())} raffle={updatedRaffle} />
                             }
                             {raffleState === RaffleState.CLOSED && <RaffleClosedCard address={address} raffle={updatedRaffle} />}
+                            {raffleState === RaffleState.REFUNDED && <RefundTicketsCard address={address} raffle={updatedRaffle} />}
                             {raffleState === RaffleState.PENDING_DRAW && <PendingDrawCard />}
                             {winningBatch && raffleState === RaffleState.DRAWN && <RaffleDrawnCard chainId={raffle.chainId} contract={raffle.contract} address={address} raffleInfo={raffleInfo} winningBatch={winningBatch} />}
                             {winningBatch && raffleState === RaffleState.RELEASED && <RaffleCompleteCard raffleInfo={raffleInfo} winningBatch={winningBatch} />}
                         </Grid.Col>
                     </Grid>
-
+                    {
+                        raffleState !== RaffleState.ACTIVE 
+                        && raffleState !== RaffleState.RELEASED 
+                        && raffleState !== RaffleState.REFUNDED &&
+                        <Box mt="2rem">
+                            <RefundRaffleCard address={address} raffle={updatedRaffle} />
+                        </Box>
+                    }
                 </Box>
             }
         </>
@@ -140,7 +148,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                             <RaffleInfoCard raffle={updatedRaffle} progress={progress} raffleState={parseInt(_raffleInfo?.raffleState.toString() || '0')} />
                             {raffleInfo ?
                                 <>
-                                    <RaffleStats ticketsHeld={parseInt(ticketsOwned?.toString() || '0')} raffleInfo={raffleInfo} progress={progress} />
+                                    <RaffleStats ticketsHeld={ticketsOwned} raffleInfo={raffleInfo} progress={progress} />
                                     {renderRaffleAction()}
                                 </>
                                 :
@@ -157,7 +165,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                         <RaffleInfoCard progress={progress} raffle={updatedRaffle} raffleState={parseInt(_raffleInfo?.raffleState.toString() || '0')} />
                         {raffleInfo &&
                             <>
-                                <RaffleStats ticketsHeld={parseInt(ticketsOwned?.toString() || '0')} raffleInfo={raffleInfo} progress={progress} />
+                                <RaffleStats ticketsHeld={ticketsOwned} raffleInfo={raffleInfo} progress={progress} />
                                 {renderRaffleAction()}
                             </>
                         }
