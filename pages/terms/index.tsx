@@ -33,7 +33,7 @@ export default function Terms() {
                         <strong>6. Intellectual Property</strong>
                         <p>All content, including but not limited to images, logos, text, and software, is the property of DeRafl or its licensors and protected by copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, or create derivative works from our content without our express written permission.</p>
                         <strong>7. Royalties and Fees</strong>
-                        <p>DeRafl pays up to 10% creator royalties to creators of NFTs raffled on the platform. Additionally, users may be subject to fees for participating in raffles, as determined by DeRafl or raffle creators.</p>
+                        <p>DeRafl pays up to 5% creator royalties to creators of NFTs raffled on the platform. Additionally, users may be subject to fees for participating in raffles, as determined by DeRafl or raffle creators.</p>
                         <strong>8. Disclaimer of Warranties and Limitation of Liability</strong>
                         <p>DeRafl is provided on an "as is" and "as available" basis, without any warranties of any kind, either express or implied. We do not warrant that our platform will be uninterrupted, secure, or error-free, or that any results obtained through the use of our services will be accurate or reliable.
                         In no event shall DeRafl, its affiliates, or their respective directors, officers, employees, or agents be liable for any indirect, consequential, or incidental damages arising out of or in connection with your use of or inability to use our platform or services, even if we have been advised of the possibility of such damages.</p>

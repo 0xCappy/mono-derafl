@@ -87,7 +87,7 @@ const ConfirmDetailsModal = ({ isOpen, expiryTimestamp, ethAmount, nftToken, roy
                     <List.Item>The raffle will expire at {expiryTimestamp.toLocaleString()} local time OR {new Date(expiryTimestamp.getTime() + expiryTimestamp.getTimezoneOffset() * 60000).toLocaleString()} UTC</List.Item>
                     <List.Item>The raffle will be closed at this time even if tickets are not sold out</List.Item>
                     <List.Item>{!royalties ? '0' : (parseFloat(royalties.toString()) / 100).toFixed(2)}% of the {chain.currencyNameShort} raised will be sent to the collection owner as royalties</List.Item>
-                    <List.Item>5% of the {chain.currencyNameShort} raised + {chain.chainLinkFee} ether will be sent to DeRafl as a protocol fee</List.Item>
+                    <List.Item>0.5% of the {chain.currencyNameShort} raised will be sent to DeRafl as a protocol fee</List.Item>
                 </List>
 
                 <Divider my="1rem" />
