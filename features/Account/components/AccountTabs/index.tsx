@@ -1,12 +1,13 @@
 import { RaffleTable, TicketBatchTable } from "@/common/components";
-import { Account, Raffle, TicketBatch } from "@/src/API"
+import { Account, Raffle, SearchRafflesQuery, SearchTicketBatchesQuery, TicketBatch } from "@/src/API"
 import { Tabs, Card, Title, Divider, TabsValue, Transition, Button } from '@mantine/core';
 import { IconPhoto, IconMessageCircle, IconSettings, IconTicket, IconTrophy, IconSquarePlus } from '@tabler/icons';
 import { useEffect, useState } from "react";
 import { SortType } from "rsuite-table";
 import Parse from 'parse'
 import { searchRaffles, searchTicketBatches } from "@/src/graphql/queries";
-import { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from 'aws-amplify';
+import { GraphQLQuery } from '@aws-amplify/api';
 
 const PAGE_LENGTH = 10
 
@@ -113,29 +114,33 @@ const AccountTabs = ({ account }: AccountTabsProps) => {
 
     const fetchRafflesCreated = async () => {
         setRafflesCreatedProps({ ...rafflesCreatedProps, loading: true })
-        const rafflesData = await API.graphql(graphqlOperation(searchRaffles, {
-            sort:{
-                field: rafflesCreatedProps.sortKey,
-                direction: rafflesCreatedProps.sort
-            },
-            filter: {
-                owner: { eq: account.address }
-            },
-            limit: PAGE_LENGTH,
-            from: (rafflesCreatedProps.page - 1) * PAGE_LENGTH
-        })) as any
-        const { items, total } = rafflesData.data.searchRaffles
+
+        const rafflesData = await API.graphql<GraphQLQuery<SearchRafflesQuery>>(
+            graphqlOperation(searchRaffles, {
+                sort: {
+                    field: rafflesCreatedProps.sortKey,
+                    direction: rafflesCreatedProps.sort
+                },
+                filter: {
+                    owner: { eq: account.address }
+                },
+                limit: PAGE_LENGTH,
+                from: (rafflesCreatedProps.page - 1) * PAGE_LENGTH
+            }))
+
+            const response = rafflesData.data?.searchRaffles
         setRafflesCreatedProps({
             ...rafflesCreatedProps,
-            raffles: items,
-            raffleCount: total,
+            raffles: response?.items as Raffle[] || [],
+            raffleCount: response?.total || 0,
             loading: false
         })
     }
 
     const fetchRafflesWon = async () => {
         setRafflesWonProps({ ...rafflesWonProps, loading: true })
-        const rafflesData = await API.graphql(graphqlOperation(searchRaffles, {
+        const rafflesData = await API.graphql<GraphQLQuery<SearchRafflesQuery>>(
+            graphqlOperation(searchRaffles, {
             sort:{
                 field: rafflesWonProps.sortKey,
                 direction: rafflesWonProps.sort
@@ -145,19 +150,20 @@ const AccountTabs = ({ account }: AccountTabsProps) => {
             },
             limit: PAGE_LENGTH,
             from: (rafflesWonProps.page - 1) * PAGE_LENGTH
-        })) as any
-        const { items, total } = rafflesData.data.searchRaffles
+        }))
+        const response = rafflesData.data?.searchRaffles
         setRafflesWonProps({
             ...rafflesWonProps,
-            raffles: items,
-            raffleCount: total,
+            raffles: response?.items as Raffle[] || [],
+            raffleCount: response?.total || 0,
             loading: false
         })
     }
 
     const fetchTicketBatches = async () => {
         setTicketBatchesProps({ ...ticketBatchesProps, loading: true })
-        const ticketBatchData = await API.graphql(graphqlOperation(searchTicketBatches, {
+            const ticketBatchData = await API.graphql<GraphQLQuery<SearchTicketBatchesQuery>>(
+                graphqlOperation(searchTicketBatches, {
             sort:{
                 field: ticketBatchesProps.sortKey,
                 direction: ticketBatchesProps.sort
@@ -167,12 +173,12 @@ const AccountTabs = ({ account }: AccountTabsProps) => {
             },
             limit: PAGE_LENGTH,
             from: (ticketBatchesProps.page - 1) * PAGE_LENGTH
-        })) as any
-        const { items, total } = ticketBatchData.data.searchTicketBatches
+        }))
+        const response = ticketBatchData.data?.searchTicketBatches
         setTicketBatchesProps({
             ...ticketBatchesProps,
-            ticketBatches: items,
-            count: total,
+            ticketBatches: response?.items as TicketBatch[] || [],
+            count: response?.total || 0,
             loading: false
         })
     }

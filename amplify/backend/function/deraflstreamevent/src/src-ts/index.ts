@@ -19,10 +19,13 @@ import { handleWebhookStream } from "./eventStream";
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-
   try {
     await handleWebhookStream(JSON.parse(event.body!))
   } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify(error)
+    }  
   }
   const queries = JSON.stringify(event.queryStringParameters);
   return {
