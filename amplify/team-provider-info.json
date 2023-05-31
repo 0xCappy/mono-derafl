@@ -83,7 +83,7 @@
       "function": {
         "deraflstreamevent": {
           "deploymentBucketName": "amplify-derafl-mainnet-135250-deployment",
-          "s3Key": "amplify-builds/deraflstreamevent-51306f71736e67326648-build.zip",
+          "s3Key": "amplify-builds/deraflstreamevent-705969677038376a374c-build.zip",
           "alchemyKey": "Nyx7UtugHODwhjfxI0EkO-xQV9Seym5M",
           "traitSniperKey": "feb08daf-f3d0-40b5-bbaa-cc5f41c0153f",
           "moralisApiKey": "aNnsQjMwzZZYLDzbXKaTRPpb1l88ipYyTF3xjNV6BbhDk5vp4Fsbd6WRHoTvguWo",
@@ -94,7 +94,7 @@
         "derafl": {},
         "deraflrafflesavetrigger": {
           "deploymentBucketName": "amplify-derafl-mainnet-135250-deployment",
-          "s3Key": "amplify-builds/deraflrafflesavetrigger-667179466a566b794d50-build.zip"
+          "s3Key": "amplify-builds/deraflrafflesavetrigger-4238636d4f6765315053-build.zip"
         }
       }
     }
