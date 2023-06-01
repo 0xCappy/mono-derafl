@@ -27,8 +27,8 @@ Back-end is setup via AWS Amplify. DynamoDB and GraphQL, and Lambda Functions ar
 
 ## Links
 
-Live app https://derafl.com
-Testnet https://testnet.derafl.com
-User Docs https://docs.derafl.com
-Smart contract repo: https://github.com/HellFireLabs/DeRafl
-Smart contract audit: https://static1.squarespace.com/static/63fb95393027395e5abc8d08/t/642462b090d4f35fb083a1d4/1680106160774/DeRafl+Contract+Review+March+2023+-+foostudio.pdf
+- Live app https://derafl.com
+- Testnet https://testnet.derafl.com
+- User Docs https://docs.derafl.com
+- Smart contract repo: https://github.com/HellFireLabs/DeRafl
+- Smart contract audit: https://static1.squarespace.com/static/63fb95393027395e5abc8d08/t/642462b090d4f35fb083a1d4/1680106160774/DeRafl+Contract+Review+March+2023+-+foostudio.pdf
