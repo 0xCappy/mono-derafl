@@ -8,7 +8,6 @@ import OwnedNft from "@/types/OwnedNft";
 import useCheckCollectionSetter, { CollectionSetterStatus } from "@/hooks/useCheckCollectionSetter";
 import { useForm } from "@mantine/form";
 import ContractActionButton from "../ContractActionButton";
-import setterAbi from "abi/royaltyFeeSetter.json";
 import Abi from "@/types/Abi";
 
 const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID!

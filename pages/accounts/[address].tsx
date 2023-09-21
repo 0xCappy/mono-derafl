@@ -6,7 +6,6 @@ import AccountDetail from '@/features/Account';
 import { listAccounts } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify';
 
-// This gets called on every request
 export const getServerSideProps = async (context: any) => {
   const address: string = context.query.address
   const accountData = await API.graphql(graphqlOperation(listAccounts, {
