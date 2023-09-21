@@ -151,9 +151,9 @@ const FooterLinks = ({ data }: FooterLinksProps) => {
         </div>
       </Container>
       <Container size="xl" className={classes.afterFooter}>
-        <Text color="dimmed" size="sm">
+        {/* <Text color="dimmed" size="sm">
           Made with ❤️ by <Anchor href="https://twitter.com/0xcappy" target="_blank">0xCappy</Anchor>
-        </Text>
+        </Text> */}
 
         {/* <Group spacing={0} className={classes.social} position="right" noWrap>
           <ActionIcon size="lg">
