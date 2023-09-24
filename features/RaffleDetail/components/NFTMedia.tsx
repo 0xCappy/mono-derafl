@@ -60,7 +60,7 @@ const NFTMedia = ({ raffle }: NFTMediaProps) => {
                 <video
                     src={src.replace("ipfs://", "https://ipfs.io/ipfs/")}
                     controls
-                    style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', width: '100%' }}
+                    style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', width: '100%', objectFit: 'contain' }}
                 />
             );
         case MediaType.Image:
@@ -68,7 +68,7 @@ const NFTMedia = ({ raffle }: NFTMediaProps) => {
             return (
                 <img
                     src={src.replace("ipfs://", "https://ipfs.io/ipfs/")}
-                    style={{ width: '100%', aspectRatio: '1' }}
+                    style={{ width: '100%', aspectRatio: '1', objectFit: 'cover' }}
                     alt="NFT Media"
                 />
             );

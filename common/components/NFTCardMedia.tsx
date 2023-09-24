@@ -44,7 +44,7 @@ const NFTCardMedia = ({ nft, hovered }: NFTCardMediaProps) => {
                 <video
                     src={src.replace("ipfs://", "https://ipfs.io/ipfs/")}
                     controls
-                    style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', width: '100%', transform: hovered ? 'scale(1.1)' : 'inherit'  }}
+                    style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', width: '100%', transform: hovered ? 'scale(1.1)' : 'inherit', objectFit: 'contain'  }}
                 />
             );
         case MediaType.Image:
@@ -52,7 +52,7 @@ const NFTCardMedia = ({ nft, hovered }: NFTCardMediaProps) => {
             return (
                 <img
                     src={src.replace("ipfs://", "https://ipfs.io/ipfs/")}
-                    style={{ width: '100%', aspectRatio: '1', transition: '0.6s', transform: hovered ? 'scale(1.1)' : 'inherit'  }}
+                    style={{ width: '100%', aspectRatio: '1', transition: '0.6s', transform: hovered ? 'scale(1.1)' : 'inherit', objectFit: 'cover'  }}
                     alt="NFT Media"
                 />
             );
