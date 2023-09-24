@@ -22,7 +22,14 @@ const RaffleCard = ({ raffle }: RaffleCardProps) => {
     useEffect(() => {
         setReady(true)
     })
-    
+
+    const [isVideo, setIsVideo] = useState(false);
+
+    const handleImageError = (error: any) => {
+        console.log("Image ror: ", error)
+        setIsVideo(true);
+    };
+
     const StateChip = () => {
         if (raffle.state === RaffleState.ACTIVE && new Date(raffle.expires) > new Date()) {
             return (
@@ -53,13 +60,22 @@ const RaffleCard = ({ raffle }: RaffleCardProps) => {
         <Card w="100%" className='img-zoom' ref={ref}>
             <Stack>
                 <Box style={{ borderRadius: '16px', overflow: 'hidden' }}>
-                    <Image
-                        style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', transform: hovered ? 'scale(1.1)' : 'inherit' }}
-                        src={raffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")}
-                        withPlaceholder
-                        placeholder={<ImagePlaceholder iconSize={100} />}
-                        w="100%"
-                    />
+                    {!isVideo ? (
+                        <Image
+                            style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', transform: hovered ? 'scale(1.1)' : 'inherit' }}
+                            src={raffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")}
+                            withPlaceholder
+                            placeholder={<ImagePlaceholder iconSize={100} />}
+                            w="100%"
+                            onError={handleImageError}
+                        />
+                    ) : (
+                        <video
+                            src={raffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")}
+                            controls
+                            style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', width: '100%', transform: hovered ? 'scale(1.1)' : 'inherit'  }}
+                        />
+                    )}
                 </Box>
 
                 <StateChip />

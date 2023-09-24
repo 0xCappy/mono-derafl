@@ -16,10 +16,9 @@ import { API, graphqlOperation } from 'aws-amplify'
 
 interface RaffleDetailProps {
     raffle: Raffle
-    trending: Raffle[]
 }
 
-const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
+const RaffleDetail = ({ raffle }: RaffleDetailProps) => {
     const { address } = useWallet()
     const [viewedBatch, setViewedBatch] = useState(0)
     const [hasSetViewed, setHasSetViewed] = useState(false)
@@ -28,6 +27,11 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
     const [raffleInfo, setRaffleInfo] = useState<RaffleInfo | undefined>()
     const [winningBatch, setWinningBatch] = useState<TicketBatch>()
     const [updatedRaffle, setUpdatedRaffle] = useState<Raffle>(raffle)
+    const [isVideo, setIsVideo] = useState(false);
+
+    const handleImageError = (error: any) => {
+        setIsVideo(true);
+    };
 
     useEffect(() => {
         setRaffleInfo(_raffleInfo)
@@ -146,10 +150,23 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                                     allowFullScreen
                                 />
                             ) : (
-                                <Image
-                                    style={{ width: '100%', aspectRatio: '1/1' }}
-                                    src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")}
-                                />
+                                <>
+                                    {!isVideo ? (
+                                        <Image
+                                            style={{ width: '100%', aspectRatio: '1/1' }}
+                                            src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")}
+                                            onError={handleImageError}
+                                        />
+
+                                    ) : (
+                                        <video
+                                            src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")}
+                                            controls
+                                            style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', width: '100%' }}
+                                        />
+                                    )}
+
+                                </>
                             )}
                             {updatedRaffle.nft.metadata && <MetadataCard nft={raffle.nft} />}
                             <TokenInfoCard nft={updatedRaffle.nft} />
