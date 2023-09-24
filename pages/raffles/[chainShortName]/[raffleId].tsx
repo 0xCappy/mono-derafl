@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { RaffleDetail } from '../../../features'
 import { EncodedParseQuery, encodeParseQuery } from '@parse/react-ssr';
@@ -53,6 +53,10 @@ interface RaffleDetailPageProps {
 }
 
 export default function RaffleDetailPage({ raffle, trending }: RaffleDetailPageProps) {
+  useEffect(() => {
+    console.log("RAFFLE: ", raffle)
+  }, [])
+
   return (
     <>
       <Head>

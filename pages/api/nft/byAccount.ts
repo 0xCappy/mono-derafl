@@ -39,6 +39,7 @@ const getNftsForOwner = async (
       pageKey,
       // excludeFilters: [NftFilters.AIRDROPS, NftFilters.SPAM]
     });
+    console.log("NFTSL: ", alchemyResponse.ownedNfts[0].media)
     return {
       nfts: alchemyResponse.ownedNfts.map((nft) => mapOwnedNftResponse(nft)),
       pageKey: alchemyResponse.pageKey,

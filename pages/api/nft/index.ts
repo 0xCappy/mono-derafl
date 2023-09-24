@@ -32,6 +32,7 @@ export const getNft = async (
     const alchemy = new Alchemy(alchemyConfig);
 
     const nft = await alchemy.nft.getNftMetadata(address, tokenId, {});
+    console.log("NFT: ", nft)
     return mapOwnedNftResponse(nft);
 };
 
