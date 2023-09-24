@@ -13,6 +13,7 @@ import { useWallet } from '@/context/WalletContext';
 import useTicketsOwned from '@/hooks/useTicketsOwned';
 import { getRaffle, listTicketBatches } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify'
+import NFTMedia from './components/NFTMedia';
 
 interface RaffleDetailProps {
     raffle: Raffle
@@ -27,11 +28,7 @@ const RaffleDetail = ({ raffle }: RaffleDetailProps) => {
     const [raffleInfo, setRaffleInfo] = useState<RaffleInfo | undefined>()
     const [winningBatch, setWinningBatch] = useState<TicketBatch>()
     const [updatedRaffle, setUpdatedRaffle] = useState<Raffle>(raffle)
-    const [isVideo, setIsVideo] = useState(false);
 
-    const handleImageError = (error: any) => {
-        setIsVideo(true);
-    };
 
     useEffect(() => {
         setRaffleInfo(_raffleInfo)
@@ -142,32 +139,7 @@ const RaffleDetail = ({ raffle }: RaffleDetailProps) => {
                 <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
                     <Flex direction={{ base: 'column', sm: 'row' }} gap="xl">
                         <Stack style={{ flex: 2 }} spacing="xl">
-                            {updatedRaffle.nft.animationUrl ? (
-                                <iframe
-                                    src={updatedRaffle.nft.animationUrl}
-                                    style={{ width: '100%', height: 'auto', aspectRatio: '1/1', border: 'none' }}
-                                    frameBorder="0"
-                                    allowFullScreen
-                                />
-                            ) : (
-                                <>
-                                    {!isVideo ? (
-                                        <Image
-                                            style={{ width: '100%', aspectRatio: '1/1' }}
-                                            src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")}
-                                            onError={handleImageError}
-                                        />
-
-                                    ) : (
-                                        <video
-                                            src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")}
-                                            controls
-                                            style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', width: '100%' }}
-                                        />
-                                    )}
-
-                                </>
-                            )}
+                            <NFTMedia raffle={updatedRaffle} />
                             {updatedRaffle.nft.metadata && <MetadataCard nft={raffle.nft} />}
                             <TokenInfoCard nft={updatedRaffle.nft} />
                             {/* <CollectionInfoCard collection={raffle.nft.collection} /> */}
