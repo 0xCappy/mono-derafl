@@ -88,7 +88,7 @@
         },
         "deraflstreamevent": {
           "deploymentBucketName": "amplify-derafl-testnet-105031-deployment",
-          "s3Key": "amplify-builds/deraflstreamevent-564333464c5256374339-build.zip",
+          "s3Key": "amplify-builds/deraflstreamevent-7536725139484162372f-build.zip",
           "alchemyKey": "Nyx7UtugHODwhjfxI0EkO-xQV9Seym5M",
           "traitSniperKey": "feb08daf-f3d0-40b5-bbaa-cc5f41c0153f",
           "moralisApiKey": "aNnsQjMwzZZYLDzbXKaTRPpb1l88ipYyTF3xjNV6BbhDk5vp4Fsbd6WRHoTvguWo",

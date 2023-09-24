@@ -139,6 +139,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
               lastSales
               chainId
               rarityData
+              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -235,6 +236,7 @@ export const onCreateTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -431,6 +433,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
               lastSales
               chainId
               rarityData
+              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -527,6 +530,7 @@ export const onUpdateTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -723,6 +727,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
               lastSales
               chainId
               rarityData
+              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -819,6 +824,7 @@ export const onDeleteTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -1074,6 +1080,7 @@ export const onCreateTicketBatch = /* GraphQL */ `
               lastSales
               chainId
               rarityData
+              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -1170,6 +1177,7 @@ export const onCreateTicketBatch = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -1369,6 +1377,7 @@ export const onUpdateTicketBatch = /* GraphQL */ `
               lastSales
               chainId
               rarityData
+              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -1465,6 +1474,7 @@ export const onUpdateTicketBatch = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -1664,6 +1674,7 @@ export const onDeleteTicketBatch = /* GraphQL */ `
               lastSales
               chainId
               rarityData
+              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -1760,6 +1771,7 @@ export const onDeleteTicketBatch = /* GraphQL */ `
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -2023,6 +2035,7 @@ export const onCreateRaffle = /* GraphQL */ `
             lastSales
             chainId
             rarityData
+            animationUrl
             collection {
               id
               type
@@ -2141,6 +2154,7 @@ export const onCreateRaffle = /* GraphQL */ `
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -2350,6 +2364,7 @@ export const onUpdateRaffle = /* GraphQL */ `
             lastSales
             chainId
             rarityData
+            animationUrl
             collection {
               id
               type
@@ -2468,6 +2483,7 @@ export const onUpdateRaffle = /* GraphQL */ `
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -2677,6 +2693,7 @@ export const onDeleteRaffle = /* GraphQL */ `
             lastSales
             chainId
             rarityData
+            animationUrl
             collection {
               id
               type
@@ -2795,6 +2812,7 @@ export const onDeleteRaffle = /* GraphQL */ `
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -2858,6 +2876,7 @@ export const onCreateNFT = /* GraphQL */ `
       lastSales
       chainId
       rarityData
+      animationUrl
       collection {
         id
         type
@@ -2902,6 +2921,7 @@ export const onUpdateNFT = /* GraphQL */ `
       lastSales
       chainId
       rarityData
+      animationUrl
       collection {
         id
         type
@@ -2946,6 +2966,7 @@ export const onDeleteNFT = /* GraphQL */ `
       lastSales
       chainId
       rarityData
+      animationUrl
       collection {
         id
         type

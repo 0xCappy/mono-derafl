@@ -48,30 +48,40 @@ const RaffleCarousel = () => {
                     </Flex>
                 </Flex>
                 <Box>
-                    {raffles.length > 0 &&
-                        <Carousel
-                            slideSize="25%"
-                            slideGap="md"
-                            loop
-                            slidesToScroll={1}
-                            align="start"
-                            controlsOffset={0}
-                            controlSize={40}
-                            breakpoints={[
-                                { maxWidth: 'sm', slideSize: '100%' },
-                                { maxWidth: 'md', slideSize: '33%' },
-                                { maxWidth: 'lg', slideSize: '25%' },
-                            ]}
-                        >
-                            {raffles.map(raffle => (
-                                <Carousel.Slide>
-                                    <Anchor href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
-                                        <RaffleCard raffle={raffle} />
-                                    </Anchor>
-                                </Carousel.Slide>
-                            ))}
-                        </Carousel>
-                    }
+                    {loading ? (
+                        // Display 4 skeleton cards while loading
+                        <Flex justify="space-between" gap={32}>
+                            <NFTCardSkeleton />
+                            <NFTCardSkeleton />
+                            <NFTCardSkeleton />
+                            <NFTCardSkeleton />
+                        </Flex>
+                    ) : (
+                        raffles.length > 0 && (
+                            <Carousel
+                                slideSize="25%"
+                                slideGap="md"
+                                loop
+                                slidesToScroll={1}
+                                align="start"
+                                controlsOffset={0}
+                                controlSize={40}
+                                breakpoints={[
+                                    { maxWidth: 'sm', slideSize: '100%' },
+                                    { maxWidth: 'md', slideSize: '33%' },
+                                    { maxWidth: 'lg', slideSize: '25%' },
+                                ]}
+                            >
+                                {raffles.map(raffle => (
+                                    <Carousel.Slide>
+                                        <Anchor href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
+                                            <RaffleCard raffle={raffle} />
+                                        </Anchor>
+                                    </Carousel.Slide>
+                                ))}
+                            </Carousel>
+                        )
+                    )}
                 </Box>
             </Stack>
             <Center mt="2rem">

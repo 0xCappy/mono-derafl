@@ -107,7 +107,8 @@ export const getOrCreateNft = async (address: string, tokenId: string, chainId: 
       lastSales: JSON.stringify(lastSale),
       nFTCollectionId: collection.id,
       chainId,
-      rarityData: JSON.stringify(rank)
+      rarityData: JSON.stringify(rank),
+      animationUrl: alchemyNft.rawMetadata.animation_url
     })
   }
   return nft
