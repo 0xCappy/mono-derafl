@@ -162,7 +162,7 @@ const RaffleDetail = ({ raffle }: RaffleDetailProps) => {
                 {/* Mobile Layout */}
                 <MediaQuery largerThan="md" styles={{ display: 'none' }}>
                     <Stack spacing="xl">
-                        <Image style={{ width: '100%', aspectRatio: '1/1' }} src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
+                        <NFTMedia raffle={updatedRaffle} />
                         <RaffleInfoCard progress={progress} raffle={updatedRaffle} raffleState={parseInt(_raffleInfo?.raffleState.toString() || '0')} />
                         {raffleInfo &&
                             <>

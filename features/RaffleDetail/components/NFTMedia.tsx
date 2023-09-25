@@ -1,6 +1,6 @@
 import { Raffle } from "@/src/API";
 import { Skeleton } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react"; // <-- Add useRef here
 
 interface NFTMediaProps {
     raffle: Raffle;
@@ -15,6 +15,13 @@ enum MediaType {
 const NFTMedia = ({ raffle }: NFTMediaProps) => {
     const [mediaType, setMediaType] = useState<MediaType | null>(null);
     const src = raffle.nft.animationUrl || raffle.nft.imageUri || '';
+    const videoRef = useRef<HTMLVideoElement | null>(null); // <-- Define the ref here
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.load(); // <-- Call load on the video element
+        }
+    }, [mediaType]); // <-- Rerun effect whenever mediaType changes
 
     useEffect(() => {
         if (src.startsWith("data:")) {
@@ -55,17 +62,23 @@ const NFTMedia = ({ raffle }: NFTMediaProps) => {
                     allowFullScreen
                 />
             );
-        case MediaType.Video:
-            return (
-                <video
-                    src={src.replace("ipfs://", "https://ipfs.io/ipfs/")}
-                    controls
-                    style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', width: '100%', objectFit: 'contain' }}
-                />
-            );
-        case MediaType.Image:
-        default:
-            return (
+            case MediaType.Video:
+                return (
+                    <video
+                        ref={videoRef} // <-- Attach the ref here
+                        controls
+                        style={{ overflow: 'hidden', aspectRatio: '1', transition: '0.6s', width: '100%', objectFit: 'contain' }}
+                        playsInline
+                        autoPlay
+                        muted
+                        loop
+                    >
+                        <source src={src.replace("ipfs://", "https://ipfs.io/ipfs/")} type="video/mp4"/>
+                    </video>
+                );
+            case MediaType.Image:
+            default:
+                return (
                 <img
                     src={src.replace("ipfs://", "https://ipfs.io/ipfs/")}
                     style={{ width: '100%', aspectRatio: '1', objectFit: 'cover' }}
