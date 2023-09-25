@@ -6,44 +6,84 @@ import Head from 'next/head';
 import React from 'react';
 import { Home } from '../features'
 
-export const getServerSideProps = async (context: any) => {
-  const accountData = await API.graphql(graphqlOperation(accountsByUpdatedAt, {
-    type: 'Account',
-    limit: 10,
-    sortDirection: 'DESC'
-  })) as any
-  const accounts = accountData.data.accountsByUpdatedAt.items
+// export const getServerSideProps = async (context: any) => {
+//   const accountData = await API.graphql(graphqlOperation(accountsByUpdatedAt, {
+//     type: 'Account',
+//     limit: 10,
+//     sortDirection: 'DESC'
+//   })) as any
+//   const accounts = accountData.data.accountsByUpdatedAt.items
 
-  const raffleData = await API.graphql(graphqlOperation(searchRaffles, {
-    sort: {
-      field: 'updatedAt',
-      direction: 'desc'
-    },
-    filter: {
-      and: [
-        { state: { eq: 1 } },
-        { expires: { gt: Date.now() } }
-      ]
-    },
-    limit: 10
-  })) as any
-  const { items } = raffleData.data.searchRaffles
+//   const raffleData = await API.graphql(graphqlOperation(searchRaffles, {
+//     sort: {
+//       field: 'updatedAt',
+//       direction: 'desc'
+//     },
+//     filter: {
+//       and: [
+//         { state: { eq: 1 } },
+//         { expires: { gt: Date.now() } }
+//       ]
+//     },
+//     limit: 10
+//   })) as any
+//   const { items } = raffleData.data.searchRaffles
 
-  const purchasesData = await API.graphql(graphqlOperation(ticketBatchesByCreatedAt, {
-    type: 'TicketBatch',
-    sortDirection: 'DESC',
-    limit: 10
-  })) as any
-  const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
+//   const purchasesData = await API.graphql(graphqlOperation(ticketBatchesByCreatedAt, {
+//     type: 'TicketBatch',
+//     sortDirection: 'DESC',
+//     limit: 10
+//   })) as any
+//   const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
 
-  return {
-    props: {
-      raffles: items,
-      purchases,
-      accounts
-    }
-  }
-}
+//   return {
+//     props: {
+//       raffles: items,
+//       purchases,
+//       accounts
+//     }
+//   }
+// }
+
+// export const initPage = async (context: any) => {
+//   const accountData = await API.graphql(graphqlOperation(accountsByUpdatedAt, {
+//     type: 'Account',
+//     limit: 10,
+//     sortDirection: 'DESC'
+//   })) as any
+//   const accounts = accountData.data.accountsByUpdatedAt.items
+
+//   const raffleData = await API.graphql(graphqlOperation(searchRaffles, {
+//     sort: {
+//       field: 'updatedAt',
+//       direction: 'desc'
+//     },
+//     filter: {
+//       and: [
+//         { state: { eq: 1 } },
+//         { expires: { gt: Date.now() } }
+//       ]
+//     },
+//     limit: 10
+//   })) as any
+//   const { items } = raffleData.data.searchRaffles
+
+//   const purchasesData = await API.graphql(graphqlOperation(ticketBatchesByCreatedAt, {
+//     type: 'TicketBatch',
+//     sortDirection: 'DESC',
+//     limit: 10
+//   })) as any
+//   const purchases = purchasesData.data.ticketBatchesByCreatedAt.items
+
+//   return {
+//     props: {
+//       raffles: items,
+//       purchases,
+//       accounts
+//     }
+//   }
+// }
+
 
 interface HomePageProps {
   raffles: Raffle[]
@@ -66,7 +106,7 @@ export default function HomePage({ raffles, purchases, accounts }: HomePageProps
         <meta name="twitter:card" content="summary_large_image"></meta>
         <meta name="robots" content="index,follow"></meta>
       </Head>
-      <Home raffles={raffles} purchases={purchases} accounts={accounts} />
+      <Home />
     </>
   )
 }

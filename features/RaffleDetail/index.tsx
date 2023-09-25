@@ -13,21 +13,22 @@ import { useWallet } from '@/context/WalletContext';
 import useTicketsOwned from '@/hooks/useTicketsOwned';
 import { getRaffle, listTicketBatches } from '@/src/graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify'
+import NFTMedia from './components/NFTMedia';
 
 interface RaffleDetailProps {
     raffle: Raffle
-    trending: Raffle[]
 }
 
-const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
+const RaffleDetail = ({ raffle }: RaffleDetailProps) => {
     const { address } = useWallet()
     const [viewedBatch, setViewedBatch] = useState(0)
     const [hasSetViewed, setHasSetViewed] = useState(false)
     const _raffleInfo = useRaffleInfo(raffle.raffleNonce.toString(), parseInt(raffle.chainId), raffle.contract)
-    const { ticketsOwned, isRefunded} = useTicketsOwned(raffle.raffleNonce.toString(), address, parseInt(raffle.chainId), raffle.contract)
+    const { ticketsOwned, isRefunded } = useTicketsOwned(raffle.raffleNonce.toString(), address, parseInt(raffle.chainId), raffle.contract)
     const [raffleInfo, setRaffleInfo] = useState<RaffleInfo | undefined>()
     const [winningBatch, setWinningBatch] = useState<TicketBatch>()
     const [updatedRaffle, setUpdatedRaffle] = useState<Raffle>(raffle)
+
 
     useEffect(() => {
         setRaffleInfo(_raffleInfo)
@@ -118,8 +119,8 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                         </Grid.Col>
                     </Grid>
                     {
-                        raffleState !== RaffleState.ACTIVE 
-                        && raffleState !== RaffleState.RELEASED 
+                        raffleState !== RaffleState.ACTIVE
+                        && raffleState !== RaffleState.RELEASED
                         && raffleState !== RaffleState.REFUNDED &&
                         <Box mt="2rem">
                             <RefundRaffleCard address={address} raffle={updatedRaffle} />
@@ -138,7 +139,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                 <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
                     <Flex direction={{ base: 'column', sm: 'row' }} gap="xl">
                         <Stack style={{ flex: 2 }} spacing="xl">
-                            <Image style={{ width: '100%', aspectRatio: '1/1' }} src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
+                            <NFTMedia raffle={updatedRaffle} />
                             {updatedRaffle.nft.metadata && <MetadataCard nft={raffle.nft} />}
                             <TokenInfoCard nft={updatedRaffle.nft} />
                             {/* <CollectionInfoCard collection={raffle.nft.collection} /> */}
@@ -161,7 +162,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                 {/* Mobile Layout */}
                 <MediaQuery largerThan="md" styles={{ display: 'none' }}>
                     <Stack spacing="xl">
-                        <Image style={{ width: '100%', aspectRatio: '1/1' }} src={updatedRaffle.nft.imageUri?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
+                        <NFTMedia raffle={updatedRaffle} />
                         <RaffleInfoCard progress={progress} raffle={updatedRaffle} raffleState={parseInt(_raffleInfo?.raffleState.toString() || '0')} />
                         {raffleInfo &&
                             <>
@@ -196,7 +197,7 @@ const RaffleDetail = ({ raffle, trending }: RaffleDetailProps) => {
                 </SimpleGrid> */}
 
                 <Box mt="4rem">
-                    <RaffleCarousel raffles={trending} />
+                    <RaffleCarousel />
                 </Box>
             </Stack>
         </Container>

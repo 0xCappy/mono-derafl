@@ -211,6 +211,7 @@ export type NFT = {
   lastSales?: string | null,
   chainId: string,
   rarityData?: string | null,
+  animationUrl?: string | null,
   collection: Collection,
   nFTCollectionId: string,
 };
@@ -513,6 +514,7 @@ export type CreateNFTInput = {
   lastSales?: string | null,
   chainId: string,
   rarityData?: string | null,
+  animationUrl?: string | null,
   nFTCollectionId: string,
 };
 
@@ -531,6 +533,7 @@ export type ModelNFTConditionInput = {
   lastSales?: ModelStringInput | null,
   chainId?: ModelStringInput | null,
   rarityData?: ModelStringInput | null,
+  animationUrl?: ModelStringInput | null,
   and?: Array< ModelNFTConditionInput | null > | null,
   or?: Array< ModelNFTConditionInput | null > | null,
   not?: ModelNFTConditionInput | null,
@@ -553,6 +556,7 @@ export type UpdateNFTInput = {
   lastSales?: string | null,
   chainId?: string | null,
   rarityData?: string | null,
+  animationUrl?: string | null,
   nFTCollectionId?: string | null,
 };
 
@@ -1140,6 +1144,7 @@ export type ModelNFTFilterInput = {
   lastSales?: ModelStringInput | null,
   chainId?: ModelStringInput | null,
   rarityData?: ModelStringInput | null,
+  animationUrl?: ModelStringInput | null,
   and?: Array< ModelNFTFilterInput | null > | null,
   or?: Array< ModelNFTFilterInput | null > | null,
   not?: ModelNFTFilterInput | null,
@@ -1415,6 +1420,7 @@ export type ModelSubscriptionNFTFilterInput = {
   lastSales?: ModelSubscriptionStringInput | null,
   chainId?: ModelSubscriptionStringInput | null,
   rarityData?: ModelSubscriptionStringInput | null,
+  animationUrl?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionNFTFilterInput | null > | null,
   or?: Array< ModelSubscriptionNFTFilterInput | null > | null,
 };
@@ -1608,6 +1614,7 @@ export type CreateTicketRefundMutation = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -1710,6 +1717,7 @@ export type CreateTicketRefundMutation = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -1922,6 +1930,7 @@ export type UpdateTicketRefundMutation = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -2024,6 +2033,7 @@ export type UpdateTicketRefundMutation = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -2236,6 +2246,7 @@ export type DeleteTicketRefundMutation = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -2338,6 +2349,7 @@ export type DeleteTicketRefundMutation = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -2625,6 +2637,7 @@ export type CreateTicketBatchMutation = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -2727,6 +2740,7 @@ export type CreateTicketBatchMutation = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -2942,6 +2956,7 @@ export type UpdateTicketBatchMutation = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -3044,6 +3059,7 @@ export type UpdateTicketBatchMutation = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -3259,6 +3275,7 @@ export type DeleteTicketBatchMutation = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -3361,6 +3378,7 @@ export type DeleteTicketBatchMutation = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -3651,6 +3669,7 @@ export type CreateRaffleMutation = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -3776,6 +3795,7 @@ export type CreateRaffleMutation = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
+      animationUrl?: string | null,
       collection:  {
         __typename: "Collection",
         id: string,
@@ -4003,6 +4023,7 @@ export type UpdateRaffleMutation = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -4128,6 +4149,7 @@ export type UpdateRaffleMutation = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
+      animationUrl?: string | null,
       collection:  {
         __typename: "Collection",
         id: string,
@@ -4355,6 +4377,7 @@ export type DeleteRaffleMutation = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -4480,6 +4503,7 @@ export type DeleteRaffleMutation = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
+      animationUrl?: string | null,
       collection:  {
         __typename: "Collection",
         id: string,
@@ -4550,6 +4574,7 @@ export type CreateNFTMutation = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
+    animationUrl?: string | null,
     collection:  {
       __typename: "Collection",
       id: string,
@@ -4600,6 +4625,7 @@ export type UpdateNFTMutation = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
+    animationUrl?: string | null,
     collection:  {
       __typename: "Collection",
       id: string,
@@ -4650,6 +4676,7 @@ export type DeleteNFTMutation = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
+    animationUrl?: string | null,
     collection:  {
       __typename: "Collection",
       id: string,
@@ -4979,6 +5006,7 @@ export type GetTicketRefundQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -5081,6 +5109,7 @@ export type GetTicketRefundQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -5303,6 +5332,7 @@ export type ListTicketRefundsQuery = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -5575,6 +5605,7 @@ export type GetTicketBatchQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -5677,6 +5708,7 @@ export type GetTicketBatchQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -5902,6 +5934,7 @@ export type ListTicketBatchesQuery = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -6132,6 +6165,7 @@ export type TicketBatchesByCreatedAtQuery = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -6362,6 +6396,7 @@ export type TicketBatchesByUpdatedAtQuery = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -6592,6 +6627,7 @@ export type TicketBatchesByTicketsBoughtQuery = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -6822,6 +6858,7 @@ export type SearchTicketBatchesQuery = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -7114,6 +7151,7 @@ export type GetRaffleQuery = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -7239,6 +7277,7 @@ export type GetRaffleQuery = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
+      animationUrl?: string | null,
       collection:  {
         __typename: "Collection",
         id: string,
@@ -7429,6 +7468,7 @@ export type ListRafflesQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -7531,6 +7571,7 @@ export type ListRafflesQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -7726,6 +7767,7 @@ export type RafflesByCreatedAtQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -7828,6 +7870,7 @@ export type RafflesByCreatedAtQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -8023,6 +8066,7 @@ export type RafflesByUpdatedAtQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -8125,6 +8169,7 @@ export type RafflesByUpdatedAtQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -8320,6 +8365,7 @@ export type RafflesByProgressQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -8422,6 +8468,7 @@ export type RafflesByProgressQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -8617,6 +8664,7 @@ export type RafflesByTicketsAvailableQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -8719,6 +8767,7 @@ export type RafflesByTicketsAvailableQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -8914,6 +8963,7 @@ export type RafflesByExpiresQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -9016,6 +9066,7 @@ export type RafflesByExpiresQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -9211,6 +9262,7 @@ export type RafflesByTicketsSoldQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -9313,6 +9365,7 @@ export type RafflesByTicketsSoldQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -9508,6 +9561,7 @@ export type SearchRafflesQuery = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -9610,6 +9664,7 @@ export type SearchRafflesQuery = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -9698,6 +9753,7 @@ export type GetNFTQuery = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
+    animationUrl?: string | null,
     collection:  {
       __typename: "Collection",
       id: string,
@@ -9751,6 +9807,7 @@ export type ListNFTSQuery = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
+      animationUrl?: string | null,
       collection:  {
         __typename: "Collection",
         id: string,
@@ -10252,6 +10309,7 @@ export type OnCreateTicketRefundSubscription = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -10354,6 +10412,7 @@ export type OnCreateTicketRefundSubscription = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -10565,6 +10624,7 @@ export type OnUpdateTicketRefundSubscription = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -10667,6 +10727,7 @@ export type OnUpdateTicketRefundSubscription = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -10878,6 +10939,7 @@ export type OnDeleteTicketRefundSubscription = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -10980,6 +11042,7 @@ export type OnDeleteTicketRefundSubscription = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -11263,6 +11326,7 @@ export type OnCreateTicketBatchSubscription = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -11365,6 +11429,7 @@ export type OnCreateTicketBatchSubscription = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -11579,6 +11644,7 @@ export type OnUpdateTicketBatchSubscription = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -11681,6 +11747,7 @@ export type OnUpdateTicketBatchSubscription = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -11895,6 +11962,7 @@ export type OnDeleteTicketBatchSubscription = {
             lastSales?: string | null,
             chainId: string,
             rarityData?: string | null,
+            animationUrl?: string | null,
             nFTCollectionId: string,
           },
           refundTx?:  {
@@ -11997,6 +12065,7 @@ export type OnDeleteTicketBatchSubscription = {
         lastSales?: string | null,
         chainId: string,
         rarityData?: string | null,
+        animationUrl?: string | null,
         collection:  {
           __typename: "Collection",
           id: string,
@@ -12283,6 +12352,7 @@ export type OnCreateRaffleSubscription = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -12408,6 +12478,7 @@ export type OnCreateRaffleSubscription = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
+      animationUrl?: string | null,
       collection:  {
         __typename: "Collection",
         id: string,
@@ -12634,6 +12705,7 @@ export type OnUpdateRaffleSubscription = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -12759,6 +12831,7 @@ export type OnUpdateRaffleSubscription = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
+      animationUrl?: string | null,
       collection:  {
         __typename: "Collection",
         id: string,
@@ -12985,6 +13058,7 @@ export type OnDeleteRaffleSubscription = {
           lastSales?: string | null,
           chainId: string,
           rarityData?: string | null,
+          animationUrl?: string | null,
           collection:  {
             __typename: "Collection",
             id: string,
@@ -13110,6 +13184,7 @@ export type OnDeleteRaffleSubscription = {
       lastSales?: string | null,
       chainId: string,
       rarityData?: string | null,
+      animationUrl?: string | null,
       collection:  {
         __typename: "Collection",
         id: string,
@@ -13179,6 +13254,7 @@ export type OnCreateNFTSubscription = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
+    animationUrl?: string | null,
     collection:  {
       __typename: "Collection",
       id: string,
@@ -13228,6 +13304,7 @@ export type OnUpdateNFTSubscription = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
+    animationUrl?: string | null,
     collection:  {
       __typename: "Collection",
       id: string,
@@ -13277,6 +13354,7 @@ export type OnDeleteNFTSubscription = {
     lastSales?: string | null,
     chainId: string,
     rarityData?: string | null,
+    animationUrl?: string | null,
     collection:  {
       __typename: "Collection",
       id: string,

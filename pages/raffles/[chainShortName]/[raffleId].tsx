@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { RaffleDetail } from '../../../features'
 import { EncodedParseQuery, encodeParseQuery } from '@parse/react-ssr';
@@ -24,35 +24,23 @@ export const getServerSideProps = async (context: any) => {
   const raffleBasic = listRaffleData.data.listRaffles.items[0]
   const raffleData = await API.graphql(graphqlOperation(getRaffle, { id: raffleBasic.id })) as any
   const raffle = raffleData.data.getRaffle
-  const trendingData = await API.graphql(graphqlOperation(searchRaffles, {
-    sort: {
-      field: 'updatedAt',
-      direction: 'desc'
-    },
-    filter: {
-      and: [
-        { state: { eq: 1 } },
-        { expires: { gt: Date.now() } }
-      ]
-    },
-    limit: 10
-  })) as any
-  const { items } = trendingData.data.searchRaffles
 
   return {
     props: {
-      raffle,
-      trending: items
+      raffle
     }
   }
 }
 
 interface RaffleDetailPageProps {
-  raffle: Raffle,
-  trending: Raffle[]
+  raffle: Raffle
 }
 
-export default function RaffleDetailPage({ raffle, trending }: RaffleDetailPageProps) {
+export default function RaffleDetailPage({ raffle }: RaffleDetailPageProps) {
+  useEffect(() => {
+    console.log("RAFFLE: ", raffle)
+  }, [])
+
   return (
     <>
       <Head>
@@ -70,7 +58,7 @@ export default function RaffleDetailPage({ raffle, trending }: RaffleDetailPageP
 
       <main>
         <Box mt="8rem">
-          <RaffleDetail raffle={raffle} trending={trending} />
+          <RaffleDetail raffle={raffle} />
         </Box>
       </main>
     </>

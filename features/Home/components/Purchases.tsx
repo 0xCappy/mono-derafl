@@ -1,25 +1,40 @@
 import { TicketBatchTable } from "@/common/components"
 import { TicketBatch } from "@/src/API"
+import { ticketBatchesByCreatedAt } from "@/src/graphql/queries"
 import { DataDisplayType } from "@/types"
 import { Center, Box, Container, Stack, Anchor, Button, Title } from "@mantine/core"
 import { IconCash, IconCompass } from "@tabler/icons"
+import { API, graphqlOperation } from "aws-amplify"
 import { useEffect, useState } from "react"
 
-interface PurchasesProps {
-    ticketBatches: TicketBatch[]
-}
+const Purchases = () => {
+    const [loading, setLoading] = useState(true)
+    const [purchases, setPurchases] = useState([])
 
-const Purchases = ({ticketBatches}: PurchasesProps) => {
+    useEffect(() => {
+        getPurchases()
+    }, [])
+
+    const getPurchases = async () => {
+        const purchasesData = await API.graphql(graphqlOperation(ticketBatchesByCreatedAt, {
+            type: 'TicketBatch',
+            sortDirection: 'DESC',
+            limit: 10
+        })) as any
+        setPurchases(purchasesData.data.ticketBatchesByCreatedAt.items)
+        setLoading(false)
+    }
+
     return (
         <Container size="xl" py="4rem">
             <Stack>
                 <Title>Recent Purchases</Title>
                 <TicketBatchTable
-                    ticketBatches={ticketBatches}
-                    loading={false}
+                    ticketBatches={purchases}
+                    loading={loading}
                     includeAccount
                     pageSize={8}
-                    count={ticketBatches.length}
+                    count={purchases.length}
                     usePaging={false}
                     displayType="table"
                 />

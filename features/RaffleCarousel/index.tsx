@@ -6,12 +6,36 @@ import { NFTCardSkeleton, RaffleCard } from "common/components";
 import { Anchor } from "react-bootstrap";
 import { Carousel } from '@mantine/carousel';
 import { chainsByChainId, ChainId } from "@/types"
+import { searchRaffles } from "@/src/graphql/queries";
+import { API, graphqlOperation } from "aws-amplify";
 
-interface RaffleCarouselProps {
-    raffles: Raffle[]
-}
+const RaffleCarousel = () => {
+    const [loading, setLoading] = useState(true)
+    const [raffles, setRaffles] = useState<Raffle[]>([])
 
-const RaffleCarousel = ({ raffles }: RaffleCarouselProps) => {
+    useEffect(() => {
+        getPurchases()
+    }, [])
+
+    const getPurchases = async () => {
+        const raffleData = await API.graphql(graphqlOperation(searchRaffles, {
+            sort: {
+                field: 'updatedAt',
+                direction: 'desc'
+            },
+            filter: {
+                and: [
+                    { state: { eq: 1 } },
+                    { expires: { gt: Date.now() } }
+                ]
+            },
+            limit: 10
+        })) as any
+        const { items } = raffleData.data.searchRaffles
+        setRaffles(items)
+        setLoading(false)
+    }
+
     return (
         <Container size="xl" py="4rem">
             <Stack>
@@ -24,30 +48,40 @@ const RaffleCarousel = ({ raffles }: RaffleCarouselProps) => {
                     </Flex>
                 </Flex>
                 <Box>
-                    {raffles.length > 0 &&
-                        <Carousel
-                            slideSize="25%"
-                            slideGap="md"
-                            loop
-                            slidesToScroll={1}
-                            align="start"
-                            controlsOffset={0}
-                            controlSize={40}
-                            breakpoints={[
-                                { maxWidth: 'sm', slideSize: '100%' },
-                                { maxWidth: 'md', slideSize: '33%' },
-                                { maxWidth: 'lg', slideSize: '25%' },
-                            ]}
-                        >
-                            {raffles.map(raffle => (
-                                <Carousel.Slide>
-                                    <Anchor href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
-                                        <RaffleCard raffle={raffle} />
-                                    </Anchor>
-                                </Carousel.Slide>
-                            ))}
-                        </Carousel>
-                    }
+                    {loading ? (
+                        // Display 4 skeleton cards while loading
+                        <Flex justify="space-between" gap={32}>
+                            <NFTCardSkeleton />
+                            <NFTCardSkeleton />
+                            <NFTCardSkeleton />
+                            <NFTCardSkeleton />
+                        </Flex>
+                    ) : (
+                        raffles.length > 0 && (
+                            <Carousel
+                                slideSize="25%"
+                                slideGap="md"
+                                loop
+                                slidesToScroll={1}
+                                align="start"
+                                controlsOffset={0}
+                                controlSize={40}
+                                breakpoints={[
+                                    { maxWidth: 'sm', slideSize: '100%' },
+                                    { maxWidth: 'md', slideSize: '33%' },
+                                    { maxWidth: 'lg', slideSize: '25%' },
+                                ]}
+                            >
+                                {raffles.map(raffle => (
+                                    <Carousel.Slide>
+                                        <Anchor href={`/raffles/${chainsByChainId[raffle.chainId as ChainId].shortName}/${raffle.raffleNonce}`}>
+                                            <RaffleCard raffle={raffle} />
+                                        </Anchor>
+                                    </Carousel.Slide>
+                                ))}
+                            </Carousel>
+                        )
+                    )}
                 </Box>
             </Stack>
             <Center mt="2rem">

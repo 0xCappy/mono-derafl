@@ -184,6 +184,7 @@ type NFT
   lastSales: AWSJSON
   chainId: String!
   rarityData: AWSJSON
+  animationUrl: String
   collection: Collection! @hasOne
 }
 

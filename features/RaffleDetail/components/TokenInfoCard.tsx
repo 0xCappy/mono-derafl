@@ -34,9 +34,9 @@ const TokenInfoCard = ({ nft }: TokenInfoCardProps) => {
                                 </Anchor>
                             </Flex>
                             <Flex justify="space-between"><Text>Marketplaces</Text> <MarketPlaceLinks contractAddress={nft.contractAddress} tokenId={nft.tokenId} /></Flex>
-                            {nft.collection.externalUrl && <Flex justify="space-between"><Text>Website</Text> <Flex><Text><strong>{nft.collection.externalUrl}</strong></Text><Center><IconExternalLink size={20} /></Center></Flex></Flex>}
-                            {nft.collection.twitterUsername && <Flex justify="space-between"><Text>Twitter</Text> <Flex><Text><strong>{nft.collection.twitterUsername}</strong></Text><Center><IconExternalLink size={20} /></Center></Flex></Flex>}
-                            {nft.collection.discordUrl && <Flex justify="space-between"><Text>Discord</Text> <Flex><Text><strong>{nft.collection.discordUrl}</strong></Text><Center><IconExternalLink size={20} /></Center></Flex></Flex>}
+                            {nft.collection.externalUrl && <Flex justify="space-between"><Text>Website</Text> <Anchor target="_blank" href={nft.collection.externalUrl}> <Flex> <Text><strong>{nft.collection.externalUrl}</strong></Text><Center><IconExternalLink size={20} /></Center></Flex></Anchor></Flex>}
+                            {nft.collection.twitterUsername && <Flex justify="space-between"><Text>Twitter</Text> <Anchor target="_blank" href={`https://twitter.com/${nft.collection.twitterUsername}`}></Anchor> <Flex><Text><strong>{nft.collection.twitterUsername}</strong></Text><Center><IconExternalLink size={20} /></Center></Flex></Flex>}
+                            {nft.collection.discordUrl && <Flex justify="space-between"><Text>Discord</Text> <Anchor target="_blank" href={nft.collection.discordUrl}></Anchor> <Flex><Text><strong>{nft.collection.discordUrl}</strong></Text><Center><IconExternalLink size={20} /></Center></Flex></Flex>}
                             {/* <Flex justify="space-between"><Text>Created</Text> <Text><strong>{new Date(nft.collection.createdAt).toLocaleDateString()}</strong></Text></Flex> */}
                             <Divider />
                             <Text>

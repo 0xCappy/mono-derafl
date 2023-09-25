@@ -3,23 +3,17 @@ import { Box } from "@mantine/core"
 import { RaffleCarousel } from ".."
 import { ActiveAccounts, Create, Hero, Intro, Open, Purchases, SupportingCreators, Transparent } from "./components"
 
-interface HomePageProps {
-    raffles: Raffle[]
-    purchases: TicketBatch[]
-    accounts: Account[]
-}
-
-const Home = ({ raffles, purchases, accounts}: HomePageProps) => {
+const Home = () => {
     return (
         <>
             {/* < HeroSection /> */}
             <Hero />
             <Intro />
-            <RaffleCarousel raffles={raffles} />
+            <RaffleCarousel />
             <Transparent />
-            <Purchases ticketBatches={purchases}/>
+            <Purchases/>
             <Open />
-            <ActiveAccounts accounts={accounts} />
+            <ActiveAccounts />
             <SupportingCreators />
             <Box mb="30vh">
                 <Create />
