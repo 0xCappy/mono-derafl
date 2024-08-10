@@ -139,7 +139,6 @@ export const onCreateTicketRefund = /* GraphQL */ `
               lastSales
               chainId
               rarityData
-              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -236,7 +235,6 @@ export const onCreateTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          animationUrl
           collection {
             id
             type
@@ -433,7 +431,6 @@ export const onUpdateTicketRefund = /* GraphQL */ `
               lastSales
               chainId
               rarityData
-              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -530,7 +527,6 @@ export const onUpdateTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          animationUrl
           collection {
             id
             type
@@ -727,7 +723,6 @@ export const onDeleteTicketRefund = /* GraphQL */ `
               lastSales
               chainId
               rarityData
-              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -824,7 +819,6 @@ export const onDeleteTicketRefund = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          animationUrl
           collection {
             id
             type
@@ -883,50 +877,59 @@ export const onDeleteTicketRefund = /* GraphQL */ `
       ticketRefundTxId
     }
   }
-`;
-export const onCreateStat = /* GraphQL */ `
-  subscription OnCreateStat($filter: ModelSubscriptionStatFilterInput) {
-    onCreateStat(filter: $filter) {
-      id
-      type
-      createdAt
-      updatedAt
-      ethPaid
-      ticketsBought
-      royaltiesPaid
-      chainId
-      rafflesCreated
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteTicketRefundSubscriptionVariables,
+  APITypes.OnDeleteTicketRefundSubscription
+>;
+export const onCreateStat = /* GraphQL */ `subscription OnCreateStat($filter: ModelSubscriptionStatFilterInput) {
+  onCreateStat(filter: $filter) {
+    id
+    type
+    createdAt
+    updatedAt
+    ethPaid
+    ticketsBought
+    royaltiesPaid
+    chainId
+    rafflesCreated
+    __typename
   }
-`;
-export const onUpdateStat = /* GraphQL */ `
-  subscription OnUpdateStat($filter: ModelSubscriptionStatFilterInput) {
-    onUpdateStat(filter: $filter) {
-      id
-      type
-      createdAt
-      updatedAt
-      ethPaid
-      ticketsBought
-      royaltiesPaid
-      chainId
-      rafflesCreated
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateStatSubscriptionVariables,
+  APITypes.OnCreateStatSubscription
+>;
+export const onUpdateStat = /* GraphQL */ `subscription OnUpdateStat($filter: ModelSubscriptionStatFilterInput) {
+  onUpdateStat(filter: $filter) {
+    id
+    type
+    createdAt
+    updatedAt
+    ethPaid
+    ticketsBought
+    royaltiesPaid
+    chainId
+    rafflesCreated
+    __typename
   }
-`;
-export const onDeleteStat = /* GraphQL */ `
-  subscription OnDeleteStat($filter: ModelSubscriptionStatFilterInput) {
-    onDeleteStat(filter: $filter) {
-      id
-      type
-      createdAt
-      updatedAt
-      ethPaid
-      ticketsBought
-      royaltiesPaid
-      chainId
-      rafflesCreated
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateStatSubscriptionVariables,
+  APITypes.OnUpdateStatSubscription
+>;
+export const onDeleteStat = /* GraphQL */ `subscription OnDeleteStat($filter: ModelSubscriptionStatFilterInput) {
+  onDeleteStat(filter: $filter) {
+    id
+    type
+    createdAt
+    updatedAt
+    ethPaid
+    ticketsBought
+    royaltiesPaid
+    chainId
+    rafflesCreated
+    __typename
   }
 `;
 export const onCreateTicketBatch = /* GraphQL */ `
@@ -1080,7 +1083,6 @@ export const onCreateTicketBatch = /* GraphQL */ `
               lastSales
               chainId
               rarityData
-              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -1177,7 +1179,6 @@ export const onCreateTicketBatch = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          animationUrl
           collection {
             id
             type
@@ -1377,7 +1378,6 @@ export const onUpdateTicketBatch = /* GraphQL */ `
               lastSales
               chainId
               rarityData
-              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -1474,7 +1474,6 @@ export const onUpdateTicketBatch = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          animationUrl
           collection {
             id
             type
@@ -1674,7 +1673,6 @@ export const onDeleteTicketBatch = /* GraphQL */ `
               lastSales
               chainId
               rarityData
-              animationUrl
               nFTCollectionId
             }
             refundTx {
@@ -1771,7 +1769,6 @@ export const onDeleteTicketBatch = /* GraphQL */ `
           lastSales
           chainId
           rarityData
-          animationUrl
           collection {
             id
             type
@@ -1819,56 +1816,65 @@ export const onDeleteTicketBatch = /* GraphQL */ `
       ticketBatchRaffleId
     }
   }
-`;
-export const onCreateTransaction = /* GraphQL */ `
-  subscription OnCreateTransaction(
-    $filter: ModelSubscriptionTransactionFilterInput
-  ) {
-    onCreateTransaction(filter: $filter) {
-      id
-      type
-      createdAt
-      updatedAt
-      raffleNonce
-      date
-      eventType
-      hash
-      chainId
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteTicketBatchSubscriptionVariables,
+  APITypes.OnDeleteTicketBatchSubscription
+>;
+export const onCreateTransaction = /* GraphQL */ `subscription OnCreateTransaction(
+  $filter: ModelSubscriptionTransactionFilterInput
+) {
+  onCreateTransaction(filter: $filter) {
+    id
+    type
+    createdAt
+    updatedAt
+    raffleNonce
+    date
+    eventType
+    hash
+    chainId
+    __typename
   }
-`;
-export const onUpdateTransaction = /* GraphQL */ `
-  subscription OnUpdateTransaction(
-    $filter: ModelSubscriptionTransactionFilterInput
-  ) {
-    onUpdateTransaction(filter: $filter) {
-      id
-      type
-      createdAt
-      updatedAt
-      raffleNonce
-      date
-      eventType
-      hash
-      chainId
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateTransactionSubscriptionVariables,
+  APITypes.OnCreateTransactionSubscription
+>;
+export const onUpdateTransaction = /* GraphQL */ `subscription OnUpdateTransaction(
+  $filter: ModelSubscriptionTransactionFilterInput
+) {
+  onUpdateTransaction(filter: $filter) {
+    id
+    type
+    createdAt
+    updatedAt
+    raffleNonce
+    date
+    eventType
+    hash
+    chainId
+    __typename
   }
-`;
-export const onDeleteTransaction = /* GraphQL */ `
-  subscription OnDeleteTransaction(
-    $filter: ModelSubscriptionTransactionFilterInput
-  ) {
-    onDeleteTransaction(filter: $filter) {
-      id
-      type
-      createdAt
-      updatedAt
-      raffleNonce
-      date
-      eventType
-      hash
-      chainId
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateTransactionSubscriptionVariables,
+  APITypes.OnUpdateTransactionSubscription
+>;
+export const onDeleteTransaction = /* GraphQL */ `subscription OnDeleteTransaction(
+  $filter: ModelSubscriptionTransactionFilterInput
+) {
+  onDeleteTransaction(filter: $filter) {
+    id
+    type
+    createdAt
+    updatedAt
+    raffleNonce
+    date
+    eventType
+    hash
+    chainId
+    __typename
   }
 `;
 export const onCreateRaffle = /* GraphQL */ `
@@ -2035,7 +2041,6 @@ export const onCreateRaffle = /* GraphQL */ `
             lastSales
             chainId
             rarityData
-            animationUrl
             collection {
               id
               type
@@ -2154,7 +2159,6 @@ export const onCreateRaffle = /* GraphQL */ `
         lastSales
         chainId
         rarityData
-        animationUrl
         collection {
           id
           type
@@ -2364,7 +2368,6 @@ export const onUpdateRaffle = /* GraphQL */ `
             lastSales
             chainId
             rarityData
-            animationUrl
             collection {
               id
               type
@@ -2483,7 +2486,6 @@ export const onUpdateRaffle = /* GraphQL */ `
         lastSales
         chainId
         rarityData
-        animationUrl
         collection {
           id
           type
@@ -2693,7 +2695,6 @@ export const onDeleteRaffle = /* GraphQL */ `
             lastSales
             chainId
             rarityData
-            animationUrl
             collection {
               id
               type
@@ -2812,7 +2813,6 @@ export const onDeleteRaffle = /* GraphQL */ `
         lastSales
         chainId
         rarityData
-        animationUrl
         collection {
           id
           type
@@ -2876,7 +2876,6 @@ export const onCreateNFT = /* GraphQL */ `
       lastSales
       chainId
       rarityData
-      animationUrl
       collection {
         id
         type
@@ -2921,7 +2920,6 @@ export const onUpdateNFT = /* GraphQL */ `
       lastSales
       chainId
       rarityData
-      animationUrl
       collection {
         id
         type
@@ -2966,7 +2964,6 @@ export const onDeleteNFT = /* GraphQL */ `
       lastSales
       chainId
       rarityData
-      animationUrl
       collection {
         id
         type
@@ -2992,133 +2989,155 @@ export const onDeleteNFT = /* GraphQL */ `
       nFTCollectionId
     }
   }
-`;
-export const onCreateCollection = /* GraphQL */ `
-  subscription OnCreateCollection(
-    $filter: ModelSubscriptionCollectionFilterInput
-  ) {
-    onCreateCollection(filter: $filter) {
-      id
-      type
-      contractAddress
-      createdAt
-      updatedAt
-      symbol
-      rafflesCreated
-      contractDeployer
-      deployedBlockNumber
-      tokenType
-      totalSupply
-      chainId
-      name
-      openseaSlug
-      imageUrl
-      externalUrl
-      discordUrl
-      twitterUsername
-      description
-      floorPrice
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteNFTSubscriptionVariables,
+  APITypes.OnDeleteNFTSubscription
+>;
+export const onCreateCollection = /* GraphQL */ `subscription OnCreateCollection(
+  $filter: ModelSubscriptionCollectionFilterInput
+) {
+  onCreateCollection(filter: $filter) {
+    id
+    type
+    contractAddress
+    createdAt
+    updatedAt
+    symbol
+    rafflesCreated
+    contractDeployer
+    deployedBlockNumber
+    tokenType
+    totalSupply
+    chainId
+    name
+    openseaSlug
+    imageUrl
+    externalUrl
+    discordUrl
+    twitterUsername
+    description
+    floorPrice
+    __typename
   }
-`;
-export const onUpdateCollection = /* GraphQL */ `
-  subscription OnUpdateCollection(
-    $filter: ModelSubscriptionCollectionFilterInput
-  ) {
-    onUpdateCollection(filter: $filter) {
-      id
-      type
-      contractAddress
-      createdAt
-      updatedAt
-      symbol
-      rafflesCreated
-      contractDeployer
-      deployedBlockNumber
-      tokenType
-      totalSupply
-      chainId
-      name
-      openseaSlug
-      imageUrl
-      externalUrl
-      discordUrl
-      twitterUsername
-      description
-      floorPrice
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateCollectionSubscriptionVariables,
+  APITypes.OnCreateCollectionSubscription
+>;
+export const onUpdateCollection = /* GraphQL */ `subscription OnUpdateCollection(
+  $filter: ModelSubscriptionCollectionFilterInput
+) {
+  onUpdateCollection(filter: $filter) {
+    id
+    type
+    contractAddress
+    createdAt
+    updatedAt
+    symbol
+    rafflesCreated
+    contractDeployer
+    deployedBlockNumber
+    tokenType
+    totalSupply
+    chainId
+    name
+    openseaSlug
+    imageUrl
+    externalUrl
+    discordUrl
+    twitterUsername
+    description
+    floorPrice
+    __typename
   }
-`;
-export const onDeleteCollection = /* GraphQL */ `
-  subscription OnDeleteCollection(
-    $filter: ModelSubscriptionCollectionFilterInput
-  ) {
-    onDeleteCollection(filter: $filter) {
-      id
-      type
-      contractAddress
-      createdAt
-      updatedAt
-      symbol
-      rafflesCreated
-      contractDeployer
-      deployedBlockNumber
-      tokenType
-      totalSupply
-      chainId
-      name
-      openseaSlug
-      imageUrl
-      externalUrl
-      discordUrl
-      twitterUsername
-      description
-      floorPrice
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateCollectionSubscriptionVariables,
+  APITypes.OnUpdateCollectionSubscription
+>;
+export const onDeleteCollection = /* GraphQL */ `subscription OnDeleteCollection(
+  $filter: ModelSubscriptionCollectionFilterInput
+) {
+  onDeleteCollection(filter: $filter) {
+    id
+    type
+    contractAddress
+    createdAt
+    updatedAt
+    symbol
+    rafflesCreated
+    contractDeployer
+    deployedBlockNumber
+    tokenType
+    totalSupply
+    chainId
+    name
+    openseaSlug
+    imageUrl
+    externalUrl
+    discordUrl
+    twitterUsername
+    description
+    floorPrice
+    __typename
   }
-`;
-export const onCreateAccount = /* GraphQL */ `
-  subscription OnCreateAccount($filter: ModelSubscriptionAccountFilterInput) {
-    onCreateAccount(filter: $filter) {
-      id
-      type
-      createdAt
-      updatedAt
-      address
-      rafflesCreated
-      rafflesWon
-      rafflesEntered
-      ticketsBought
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteCollectionSubscriptionVariables,
+  APITypes.OnDeleteCollectionSubscription
+>;
+export const onCreateAccount = /* GraphQL */ `subscription OnCreateAccount($filter: ModelSubscriptionAccountFilterInput) {
+  onCreateAccount(filter: $filter) {
+    id
+    type
+    createdAt
+    updatedAt
+    address
+    rafflesCreated
+    rafflesWon
+    rafflesEntered
+    ticketsBought
+    __typename
   }
-`;
-export const onUpdateAccount = /* GraphQL */ `
-  subscription OnUpdateAccount($filter: ModelSubscriptionAccountFilterInput) {
-    onUpdateAccount(filter: $filter) {
-      id
-      type
-      createdAt
-      updatedAt
-      address
-      rafflesCreated
-      rafflesWon
-      rafflesEntered
-      ticketsBought
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateAccountSubscriptionVariables,
+  APITypes.OnCreateAccountSubscription
+>;
+export const onUpdateAccount = /* GraphQL */ `subscription OnUpdateAccount($filter: ModelSubscriptionAccountFilterInput) {
+  onUpdateAccount(filter: $filter) {
+    id
+    type
+    createdAt
+    updatedAt
+    address
+    rafflesCreated
+    rafflesWon
+    rafflesEntered
+    ticketsBought
+    __typename
   }
-`;
-export const onDeleteAccount = /* GraphQL */ `
-  subscription OnDeleteAccount($filter: ModelSubscriptionAccountFilterInput) {
-    onDeleteAccount(filter: $filter) {
-      id
-      type
-      createdAt
-      updatedAt
-      address
-      rafflesCreated
-      rafflesWon
-      rafflesEntered
-      ticketsBought
-    }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateAccountSubscriptionVariables,
+  APITypes.OnUpdateAccountSubscription
+>;
+export const onDeleteAccount = /* GraphQL */ `subscription OnDeleteAccount($filter: ModelSubscriptionAccountFilterInput) {
+  onDeleteAccount(filter: $filter) {
+    id
+    type
+    createdAt
+    updatedAt
+    address
+    rafflesCreated
+    rafflesWon
+    rafflesEntered
+    ticketsBought
+    __typename
   }
-`;
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteAccountSubscriptionVariables,
+  APITypes.OnDeleteAccountSubscription
+>;
