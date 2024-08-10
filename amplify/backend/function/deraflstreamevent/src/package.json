@@ -25,6 +25,7 @@
     "bufferutil": "^4.0.7",
     "ethers": "^6.0.8",
     "moralis": "^2.14.3",
-    "node-fetch": "2"
+    "node-fetch": "2",
+    "node-gyp-build": "^4.8.1"
   }
 }
