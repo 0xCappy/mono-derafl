@@ -31,22 +31,6 @@
     }
   },
   "function": {
-    "deraflrafflesavetrigger": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ],
-          "category": "api",
-          "resourceName": "derafl"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "deraflstreamevent": {
       "build": true,
       "dependsOn": [
@@ -65,22 +49,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_deraflrafflesavetrigger_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "deraflrafflesavetrigger"
-        }
-      ]
-    },
-    "AMPLIFY_function_deraflrafflesavetrigger_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "deraflrafflesavetrigger"
-        }
-      ]
-    },
     "AMPLIFY_function_deraflstreamevent_alchemyKey": {
       "usedBy": [
         {

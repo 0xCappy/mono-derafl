@@ -886,6 +886,7 @@ export enum SearchableAggregateType {
   min = "min",
   max = "max",
   sum = "sum",
+  cardinality = "cardinality",
 }
 
 
@@ -1276,6 +1277,8 @@ export type ModelSubscriptionTicketRefundFilterInput = {
   chainId?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionTicketRefundFilterInput | null > | null,
   or?: Array< ModelSubscriptionTicketRefundFilterInput | null > | null,
+  ticketRefundRaffleId?: ModelSubscriptionIDInput | null,
+  ticketRefundTxId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -1360,6 +1363,8 @@ export type ModelSubscriptionTicketBatchFilterInput = {
   chainId?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionTicketBatchFilterInput | null > | null,
   or?: Array< ModelSubscriptionTicketBatchFilterInput | null > | null,
+  ticketBatchTransactionId?: ModelSubscriptionIDInput | null,
+  ticketBatchRaffleId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionTransactionFilterInput = {
@@ -1397,6 +1402,13 @@ export type ModelSubscriptionRaffleFilterInput = {
   contract?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionRaffleFilterInput | null > | null,
   or?: Array< ModelSubscriptionRaffleFilterInput | null > | null,
+  raffleWinningBatchId?: ModelSubscriptionIDInput | null,
+  raffleReleaseTxId?: ModelSubscriptionIDInput | null,
+  raffleOpenTxId?: ModelSubscriptionIDInput | null,
+  raffleDrawnTxId?: ModelSubscriptionIDInput | null,
+  raffleCloseTxId?: ModelSubscriptionIDInput | null,
+  raffleNftId?: ModelSubscriptionIDInput | null,
+  raffleRefundTxId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionNFTFilterInput = {
@@ -1417,6 +1429,7 @@ export type ModelSubscriptionNFTFilterInput = {
   rarityData?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionNFTFilterInput | null > | null,
   or?: Array< ModelSubscriptionNFTFilterInput | null > | null,
+  nFTCollectionId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionCollectionFilterInput = {
