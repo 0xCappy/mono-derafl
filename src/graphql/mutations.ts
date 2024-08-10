@@ -151,6 +151,7 @@ export const createTicketRefund = /* GraphQL */ `mutation CreateTicketRefund(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -467,6 +468,7 @@ export const updateTicketRefund = /* GraphQL */ `mutation UpdateTicketRefund(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -783,6 +785,7 @@ export const deleteTicketRefund = /* GraphQL */ `mutation DeleteTicketRefund(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -1177,6 +1180,7 @@ export const createTicketBatch = /* GraphQL */ `mutation CreateTicketBatch(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -1281,6 +1285,7 @@ export const createTicketBatch = /* GraphQL */ `mutation CreateTicketBatch(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -1495,6 +1500,7 @@ export const updateTicketBatch = /* GraphQL */ `mutation UpdateTicketBatch(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -1599,6 +1605,7 @@ export const updateTicketBatch = /* GraphQL */ `mutation UpdateTicketBatch(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -1813,6 +1820,7 @@ export const deleteTicketBatch = /* GraphQL */ `mutation DeleteTicketBatch(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -1917,6 +1925,7 @@ export const deleteTicketBatch = /* GraphQL */ `mutation DeleteTicketBatch(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -2210,6 +2219,7 @@ export const createRaffle = /* GraphQL */ `mutation CreateRaffle(
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -2564,6 +2574,7 @@ export const updateRaffle = /* GraphQL */ `mutation UpdateRaffle(
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -2918,6 +2929,7 @@ export const deleteRaffle = /* GraphQL */ `mutation DeleteRaffle(
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -3118,6 +3130,7 @@ export const createNFT = /* GraphQL */ `mutation CreateNFT(
     lastSales
     chainId
     rarityData
+    animationUrl
     collection {
       id
       type
@@ -3169,6 +3182,7 @@ export const updateNFT = /* GraphQL */ `mutation UpdateNFT(
     lastSales
     chainId
     rarityData
+    animationUrl
     collection {
       id
       type
@@ -3220,6 +3234,7 @@ export const deleteNFT = /* GraphQL */ `mutation DeleteNFT(
     lastSales
     chainId
     rarityData
+    animationUrl
     collection {
       id
       type

@@ -49,6 +49,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_deraflrafflesavetrigger_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflrafflesavetrigger"
+        }
+      ]
+    },
+    "AMPLIFY_function_deraflrafflesavetrigger_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deraflrafflesavetrigger"
+        }
+      ]
+    },
     "AMPLIFY_function_deraflstreamevent_alchemyKey": {
       "usedBy": [
         {

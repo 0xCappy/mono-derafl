@@ -148,6 +148,7 @@ export const getTicketRefund = /* GraphQL */ `query GetTicketRefund($id: ID!) {
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -475,6 +476,7 @@ export const listTicketRefunds = /* GraphQL */ `query ListTicketRefunds(
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -739,6 +741,7 @@ export const getTicketBatch = /* GraphQL */ `query GetTicketBatch($id: ID!) {
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -1069,6 +1072,7 @@ export const listTicketBatches = /* GraphQL */ `query ListTicketBatches(
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -1307,6 +1311,7 @@ export const ticketBatchesByCreatedAt = /* GraphQL */ `query TicketBatchesByCrea
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -1545,6 +1550,7 @@ export const ticketBatchesByUpdatedAt = /* GraphQL */ `query TicketBatchesByUpda
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -1783,6 +1789,7 @@ export const ticketBatchesByTicketsBought = /* GraphQL */ `query TicketBatchesBy
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -2021,6 +2028,7 @@ export const searchTicketBatches = /* GraphQL */ `query SearchTicketBatches(
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -2312,6 +2320,7 @@ export const getRaffle = /* GraphQL */ `query GetRaffle($id: ID!) {
           lastSales
           chainId
           rarityData
+          animationUrl
           collection {
             id
             type
@@ -2439,6 +2448,7 @@ export const getRaffle = /* GraphQL */ `query GetRaffle($id: ID!) {
       lastSales
       chainId
       rarityData
+      animationUrl
       collection {
         id
         type
@@ -2624,6 +2634,7 @@ export const listRaffles = /* GraphQL */ `query ListRaffles(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -2728,6 +2739,7 @@ export const listRaffles = /* GraphQL */ `query ListRaffles(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -2929,6 +2941,7 @@ export const rafflesByCreatedAt = /* GraphQL */ `query RafflesByCreatedAt(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -3033,6 +3046,7 @@ export const rafflesByCreatedAt = /* GraphQL */ `query RafflesByCreatedAt(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -3234,6 +3248,7 @@ export const rafflesByUpdatedAt = /* GraphQL */ `query RafflesByUpdatedAt(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -3338,6 +3353,7 @@ export const rafflesByUpdatedAt = /* GraphQL */ `query RafflesByUpdatedAt(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -3539,6 +3555,7 @@ export const rafflesByProgress = /* GraphQL */ `query RafflesByProgress(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -3643,6 +3660,7 @@ export const rafflesByProgress = /* GraphQL */ `query RafflesByProgress(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -3844,6 +3862,7 @@ export const rafflesByTicketsAvailable = /* GraphQL */ `query RafflesByTicketsAv
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -3948,6 +3967,7 @@ export const rafflesByTicketsAvailable = /* GraphQL */ `query RafflesByTicketsAv
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -4149,6 +4169,7 @@ export const rafflesByExpires = /* GraphQL */ `query RafflesByExpires(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -4253,6 +4274,7 @@ export const rafflesByExpires = /* GraphQL */ `query RafflesByExpires(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -4454,6 +4476,7 @@ export const rafflesByTicketsSold = /* GraphQL */ `query RafflesByTicketsSold(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -4558,6 +4581,7 @@ export const rafflesByTicketsSold = /* GraphQL */ `query RafflesByTicketsSold(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -4759,6 +4783,7 @@ export const searchRaffles = /* GraphQL */ `query SearchRaffles(
             lastSales
             chainId
             rarityData
+            animationUrl
             nFTCollectionId
             __typename
           }
@@ -4863,6 +4888,7 @@ export const searchRaffles = /* GraphQL */ `query SearchRaffles(
         lastSales
         chainId
         rarityData
+        animationUrl
         collection {
           id
           type
@@ -4952,6 +4978,7 @@ export const getNFT = /* GraphQL */ `query GetNFT($id: ID!) {
     lastSales
     chainId
     rarityData
+    animationUrl
     collection {
       id
       type
@@ -4998,6 +5025,7 @@ export const listNFTS = /* GraphQL */ `query ListNFTS($filter: ModelNFTFilterInp
       lastSales
       chainId
       rarityData
+      animationUrl
       collection {
         id
         type
