@@ -1,7 +1,7 @@
-import blur from '@/public/marketplace/blur.jpeg'
-import looks from '@/public/marketplace/looks.png'
-import opensea from '@/public/marketplace/opensea.png'
-import x2y2 from '@/public/marketplace/x2y2.png'
+// import blur from '@/public/marketplace/blur.jpeg'
+// import looks from '@/public/marketplace/looks.png'
+// import opensea from '@/public/marketplace/opensea.png'
+// import x2y2 from '@/public/marketplace/x2y2.png'
 import { ActionIcon, Anchor, Group, Image } from '@mantine/core'
 
 interface MarketPlaceLinksProps {
@@ -12,12 +12,12 @@ interface MarketPlaceLinksProps {
 const MarketPlaceLinks = ({ contractAddress, tokenId }: MarketPlaceLinksProps) => {
     const links = () => [
         {
-            image: blur.src,
+            // image: blur.src,
             link: `https://blur.io/asset/${contractAddress}/${tokenId}`,
             name: 'Blur'
         },
         {
-            image: x2y2.src,
+            // image: x2y2.src,
             link: `https://x2y2.io/eth/${contractAddress}/${tokenId}`,
             name: 'X2Y2'
         },
@@ -27,7 +27,7 @@ const MarketPlaceLinks = ({ contractAddress, tokenId }: MarketPlaceLinksProps) =
         //     name: 'Blur'
         // },
         {
-            image: looks.src,
+            // image: looks.src,
             link: `https://looksrare.org/collections/${contractAddress}/${tokenId}`,
             name: 'LooksRare'
         }
@@ -39,7 +39,7 @@ const MarketPlaceLinks = ({ contractAddress, tokenId }: MarketPlaceLinksProps) =
                 {links().map(link =>
                     <ActionIcon variant="transparent" radius="xl" size="md">
                         <Anchor href={link.link} target="_blank">
-                            <Image radius="xl" src={link.image} />
+                            {/* <Image radius="xl" src={link.image} /> */}
                         </Anchor>
                     </ActionIcon>
                 )}
